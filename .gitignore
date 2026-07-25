@@ -58,3 +58,5 @@ Thumbs.db
 
 # Medusa generated production build
 **/.medusa/
+
+*.tsbuildinfo
