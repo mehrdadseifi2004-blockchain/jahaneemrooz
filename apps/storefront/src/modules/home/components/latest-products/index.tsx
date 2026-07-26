@@ -13,7 +13,7 @@ export default async function LatestProducts({
   } = await listProducts({
     regionId: region.id,
     queryParams: {
-      limit: 8,
+      limit: 4,
       order: "-created_at",
       fields: "*variants.calculated_price,*categories",
     },
@@ -24,51 +24,26 @@ export default async function LatestProducts({
   }
 
   return (
-    <section className="bg-white py-16 small:py-24">
-      <div className="content-container">
-        <div className="mb-10 flex flex-col gap-5 small:flex-row small:items-end small:justify-between">
-          <div>
-            <span className="inline-flex rounded-full bg-blue-50 px-3 py-1 text-sm font-semibold text-blue-600">
-              جدیدترین محصولات
-            </span>
+    <section className="bg-white py-[50px] small:py-[72px]">
+      <div className="content-container text-center">
+        <h2 className="mb-8 text-[32px] font-black leading-tight tracking-[-0.03em] text-black small:mb-14 small:text-5xl">
+          جدیدترین محصولات
+        </h2>
 
-            <h2 className="mt-4 text-3xl font-bold text-slate-950 small:text-4xl">
-              تازه به جهان امروز اضافه شده
-            </h2>
-
-            <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-600 small:text-base">
-              جدیدترین محصولات فیزیکی و دیجیتال فروشگاه را ببین و از میان
-              تجهیزات، لوازم جانبی، گیمینگ و سرویس‌های دیجیتال انتخاب کن.
-            </p>
-          </div>
-
-          <LocalizedClientLink
-            href="/store"
-            className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-5 text-sm font-semibold text-slate-700 shadow-sm transition hover:border-blue-200 hover:bg-blue-50 hover:text-blue-600"
-          >
-            <span>مشاهده همه محصولات</span>
-            <span>←</span>
-          </LocalizedClientLink>
-        </div>
-
-        <ul className="grid grid-cols-1 gap-6 xsmall:grid-cols-2 medium:grid-cols-4">
+        <ul className="grid grid-cols-2 gap-x-4 gap-y-8 text-right small:gap-x-5 medium:grid-cols-4">
           {products.map((product) => (
-            <li key={product.id} className="h-full">
-              <ProductPreview
-                product={product}
-                region={region}
-                isFeatured
-              />
+            <li key={product.id} className="min-w-0">
+              <ProductPreview product={product} region={region} isFeatured />
             </li>
           ))}
         </ul>
 
-        <div className="mt-10 flex justify-center small:hidden">
+        <div className="mt-9 flex justify-center">
           <LocalizedClientLink
             href="/store"
-            className="inline-flex h-11 items-center justify-center rounded-xl bg-slate-950 px-6 text-sm font-semibold text-white transition hover:bg-blue-600"
+            className="inline-flex h-[52px] w-full items-center justify-center rounded-full border border-black/10 px-12 text-sm font-medium text-black transition hover:bg-black hover:text-white small:w-[218px] small:text-base"
           >
-            مشاهده همه محصولات
+            مشاهده همه
           </LocalizedClientLink>
         </div>
       </div>

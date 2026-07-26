@@ -1,9 +1,10 @@
 import { Metadata } from "next"
 
+import { getRegion } from "@lib/data/regions"
+import Brands from "@modules/home/components/brands"
+import CategoryGrid from "@modules/home/components/category-grid"
 import Hero from "@modules/home/components/hero"
 import LatestProducts from "@modules/home/components/latest-products"
-import { getRegion } from "@lib/data/regions"
-import CategoryGrid from "@modules/home/components/category-grid"
 
 export const metadata: Metadata = {
   title: "جهان امروز | فروشگاه آنلاین محصولات دیجیتال",
@@ -25,6 +26,7 @@ export default async function Home(props: {
   return (
     <>
       <Hero />
+      <Brands />
       <CategoryGrid />
       <LatestProducts region={region} />
     </>

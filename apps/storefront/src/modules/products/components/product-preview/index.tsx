@@ -17,94 +17,62 @@ export default async function ProductPreview({
     product,
   })
 
-  const isDigital =
-    product.categories?.some((category) =>
-      ["gift-cards", "accounts-subscriptions", "software"].includes(
-        category.handle || ""
-      )
-    ) ?? false
-
-  const categoryName = product.categories?.[0]?.name
-
   return (
     <LocalizedClientLink
       href={`/products/${product.handle}`}
-      className="group block h-full"
+      className="group flex min-w-0 flex-col items-start"
+      data-testid="product-wrapper"
     >
-      <article
-        data-testid="product-wrapper"
-        className="flex h-full flex-col overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-blue-200 hover:shadow-xl"
+      <Thumbnail
+        thumbnail={product.thumbnail}
+        images={product.images}
+        size="square"
+        isFeatured={isFeatured}
+        className="mb-2.5 w-full rounded-[13px] border-0 bg-[#f0eeed] p-0 shadow-none small:mb-4 small:rounded-[20px]"
+      />
+
+      <h3
+        className="line-clamp-2 min-h-11 w-full text-right text-sm font-bold leading-6 text-black small:min-h-14 small:text-base medium:text-xl"
+        data-testid="product-title"
       >
-        <div className="relative overflow-hidden bg-slate-50">
-          <Thumbnail
-            thumbnail={product.thumbnail}
-            images={product.images}
-            size="full"
-            isFeatured={isFeatured}
-          />
+        {product.title}
+      </h3>
 
-          <div className="absolute right-4 top-4 z-10 flex flex-col items-end gap-2">
-            <span
-              className={`inline-flex rounded-full px-3 py-1.5 text-xs font-semibold shadow-sm backdrop-blur ${
-                isDigital
-                  ? "bg-violet-600/90 text-white"
-                  : "bg-white/90 text-slate-700"
-              }`}
-            >
-              {isDigital ? "محصول دیجیتال" : "کالای فیزیکی"}
+      <div
+        dir="ltr"
+        className="mt-1 flex items-center gap-2 small:mt-0 small:gap-3"
+        aria-label="امتیاز محصول ۴.۵ از ۵"
+      >
+        <div className="flex items-center gap-0.5 text-sm text-[#ffc633] small:text-lg">
+          <span>★</span>
+          <span>★</span>
+          <span>★</span>
+          <span>★</span>
+          <span className="relative inline-block">
+            <span className="text-black/10">★</span>
+            <span className="absolute inset-0 w-1/2 overflow-hidden text-[#ffc633]">
+              ★
             </span>
-
-            {categoryName && (
-              <span className="inline-flex rounded-full bg-slate-950/70 px-3 py-1 text-[11px] font-medium text-white backdrop-blur">
-                {categoryName}
-              </span>
-            )}
-          </div>
-
-          <div className="absolute inset-x-4 bottom-4 translate-y-20 opacity-0 transition duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-            <div className="flex h-11 items-center justify-center rounded-xl bg-slate-950 px-4 text-sm font-semibold text-white shadow-lg">
-              مشاهده جزئیات محصول
-            </div>
-          </div>
+          </span>
         </div>
 
-        <div className="flex flex-1 flex-col p-5">
-          <div className="flex-1">
-            <h3
-              className="line-clamp-2 text-base font-bold leading-7 text-slate-900 transition group-hover:text-blue-600"
-              data-testid="product-title"
-            >
-              {product.title}
-            </h3>
+        <span className="text-xs text-black small:text-sm">
+          4.5<span className="text-black/60">/5</span>
+        </span>
+      </div>
 
-            {product.subtitle && (
-              <p className="mt-2 line-clamp-2 text-sm leading-6 text-slate-500">
-                {product.subtitle}
-              </p>
-            )}
-          </div>
-
-          <div className="mt-5 flex items-end justify-between border-t border-slate-100 pt-4">
-            <div>
-              <p className="mb-1 text-xs text-slate-400">
-                قیمت
-              </p>
-
-              {cheapestPrice ? (
-                <PreviewPrice price={cheapestPrice} />
-              ) : (
-                <span className="text-sm font-semibold text-slate-500">
-                  تماس بگیرید
-                </span>
-              )}
-            </div>
-
-            <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-slate-100 text-lg text-slate-700 transition duration-300 group-hover:bg-blue-600 group-hover:text-white">
-              ←
-            </span>
-          </div>
-        </div>
-      </article>
+      <div
+        dir="rtl"
+        className="mt-1 flex min-h-8 w-full items-center text-right"
+      >
+        {cheapestPrice ? (
+          <PreviewPrice price={cheapestPrice} />
+        ) : (
+          <span className="text-base font-bold text-black small:text-xl">
+            تماس بگیرید
+          </span>
+        )}
+      </div>
     </LocalizedClientLink>
   )
 }

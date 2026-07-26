@@ -35,7 +35,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
           "w-[290px]": size === "medium",
           "w-[440px]": size === "large",
           "w-full": size === "full",
-        }
+        },
       )}
       data-testid={dataTestid}
     >
@@ -52,7 +52,7 @@ const ImageOrPlaceholder = ({
     <Image
       src={image}
       alt="Thumbnail"
-      className="absolute inset-0 object-contain object-center p-2"
+      className="absolute inset-0 object-contain object-center p-3 transition-transform duration-500 group-hover:scale-110 small:p-4"
       draggable={false}
       quality={50}
       sizes="(max-width: 576px) 280px, (max-width: 768px) 360px, (max-width: 992px) 480px, 800px"
