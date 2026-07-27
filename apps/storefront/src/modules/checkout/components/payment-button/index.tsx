@@ -25,8 +25,7 @@ const PaymentButton = ({
     !cart.email ||
     (cart.shipping_methods?.length || 0) < 1
 
-  const paymentSession =
-    cart.payment_collection?.payment_sessions?.[0]
+  const paymentSession = cart.payment_collection?.payment_sessions?.[0]
 
   if (isStripeLike(paymentSession?.provider_id)) {
     return (
@@ -39,19 +38,11 @@ const PaymentButton = ({
   }
 
   if (isManual(paymentSession?.provider_id)) {
-    return (
-      <ManualPaymentButton
-        notReady={notReady}
-        data-testid={dataTestId}
-      />
-    )
+    return <ManualPaymentButton notReady={notReady} data-testid={dataTestId} />
   }
 
   return (
-    <Button
-      disabled
-      className="h-12 w-full rounded-xl"
-    >
+    <Button disabled className="h-14 w-full rounded-full">
       ابتدا روش پرداخت را انتخاب کنید
     </Button>
   )
@@ -73,18 +64,15 @@ const StripePaymentButton = ({
   const elements = useElements()
   const card = elements?.getElement("card")
 
-  const session =
-    cart.payment_collection?.payment_sessions?.find(
-      (paymentSession) => paymentSession.status === "pending"
-    )
+  const session = cart.payment_collection?.payment_sessions?.find(
+    (paymentSession) => paymentSession.status === "pending",
+  )
 
   const onPaymentCompleted = async () => {
     await placeOrder()
       .catch((err) => {
         setErrorMessage(
-          err instanceof Error
-            ? err.message
-            : "ثبت سفارش انجام نشد."
+          err instanceof Error ? err.message : "ثبت سفارش انجام نشد.",
         )
       })
       .finally(() => {
@@ -111,12 +99,10 @@ const StripePaymentButton = ({
             }`.trim(),
             address: {
               city: cart.billing_address?.city || undefined,
-              country:
-                cart.billing_address?.country_code || undefined,
+              country: cart.billing_address?.country_code || undefined,
               line1: cart.billing_address?.address_1 || undefined,
               line2: cart.billing_address?.address_2 || undefined,
-              postal_code:
-                cart.billing_address?.postal_code || undefined,
+              postal_code: cart.billing_address?.postal_code || undefined,
               state: cart.billing_address?.province || undefined,
             },
             email: cart.email,
@@ -135,9 +121,7 @@ const StripePaymentButton = ({
             return onPaymentCompleted()
           }
 
-          setErrorMessage(
-            error.message || "پرداخت با خطا مواجه شد."
-          )
+          setErrorMessage(error.message || "پرداخت با خطا مواجه شد.")
           setSubmitting(false)
           return
         }
@@ -160,7 +144,7 @@ const StripePaymentButton = ({
         onClick={handlePayment}
         size="large"
         isLoading={submitting}
-        className="h-12 w-full rounded-xl bg-blue-600 text-base font-bold text-white hover:bg-blue-500"
+        className="h-14 w-full rounded-full bg-black text-base font-medium text-white transition hover:bg-black/80"
         data-testid={dataTestId}
       >
         پرداخت و ثبت سفارش
@@ -191,9 +175,7 @@ const ManualPaymentButton = ({
     await placeOrder()
       .catch((err) => {
         setErrorMessage(
-          err instanceof Error
-            ? err.message
-            : "ثبت سفارش انجام نشد."
+          err instanceof Error ? err.message : "ثبت سفارش انجام نشد.",
         )
       })
       .finally(() => {
@@ -208,7 +190,7 @@ const ManualPaymentButton = ({
         isLoading={submitting}
         onClick={handlePayment}
         size="large"
-        className="h-12 w-full rounded-xl bg-blue-600 text-base font-bold text-white hover:bg-blue-500"
+        className="h-14 w-full rounded-full bg-black text-base font-medium text-white transition hover:bg-black/80"
         data-testid={dataTestId}
       >
         ثبت نهایی سفارش

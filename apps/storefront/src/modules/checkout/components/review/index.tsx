@@ -12,7 +12,7 @@ const Review = ({ cart }: { cart: HttpTypes.StoreCart }) => {
 
   const paidByGiftcard = Boolean(
     (cart as unknown as { gift_cards?: unknown[] }).gift_cards?.length &&
-      cart.total === 0
+    cart.total === 0,
   )
 
   const previousStepsCompleted =
@@ -27,9 +27,7 @@ const Review = ({ cart }: { cart: HttpTypes.StoreCart }) => {
           <span
             className={clx(
               "flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold",
-              isOpen
-                ? "bg-blue-600 text-white"
-                : "bg-slate-100 text-slate-400"
+              isOpen ? "bg-black text-white" : "bg-[#f0f0f0] text-black/35",
             )}
           >
             ۴
@@ -38,37 +36,34 @@ const Review = ({ cart }: { cart: HttpTypes.StoreCart }) => {
           <h2
             className={clx(
               "text-xl font-bold small:text-2xl",
-              isOpen ? "text-slate-950" : "text-slate-400"
+              isOpen ? "text-black" : "text-black/40",
             )}
           >
             مرور و ثبت سفارش
           </h2>
         </div>
 
-        <p className="mr-12 mt-2 text-sm leading-7 text-slate-500">
+        <p className="mr-12 mt-2 text-sm leading-7 text-black/50">
           پیش از ثبت نهایی، اطلاعات سفارش را بررسی کنید.
         </p>
       </div>
 
       {isOpen && previousStepsCompleted && (
         <div>
-          <div className="rounded-2xl border border-blue-100 bg-blue-50 p-5">
-            <p className="font-bold text-slate-900">
+          <div className="rounded-2xl border border-black/10 bg-[#f0f0f0] p-5">
+            <p className="font-bold text-black">
               سفارش شما آماده ثبت نهایی است
             </p>
 
-            <p className="mt-2 text-sm leading-7 text-slate-600">
+            <p className="mt-2 text-sm leading-7 text-black/60">
               با انتخاب دکمه ثبت سفارش، تأیید می‌کنید که اطلاعات واردشده صحیح
-              است و قوانین خرید، ارسال، بازگشت کالا و حریم خصوصی فروشگاه
-              «جهان امروز» را پذیرفته‌اید.
+              است و قوانین خرید، ارسال، بازگشت کالا و حریم خصوصی فروشگاه «جهان
+              امروز» را پذیرفته‌اید.
             </p>
           </div>
 
           <div className="mt-6">
-            <PaymentButton
-              cart={cart}
-              data-testid="submit-order-button"
-            />
+            <PaymentButton cart={cart} data-testid="submit-order-button" />
           </div>
         </div>
       )}

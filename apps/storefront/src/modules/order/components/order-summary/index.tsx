@@ -6,51 +6,69 @@ type OrderSummaryProps = {
 }
 
 const OrderSummary = ({ order }: OrderSummaryProps) => {
-  const getAmount = (amount?: number | null) => {
-    if (!amount) {
-      return
-    }
-
-    return convertToLocale({
-      amount,
+  const getAmount = (amount?: number | null) =>
+    convertToLocale({
+      amount: amount ?? 0,
       currency_code: order.currency_code,
     })
-  }
 
   return (
     <div>
-      <h2 className="text-base-semi">Order Summary</h2>
-      <div className="text-small-regular text-ui-fg-base my-2">
-        <div className="flex items-center justify-between text-base-regular text-ui-fg-base mb-2">
-          <span>Subtotal</span>
-          <span>{getAmount(order.subtotal)}</span>
+      <h2 className="text-xl font-bold text-black small:text-2xl">
+        خلاصه مبلغ سفارش
+      </h2>
+
+      <div className="mt-6 space-y-5">
+        <div className="flex items-center justify-between gap-4">
+          <span className="text-black/60">جمع محصولات</span>
+          <span className="font-bold text-black">
+            {getAmount(order.subtotal)}
+          </span>
         </div>
-        <div className="flex flex-col gap-y-1">
-          {order.discount_total > 0 && (
-            <div className="flex items-center justify-between">
-              <span>Discount</span>
-              <span>- {getAmount(order.discount_total)}</span>
-            </div>
-          )}
-          {order.gift_card_total > 0 && (
-            <div className="flex items-center justify-between">
-              <span>Discount</span>
-              <span>- {getAmount(order.gift_card_total)}</span>
-            </div>
-          )}
-          <div className="flex items-center justify-between">
-            <span>Shipping</span>
-            <span>{getAmount(order.shipping_total)}</span>
+
+        {order.discount_total > 0 && (
+          <div className="flex items-center justify-between gap-4">
+            <span className="text-black/60">تخفیف</span>
+            <span className="font-bold text-[#ff3333]">
+              -{getAmount(order.discount_total)}
+            </span>
           </div>
-          <div className="flex items-center justify-between">
-            <span>Taxes</span>
-            <span>{getAmount(order.tax_total)}</span>
+        )}
+
+        {order.gift_card_total > 0 && (
+          <div className="flex items-center justify-between gap-4">
+            <span className="text-black/60">اعتبار گیفت‌کارت</span>
+            <span className="font-bold text-[#ff3333]">
+              -{getAmount(order.gift_card_total)}
+            </span>
           </div>
+        )}
+
+        <div className="flex items-center justify-between gap-4">
+          <span className="text-black/60">هزینه ارسال</span>
+          <span className="font-bold text-black">
+            {getAmount(order.shipping_total)}
+          </span>
         </div>
-        <div className="h-px w-full border-b border-gray-200 border-dashed my-4" />
-        <div className="flex items-center justify-between text-base-regular text-ui-fg-base mb-2">
-          <span>Total</span>
-          <span>{getAmount(order.total)}</span>
+
+        <div className="flex items-center justify-between gap-4">
+          <span className="text-black/60">مالیات</span>
+          <span className="font-bold text-black">
+            {getAmount(order.tax_total)}
+          </span>
+        </div>
+
+        <div className="h-px bg-black/10" />
+
+        <div className="flex items-center justify-between gap-4">
+          <span className="text-lg text-black">مبلغ نهایی</span>
+
+          <span
+            className="text-xl font-black text-black small:text-2xl"
+            data-testid="order-total"
+          >
+            {getAmount(order.total)}
+          </span>
         </div>
       </div>
     </div>

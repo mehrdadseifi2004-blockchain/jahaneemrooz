@@ -3,6 +3,7 @@ import { retrieveCustomer } from "@lib/data/customer"
 import PaymentWrapper from "@modules/checkout/components/payment-wrapper"
 import CheckoutForm from "@modules/checkout/templates/checkout-form"
 import CheckoutSummary from "@modules/checkout/templates/checkout-summary"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { Metadata } from "next"
 import { notFound } from "next/navigation"
 
@@ -21,32 +22,56 @@ export default async function Checkout() {
   const customer = await retrieveCustomer()
 
   return (
-    <main className="min-h-screen bg-slate-50 py-10 small:py-14" dir="rtl">
+    <main className="min-h-screen bg-white pb-20" dir="rtl">
       <div className="content-container">
-        <div className="mb-8">
-          <span className="inline-flex rounded-full bg-blue-50 px-3 py-1.5 text-sm font-semibold text-blue-600">
-            تکمیل سفارش
-          </span>
+        <div className="pt-5 small:pt-6">
+          <nav
+            aria-label="مسیر صفحه"
+            className="mb-5 flex items-center gap-2 text-sm text-black/60"
+          >
+            <LocalizedClientLink
+              href="/"
+              className="transition hover:text-black"
+            >
+              خانه
+            </LocalizedClientLink>
 
-          <h1 className="mt-4 text-3xl font-bold text-slate-950 small:text-4xl">
-            ادامه فرایند خرید
-          </h1>
+            <span aria-hidden="true">←</span>
 
-          <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-500">
-            اطلاعات دریافت سفارش، روش ارسال و شیوه پرداخت را تکمیل کنید.
-          </p>
-        </div>
+            <LocalizedClientLink
+              href="/cart"
+              className="transition hover:text-black"
+            >
+              سبد خرید
+            </LocalizedClientLink>
 
-        <div className="grid grid-cols-1 items-start gap-8 large:grid-cols-[minmax(0,1fr)_390px]">
-          <section className="min-w-0">
-            <PaymentWrapper cart={cart}>
-              <CheckoutForm cart={cart} customer={customer} />
-            </PaymentWrapper>
-          </section>
+            <span aria-hidden="true">←</span>
 
-          <aside className="large:sticky large:top-28">
-            <CheckoutSummary cart={cart} />
-          </aside>
+            <span className="text-black">تکمیل سفارش</span>
+          </nav>
+
+          <div className="mb-7 small:mb-9">
+            <h1 className="text-[32px] font-black leading-tight tracking-[-0.03em] text-black small:text-[40px]">
+              تکمیل سفارش
+            </h1>
+
+            <p className="mt-3 max-w-2xl text-sm leading-7 text-black/60 small:text-base">
+              اطلاعات دریافت سفارش، روش ارسال و شیوه پرداخت را تکمیل و سفارش خود
+              را ثبت کنید.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 items-start gap-5 large:grid-cols-[minmax(0,1fr)_minmax(360px,460px)]">
+            <section className="min-w-0">
+              <PaymentWrapper cart={cart}>
+                <CheckoutForm cart={cart} customer={customer} />
+              </PaymentWrapper>
+            </section>
+
+            <aside className="large:sticky large:top-[112px]">
+              <CheckoutSummary cart={cart} />
+            </aside>
+          </div>
         </div>
       </div>
     </main>

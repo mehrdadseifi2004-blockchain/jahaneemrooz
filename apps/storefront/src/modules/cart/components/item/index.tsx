@@ -2,7 +2,6 @@
 
 import { updateLineItem } from "@lib/data/cart"
 import { HttpTypes } from "@medusajs/types"
-import CartItemSelect from "@modules/cart/components/cart-item-select"
 import ErrorMessage from "@modules/checkout/components/error-message"
 import DeleteButton from "@modules/common/components/delete-button"
 import LineItemPrice from "@modules/common/components/line-item-price"
@@ -22,7 +21,23 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
   const [updating, setUpdating] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
+  const maxQuantity = item.variant?.manage_inventory
+    ? Math.max(
+        1,
+        Math.min(item.variant.inventory_quantity || item.quantity, 10),
+      )
+    : 10
+
   const changeQuantity = async (quantity: number) => {
+    if (
+      quantity < 1 ||
+      quantity > maxQuantity ||
+      quantity === item.quantity ||
+      updating
+    ) {
+      return
+    }
+
     setError(null)
     setUpdating(true)
 
@@ -30,21 +45,21 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
       lineId: item.id,
       quantity,
     })
-      .catch((err) => {
-        setError(err.message)
+      .catch((error) => {
+        setError(
+          error instanceof Error
+            ? error.message
+            : "تغییر تعداد محصول انجام نشد.",
+        )
       })
       .finally(() => {
         setUpdating(false)
       })
   }
 
-  const maxQuantity = item.variant?.manage_inventory
-    ? Math.min(item.variant.inventory_quantity || 10, 10)
-    : 10
-
   if (type === "preview") {
     return (
-      <div className="flex items-center gap-3">
+      <div className="flex items-center gap-3 py-3">
         <LocalizedClientLink
           href={`/products/${item.product_handle}`}
           className="w-16 shrink-0"
@@ -53,17 +68,19 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
             thumbnail={item.thumbnail}
             images={item.variant?.product?.images}
             size="square"
+            className="rounded-xl bg-[#f0eeed]"
           />
         </LocalizedClientLink>
 
         <div className="min-w-0 flex-1">
-          <p className="line-clamp-1 text-sm font-semibold text-slate-900">
+          <p className="line-clamp-1 text-sm font-semibold text-black">
             {item.product_title}
           </p>
 
-          <div className="mt-1 flex items-center gap-1 text-xs text-slate-500">
+          <div className="mt-1 flex items-center gap-1 text-xs text-black/50">
             <span>{item.quantity.toLocaleString("fa-IR")} عدد</span>
             <span>×</span>
+
             <LineItemUnitPrice
               item={item}
               style="tight"
@@ -72,129 +89,117 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
           </div>
         </div>
 
-        <LineItemPrice
-          item={item}
-          style="tight"
-          currencyCode={currencyCode}
-        />
+        <div className="font-bold text-black">
+          <LineItemPrice
+            item={item}
+            style="tight"
+            currencyCode={currencyCode}
+          />
+        </div>
       </div>
     )
   }
 
   return (
     <article
-      className="rounded-2xl border border-slate-200 p-4 transition hover:border-blue-200 hover:shadow-sm small:p-5"
+      className="py-5 first:pt-0 last:pb-0 small:py-6"
       data-testid="product-row"
     >
-      <div className="flex flex-col gap-5 xsmall:flex-row">
+      <div className="flex items-start gap-4">
         <LocalizedClientLink
           href={`/products/${item.product_handle}`}
-          className="w-full shrink-0 xsmall:w-32"
+          className="w-[100px] shrink-0 small:w-[124px]"
         >
           <Thumbnail
             thumbnail={item.thumbnail}
             images={item.variant?.product?.images}
             size="square"
+            className="rounded-[13px] border-0 bg-[#f0eeed] shadow-none small:rounded-[20px]"
           />
         </LocalizedClientLink>
 
-        <div className="flex min-w-0 flex-1 flex-col justify-between">
-          <div>
+        <div className="flex min-w-0 flex-1 self-stretch flex-col">
+          <div className="flex items-start justify-between gap-3">
             <LocalizedClientLink
               href={`/products/${item.product_handle}`}
-              className="text-base font-bold leading-7 text-slate-950 transition hover:text-blue-600"
+              className="line-clamp-2 text-base font-bold leading-6 text-black transition hover:text-black/60 small:text-xl"
               data-testid="product-title"
             >
               {item.product_title}
             </LocalizedClientLink>
 
-            {item.variant_title &&
-              !item.variant_title.toLowerCase().includes("default") && (
-                <p className="mt-2 text-sm text-slate-500">
-                  گزینه انتخاب‌شده: {item.variant_title}
-                </p>
-              )}
-
-            <div className="mt-4 flex items-center gap-2">
-              <span className="h-2 w-2 rounded-full bg-emerald-500" />
-
-              <span className="text-xs font-medium text-emerald-700">
-                موجود و آماده سفارش
-              </span>
+            <div data-testid="product-delete-button">
+              <DeleteButton id={item.id} className="shrink-0 text-[#ff3333]" />
             </div>
           </div>
 
-          <div className="mt-5 flex flex-col gap-4 border-t border-slate-100 pt-4 small:flex-row small:items-end small:justify-between">
-            <div>
-              <p className="mb-1 text-xs text-slate-400">
-                قیمت واحد
+          {item.variant_title &&
+            !item.variant_title.toLowerCase().includes("default") && (
+              <p className="mt-1 text-xs leading-6 text-black/60 small:text-sm">
+                گزینه انتخاب‌شده:{" "}
+                <span className="text-black">{item.variant_title}</span>
               </p>
+            )}
 
-              <div className="font-semibold text-slate-700">
-                <LineItemUnitPrice
-                  item={item}
-                  style="tight"
-                  currencyCode={currencyCode}
-                />
-              </div>
-            </div>
-
+          <div className="mt-auto flex flex-col gap-4 pt-4 xsmall:flex-row xsmall:items-end xsmall:justify-between">
             <div>
-              <p className="mb-1 text-xs text-slate-400">
-                قیمت نهایی
-              </p>
-
-              <div className="text-base font-bold text-slate-950">
+              <div className="text-xl font-bold text-black small:text-2xl">
                 <LineItemPrice
                   item={item}
                   style="tight"
                   currencyCode={currencyCode}
                 />
               </div>
+
+              {item.quantity > 1 && (
+                <div className="mt-1 flex items-center gap-1 text-xs text-black/50">
+                  <span>قیمت واحد:</span>
+
+                  <LineItemUnitPrice
+                    item={item}
+                    style="tight"
+                    currencyCode={currencyCode}
+                  />
+                </div>
+              )}
             </div>
 
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-slate-500">
-                  تعداد:
+            <div className="flex items-center gap-2">
+              {updating && <Spinner />}
+
+              <div className="flex h-10 items-center rounded-full bg-[#f0f0f0] px-2 small:h-11">
+                <button
+                  type="button"
+                  onClick={() => changeQuantity(item.quantity - 1)}
+                  disabled={item.quantity <= 1 || updating}
+                  aria-label="کاهش تعداد"
+                  className="flex h-8 w-8 items-center justify-center rounded-full text-xl text-black transition hover:bg-black/5 disabled:cursor-not-allowed disabled:opacity-30"
+                >
+                  −
+                </button>
+
+                <span
+                  className="min-w-8 text-center text-sm font-medium text-black"
+                  data-testid="product-quantity"
+                  aria-live="polite"
+                >
+                  {item.quantity.toLocaleString("fa-IR")}
                 </span>
 
-                <CartItemSelect
-                  value={item.quantity}
-                  onChange={(event) =>
-                    changeQuantity(parseInt(event.target.value))
-                  }
-                  className="h-10 w-16 rounded-xl border border-slate-200 bg-white px-2"
-                  data-testid="product-select-button"
+                <button
+                  type="button"
+                  onClick={() => changeQuantity(item.quantity + 1)}
+                  disabled={item.quantity >= maxQuantity || updating}
+                  aria-label="افزایش تعداد"
+                  className="flex h-8 w-8 items-center justify-center rounded-full text-xl text-black transition hover:bg-black/5 disabled:cursor-not-allowed disabled:opacity-30"
                 >
-                  {Array.from(
-                    {
-                      length: Math.max(maxQuantity, 1),
-                    },
-                    (_, index) => (
-                      <option value={index + 1} key={index + 1}>
-                        {(index + 1).toLocaleString("fa-IR")}
-                      </option>
-                    )
-                  )}
-                </CartItemSelect>
-
-                {updating && <Spinner />}
-              </div>
-
-              <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-rose-100 bg-rose-50 text-rose-600 transition hover:bg-rose-100">
-                <DeleteButton
-                  id={item.id}
-                  data-testid="product-delete-button"
-                />
+                  +
+                </button>
               </div>
             </div>
           </div>
 
-          <ErrorMessage
-            error={error}
-            data-testid="product-error-message"
-          />
+          <ErrorMessage error={error} data-testid="product-error-message" />
         </div>
       </div>
     </article>

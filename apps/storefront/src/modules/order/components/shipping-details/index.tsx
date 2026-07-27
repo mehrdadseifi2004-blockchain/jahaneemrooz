@@ -1,71 +1,79 @@
 import { convertToLocale } from "@lib/util/money"
 import { HttpTypes } from "@medusajs/types"
-import { Heading, Text } from "@modules/common/components/ui"
-
-import Divider from "@modules/common/components/divider"
 
 type ShippingDetailsProps = {
   order: HttpTypes.StoreOrder
 }
 
 const ShippingDetails = ({ order }: ShippingDetailsProps) => {
+  const address = order.shipping_address
+  const shippingMethod = order.shipping_methods?.[0]
+
   return (
     <div>
-      <Heading level="h2" className="flex flex-row text-3xl-regular my-6">
-        Delivery
-      </Heading>
-      <div className="flex items-start gap-x-8">
+      <h2 className="text-xl font-bold text-black small:text-2xl">
+        اطلاعات ارسال
+      </h2>
+
+      <div className="mt-6 grid gap-4 medium:grid-cols-3">
         <div
-          className="flex flex-col w-1/3"
+          className="rounded-[16px] bg-[#f0f0f0] p-5"
           data-testid="shipping-address-summary"
         >
-          <Text className="txt-medium-plus text-ui-fg-base mb-1">
-            Shipping Address
-          </Text>
-          <Text className="txt-medium text-ui-fg-subtle">
-            {order.shipping_address?.first_name}{" "}
-            {order.shipping_address?.last_name}
-          </Text>
-          <Text className="txt-medium text-ui-fg-subtle">
-            {order.shipping_address?.address_1}{" "}
-            {order.shipping_address?.address_2}
-          </Text>
-          <Text className="txt-medium text-ui-fg-subtle">
-            {order.shipping_address?.postal_code},{" "}
-            {order.shipping_address?.city}
-          </Text>
-          <Text className="txt-medium text-ui-fg-subtle">
-            {order.shipping_address?.country_code?.toUpperCase()}
-          </Text>
+          <p className="text-sm font-bold text-black">نشانی دریافت سفارش</p>
+
+          <div className="mt-3 text-sm leading-7 text-black/60">
+            <p>
+              {address?.first_name} {address?.last_name}
+            </p>
+
+            <p>
+              {address?.address_1}
+              {address?.address_2 ? `، ${address.address_2}` : ""}
+            </p>
+
+            <p>
+              {address?.province ? `${address.province}، ` : ""}
+              {address?.city}
+            </p>
+
+            <p>کد پستی: {address?.postal_code || "ثبت نشده"}</p>
+
+            <p>کشور: {address?.country_code?.toUpperCase() || "ثبت نشده"}</p>
+          </div>
         </div>
 
         <div
-          className="flex flex-col w-1/3 "
+          className="rounded-[16px] bg-[#f0f0f0] p-5"
           data-testid="shipping-contact-summary"
         >
-          <Text className="txt-medium-plus text-ui-fg-base mb-1">Contact</Text>
-          <Text className="txt-medium text-ui-fg-subtle">
-            {order.shipping_address?.phone}
-          </Text>
-          <Text className="txt-medium text-ui-fg-subtle">{order.email}</Text>
+          <p className="text-sm font-bold text-black">اطلاعات تماس</p>
+
+          <div className="mt-3 text-sm leading-7 text-black/60">
+            <p>موبایل: {address?.phone || "ثبت نشده"}</p>
+            <p className="break-all">ایمیل: {order.email}</p>
+          </div>
         </div>
 
         <div
-          className="flex flex-col w-1/3"
+          className="rounded-[16px] bg-[#f0f0f0] p-5"
           data-testid="shipping-method-summary"
         >
-          <Text className="txt-medium-plus text-ui-fg-base mb-1">Method</Text>
-          <Text className="txt-medium text-ui-fg-subtle">
-            {(order.shipping_methods?.[0] as { name?: string })?.name} (
-            {convertToLocale({
-              amount: order.shipping_methods?.[0].total ?? 0,
-              currency_code: order.currency_code,
-            })}
-            )
-          </Text>
+          <p className="text-sm font-bold text-black">روش دریافت</p>
+
+          <div className="mt-3 text-sm leading-7 text-black/60">
+            <p>{shippingMethod?.name || "ثبت نشده"}</p>
+
+            <p>
+              هزینه:{" "}
+              {convertToLocale({
+                amount: shippingMethod?.total ?? 0,
+                currency_code: order.currency_code,
+              })}
+            </p>
+          </div>
         </div>
       </div>
-      <Divider className="mt-8" />
     </div>
   )
 }

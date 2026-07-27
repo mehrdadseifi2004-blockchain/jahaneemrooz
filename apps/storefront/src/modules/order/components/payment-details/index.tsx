@@ -1,7 +1,4 @@
-import { Container, Heading, Text } from "@modules/common/components/ui"
-
 import { isStripeLike, paymentInfoMap } from "@lib/constants"
-import Divider from "@modules/common/components/divider"
 import { convertToLocale } from "@lib/util/money"
 import { HttpTypes } from "@medusajs/types"
 
@@ -10,52 +7,77 @@ type PaymentDetailsProps = {
 }
 
 const PaymentDetails = ({ order }: PaymentDetailsProps) => {
-  const payment = order.payment_collections?.[0].payments?.[0]
+  const payment = order.payment_collections?.[0]?.payments?.[0]
+
+  if (!payment) {
+    return (
+      <div>
+        <h2 className="text-xl font-bold text-black small:text-2xl">
+          اطلاعات پرداخت
+        </h2>
+
+        <div className="mt-6 rounded-[16px] bg-[#f0f0f0] p-5 text-sm text-black/60">
+          اطلاعات پرداخت برای این سفارش ثبت نشده است.
+        </div>
+      </div>
+    )
+  }
+
+  const paymentInfo = paymentInfoMap[payment.provider_id]
+  const paymentDate = payment.created_at
+    ? new Intl.DateTimeFormat("fa-IR", {
+        dateStyle: "medium",
+        timeStyle: "short",
+      }).format(new Date(payment.created_at))
+    : "ثبت نشده"
 
   return (
     <div>
-      <Heading level="h2" className="flex flex-row text-3xl-regular my-6">
-        Payment
-      </Heading>
-      <div>
-        {payment && (
-          <div className="flex items-start gap-x-1 w-full">
-            <div className="flex flex-col w-1/3">
-              <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                Payment method
-              </Text>
-              <Text
-                className="txt-medium text-ui-fg-subtle"
-                data-testid="payment-method"
-              >
-                {paymentInfoMap[payment.provider_id].title}
-              </Text>
-            </div>
-            <div className="flex flex-col w-2/3">
-              <Text className="txt-medium-plus text-ui-fg-base mb-1">
-                Payment details
-              </Text>
-              <div className="flex gap-2 txt-medium text-ui-fg-subtle items-center">
-                <Container className="flex items-center h-7 w-fit p-2 bg-ui-button-neutral-hover">
-                  {paymentInfoMap[payment.provider_id].icon}
-                </Container>
-                <Text data-testid="payment-amount">
-                  {isStripeLike(payment.provider_id) && payment.data?.card_last4
-                    ? `**** **** **** ${payment.data.card_last4}`
-                    : `${convertToLocale({
-                        amount: payment.amount,
-                        currency_code: order.currency_code,
-                      })} paid at ${new Date(
-                        payment.created_at ?? ""
-                      ).toLocaleString()}`}
-                </Text>
-              </div>
-            </div>
-          </div>
-        )}
-      </div>
+      <h2 className="text-xl font-bold text-black small:text-2xl">
+        اطلاعات پرداخت
+      </h2>
 
-      <Divider className="mt-8" />
+      <div className="mt-6 grid gap-4 small:grid-cols-2">
+        <div className="rounded-[16px] bg-[#f0f0f0] p-5">
+          <p className="text-xs text-black/50">روش پرداخت</p>
+
+          <div className="mt-3 flex items-center gap-3">
+            {paymentInfo?.icon && (
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-white">
+                {paymentInfo.icon}
+              </span>
+            )}
+
+            <p className="font-bold text-black" data-testid="payment-method">
+              {paymentInfo?.title || payment.provider_id || "پرداخت دستی"}
+            </p>
+          </div>
+        </div>
+
+        <div className="rounded-[16px] bg-[#f0f0f0] p-5">
+          <p className="text-xs text-black/50">جزئیات پرداخت</p>
+
+          <div
+            className="mt-3 text-sm leading-7 text-black"
+            data-testid="payment-amount"
+          >
+            {isStripeLike(payment.provider_id) && payment.data?.card_last4 ? (
+              <p dir="ltr">**** **** **** {String(payment.data.card_last4)}</p>
+            ) : (
+              <>
+                <p className="font-bold">
+                  {convertToLocale({
+                    amount: payment.amount,
+                    currency_code: order.currency_code,
+                  })}
+                </p>
+
+                <p className="text-xs text-black/50">پرداخت در {paymentDate}</p>
+              </>
+            )}
+          </div>
+        </div>
+      </div>
     </div>
   )
 }

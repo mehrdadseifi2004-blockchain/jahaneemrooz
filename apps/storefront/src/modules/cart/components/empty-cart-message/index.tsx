@@ -1,24 +1,48 @@
-import { Heading, Text } from "@modules/common/components/ui"
-
-import InteractiveLink from "@modules/common/components/interactive-link"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 const EmptyCartMessage = () => {
   return (
-    <div className="py-48 px-2 flex flex-col justify-center items-start" data-testid="empty-cart-message">
-      <Heading
-        level="h1"
-        className="flex flex-row text-3xl-regular gap-x-2 items-baseline"
-      >
-        Cart
-      </Heading>
-      <Text className="text-base-regular mt-4 mb-6 max-w-[32rem]">
-        You don&apos;t have anything in your cart. Let&apos;s change that, use
-        the link below to start browsing our products.
-      </Text>
-      <div>
-        <InteractiveLink href="/store">Explore products</InteractiveLink>
+    <section
+      className="flex min-h-[520px] flex-col items-center justify-center px-4 text-center"
+      data-testid="empty-cart-message"
+    >
+      <div className="flex h-24 w-24 items-center justify-center rounded-full bg-[#f0f0f0]">
+        <svg
+          width="46"
+          height="46"
+          viewBox="0 0 24 24"
+          fill="none"
+          className="text-black/40"
+          aria-hidden="true"
+        >
+          <path
+            d="M3 3H5L7.4 14.2C7.6 15.2 8.5 16 9.6 16H17.5C18.5 16 19.4 15.3 19.7 14.3L21 8H6"
+            stroke="currentColor"
+            strokeWidth="1.5"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <circle cx="10" cy="20" r="1" fill="currentColor" />
+          <circle cx="18" cy="20" r="1" fill="currentColor" />
+        </svg>
       </div>
-    </div>
+
+      <h1 className="mt-6 text-3xl font-black text-black small:text-4xl">
+        سبد خرید شما خالی است
+      </h1>
+
+      <p className="mt-4 max-w-lg text-sm leading-7 text-black/60 small:text-base">
+        هنوز محصولی به سبد خرید اضافه نکرده‌اید. محصولات فروشگاه را مشاهده کنید
+        و خرید خود را آغاز کنید.
+      </p>
+
+      <LocalizedClientLink
+        href="/store"
+        className="mt-7 inline-flex h-12 items-center justify-center rounded-full bg-black px-8 text-sm font-medium text-white transition hover:bg-black/80"
+      >
+        مشاهده محصولات
+      </LocalizedClientLink>
+    </section>
   )
 }
 
