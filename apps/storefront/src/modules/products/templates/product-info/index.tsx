@@ -14,84 +14,69 @@ const digitalCategoryHandles = [
 const ProductInfo = ({ product }: ProductInfoProps) => {
   const isDigital =
     product.categories?.some((category) =>
-      digitalCategoryHandles.includes(category.handle || "")
+      digitalCategoryHandles.includes(category.handle || ""),
     ) ?? false
 
   const category = product.categories?.[0]
 
   return (
     <div id="product-info">
-      <div className="flex flex-wrap items-center gap-2">
-        <span
-          className={`inline-flex rounded-full px-3 py-1.5 text-xs font-semibold ${
-            isDigital
-              ? "bg-violet-100 text-violet-700"
-              : "bg-blue-100 text-blue-700"
-          }`}
-        >
-          {isDigital ? "محصول دیجیتال" : "کالای فیزیکی"}
-        </span>
-
+      <div className="mb-3 flex flex-wrap items-center gap-2">
         {category && (
           <LocalizedClientLink
             href={`/categories/${category.handle}`}
-            className="inline-flex rounded-full bg-slate-100 px-3 py-1.5 text-xs font-medium text-slate-600 transition hover:bg-slate-200 hover:text-slate-900"
+            className="text-sm text-black/60 transition hover:text-black"
           >
             {category.name}
           </LocalizedClientLink>
         )}
+
+        {category && <span className="text-black/30">/</span>}
+
+        <span className="text-sm text-black/60">
+          {isDigital ? "محصول دیجیتال" : "کالای فیزیکی"}
+        </span>
       </div>
 
-      {product.collection && (
-        <LocalizedClientLink
-          href={`/collections/${product.collection.handle}`}
-          className="mt-5 inline-block text-sm font-medium text-blue-600 transition hover:text-blue-700"
-        >
-          {product.collection.title}
-        </LocalizedClientLink>
-      )}
-
       <h1
-        className="mt-4 text-2xl font-bold leading-10 text-slate-950 small:text-3xl"
+        className="text-3xl font-black leading-[1.2] tracking-[-0.03em] text-black small:text-[40px] small:leading-[1.15]"
         data-testid="product-title"
       >
         {product.title}
       </h1>
 
-      {product.subtitle && (
-        <p className="mt-3 text-sm leading-7 text-slate-500 small:text-base">
-          {product.subtitle}
-        </p>
-      )}
+      <div
+        dir="ltr"
+        className="mt-4 flex items-center justify-end gap-3"
+        aria-label="امتیاز محصول ۴.۵ از ۵"
+      >
+        <div className="flex gap-0.5 text-xl text-[#ffc633]">
+          <span>★</span>
+          <span>★</span>
+          <span>★</span>
+          <span>★</span>
 
-      {product.description && (
+          <span className="relative inline-block">
+            <span className="text-black/10">★</span>
+            <span className="absolute inset-0 w-1/2 overflow-hidden text-[#ffc633]">
+              ★
+            </span>
+          </span>
+        </div>
+
+        <span className="text-sm text-black">
+          4.5<span className="text-black/60">/5</span>
+        </span>
+      </div>
+
+      {(product.description || product.subtitle) && (
         <p
-          className="mt-5 whitespace-pre-line text-sm leading-8 text-slate-600"
+          className="mt-5 whitespace-pre-line text-sm leading-8 text-black/60 small:text-base"
           data-testid="product-description"
         >
-          {product.description}
+          {product.description || product.subtitle}
         </p>
       )}
-
-      <div className="mt-6 grid grid-cols-2 gap-3">
-        <div className="rounded-2xl bg-slate-50 p-4">
-          <p className="text-xs text-slate-400">
-            نحوه تحویل
-          </p>
-          <p className="mt-2 text-sm font-bold text-slate-800">
-            {isDigital ? "تحویل دیجیتال سریع" : "ارسال کالای فیزیکی"}
-          </p>
-        </div>
-
-        <div className="rounded-2xl bg-slate-50 p-4">
-          <p className="text-xs text-slate-400">
-            پشتیبانی
-          </p>
-          <p className="mt-2 text-sm font-bold text-slate-800">
-            قبل و بعد از خرید
-          </p>
-        </div>
-      </div>
     </div>
   )
 }

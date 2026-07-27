@@ -2,12 +2,13 @@ import React, { Suspense } from "react"
 import { notFound } from "next/navigation"
 import { HttpTypes } from "@medusajs/types"
 
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import ImageGallery from "@modules/products/components/image-gallery"
 import ProductActions from "@modules/products/components/product-actions"
 import ProductTabs from "@modules/products/components/product-tabs"
-// import RelatedProducts from "@modules/products/components/related-products"
+import RelatedProducts from "@modules/products/components/related-products"
+import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-related-products"
 import ProductInfo from "@modules/products/templates/product-info"
-// import SkeletonRelatedProducts from "@modules/skeletons/templates/skeleton-related-products"
 
 import ProductActionsWrapper from "./product-actions-wrapper"
 
@@ -29,23 +30,43 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   }
 
   return (
-    <main className="min-h-screen bg-slate-50" dir="rtl">
-      <div
-        className="content-container py-8 small:py-12"
-        data-testid="product-container"
-      >
-        <div className="grid items-start gap-8 large:grid-cols-[minmax(0,1fr)_420px]">
-          {/* Product gallery */}
-          <section className="min-w-0">
-            <ImageGallery images={images} />
-          </section>
+    <main className="min-h-screen bg-white pb-20" dir="rtl">
+      <div className="content-container" data-testid="product-container">
+        <div className="border-t border-black/10 pt-5 small:pt-6">
+          <nav
+            aria-label="مسیر صفحه"
+            className="mb-6 flex flex-wrap items-center gap-2 text-sm text-black/60"
+          >
+            <LocalizedClientLink
+              href="/"
+              className="transition hover:text-black"
+            >
+              خانه
+            </LocalizedClientLink>
 
-          {/* Product information and purchase box */}
-          <aside className="flex min-w-0 flex-col gap-6 large:sticky large:top-28">
-            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm small:p-8">
+            <span aria-hidden="true">←</span>
+
+            <LocalizedClientLink
+              href="/store"
+              className="transition hover:text-black"
+            >
+              فروشگاه
+            </LocalizedClientLink>
+
+            <span aria-hidden="true">←</span>
+
+            <span className="line-clamp-1 text-black">{product.title}</span>
+          </nav>
+
+          <section className="grid items-start gap-8 medium:grid-cols-2 medium:gap-10">
+            <div className="min-w-0">
+              <ImageGallery images={images} title={product.title} />
+            </div>
+
+            <div className="min-w-0">
               <ProductInfo product={product} />
 
-              <div className="mt-7 border-t border-slate-100 pt-6">
+              <div className="mt-5 border-t border-black/10 pt-5">
                 <Suspense
                   fallback={
                     <ProductActions
@@ -55,34 +76,28 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                     />
                   }
                 >
-                  <ProductActionsWrapper
-                    id={product.id}
-                    region={region}
-                  />
+                  <ProductActionsWrapper id={product.id} region={region} />
                 </Suspense>
               </div>
             </div>
+          </section>
 
-            <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-sm">
-              <ProductTabs product={product} />
-            </div>
-          </aside>
+          <section className="mt-12 small:mt-16">
+            <ProductTabs product={product} />
+          </section>
         </div>
       </div>
 
-      {/* <section
-        className="border-t border-slate-200 bg-white py-16 small:py-24"
+      <section
+        className="mt-4 border-t border-black/10 bg-white pt-[50px] small:mt-8 small:pt-20"
         data-testid="related-products-container"
       >
         <div className="content-container">
           <Suspense fallback={<SkeletonRelatedProducts />}>
-            <RelatedProducts
-              product={product}
-              countryCode={countryCode}
-            />
+            <RelatedProducts product={product} countryCode={countryCode} />
           </Suspense>
         </div>
-      </section> */}
+      </section>
     </main>
   )
 }

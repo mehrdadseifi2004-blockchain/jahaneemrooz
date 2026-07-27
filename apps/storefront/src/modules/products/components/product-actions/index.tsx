@@ -20,7 +20,7 @@ type ProductActionsProps = {
 }
 
 const optionsAsKeymap = (
-  variantOptions: HttpTypes.StoreProductVariant["options"]
+  variantOptions: HttpTypes.StoreProductVariant["options"],
 ) => {
   return variantOptions?.reduce((acc: Record<string, string>, varopt) => {
     if (varopt.option_id) acc[varopt.option_id] = varopt.value
@@ -38,6 +38,7 @@ export default function ProductActions({
 
   const [options, setOptions] = useState<Record<string, string | undefined>>({})
   const [isAdding, setIsAdding] = useState(false)
+  const [quantity, setQuantity] = useState(1)
   const countryCode = useParams().countryCode as string
 
   // If there is only 1 variant, preselect the options
@@ -128,7 +129,7 @@ export default function ProductActions({
 
     await addToCart({
       variantId: selectedVariant.id,
-      quantity: 1,
+      quantity,
       countryCode,
     })
 
@@ -136,134 +137,150 @@ export default function ProductActions({
   }
 
   const isDigital =
-  product.categories?.some((category) =>
-    ["gift-cards", "accounts-subscriptions", "software"].includes(
-      category.handle || ""
-    )
-  ) ?? false
+    product.categories?.some((category) =>
+      ["gift-cards", "accounts-subscriptions", "software"].includes(
+        category.handle || "",
+      ),
+    ) ?? false
 
-return (
-  <>
-    <div
-      className="flex flex-col gap-y-5"
-      ref={actionsRef}
-      dir="rtl"
-    >
-      {(product.variants?.length ?? 0) > 1 && (
-        <div className="flex flex-col gap-y-4">
-          {(product.options || []).map((option) => (
-            <div key={option.id}>
-              <OptionSelect
-                option={option}
-                current={options[option.id]}
-                updateOption={setOptionValue}
-                title={option.title ?? ""}
-                data-testid="product-options"
-                disabled={!!disabled || isAdding}
-              />
-            </div>
-          ))}
+  return (
+    <>
+      <div className="flex flex-col gap-y-5" ref={actionsRef} dir="rtl">
+        {(product.variants?.length ?? 0) > 1 && (
+          <div className="flex flex-col gap-y-4">
+            {(product.options || []).map((option) => (
+              <div key={option.id}>
+                <OptionSelect
+                  option={option}
+                  current={options[option.id]}
+                  updateOption={setOptionValue}
+                  title={option.title ?? ""}
+                  data-testid="product-options"
+                  disabled={!!disabled || isAdding}
+                />
+              </div>
+            ))}
 
-          <Divider />
+            <Divider />
+          </div>
+        )}
+
+        <div className="border-b border-black/10 pb-5">
+          <ProductPrice product={product} variant={selectedVariant} />
         </div>
-      )}
 
-      <div className="rounded-2xl bg-slate-50 p-5">
-        <p className="mb-2 text-xs font-medium text-slate-400">
-          قیمت محصول
-        </p>
+        <div
+          className={`flex items-center gap-3 rounded-2xl border p-4 ${
+            inStock
+              ? "border-emerald-200 bg-emerald-50"
+              : "border-rose-200 bg-rose-50"
+          }`}
+        >
+          <span
+            className={`h-2.5 w-2.5 rounded-full ${
+              inStock ? "bg-emerald-500" : "bg-rose-500"
+            }`}
+          />
 
-        <ProductPrice
+          <div>
+            <p
+              className={`text-sm font-bold ${
+                inStock ? "text-emerald-700" : "text-rose-700"
+              }`}
+            >
+              {inStock ? "موجود و قابل سفارش" : "در حال حاضر ناموجود"}
+            </p>
+
+            {inStock && (
+              <p className="mt-1 text-xs text-slate-500">
+                {isDigital
+                  ? "اطلاعات محصول پس از خرید به‌صورت دیجیتال تحویل می‌شود."
+                  : "کالا پس از ثبت سفارش برای ارسال آماده می‌شود."}
+              </p>
+            )}
+          </div>
+        </div>
+
+        <div className="flex items-center gap-3">
+          <div className="flex h-14 shrink-0 items-center rounded-full bg-[#f0f0f0] px-2">
+            <button
+              type="button"
+              onClick={() => setQuantity((current) => Math.max(1, current - 1))}
+              disabled={quantity <= 1 || isAdding}
+              aria-label="کاهش تعداد"
+              className="flex h-10 w-10 items-center justify-center rounded-full text-xl text-black transition hover:bg-black/5 disabled:opacity-30"
+            >
+              −
+            </button>
+
+            <span
+              className="min-w-8 text-center text-base font-medium text-black"
+              aria-live="polite"
+            >
+              {quantity}
+            </span>
+
+            <button
+              type="button"
+              onClick={() =>
+                setQuantity((current) => Math.min(99, current + 1))
+              }
+              disabled={isAdding}
+              aria-label="افزایش تعداد"
+              className="flex h-10 w-10 items-center justify-center rounded-full text-xl text-black transition hover:bg-black/5 disabled:opacity-30"
+            >
+              +
+            </button>
+          </div>
+
+          <Button
+            onClick={handleAddToCart}
+            disabled={
+              !inStock ||
+              !selectedVariant ||
+              !!disabled ||
+              isAdding ||
+              !isValidVariant
+            }
+            variant="primary"
+            className="h-14 min-w-0 flex-1 rounded-full bg-black px-5 text-sm font-medium text-white transition hover:bg-black/80 small:text-base"
+            isLoading={isAdding}
+            data-testid="add-product-button"
+          >
+            {!selectedVariant
+              ? "انتخاب گزینه محصول"
+              : !inStock || !isValidVariant
+                ? "ناموجود"
+                : "افزودن به سبد خرید"}
+          </Button>
+        </div>
+
+        <div className="grid grid-cols-3 gap-2 text-center">
+          <div className="rounded-xl border border-slate-200 p-3">
+            <p className="text-xs font-semibold text-slate-700">خرید امن</p>
+          </div>
+
+          <div className="rounded-xl border border-slate-200 p-3">
+            <p className="text-xs font-semibold text-slate-700">پشتیبانی</p>
+          </div>
+
+          <div className="rounded-xl border border-slate-200 p-3">
+            <p className="text-xs font-semibold text-slate-700">تحویل سریع</p>
+          </div>
+        </div>
+
+        <MobileActions
           product={product}
           variant={selectedVariant}
+          options={options}
+          updateOptions={setOptionValue}
+          inStock={inStock}
+          handleAddToCart={handleAddToCart}
+          isAdding={isAdding}
+          show={!inView}
+          optionsDisabled={!!disabled || isAdding}
         />
       </div>
-
-      <div
-        className={`flex items-center gap-3 rounded-2xl border p-4 ${
-          inStock
-            ? "border-emerald-200 bg-emerald-50"
-            : "border-rose-200 bg-rose-50"
-        }`}
-      >
-        <span
-          className={`h-2.5 w-2.5 rounded-full ${
-            inStock ? "bg-emerald-500" : "bg-rose-500"
-          }`}
-        />
-
-        <div>
-          <p
-            className={`text-sm font-bold ${
-              inStock ? "text-emerald-700" : "text-rose-700"
-            }`}
-          >
-            {inStock ? "موجود و قابل سفارش" : "در حال حاضر ناموجود"}
-          </p>
-
-          {inStock && (
-            <p className="mt-1 text-xs text-slate-500">
-              {isDigital
-                ? "اطلاعات محصول پس از خرید به‌صورت دیجیتال تحویل می‌شود."
-                : "کالا پس از ثبت سفارش برای ارسال آماده می‌شود."}
-            </p>
-          )}
-        </div>
-      </div>
-
-      <Button
-        onClick={handleAddToCart}
-        disabled={
-          !inStock ||
-          !selectedVariant ||
-          !!disabled ||
-          isAdding ||
-          !isValidVariant
-        }
-        variant="primary"
-        className="h-12 w-full rounded-xl bg-blue-600 text-base font-bold text-white transition hover:bg-blue-500"
-        isLoading={isAdding}
-        data-testid="add-product-button"
-      >
-        {!selectedVariant
-          ? "انتخاب گزینه محصول"
-          : !inStock || !isValidVariant
-          ? "ناموجود"
-          : "افزودن به سبد خرید"}
-      </Button>
-
-      <div className="grid grid-cols-3 gap-2 text-center">
-        <div className="rounded-xl border border-slate-200 p-3">
-          <p className="text-xs font-semibold text-slate-700">
-            خرید امن
-          </p>
-        </div>
-
-        <div className="rounded-xl border border-slate-200 p-3">
-          <p className="text-xs font-semibold text-slate-700">
-            پشتیبانی
-          </p>
-        </div>
-
-        <div className="rounded-xl border border-slate-200 p-3">
-          <p className="text-xs font-semibold text-slate-700">
-            تحویل سریع
-          </p>
-        </div>
-      </div>
-
-      <MobileActions
-        product={product}
-        variant={selectedVariant}
-        options={options}
-        updateOptions={setOptionValue}
-        inStock={inStock}
-        handleAddToCart={handleAddToCart}
-        isAdding={isAdding}
-        show={!inView}
-        optionsDisabled={!!disabled || isAdding}
-      />
-    </div>
-  </>
-)
+    </>
+  )
 }

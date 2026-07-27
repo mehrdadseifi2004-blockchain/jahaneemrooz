@@ -1,114 +1,125 @@
 "use client"
 
-import { clx } from "@modules/common/components/ui"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 export function Pagination({
   page,
   totalPages,
-  'data-testid': dataTestid
+  "data-testid": dataTestid,
 }: {
   page: number
   totalPages: number
-  'data-testid'?: string
+  "data-testid"?: string
 }) {
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
 
-  // Helper function to generate an array of numbers within a range
   const arrayRange = (start: number, stop: number) =>
     Array.from({ length: stop - start + 1 }, (_, index) => start + index)
 
-  // Function to handle page changes
   const handlePageChange = (newPage: number) => {
-    const params = new URLSearchParams(searchParams)
+    if (newPage < 1 || newPage > totalPages || newPage === page) {
+      return
+    }
+
+    const params = new URLSearchParams(searchParams.toString())
     params.set("page", newPage.toString())
+
     router.push(`${pathname}?${params.toString()}`)
   }
 
-  // Function to render a page button
-  const renderPageButton = (
-    p: number,
-    label: string | number,
-    isCurrent: boolean
-  ) => (
-    <button
-      key={p}
-      className={clx("txt-xlarge-plus text-ui-fg-muted", {
-        "text-ui-fg-base hover:text-ui-fg-subtle": isCurrent,
-      })}
-      disabled={isCurrent}
-      onClick={() => handlePageChange(p)}
-    >
-      {label}
-    </button>
-  )
+  const renderPageButton = (pageNumber: number) => {
+    const isCurrent = pageNumber === page
 
-  // Function to render ellipsis
+    return (
+      <button
+        key={pageNumber}
+        type="button"
+        disabled={isCurrent}
+        onClick={() => handlePageChange(pageNumber)}
+        aria-current={isCurrent ? "page" : undefined}
+        className={`flex h-10 min-w-10 items-center justify-center rounded-lg px-3 text-sm font-medium transition ${
+          isCurrent
+            ? "bg-black/5 text-black"
+            : "text-black/50 hover:bg-black/5 hover:text-black"
+        }`}
+      >
+        {pageNumber}
+      </button>
+    )
+  }
+
   const renderEllipsis = (key: string) => (
     <span
       key={key}
-      className="txt-xlarge-plus text-ui-fg-muted items-center cursor-default"
+      className="flex h-10 min-w-8 items-center justify-center text-black/40"
     >
       ...
     </span>
   )
 
-  // Function to render page buttons based on the current page and total pages
   const renderPageButtons = () => {
-    const buttons = []
-
     if (totalPages <= 7) {
-      // Show all pages
-      buttons.push(
-        ...arrayRange(1, totalPages).map((p) =>
-          renderPageButton(p, p, p === page)
-        )
-      )
-    } else {
-      // Handle different cases for displaying pages and ellipses
-      if (page <= 4) {
-        // Show 1, 2, 3, 4, 5, ..., lastpage
-        buttons.push(
-          ...arrayRange(1, 5).map((p) => renderPageButton(p, p, p === page))
-        )
-        buttons.push(renderEllipsis("ellipsis1"))
-        buttons.push(
-          renderPageButton(totalPages, totalPages, totalPages === page)
-        )
-      } else if (page >= totalPages - 3) {
-        // Show 1, ..., lastpage - 4, lastpage - 3, lastpage - 2, lastpage - 1, lastpage
-        buttons.push(renderPageButton(1, 1, 1 === page))
-        buttons.push(renderEllipsis("ellipsis2"))
-        buttons.push(
-          ...arrayRange(totalPages - 4, totalPages).map((p) =>
-            renderPageButton(p, p, p === page)
-          )
-        )
-      } else {
-        // Show 1, ..., page - 1, page, page + 1, ..., lastpage
-        buttons.push(renderPageButton(1, 1, 1 === page))
-        buttons.push(renderEllipsis("ellipsis3"))
-        buttons.push(
-          ...arrayRange(page - 1, page + 1).map((p) =>
-            renderPageButton(p, p, p === page)
-          )
-        )
-        buttons.push(renderEllipsis("ellipsis4"))
-        buttons.push(
-          renderPageButton(totalPages, totalPages, totalPages === page)
-        )
-      }
+      return arrayRange(1, totalPages).map(renderPageButton)
     }
 
-    return buttons
+    if (page <= 4) {
+      return [
+        ...arrayRange(1, 5).map(renderPageButton),
+        renderEllipsis("end"),
+        renderPageButton(totalPages),
+      ]
+    }
+
+    if (page >= totalPages - 3) {
+      return [
+        renderPageButton(1),
+        renderEllipsis("start"),
+        ...arrayRange(totalPages - 4, totalPages).map(renderPageButton),
+      ]
+    }
+
+    return [
+      renderPageButton(1),
+      renderEllipsis("start"),
+      ...arrayRange(page - 1, page + 1).map(renderPageButton),
+      renderEllipsis("end"),
+      renderPageButton(totalPages),
+    ]
   }
 
-  // Render the component
   return (
-    <div className="flex justify-center w-full mt-12">
-      <div className="flex gap-3 items-end" data-testid={dataTestid}>{renderPageButtons()}</div>
-    </div>
+    <nav
+      aria-label="صفحه‌بندی محصولات"
+      className="mt-10 flex w-full items-center justify-between border-t border-black/10 pt-5"
+      data-testid={dataTestid}
+    >
+      <button
+        type="button"
+        disabled={page === 1}
+        onClick={() => handlePageChange(page - 1)}
+        className="inline-flex h-10 items-center justify-center rounded-lg border border-black/10 px-4 text-sm font-medium text-black transition hover:bg-black hover:text-white disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-black"
+      >
+        صفحه قبل
+      </button>
+
+      <div dir="ltr" className="hidden items-center gap-1 small:flex">
+        {renderPageButtons()}
+      </div>
+
+      <span className="text-sm text-black/60 small:hidden">
+        صفحه {page} از {totalPages}
+      </span>
+
+      <button
+        type="button"
+        disabled={page === totalPages}
+        onClick={() => handlePageChange(page + 1)}
+        className="inline-flex h-10 items-center justify-center rounded-lg border border-black/10 px-4 text-sm font-medium text-black transition hover:bg-black hover:text-white disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-black"
+      >
+        صفحه بعد
+      </button>
+    </nav>
   )
 }

@@ -7,6 +7,7 @@ import {
   OPTION_VALUE_QUERY_KEY,
   parseOptionValueIds,
 } from "@lib/util/product-option-filters"
+
 import OptionsPicker from "./options-picker"
 import SortProducts, { SortOptions } from "./sort-products"
 
@@ -29,8 +30,8 @@ const RefinementList = ({
   const updateQueryParams = useCallback(
     (updater: (params: URLSearchParams) => void) => {
       const params = new URLSearchParams(searchParams.toString())
-      updater(params)
 
+      updater(params)
       params.delete("page")
 
       const queryString = params.toString()
@@ -44,7 +45,7 @@ const RefinementList = ({
         router.push(nextPath)
       }
     },
-    [pathname, router, searchParams]
+    [pathname, router, searchParams],
   )
 
   const setQueryParams = (name: string, value: string) =>
@@ -52,30 +53,51 @@ const RefinementList = ({
 
   const selectedOptionValueIds = useMemo(
     () => parseOptionValueIds(searchParams),
-    [searchParams]
+    [searchParams],
   )
 
   const setOptionValueIds = (valueIds: string[]) =>
     updateQueryParams((params) => {
       params.delete(OPTION_VALUE_QUERY_KEY)
+
       valueIds.forEach((valueId) =>
-        params.append(OPTION_VALUE_QUERY_KEY, valueId)
+        params.append(OPTION_VALUE_QUERY_KEY, valueId),
       )
     })
 
+  const clearFilters = () => {
+    updateQueryParams((params) => {
+      params.delete("sortBy")
+      params.delete(OPTION_VALUE_QUERY_KEY)
+    })
+  }
+
   return (
-    <div className="flex flex-col gap-12 py-4 mb-8 small:px-0 pl-6 small:min-w-[250px] small:ml-[1.675rem]">
+    <div className="flex flex-col">
       <SortProducts
         sortBy={sortBy}
         setQueryParams={setQueryParams}
         data-testid={dataTestId}
       />
+
       {!hideOptionsPicker && (
-        <OptionsPicker
-          selectedValueIds={selectedOptionValueIds}
-          setOptionValueIds={setOptionValueIds}
-        />
+        <>
+          <div className="my-5 h-px bg-black/10" />
+
+          <OptionsPicker
+            selectedValueIds={selectedOptionValueIds}
+            setOptionValueIds={setOptionValueIds}
+          />
+        </>
       )}
+
+      <button
+        type="button"
+        onClick={clearFilters}
+        className="mt-6 h-12 w-full rounded-full bg-black px-5 text-sm font-medium text-white transition hover:bg-black/80"
+      >
+        پاک‌کردن فیلترها
+      </button>
     </div>
   )
 }

@@ -33,23 +33,23 @@ export default async function PaginatedProducts({
   optionValueIds?: OptionValueIds
 }) {
   const queryParams: PaginatedProductsParams = {
-    limit: 12,
+    limit: PRODUCT_LIMIT,
   }
 
   if (collectionId) {
-    queryParams["collection_id"] = [collectionId]
+    queryParams.collection_id = [collectionId]
   }
 
   if (categoryId) {
-    queryParams["category_id"] = [categoryId]
+    queryParams.category_id = [categoryId]
   }
 
   if (productsIds) {
-    queryParams["id"] = productsIds
+    queryParams.id = productsIds
   }
 
   if (sortBy === "created_at") {
-    queryParams["order"] = "created_at"
+    queryParams.order = "created_at"
   }
 
   const region = await getRegion(countryCode)
@@ -69,21 +69,42 @@ export default async function PaginatedProducts({
   })
 
   const totalPages = Math.ceil(count / PRODUCT_LIMIT)
+  const firstProduct = count === 0 ? 0 : (page - 1) * PRODUCT_LIMIT + 1
+  const lastProduct = Math.min(page * PRODUCT_LIMIT, count)
 
   return (
     <>
-      <ul
-        className="grid grid-cols-2 w-full small:grid-cols-3 medium:grid-cols-4 gap-x-6 gap-y-8"
-        data-testid="products-list"
-      >
-        {products.map((p) => {
-          return (
-            <li key={p.id}>
-              <ProductPreview product={p} region={region} />
+      <div className="mb-5 flex items-center justify-between border-b border-black/10 pb-5">
+        <p className="text-sm text-black/60">
+          نمایش {firstProduct} تا {lastProduct} از {count} محصول
+        </p>
+      </div>
+
+      {products.length ? (
+        <ul
+          className="grid w-full grid-cols-2 gap-x-4 gap-y-8 small:gap-x-5 medium:grid-cols-2 large:grid-cols-3"
+          data-testid="products-list"
+        >
+          {products.map((product) => (
+            <li key={product.id} className="min-w-0">
+              <ProductPreview product={product} region={region} />
             </li>
-          )
-        })}
-      </ul>
+          ))}
+        </ul>
+      ) : (
+        <div className="flex min-h-[360px] flex-col items-center justify-center rounded-[20px] border border-black/10 px-6 text-center">
+          <span className="text-5xl" aria-hidden="true">
+            🔍
+          </span>
+
+          <h2 className="mt-5 text-xl font-bold text-black">محصولی پیدا نشد</h2>
+
+          <p className="mt-2 max-w-md text-sm leading-7 text-black/60">
+            فیلترهای انتخاب‌شده را تغییر دهید یا همه فیلترها را پاک کنید.
+          </p>
+        </div>
+      )}
+
       {totalPages > 1 && (
         <Pagination
           data-testid="product-pagination"

@@ -1,8 +1,10 @@
 import { Metadata } from "next"
 
 import { getRegion } from "@lib/data/regions"
+import BestSellingProducts from "@modules/home/components/best-selling-products"
 import Brands from "@modules/home/components/brands"
 import CategoryGrid from "@modules/home/components/category-grid"
+import CustomerReviews from "@modules/home/components/customer-reviews"
 import Hero from "@modules/home/components/hero"
 import LatestProducts from "@modules/home/components/latest-products"
 
@@ -26,9 +28,16 @@ export default async function Home(props: {
   return (
     <>
       <Hero />
+
       <Brands />
-      <CategoryGrid />
+
       <LatestProducts region={region} />
+
+      <BestSellingProducts region={region} />
+
+      <CategoryGrid />
+
+      <CustomerReviews />
     </>
   )
 }
