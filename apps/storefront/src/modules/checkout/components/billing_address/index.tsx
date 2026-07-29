@@ -1,37 +1,27 @@
+import { useI18n } from "@i18n/components/i18n-provider"
 import { HttpTypes } from "@medusajs/types"
 import Input from "@modules/common/components/input"
 import React, { useState } from "react"
 
 import CountrySelect from "../country-select"
 
-const BillingAddress = ({
-  cart,
-}: {
-  cart: HttpTypes.StoreCart | null
-}) => {
+const BillingAddress = ({ cart }: { cart: HttpTypes.StoreCart | null }) => {
+  const { dictionary } = useI18n()
+
   const [formData, setFormData] = useState<Record<string, string>>({
-    "billing_address.first_name":
-      cart?.billing_address?.first_name || "",
-    "billing_address.last_name":
-      cart?.billing_address?.last_name || "",
-    "billing_address.address_1":
-      cart?.billing_address?.address_1 || "",
-    "billing_address.company":
-      cart?.billing_address?.company || "",
-    "billing_address.postal_code":
-      cart?.billing_address?.postal_code || "",
-    "billing_address.city":
-      cart?.billing_address?.city || "",
-    "billing_address.country_code":
-      cart?.billing_address?.country_code || "ir",
-    "billing_address.province":
-      cart?.billing_address?.province || "",
-    "billing_address.phone":
-      cart?.billing_address?.phone || "",
+    "billing_address.first_name": cart?.billing_address?.first_name || "",
+    "billing_address.last_name": cart?.billing_address?.last_name || "",
+    "billing_address.address_1": cart?.billing_address?.address_1 || "",
+    "billing_address.company": cart?.billing_address?.company || "",
+    "billing_address.postal_code": cart?.billing_address?.postal_code || "",
+    "billing_address.city": cart?.billing_address?.city || "",
+    "billing_address.country_code": cart?.billing_address?.country_code || "ir",
+    "billing_address.province": cart?.billing_address?.province || "",
+    "billing_address.phone": cart?.billing_address?.phone || "",
   })
 
   const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     setFormData((previous) => ({
       ...previous,
@@ -40,12 +30,9 @@ const BillingAddress = ({
   }
 
   return (
-    <div
-      className="grid grid-cols-1 gap-4 small:grid-cols-2"
-      dir="rtl"
-    >
+    <div className="grid grid-cols-1 gap-4 small:grid-cols-2">
       <Input
-        label="نام"
+        label={dictionary.checkout.address.firstName}
         name="billing_address.first_name"
         autoComplete="given-name"
         value={formData["billing_address.first_name"]}
@@ -55,7 +42,7 @@ const BillingAddress = ({
       />
 
       <Input
-        label="نام خانوادگی"
+        label={dictionary.checkout.address.lastName}
         name="billing_address.last_name"
         autoComplete="family-name"
         value={formData["billing_address.last_name"]}
@@ -66,7 +53,7 @@ const BillingAddress = ({
 
       <div className="small:col-span-2">
         <Input
-          label="نشانی کامل"
+          label={dictionary.checkout.address.addressLine}
           name="billing_address.address_1"
           autoComplete="address-line1"
           value={formData["billing_address.address_1"]}
@@ -77,7 +64,7 @@ const BillingAddress = ({
       </div>
 
       <Input
-        label="استان"
+        label={dictionary.checkout.address.province}
         name="billing_address.province"
         autoComplete="address-level1"
         value={formData["billing_address.province"]}
@@ -87,7 +74,7 @@ const BillingAddress = ({
       />
 
       <Input
-        label="شهر"
+        label={dictionary.checkout.address.city}
         name="billing_address.city"
         autoComplete="address-level2"
         value={formData["billing_address.city"]}
@@ -96,7 +83,7 @@ const BillingAddress = ({
       />
 
       <Input
-        label="کد پستی"
+        label={dictionary.checkout.address.postal}
         name="billing_address.postal_code"
         autoComplete="postal-code"
         inputMode="numeric"
@@ -117,7 +104,7 @@ const BillingAddress = ({
       />
 
       <Input
-        label="شماره تماس"
+        label={dictionary.checkout.address.billingPhone}
         name="billing_address.phone"
         autoComplete="tel"
         inputMode="tel"
@@ -127,7 +114,7 @@ const BillingAddress = ({
       />
 
       <Input
-        label="شرکت یا سازمان (اختیاری)"
+        label={dictionary.checkout.address.billingCompany}
         name="billing_address.company"
         value={formData["billing_address.company"]}
         onChange={handleChange}

@@ -25,7 +25,7 @@ const ItemsTemplate = ({ cart }: ItemsTemplateProps) => {
               <Item
                 key={item.id}
                 item={item}
-                currencyCode={cart?.currency_code}
+                currencyCode={cart?.currency_code ?? ""}
               />
             ))
           : repeat(3).map((index) => (

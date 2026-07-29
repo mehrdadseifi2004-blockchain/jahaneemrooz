@@ -15,12 +15,12 @@
     "jsx": "preserve",
     "incremental": true,
     "baseUrl": "./src",
-    "ignoreDeprecations": "6.0",
     "paths": {
-  "@lib/*": ["lib/*"],
-  "@modules/*": ["modules/*"],
-  "@pages/*": ["pages/*"]
-},
+      "@lib/*": ["lib/*"],
+      "@modules/*": ["modules/*"],
+      "@pages/*": ["pages/*"],
+      "@i18n/*": ["i18n/*"]
+    },
     "plugins": [
       {
         "name": "next"

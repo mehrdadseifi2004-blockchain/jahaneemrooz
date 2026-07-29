@@ -1,4 +1,8 @@
+"use client"
+
 import { forwardRef, useImperativeHandle, useMemo, useRef } from "react"
+
+import { useI18n } from "@i18n/components/i18n-provider"
 
 import NativeSelect, {
   NativeSelectProps,
@@ -10,12 +14,13 @@ const CountrySelect = forwardRef<
   NativeSelectProps & {
     region?: HttpTypes.StoreRegion
   }
->(({ placeholder = "Country", region, defaultValue, ...props }, ref) => {
+>(({ placeholder, region, defaultValue, ...props }, ref) => {
+  const { dictionary } = useI18n()
   const innerRef = useRef<HTMLSelectElement>(null)
 
   useImperativeHandle<HTMLSelectElement | null, HTMLSelectElement | null>(
     ref,
-    () => innerRef.current
+    () => innerRef.current,
   )
 
   const countryOptions = useMemo(() => {
@@ -32,7 +37,7 @@ const CountrySelect = forwardRef<
   return (
     <NativeSelect
       ref={innerRef}
-      placeholder={placeholder}
+      placeholder={placeholder || dictionary.checkout.address.country}
       defaultValue={defaultValue}
       {...props}
     >

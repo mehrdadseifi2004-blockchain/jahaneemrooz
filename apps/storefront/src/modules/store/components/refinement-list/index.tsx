@@ -3,6 +3,7 @@
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useCallback, useMemo } from "react"
 
+import { useI18n } from "@i18n/components/i18n-provider"
 import {
   OPTION_VALUE_QUERY_KEY,
   parseOptionValueIds,
@@ -23,6 +24,7 @@ const RefinementList = ({
   hideOptionsPicker = false,
   "data-testid": dataTestId,
 }: RefinementListProps) => {
+  const { dictionary } = useI18n()
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -96,7 +98,7 @@ const RefinementList = ({
         onClick={clearFilters}
         className="mt-6 h-12 w-full rounded-full bg-black px-5 text-sm font-medium text-white transition hover:bg-black/80"
       >
-        پاک‌کردن فیلترها
+        {dictionary.store.filters.clear}
       </button>
     </div>
   )

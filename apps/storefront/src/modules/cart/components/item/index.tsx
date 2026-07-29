@@ -1,5 +1,6 @@
 "use client"
 
+import { useI18n } from "@i18n/components/i18n-provider"
 import { updateLineItem } from "@lib/data/cart"
 import { HttpTypes } from "@medusajs/types"
 import ErrorMessage from "@modules/checkout/components/error-message"
@@ -18,6 +19,9 @@ type ItemProps = {
 }
 
 const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
+  const { locale, dictionary } = useI18n()
+  const numberLocale = locale === "fa" ? "fa-IR" : "en-US"
+
   const [updating, setUpdating] = useState(false)
   const [error, setError] = useState<string | null>(null)
 
@@ -49,7 +53,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
         setError(
           error instanceof Error
             ? error.message
-            : "تغییر تعداد محصول انجام نشد.",
+            : dictionary.cart.item.updateError,
         )
       })
       .finally(() => {
@@ -78,7 +82,10 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
           </p>
 
           <div className="mt-1 flex items-center gap-1 text-xs text-black/50">
-            <span>{item.quantity.toLocaleString("fa-IR")} عدد</span>
+            <span>
+              {item.quantity.toLocaleString(numberLocale)}{" "}
+              {dictionary.cart.item.quantityUnit}
+            </span>
             <span>×</span>
 
             <LineItemUnitPrice
@@ -136,7 +143,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
           {item.variant_title &&
             !item.variant_title.toLowerCase().includes("default") && (
               <p className="mt-1 text-xs leading-6 text-black/60 small:text-sm">
-                گزینه انتخاب‌شده:{" "}
+                {dictionary.cart.item.selectedOption}{" "}
                 <span className="text-black">{item.variant_title}</span>
               </p>
             )}
@@ -153,7 +160,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
 
               {item.quantity > 1 && (
                 <div className="mt-1 flex items-center gap-1 text-xs text-black/50">
-                  <span>قیمت واحد:</span>
+                  <span>{dictionary.cart.item.unitPrice}</span>
 
                   <LineItemUnitPrice
                     item={item}
@@ -172,7 +179,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
                   type="button"
                   onClick={() => changeQuantity(item.quantity - 1)}
                   disabled={item.quantity <= 1 || updating}
-                  aria-label="کاهش تعداد"
+                  aria-label={dictionary.cart.item.decreaseQuantity}
                   className="flex h-8 w-8 items-center justify-center rounded-full text-xl text-black transition hover:bg-black/5 disabled:cursor-not-allowed disabled:opacity-30"
                 >
                   −
@@ -183,14 +190,14 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
                   data-testid="product-quantity"
                   aria-live="polite"
                 >
-                  {item.quantity.toLocaleString("fa-IR")}
+                  {item.quantity.toLocaleString(numberLocale)}
                 </span>
 
                 <button
                   type="button"
                   onClick={() => changeQuantity(item.quantity + 1)}
                   disabled={item.quantity >= maxQuantity || updating}
-                  aria-label="افزایش تعداد"
+                  aria-label={dictionary.cart.item.increaseQuantity}
                   className="flex h-8 w-8 items-center justify-center rounded-full text-xl text-black transition hover:bg-black/5 disabled:cursor-not-allowed disabled:opacity-30"
                 >
                   +

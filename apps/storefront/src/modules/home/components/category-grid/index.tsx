@@ -1,3 +1,4 @@
+import { Dictionary } from "@i18n/get-dictionary"
 import { listCategories } from "@lib/data/categories"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
@@ -24,7 +25,11 @@ const categoryCards = [
   },
 ]
 
-export default async function CategoryGrid() {
+type CategoryGridProps = {
+  dictionary: Dictionary
+}
+
+export default async function CategoryGrid({ dictionary }: CategoryGridProps) {
   const categories = await listCategories()
 
   if (!categories?.length) {
@@ -40,7 +45,7 @@ export default async function CategoryGrid() {
     >
       <div className="content-container rounded-[40px] bg-[#f0f0f0] px-6 pb-6 pt-10 text-center small:p-10 medium:p-[70px]">
         <h2 className="mb-8 text-[32px] font-black leading-[1.1] tracking-[-0.03em] text-black small:mb-14 small:text-5xl">
-          خرید بر اساس دسته‌بندی
+          {dictionary.home.categories.title}
         </h2>
 
         <div className="grid grid-cols-1 gap-4 medium:grid-cols-5 medium:gap-5">
@@ -51,11 +56,11 @@ export default async function CategoryGrid() {
               <LocalizedClientLink
                 key={category.id}
                 href={`/categories/${category.handle}`}
-                className={`group relative min-h-[190px] overflow-hidden rounded-[20px] bg-cover bg-center bg-no-repeat text-right medium:min-h-[289px] ${card.className}`}
+                className={`group relative min-h-[190px] overflow-hidden rounded-[20px] bg-cover bg-center bg-no-repeat text-start medium:min-h-[289px] ${card.className}`}
               >
-                <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-white/20" />
+                <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-white/20 rtl:bg-gradient-to-r" />
 
-                <div className="absolute bottom-4 left-5 text-[82px] opacity-90 transition duration-500 group-hover:scale-110 small:text-[110px] medium:bottom-6 medium:left-8 medium:text-[140px]">
+                <div className="absolute bottom-4 end-5 text-[82px] opacity-90 transition duration-500 group-hover:scale-110 small:text-[110px] medium:bottom-6 medium:end-8 medium:text-[140px]">
                   {card.decoration}
                 </div>
 
@@ -73,7 +78,7 @@ export default async function CategoryGrid() {
                   </div>
 
                   <span className="self-start rounded-full bg-black px-5 py-2.5 text-sm font-medium text-white opacity-0 transition duration-300 group-hover:opacity-100">
-                    مشاهده محصولات
+                    {dictionary.home.categories.viewProducts}
                   </span>
                 </div>
               </LocalizedClientLink>

@@ -1,3 +1,4 @@
+import { useI18n } from "@i18n/components/i18n-provider"
 import { HttpTypes } from "@medusajs/types"
 import { clx } from "@modules/common/components/ui"
 import React from "react"
@@ -19,11 +20,15 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
   "data-testid": dataTestId,
   disabled,
 }) => {
+  const { dictionary } = useI18n()
+
   const filteredOptions = (option.values ?? []).map((v) => v.value)
 
   return (
     <div className="flex flex-col gap-y-3">
-      <span className="text-sm">Select {title}</span>
+      <span className="text-sm">
+        {dictionary.product.actions.selectLabel.replace("{title}", title)}
+      </span>
       <div
         className="flex flex-wrap justify-between gap-2"
         data-testid={dataTestId}
@@ -39,7 +44,7 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
                   "border-ui-border-interactive": v === current,
                   "hover:shadow-elevation-card-rest transition-shadow ease-in-out duration-150":
                     v !== current,
-                }
+                },
               )}
               disabled={disabled}
               data-testid="option-button"

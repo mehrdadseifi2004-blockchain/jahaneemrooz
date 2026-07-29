@@ -1,5 +1,6 @@
 "use client"
 
+import { useI18n } from "@i18n/components/i18n-provider"
 import { addToCart } from "@lib/data/cart"
 import { useIntersection } from "@lib/hooks/use-in-view"
 import { HttpTypes } from "@medusajs/types"
@@ -32,6 +33,7 @@ export default function ProductActions({
   product,
   disabled,
 }: ProductActionsProps) {
+  const { dictionary } = useI18n()
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -145,7 +147,7 @@ export default function ProductActions({
 
   return (
     <>
-      <div className="flex flex-col gap-y-5" ref={actionsRef} dir="rtl">
+      <div className="flex flex-col gap-y-5" ref={actionsRef}>
         {(product.variants?.length ?? 0) > 1 && (
           <div className="flex flex-col gap-y-4">
             {(product.options || []).map((option) => (
@@ -188,14 +190,16 @@ export default function ProductActions({
                 inStock ? "text-emerald-700" : "text-rose-700"
               }`}
             >
-              {inStock ? "موجود و قابل سفارش" : "در حال حاضر ناموجود"}
+              {inStock
+                ? dictionary.product.actions.inStock
+                : dictionary.product.actions.outOfStock}
             </p>
 
             {inStock && (
               <p className="mt-1 text-xs text-slate-500">
                 {isDigital
-                  ? "اطلاعات محصول پس از خرید به‌صورت دیجیتال تحویل می‌شود."
-                  : "کالا پس از ثبت سفارش برای ارسال آماده می‌شود."}
+                  ? dictionary.product.actions.digitalDelivery
+                  : dictionary.product.actions.physicalDelivery}
               </p>
             )}
           </div>
@@ -207,7 +211,7 @@ export default function ProductActions({
               type="button"
               onClick={() => setQuantity((current) => Math.max(1, current - 1))}
               disabled={quantity <= 1 || isAdding}
-              aria-label="کاهش تعداد"
+              aria-label={dictionary.product.actions.decreaseQuantity}
               className="flex h-10 w-10 items-center justify-center rounded-full text-xl text-black transition hover:bg-black/5 disabled:opacity-30"
             >
               −
@@ -226,7 +230,7 @@ export default function ProductActions({
                 setQuantity((current) => Math.min(99, current + 1))
               }
               disabled={isAdding}
-              aria-label="افزایش تعداد"
+              aria-label={dictionary.product.actions.increaseQuantity}
               className="flex h-10 w-10 items-center justify-center rounded-full text-xl text-black transition hover:bg-black/5 disabled:opacity-30"
             >
               +
@@ -248,24 +252,30 @@ export default function ProductActions({
             data-testid="add-product-button"
           >
             {!selectedVariant
-              ? "انتخاب گزینه محصول"
+              ? dictionary.product.actions.selectOption
               : !inStock || !isValidVariant
-                ? "ناموجود"
-                : "افزودن به سبد خرید"}
+                ? dictionary.product.actions.unavailable
+                : dictionary.product.actions.addToCart}
           </Button>
         </div>
 
         <div className="grid grid-cols-3 gap-2 text-center">
           <div className="rounded-xl border border-slate-200 p-3">
-            <p className="text-xs font-semibold text-slate-700">خرید امن</p>
+            <p className="text-xs font-semibold text-slate-700">
+              {dictionary.product.actions.securePurchase}
+            </p>
           </div>
 
           <div className="rounded-xl border border-slate-200 p-3">
-            <p className="text-xs font-semibold text-slate-700">پشتیبانی</p>
+            <p className="text-xs font-semibold text-slate-700">
+              {dictionary.product.actions.support}
+            </p>
           </div>
 
           <div className="rounded-xl border border-slate-200 p-3">
-            <p className="text-xs font-semibold text-slate-700">تحویل سریع</p>
+            <p className="text-xs font-semibold text-slate-700">
+              {dictionary.product.actions.fastDelivery}
+            </p>
           </div>
         </div>
 

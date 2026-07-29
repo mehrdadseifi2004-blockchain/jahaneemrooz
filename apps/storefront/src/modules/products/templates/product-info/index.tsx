@@ -1,3 +1,6 @@
+"use client"
+
+import { useI18n } from "@i18n/components/i18n-provider"
 import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
@@ -12,6 +15,8 @@ const digitalCategoryHandles = [
 ]
 
 const ProductInfo = ({ product }: ProductInfoProps) => {
+  const { dictionary } = useI18n()
+
   const isDigital =
     product.categories?.some((category) =>
       digitalCategoryHandles.includes(category.handle || ""),
@@ -34,7 +39,9 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
         {category && <span className="text-black/30">/</span>}
 
         <span className="text-sm text-black/60">
-          {isDigital ? "محصول دیجیتال" : "کالای فیزیکی"}
+          {isDigital
+            ? dictionary.product.info.digital
+            : dictionary.product.info.physical}
         </span>
       </div>
 
@@ -47,8 +54,8 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
 
       <div
         dir="ltr"
-        className="mt-4 flex items-center justify-end gap-3"
-        aria-label="امتیاز محصول ۴.۵ از ۵"
+        className="mt-4 flex items-center justify-start gap-3 rtl:justify-end"
+        aria-label={dictionary.product.info.ratingLabel}
       >
         <div className="flex gap-0.5 text-xl text-[#ffc633]">
           <span>★</span>

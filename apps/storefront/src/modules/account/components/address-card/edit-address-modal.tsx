@@ -1,5 +1,6 @@
 "use client"
 
+import { useI18n } from "@i18n/components/i18n-provider"
 import {
   deleteCustomerAddress,
   updateCustomerAddress,
@@ -26,6 +27,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
   address,
   isActive = false,
 }) => {
+  const { locale, dictionary } = useI18n()
   const [removing, setRemoving] = useState(false)
   const [successState, setSuccessState] = useState(false)
   const { state, open, close: closeModal } = useToggleState(false)
@@ -59,6 +61,8 @@ const EditAddress: React.FC<EditAddressProps> = ({
     setRemoving(false)
   }
 
+  const separator = locale === "fa" ? "، " : ", "
+
   return (
     <>
       <div
@@ -66,13 +70,13 @@ const EditAddress: React.FC<EditAddressProps> = ({
           "border rounded-rounded p-5 min-h-[220px] h-full w-full flex flex-col justify-between transition-colors",
           {
             "border-gray-900": isActive,
-          }
+          },
         )}
         data-testid="address-container"
       >
         <div className="flex flex-col">
           <Heading
-            className="text-left text-base-semi"
+            className="text-start text-base-semi"
             data-testid="address-name"
           >
             {address.first_name} {address.last_name}
@@ -85,16 +89,23 @@ const EditAddress: React.FC<EditAddressProps> = ({
               {address.company}
             </Text>
           )}
-          <Text className="flex flex-col text-left text-base-regular mt-2">
+          <Text className="mt-2 flex flex-col text-start text-base-regular">
             <span data-testid="address-address">
               {address.address_1}
-              {address.address_2 && <span>, {address.address_2}</span>}
+              {address.address_2 && (
+                <span>
+                  {separator}
+                  {address.address_2}
+                </span>
+              )}
             </span>
             <span data-testid="address-postal-city">
-              {address.postal_code}, {address.city}
+              {address.postal_code}
+              {separator}
+              {address.city}
             </span>
             <span data-testid="address-province-country">
-              {address.province && `${address.province}, `}
+              {address.province && `${address.province}${separator}`}
               {address.country_code?.toUpperCase()}
             </span>
           </Text>
@@ -106,7 +117,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
             data-testid="address-edit-button"
           >
             <Edit />
-            Edit
+            {dictionary.addressForm.edit}
           </button>
           <button
             className="text-small-regular text-ui-fg-base flex items-center gap-x-2"
@@ -114,14 +125,16 @@ const EditAddress: React.FC<EditAddressProps> = ({
             data-testid="address-delete-button"
           >
             {removing ? <Spinner /> : <Trash />}
-            Remove
+            {dictionary.addressForm.remove}
           </button>
         </div>
       </div>
 
       <Modal isOpen={state} close={close} data-testid="edit-address-modal">
         <Modal.Title>
-          <Heading className="mb-2">Edit address</Heading>
+          <Heading className="mb-2">
+            {dictionary.addressForm.editAddress}
+          </Heading>
         </Modal.Title>
         <form action={formAction}>
           <input type="hidden" name="addressId" value={address.id} />
@@ -129,7 +142,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
             <div className="grid grid-cols-1 gap-y-2">
               <div className="grid grid-cols-2 gap-x-2">
                 <Input
-                  label="First name"
+                  label={dictionary.addressForm.firstName}
                   name="first_name"
                   required
                   autoComplete="given-name"
@@ -137,7 +150,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
                   data-testid="first-name-input"
                 />
                 <Input
-                  label="Last name"
+                  label={dictionary.addressForm.lastName}
                   name="last_name"
                   required
                   autoComplete="family-name"
@@ -146,14 +159,14 @@ const EditAddress: React.FC<EditAddressProps> = ({
                 />
               </div>
               <Input
-                label="Company"
+                label={dictionary.addressForm.company}
                 name="company"
                 autoComplete="organization"
                 defaultValue={address.company || undefined}
                 data-testid="company-input"
               />
               <Input
-                label="Address"
+                label={dictionary.addressForm.address}
                 name="address_1"
                 required
                 autoComplete="address-line1"
@@ -161,7 +174,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
                 data-testid="address-1-input"
               />
               <Input
-                label="Apartment, suite, etc."
+                label={dictionary.addressForm.addressExtra}
                 name="address_2"
                 autoComplete="address-line2"
                 defaultValue={address.address_2 || undefined}
@@ -169,7 +182,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
               />
               <div className="grid grid-cols-[144px_1fr] gap-x-2">
                 <Input
-                  label="Postal code"
+                  label={dictionary.addressForm.postalCode}
                   name="postal_code"
                   required
                   autoComplete="postal-code"
@@ -177,7 +190,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
                   data-testid="postal-code-input"
                 />
                 <Input
-                  label="City"
+                  label={dictionary.addressForm.city}
                   name="city"
                   required
                   autoComplete="locality"
@@ -186,7 +199,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
                 />
               </div>
               <Input
-                label="Province / State"
+                label={dictionary.addressForm.province}
                 name="province"
                 autoComplete="address-level1"
                 defaultValue={address.province || undefined}
@@ -201,7 +214,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
                 data-testid="country-select"
               />
               <Input
-                label="Phone"
+                label={dictionary.addressForm.phone}
                 name="phone"
                 autoComplete="phone"
                 defaultValue={address.phone || undefined}
@@ -223,9 +236,11 @@ const EditAddress: React.FC<EditAddressProps> = ({
                 className="h-10"
                 data-testid="cancel-button"
               >
-                Cancel
+                {dictionary.addressForm.cancel}
               </Button>
-              <SubmitButton data-testid="save-button">Save</SubmitButton>
+              <SubmitButton data-testid="save-button">
+                {dictionary.addressForm.save}
+              </SubmitButton>
             </div>
           </Modal.Footer>
         </form>

@@ -1,34 +1,71 @@
 "use client"
 
 import { Popover, PopoverPanel, Transition } from "@headlessui/react"
+import { AppLocale } from "@i18n/config"
+import { Dictionary } from "@i18n/get-dictionary"
+import { Locale } from "@lib/data/locales"
 import useToggleState from "@lib/hooks/use-toggle-state"
 import { ArrowRightMini, XMark } from "@medusajs/icons"
 import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { Text, clx } from "@modules/common/components/ui"
 import { Fragment } from "react"
+
 import CountrySelect from "../country-select"
 import LanguageSelect from "../language-select"
-import { Locale } from "@lib/data/locales"
-
-const SideMenuItems = {
-  "صفحه اصلی": "/",
-  "فروشگاه": "/store",
-  "گیفت کارت‌ها": "/store",
-  "محصولات دیجیتال": "/store",
-  "حساب کاربری": "/account",
-  "سبد خرید": "/cart",
-}
 
 type SideMenuProps = {
   regions: HttpTypes.StoreRegion[] | null
   locales: Locale[] | null
   currentLocale: string | null
+  locale: AppLocale
+  dictionary: Dictionary
 }
 
-const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
+const SideMenu = ({
+  regions,
+  locales,
+  currentLocale,
+  locale,
+  dictionary,
+}: SideMenuProps) => {
   const countryToggleState = useToggleState()
   const languageToggleState = useToggleState()
+
+  const isRtl = locale === "fa"
+
+  const sideMenuItems = [
+    {
+      key: "home",
+      name: dictionary.sideMenu.home,
+      href: "/",
+    },
+    {
+      key: "store",
+      name: dictionary.sideMenu.store,
+      href: "/store",
+    },
+    {
+      key: "gift-cards",
+      name: dictionary.sideMenu.giftCards,
+      href: "/store",
+    },
+    {
+      key: "digital-products",
+      name: dictionary.sideMenu.digitalProducts,
+      href: "/store",
+    },
+    {
+      key: "account",
+      name: dictionary.sideMenu.account,
+      href: "/account",
+    },
+    {
+      key: "cart",
+      name: dictionary.sideMenu.cart,
+      href: "/cart",
+    },
+  ]
 
   return (
     <div className="h-full">
@@ -39,10 +76,14 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
               <div className="relative flex h-full items-center">
                 <Popover.Button
                   data-testid="nav-menu-button"
+                  aria-label={dictionary.sideMenu.menu}
                   className="inline-flex h-10 items-center gap-2 rounded-xl border border-slate-200 bg-white px-4 text-sm font-semibold text-slate-800 shadow-sm transition hover:border-blue-300 hover:bg-blue-50 hover:text-blue-700 focus:outline-none"
                 >
-                  <span className="text-lg leading-none">☰</span>
-                  <span>منو</span>
+                  <span className="text-lg leading-none" aria-hidden="true">
+                    ☰
+                  </span>
+
+                  <span>{dictionary.sideMenu.menu}</span>
                 </Popover.Button>
               </div>
 
@@ -58,13 +99,24 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                 show={open}
                 as={Fragment}
                 enter="transition ease-out duration-200"
-                enterFrom="opacity-0 translate-x-6"
-                enterTo="opacity-100 translate-x-0"
+                enterFrom={clx(
+                  "opacity-0",
+                  isRtl ? "translate-x-6" : "-translate-x-6",
+                )}
+                enterTo="translate-x-0 opacity-100"
                 leave="transition ease-in duration-150"
-                leaveFrom="opacity-100 translate-x-0"
-                leaveTo="opacity-0 translate-x-6"
+                leaveFrom="translate-x-0 opacity-100"
+                leaveTo={clx(
+                  "opacity-0",
+                  isRtl ? "translate-x-6" : "-translate-x-6",
+                )}
               >
-                <PopoverPanel className="fixed right-0 top-0 z-[51] h-screen w-full max-w-sm p-3">
+                <PopoverPanel
+                  className={clx(
+                    "fixed top-0 z-[51] h-screen w-full max-w-sm p-3",
+                    isRtl ? "right-0" : "left-0",
+                  )}
+                >
                   <div
                     data-testid="nav-menu-popup"
                     className="flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-slate-950 p-6 text-white shadow-2xl"
@@ -72,15 +124,20 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                     <div>
                       <div className="mb-8 flex items-center justify-between">
                         <div>
-                          <p className="text-lg font-bold">جهان امروز</p>
+                          <p className="text-lg font-bold">
+                            {dictionary.common.brand}
+                          </p>
+
                           <p className="mt-1 text-xs text-slate-400">
-                            فروشگاه آنلاین محصولات دیجیتال
+                            {dictionary.sideMenu.brandDescription}
                           </p>
                         </div>
 
                         <button
+                          type="button"
                           data-testid="close-menu-button"
                           onClick={close}
+                          aria-label={dictionary.sideMenu.closeMenu}
                           className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 transition hover:bg-white/10"
                         >
                           <XMark />
@@ -88,16 +145,22 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                       </div>
 
                       <ul className="flex flex-col gap-2">
-                        {Object.entries(SideMenuItems).map(([name, href]) => (
-                          <li key={name}>
+                        {sideMenuItems.map(({ key, name, href }) => (
+                          <li key={key}>
                             <LocalizedClientLink
                               href={href}
                               className="flex items-center justify-between rounded-xl px-4 py-3 text-lg font-medium text-slate-200 transition hover:bg-white/10 hover:text-white"
                               onClick={close}
-                              data-testid={`${name.toLowerCase()}-link`}
+                              data-testid={`${key}-link`}
                             >
                               <span>{name}</span>
-                              <span className="text-slate-500">←</span>
+
+                              <span
+                                className="text-slate-500"
+                                aria-hidden="true"
+                              >
+                                {isRtl ? "←" : "→"}
+                              </span>
                             </LocalizedClientLink>
                           </li>
                         ))}
@@ -120,7 +183,7 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                           <ArrowRightMini
                             className={clx(
                               "transition-transform duration-150",
-                              languageToggleState.state ? "-rotate-90" : ""
+                              languageToggleState.state ? "-rotate-90" : "",
                             )}
                           />
                         </div>
@@ -141,13 +204,14 @@ const SideMenu = ({ regions, locales, currentLocale }: SideMenuProps) => {
                         <ArrowRightMini
                           className={clx(
                             "transition-transform duration-150",
-                            countryToggleState.state ? "-rotate-90" : ""
+                            countryToggleState.state ? "-rotate-90" : "",
                           )}
                         />
                       </div>
 
                       <Text className="text-xs text-slate-500">
-                        © {new Date().getFullYear()} Jahan Emrooz. All rights reserved.
+                        © {new Date().getFullYear()}{" "}
+                        {dictionary.footer.copyright}
                       </Text>
                     </div>
                   </div>

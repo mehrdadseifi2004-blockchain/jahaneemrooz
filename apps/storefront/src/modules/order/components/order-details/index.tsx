@@ -1,40 +1,30 @@
+"use client"
+
 import { HttpTypes } from "@medusajs/types"
+
+import { useI18n } from "@i18n/components/i18n-provider"
 
 type OrderDetailsProps = {
   order: HttpTypes.StoreOrder
   showStatus?: boolean
 }
 
-const statusLabels: Record<string, string> = {
-  not_fulfilled: "در انتظار پردازش",
-  partially_fulfilled: "بخشی ارسال شده",
-  fulfilled: "آماده یا ارسال شده",
-  partially_shipped: "بخشی ارسال شده",
-  shipped: "ارسال شده",
-  partially_delivered: "بخشی تحویل شده",
-  delivered: "تحویل شده",
-  canceled: "لغو شده",
-  requires_action: "نیازمند اقدام",
-  not_paid: "پرداخت نشده",
-  awaiting: "در انتظار پرداخت",
-  authorized: "پرداخت تأیید شده",
-  partially_authorized: "بخشی تأیید شده",
-  captured: "پرداخت شده",
-  partially_captured: "بخشی پرداخت شده",
-  refunded: "بازپرداخت شده",
-  partially_refunded: "بخشی بازپرداخت شده",
-}
+const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
+  const { locale, dictionary } = useI18n()
 
-const getStatusLabel = (status?: string) => {
-  if (!status) {
-    return "نامشخص"
+  const dateLocale = locale === "fa" ? "fa-IR" : "en-US"
+
+  const getStatusLabel = (status?: string) => {
+    if (!status) {
+      return dictionary.order.details.unknown
+    }
+
+    const statuses = dictionary.order.statuses as Record<string, string>
+
+    return statuses[status] || status.split("_").join(" ")
   }
 
-  return statusLabels[status] || status.split("_").join(" ")
-}
-
-const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
-  const orderDate = new Intl.DateTimeFormat("fa-IR", {
+  const orderDate = new Intl.DateTimeFormat(dateLocale, {
     dateStyle: "long",
     timeStyle: "short",
   }).format(new Date(order.created_at))
@@ -42,7 +32,7 @@ const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
   return (
     <div>
       <p className="text-sm leading-7 text-black/60 small:text-base">
-        جزئیات تأیید سفارش به ایمیل زیر ارسال خواهد شد:
+        {dictionary.order.details.emailNotice}
       </p>
 
       <p
@@ -54,7 +44,9 @@ const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
 
       <div className="mt-6 grid gap-3 small:grid-cols-2">
         <div className="rounded-[16px] bg-[#f0f0f0] p-4">
-          <p className="text-xs text-black/50">شماره سفارش</p>
+          <p className="text-xs text-black/50">
+            {dictionary.order.details.orderNumber}
+          </p>
 
           <p className="mt-2 font-bold text-black" data-testid="order-id">
             #{order.display_id}
@@ -62,7 +54,9 @@ const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
         </div>
 
         <div className="rounded-[16px] bg-[#f0f0f0] p-4">
-          <p className="text-xs text-black/50">تاریخ ثبت سفارش</p>
+          <p className="text-xs text-black/50">
+            {dictionary.order.details.orderDate}
+          </p>
 
           <p className="mt-2 font-bold text-black" data-testid="order-date">
             {orderDate}
@@ -73,7 +67,9 @@ const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
       {showStatus && (
         <div className="mt-3 grid gap-3 small:grid-cols-2">
           <div className="rounded-[16px] border border-black/10 p-4">
-            <p className="text-xs text-black/50">وضعیت سفارش</p>
+            <p className="text-xs text-black/50">
+              {dictionary.order.details.orderStatus}
+            </p>
 
             <p
               className="mt-2 font-semibold text-black"
@@ -84,7 +80,9 @@ const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
           </div>
 
           <div className="rounded-[16px] border border-black/10 p-4">
-            <p className="text-xs text-black/50">وضعیت پرداخت</p>
+            <p className="text-xs text-black/50">
+              {dictionary.order.details.paymentStatus}
+            </p>
 
             <p
               className="mt-2 font-semibold text-black"

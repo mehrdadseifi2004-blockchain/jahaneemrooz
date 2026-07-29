@@ -1,16 +1,20 @@
+import { Dictionary } from "@i18n/get-dictionary"
 import { listProducts } from "@lib/data/products"
 import { getRegion } from "@lib/data/regions"
 import { HttpTypes } from "@medusajs/types"
+
 import ProductPreview from "../product-preview"
 
 type RelatedProductsProps = {
   product: HttpTypes.StoreProduct
   countryCode: string
+  dictionary: Dictionary
 }
 
 export default async function RelatedProducts({
   product,
   countryCode,
+  dictionary,
 }: RelatedProductsProps) {
   const region = await getRegion(countryCode)
 
@@ -54,7 +58,7 @@ export default async function RelatedProducts({
   return (
     <div>
       <h2 className="mb-8 text-center text-[32px] font-black leading-tight tracking-[-0.03em] text-black small:mb-14 small:text-5xl">
-        شاید این محصولات را هم بپسندید
+        {dictionary.product.related.title}
       </h2>
 
       <ul className="grid grid-cols-2 gap-x-4 gap-y-8 small:gap-x-5 medium:grid-cols-4">

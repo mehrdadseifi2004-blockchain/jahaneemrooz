@@ -1,6 +1,7 @@
 "use client"
 
 import { RadioGroup } from "@headlessui/react"
+import { useI18n } from "@i18n/components/i18n-provider"
 import { isStripeLike, paymentInfoMap } from "@lib/constants"
 import { initiatePaymentSession } from "@lib/data/cart"
 import { CheckCircleSolid, CreditCard } from "@medusajs/icons"
@@ -20,6 +21,9 @@ const Payment = ({
   cart: HttpTypes.StoreCart
   availablePaymentMethods: { id: string }[]
 }) => {
+  const { locale, dictionary } = useI18n()
+  const numberLocale = locale === "fa" ? "fa-IR" : "en-US"
+
   const activeSession = cart.payment_collection?.payment_sessions?.find(
     (session) => session.status === "pending",
   )
@@ -99,7 +103,9 @@ const Payment = ({
       }
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : "راه‌اندازی روش پرداخت انجام نشد.",
+        err instanceof Error
+          ? err.message
+          : dictionary.checkout.payment.initError,
       )
     } finally {
       setIsLoading(false)
@@ -107,7 +113,7 @@ const Payment = ({
   }
 
   return (
-    <section dir="rtl">
+    <section>
       <div className="mb-6 flex items-start justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
@@ -121,7 +127,11 @@ const Payment = ({
                 },
               )}
             >
-              {!isOpen && paymentReady ? <CheckCircleSolid /> : "۳"}
+              {!isOpen && paymentReady ? (
+                <CheckCircleSolid />
+              ) : (
+                (3).toLocaleString(numberLocale)
+              )}
             </span>
 
             <h2
@@ -130,12 +140,12 @@ const Payment = ({
                 isOpen || paymentReady ? "text-black" : "text-black/40",
               )}
             >
-              روش پرداخت
+              {dictionary.checkout.payment.title}
             </h2>
           </div>
 
-          <p className="mr-12 mt-2 text-sm leading-7 text-black/50">
-            شیوه پرداخت سفارش را انتخاب کنید.
+          <p className="ms-12 mt-2 text-sm leading-7 text-black/50">
+            {dictionary.checkout.payment.description}
           </p>
         </div>
 
@@ -146,7 +156,7 @@ const Payment = ({
             className="text-sm font-semibold text-black hover:text-black/70"
             data-testid="edit-payment-button"
           >
-            تغییر روش پرداخت
+            {dictionary.checkout.payment.edit}
           </button>
         )}
       </div>
@@ -194,7 +204,7 @@ const Payment = ({
           {paidByGiftcard && (
             <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
               <p className="font-bold text-emerald-700">
-                پرداخت با اعتبار گیفت کارت
+                {dictionary.checkout.payment.giftCardPayment}
               </p>
             </div>
           )}
@@ -202,11 +212,11 @@ const Payment = ({
           {!availablePaymentMethods?.length && !paidByGiftcard && (
             <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
               <p className="font-bold text-amber-700">
-                روش پرداخت فعالی برای این منطقه تعریف نشده است.
+                {dictionary.checkout.payment.noMethod}
               </p>
 
               <p className="mt-2 text-sm leading-6 text-amber-600">
-                ابتدا باید یک Payment Provider در تنظیمات Medusa فعال شود.
+                {dictionary.checkout.payment.noMethodHelp}
               </p>
             </div>
           )}
@@ -228,17 +238,19 @@ const Payment = ({
             data-testid="submit-payment-button"
           >
             {isLoading
-              ? "در حال ثبت..."
+              ? dictionary.checkout.payment.submitting
               : isStripeLike(selectedPaymentMethod) && !activeSession
-                ? "ثبت اطلاعات کارت"
-                : "ثبت روش پرداخت و مرور سفارش"}
+                ? dictionary.checkout.payment.saveCard
+                : dictionary.checkout.payment.saveAndReview}
           </button>
         </div>
       ) : (
         paymentReady &&
         (activeSession || paidByGiftcard) && (
           <div className="rounded-2xl border border-black/10 bg-[#f0f0f0] p-5">
-            <p className="text-xs text-black/40">روش پرداخت انتخاب‌شده</p>
+            <p className="text-xs text-black/40">
+              {dictionary.checkout.payment.selected}
+            </p>
 
             <div className="mt-3 flex items-center gap-3">
               <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-black/70">
@@ -253,16 +265,16 @@ const Payment = ({
               <div>
                 <p className="font-bold text-black">
                   {paidByGiftcard
-                    ? "گیفت کارت"
+                    ? dictionary.checkout.payment.giftCard
                     : paymentInfoMap[activeSession?.provider_id || ""]?.title ||
                       activeSession?.provider_id ||
-                      "درگاه پرداخت"}
+                      dictionary.checkout.payment.gateway}
                 </p>
 
                 <p className="mt-1 text-xs text-black/50">
                   {isStripeLike(selectedPaymentMethod) && cardBrand
                     ? cardBrand
-                    : "جزئیات پرداخت در مرحله بعد تکمیل می‌شود."}
+                    : dictionary.checkout.payment.detailsLater}
                 </p>
               </div>
             </div>

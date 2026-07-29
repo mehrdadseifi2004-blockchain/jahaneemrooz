@@ -1,10 +1,16 @@
+import { Dictionary } from "@i18n/get-dictionary"
+
 const brands = ["SONY", "SAMSUNG", "XIAOMI", "MICROSOFT", "APPLE"]
 
-const Brands = () => {
+type BrandsProps = {
+  dictionary: Dictionary
+}
+
+const Brands = ({ dictionary }: BrandsProps) => {
   return (
     <section
       dir="ltr"
-      aria-label="برندهای فروشگاه"
+      aria-label={dictionary.home.brands.ariaLabel}
       className="bg-black text-white"
     >
       <div className="content-container">

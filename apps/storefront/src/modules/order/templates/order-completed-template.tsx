@@ -1,6 +1,7 @@
-import { cookies as nextCookies } from "next/headers"
 import { HttpTypes } from "@medusajs/types"
+import { cookies as nextCookies } from "next/headers"
 
+import { Dictionary } from "@i18n/get-dictionary"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Help from "@modules/order/components/help"
 import Items from "@modules/order/components/items"
@@ -12,16 +13,19 @@ import ShippingDetails from "@modules/order/components/shipping-details"
 
 type OrderCompletedTemplateProps = {
   order: HttpTypes.StoreOrder
+  dictionary: Dictionary
 }
 
 export default async function OrderCompletedTemplate({
   order,
+  dictionary,
 }: OrderCompletedTemplateProps) {
   const cookies = await nextCookies()
+
   const isOnboarding = cookies.get("_medusa_onboarding")?.value === "true"
 
   return (
-    <main className="min-h-screen bg-white pb-20" dir="rtl">
+    <main className="min-h-screen bg-white pb-20">
       <div className="content-container" data-testid="order-complete-container">
         <div className="border-t border-black/10 pt-8 small:pt-12">
           {isOnboarding && (
@@ -36,12 +40,11 @@ export default async function OrderCompletedTemplate({
             </div>
 
             <h1 className="mt-6 text-[32px] font-black leading-tight tracking-[-0.03em] text-black small:text-[44px]">
-              سفارش شما با موفقیت ثبت شد
+              {dictionary.order.completed.title}
             </h1>
 
             <p className="mx-auto mt-4 max-w-2xl text-sm leading-8 text-black/60 small:text-base">
-              از خرید شما متشکریم. سفارش ثبت شده و مراحل آماده‌سازی آن آغاز
-              خواهد شد.
+              {dictionary.order.completed.description}
             </p>
           </section>
 
@@ -52,7 +55,7 @@ export default async function OrderCompletedTemplate({
           <div className="mt-8 grid items-start gap-5 large:grid-cols-[minmax(0,1fr)_380px]">
             <section className="rounded-[20px] border border-black/10 p-5 small:p-7">
               <h2 className="mb-6 text-xl font-bold text-black small:text-2xl">
-                محصولات سفارش
+                {dictionary.order.completed.products}
               </h2>
 
               <Items order={order} />
@@ -80,14 +83,14 @@ export default async function OrderCompletedTemplate({
               href="/store"
               className="inline-flex h-12 items-center justify-center rounded-full bg-black px-8 text-sm font-medium text-white transition hover:bg-black/80"
             >
-              ادامه خرید
+              {dictionary.order.completed.continueShopping}
             </LocalizedClientLink>
 
             <LocalizedClientLink
               href="/account/orders"
               className="inline-flex h-12 items-center justify-center rounded-full border border-black/10 px-8 text-sm font-medium text-black transition hover:bg-black hover:text-white"
             >
-              مشاهده سفارش‌های من
+              {dictionary.order.completed.myOrders}
             </LocalizedClientLink>
           </div>
         </div>

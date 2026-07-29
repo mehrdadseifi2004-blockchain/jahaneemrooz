@@ -26,7 +26,7 @@ const FilterRadioGroup = ({
           <div
             key={i.value}
             className={clx("flex gap-x-2 items-center", {
-              "ml-[-23px]": i.value === value,
+              "ms-[-23px]": i.value === value,
             })}
           >
             {i.value === value && <EllipseMiniSolid />}
@@ -43,7 +43,7 @@ const FilterRadioGroup = ({
                 "!txt-compact-small !transform-none text-ui-fg-subtle hover:cursor-pointer",
                 {
                   "text-ui-fg-base": i.value === value,
-                }
+                },
               )}
               data-testid="radio-label"
               data-active={i.value === value}

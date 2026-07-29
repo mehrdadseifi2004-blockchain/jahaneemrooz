@@ -1,3 +1,6 @@
+"use client"
+
+import { useI18n } from "@i18n/components/i18n-provider"
 import { HttpTypes } from "@medusajs/types"
 import LineItemOptions from "@modules/common/components/line-item-options"
 import LineItemPrice from "@modules/common/components/line-item-price"
@@ -10,6 +13,10 @@ type ItemProps = {
 }
 
 const Item = ({ item, currencyCode }: ItemProps) => {
+  const { locale, dictionary } = useI18n()
+
+  const numberLocale = locale === "fa" ? "fa-IR" : "en-US"
+
   return (
     <article
       className="flex items-start gap-4 py-5 first:pt-0 last:pb-0"
@@ -41,10 +48,10 @@ const Item = ({ item, currencyCode }: ItemProps) => {
         <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
           <div className="flex items-center gap-1 text-xs text-black/50">
             <span data-testid="product-quantity">
-              {item.quantity.toLocaleString("fa-IR")}
+              {item.quantity.toLocaleString(numberLocale)}
             </span>
 
-            <span>عدد ×</span>
+            <span>{dictionary.order.item.quantityUnit} ×</span>
 
             <LineItemUnitPrice
               item={item}

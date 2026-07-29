@@ -1,7 +1,9 @@
 import { getProductPrice } from "@lib/util/get-product-price"
 import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+
 import Thumbnail from "../thumbnail"
+import { ProductContactPrice, ProductRating } from "./localized-content"
 import PreviewPrice from "./price"
 
 export default async function ProductPreview({
@@ -32,24 +34,22 @@ export default async function ProductPreview({
       />
 
       <h3
-        className="line-clamp-2 min-h-11 w-full text-right text-sm font-bold leading-6 text-black small:min-h-14 small:text-base medium:text-xl"
+        className="line-clamp-2 min-h-11 w-full text-start text-sm font-bold leading-6 text-black small:min-h-14 small:text-base medium:text-xl"
         data-testid="product-title"
       >
         {product.title}
       </h3>
 
-      <div
-        dir="ltr"
-        className="mt-1 flex items-center gap-2 small:mt-0 small:gap-3"
-        aria-label="امتیاز محصول ۴.۵ از ۵"
-      >
+      <ProductRating>
         <div className="flex items-center gap-0.5 text-sm text-[#ffc633] small:text-lg">
           <span>★</span>
           <span>★</span>
           <span>★</span>
           <span>★</span>
+
           <span className="relative inline-block">
             <span className="text-black/10">★</span>
+
             <span className="absolute inset-0 w-1/2 overflow-hidden text-[#ffc633]">
               ★
             </span>
@@ -57,20 +57,19 @@ export default async function ProductPreview({
         </div>
 
         <span className="text-xs text-black small:text-sm">
-          4.5<span className="text-black/60">/5</span>
+          4.5
+          <span className="text-black/60">/5</span>
         </span>
-      </div>
+      </ProductRating>
 
       <div
-        dir="rtl"
-        className="mt-1 flex min-h-8 w-full items-center text-right"
+        dir="auto"
+        className="mt-1 flex min-h-8 w-full items-center text-start"
       >
         {cheapestPrice ? (
           <PreviewPrice price={cheapestPrice} />
         ) : (
-          <span className="text-base font-bold text-black small:text-xl">
-            تماس بگیرید
-          </span>
+          <ProductContactPrice />
         )}
       </div>
     </LocalizedClientLink>

@@ -1,5 +1,6 @@
 "use client"
 
+import { useI18n } from "@i18n/components/i18n-provider"
 import { isManual, isStripeLike } from "@lib/constants"
 import { placeOrder } from "@lib/data/cart"
 import { HttpTypes } from "@medusajs/types"
@@ -18,6 +19,8 @@ const PaymentButton = ({
   cart,
   "data-testid": dataTestId,
 }: PaymentButtonProps) => {
+  const { dictionary } = useI18n()
+
   const notReady =
     !cart ||
     !cart.shipping_address ||
@@ -43,7 +46,7 @@ const PaymentButton = ({
 
   return (
     <Button disabled className="h-14 w-full rounded-full">
-      ابتدا روش پرداخت را انتخاب کنید
+      {dictionary.checkout.paymentButton.selectMethod}
     </Button>
   )
 }
@@ -57,6 +60,8 @@ const StripePaymentButton = ({
   notReady: boolean
   "data-testid"?: string
 }) => {
+  const { dictionary } = useI18n()
+
   const [submitting, setSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
@@ -72,7 +77,9 @@ const StripePaymentButton = ({
     await placeOrder()
       .catch((err) => {
         setErrorMessage(
-          err instanceof Error ? err.message : "ثبت سفارش انجام نشد.",
+          err instanceof Error
+            ? err.message
+            : dictionary.checkout.paymentButton.orderError,
         )
       })
       .finally(() => {
@@ -121,7 +128,9 @@ const StripePaymentButton = ({
             return onPaymentCompleted()
           }
 
-          setErrorMessage(error.message || "پرداخت با خطا مواجه شد.")
+          setErrorMessage(
+            error.message || dictionary.checkout.paymentButton.paymentError,
+          )
           setSubmitting(false)
           return
         }
@@ -147,7 +156,7 @@ const StripePaymentButton = ({
         className="h-14 w-full rounded-full bg-black text-base font-medium text-white transition hover:bg-black/80"
         data-testid={dataTestId}
       >
-        پرداخت و ثبت سفارش
+        {dictionary.checkout.paymentButton.payAndPlace}
       </Button>
 
       <ErrorMessage
@@ -165,6 +174,8 @@ const ManualPaymentButton = ({
   notReady: boolean
   "data-testid"?: string
 }) => {
+  const { dictionary } = useI18n()
+
   const [submitting, setSubmitting] = useState(false)
   const [errorMessage, setErrorMessage] = useState<string | null>(null)
 
@@ -175,7 +186,9 @@ const ManualPaymentButton = ({
     await placeOrder()
       .catch((err) => {
         setErrorMessage(
-          err instanceof Error ? err.message : "ثبت سفارش انجام نشد.",
+          err instanceof Error
+            ? err.message
+            : dictionary.checkout.paymentButton.orderError,
         )
       })
       .finally(() => {
@@ -193,7 +206,7 @@ const ManualPaymentButton = ({
         className="h-14 w-full rounded-full bg-black text-base font-medium text-white transition hover:bg-black/80"
         data-testid={dataTestId}
       >
-        ثبت نهایی سفارش
+        {dictionary.checkout.paymentButton.placeOrder}
       </Button>
 
       <ErrorMessage

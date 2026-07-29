@@ -1,3 +1,6 @@
+"use client"
+
+import { useI18n } from "@i18n/components/i18n-provider"
 import { isStripeLike, paymentInfoMap } from "@lib/constants"
 import { convertToLocale } from "@lib/util/money"
 import { HttpTypes } from "@medusajs/types"
@@ -7,17 +10,19 @@ type PaymentDetailsProps = {
 }
 
 const PaymentDetails = ({ order }: PaymentDetailsProps) => {
+  const { locale, dictionary } = useI18n()
+
   const payment = order.payment_collections?.[0]?.payments?.[0]
 
   if (!payment) {
     return (
       <div>
         <h2 className="text-xl font-bold text-black small:text-2xl">
-          اطلاعات پرداخت
+          {dictionary.order.payment.title}
         </h2>
 
         <div className="mt-6 rounded-[16px] bg-[#f0f0f0] p-5 text-sm text-black/60">
-          اطلاعات پرداخت برای این سفارش ثبت نشده است.
+          {dictionary.order.payment.notAvailable}
         </div>
       </div>
     )
@@ -25,21 +30,23 @@ const PaymentDetails = ({ order }: PaymentDetailsProps) => {
 
   const paymentInfo = paymentInfoMap[payment.provider_id]
   const paymentDate = payment.created_at
-    ? new Intl.DateTimeFormat("fa-IR", {
+    ? new Intl.DateTimeFormat(locale === "fa" ? "fa-IR" : "en-US", {
         dateStyle: "medium",
         timeStyle: "short",
       }).format(new Date(payment.created_at))
-    : "ثبت نشده"
+    : dictionary.order.payment.notProvided
 
   return (
     <div>
       <h2 className="text-xl font-bold text-black small:text-2xl">
-        اطلاعات پرداخت
+        {dictionary.order.payment.title}
       </h2>
 
       <div className="mt-6 grid gap-4 small:grid-cols-2">
         <div className="rounded-[16px] bg-[#f0f0f0] p-5">
-          <p className="text-xs text-black/50">روش پرداخت</p>
+          <p className="text-xs text-black/50">
+            {dictionary.order.payment.method}
+          </p>
 
           <div className="mt-3 flex items-center gap-3">
             {paymentInfo?.icon && (
@@ -49,13 +56,17 @@ const PaymentDetails = ({ order }: PaymentDetailsProps) => {
             )}
 
             <p className="font-bold text-black" data-testid="payment-method">
-              {paymentInfo?.title || payment.provider_id || "پرداخت دستی"}
+              {paymentInfo?.title ||
+                payment.provider_id ||
+                dictionary.order.payment.manual}
             </p>
           </div>
         </div>
 
         <div className="rounded-[16px] bg-[#f0f0f0] p-5">
-          <p className="text-xs text-black/50">جزئیات پرداخت</p>
+          <p className="text-xs text-black/50">
+            {dictionary.order.payment.details}
+          </p>
 
           <div
             className="mt-3 text-sm leading-7 text-black"
@@ -72,7 +83,12 @@ const PaymentDetails = ({ order }: PaymentDetailsProps) => {
                   })}
                 </p>
 
-                <p className="text-xs text-black/50">پرداخت در {paymentDate}</p>
+                <p className="text-xs text-black/50">
+                  {dictionary.order.payment.paidAt.replace(
+                    "{date}",
+                    paymentDate,
+                  )}
+                </p>
               </>
             )}
           </div>

@@ -1,14 +1,24 @@
 import { notFound } from "next/navigation"
 import { Suspense } from "react"
+import { HttpTypes } from "@medusajs/types"
 
+import { Dictionary } from "@i18n/get-dictionary"
+import { OptionValueIds } from "@lib/util/product-option-filters"
 import InteractiveLink from "@modules/common/components/interactive-link"
+import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import SkeletonProductGrid from "@modules/skeletons/templates/skeleton-product-grid"
 import RefinementList from "@modules/store/components/refinement-list"
 import { SortOptions } from "@modules/store/components/refinement-list/sort-products"
 import PaginatedProducts from "@modules/store/templates/paginated-products"
-import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import { HttpTypes } from "@medusajs/types"
-import { OptionValueIds } from "@lib/util/product-option-filters"
+
+type CategoryTemplateProps = {
+  category: HttpTypes.StoreProductCategory
+  sortBy?: SortOptions
+  page?: string
+  countryCode: string
+  optionValueIds?: OptionValueIds
+  dictionary: Dictionary
+}
 
 export default function CategoryTemplate({
   category,
@@ -16,90 +26,120 @@ export default function CategoryTemplate({
   page,
   countryCode,
   optionValueIds,
-}: {
-  category: HttpTypes.StoreProductCategory
-  sortBy?: SortOptions
-  page?: string
-  countryCode: string
-  optionValueIds?: OptionValueIds
-}) {
-  const pageNumber = page ? parseInt(page) : 1
+  dictionary,
+}: CategoryTemplateProps) {
+  const parsedPage = page ? Number.parseInt(page, 10) : 1
+
+  const pageNumber =
+    Number.isFinite(parsedPage) && parsedPage > 0 ? parsedPage : 1
+
   const sort = sortBy || "created_at"
 
-  if (!category || !countryCode) notFound()
+  if (!category || !countryCode) {
+    notFound()
+  }
 
-  const parents = [] as HttpTypes.StoreProductCategory[]
+  const parents: HttpTypes.StoreProductCategory[] = []
 
-  const getParents = (category: HttpTypes.StoreProductCategory) => {
-    if (category.parent_category) {
-      parents.push(category.parent_category)
-      getParents(category.parent_category)
+  const getParents = (currentCategory: HttpTypes.StoreProductCategory) => {
+    if (currentCategory.parent_category) {
+      parents.push(currentCategory.parent_category)
+      getParents(currentCategory.parent_category)
     }
   }
 
   getParents(category)
 
+  const orderedParents = [...parents].reverse()
+
   return (
-    <div
-      className="flex flex-col small:flex-row small:items-start py-6 content-container"
-      data-testid="category-container"
-    >
-      <RefinementList
-        sortBy={sort}
-        data-testid="sort-by-container"
-        hideOptionsPicker
-      />
-      <div className="w-full">
-        <div className="flex flex-row mb-8 text-2xl-semi gap-4">
-          {parents &&
-            parents.map((parent) => (
-              <span key={parent.id} className="text-ui-fg-subtle">
-                <LocalizedClientLink
-                  className="mr-4 hover:text-black"
-                  href={`/categories/${parent.handle}`}
-                  data-testid="sort-by-link"
-                >
-                  {parent.name}
-                </LocalizedClientLink>
-                /
-              </span>
-            ))}
-          <h1 data-testid="category-page-title">{category.name}</h1>
-        </div>
-        {category.description && (
-          <div className="mb-8 text-base-regular">
-            <p>{category.description}</p>
-          </div>
-        )}
-        {category.category_children && (
-          <div className="mb-8 text-base-large">
-            <ul className="grid grid-cols-1 gap-2">
-              {category.category_children?.map((c) => (
-                <li key={c.id}>
-                  <InteractiveLink href={`/categories/${c.handle}`}>
-                    {c.name}
-                  </InteractiveLink>
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-        <Suspense
-          fallback={
-            <SkeletonProductGrid
-              numberOfProducts={category.products?.length ?? 8}
-            />
-          }
+    <main className="min-h-screen bg-white pb-20">
+      <div className="content-container">
+        <div
+          className="flex flex-col gap-8 border-t border-black/10 py-6 medium:flex-row medium:items-start"
+          data-testid="category-container"
         >
-          <PaginatedProducts
-            sortBy={sort}
-            page={pageNumber}
-            categoryId={category.id}
-            countryCode={countryCode}
-            optionValueIds={optionValueIds}
-          />
-        </Suspense>
+          <aside className="w-full shrink-0 medium:w-[295px]">
+            <div className="rounded-[20px] border border-black/10 bg-white px-6 py-5">
+              <RefinementList
+                sortBy={sort}
+                data-testid="sort-by-container"
+                hideOptionsPicker
+              />
+            </div>
+          </aside>
+
+          <section className="min-w-0 w-full flex-1">
+            <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-black/60">
+              {orderedParents.map((parent) => (
+                <span key={parent.id} className="contents">
+                  <LocalizedClientLink
+                    className="transition hover:text-black"
+                    href={`/categories/${parent.handle}`}
+                    data-testid="sort-by-link"
+                  >
+                    {parent.name}
+                  </LocalizedClientLink>
+
+                  <span aria-hidden="true">
+                    <span className="rtl:hidden">→</span>
+
+                    <span className="hidden rtl:inline">←</span>
+                  </span>
+                </span>
+              ))}
+
+              <span className="font-medium text-black">{category.name}</span>
+            </nav>
+
+            <div className="mb-8">
+              <h1
+                className="text-3xl font-black leading-tight text-black small:text-4xl"
+                data-testid="category-page-title"
+              >
+                {category.name}
+              </h1>
+
+              {category.description && (
+                <p className="mt-3 max-w-3xl text-sm leading-7 text-black/60 small:text-base">
+                  {category.description}
+                </p>
+              )}
+            </div>
+
+            {!!category.category_children?.length && (
+              <div className="mb-8">
+                <ul className="flex flex-wrap gap-3">
+                  {category.category_children.map((child) => (
+                    <li key={child.id}>
+                      <InteractiveLink href={`/categories/${child.handle}`}>
+                        {child.name}
+                      </InteractiveLink>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            )}
+
+            <Suspense
+              fallback={
+                <SkeletonProductGrid
+                  numberOfProducts={category.products?.length ?? 8}
+                />
+              }
+            >
+              <PaginatedProducts
+                sortBy={sort}
+                page={pageNumber}
+                categoryId={category.id}
+                countryCode={countryCode}
+                optionValueIds={optionValueIds}
+                dictionary={dictionary}
+              />
+            </Suspense>
+          </section>
+        </div>
       </div>
-    </div>
+    </main>
   )
 }

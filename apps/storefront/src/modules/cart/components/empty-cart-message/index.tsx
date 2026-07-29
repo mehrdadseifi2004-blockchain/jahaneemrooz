@@ -1,6 +1,11 @@
+"use client"
+
+import { useI18n } from "@i18n/components/i18n-provider"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
 const EmptyCartMessage = () => {
+  const { dictionary } = useI18n()
+
   return (
     <section
       className="flex min-h-[520px] flex-col items-center justify-center px-4 text-center"
@@ -22,25 +27,26 @@ const EmptyCartMessage = () => {
             strokeLinecap="round"
             strokeLinejoin="round"
           />
+
           <circle cx="10" cy="20" r="1" fill="currentColor" />
+
           <circle cx="18" cy="20" r="1" fill="currentColor" />
         </svg>
       </div>
 
       <h1 className="mt-6 text-3xl font-black text-black small:text-4xl">
-        سبد خرید شما خالی است
+        {dictionary.cart.empty.title}
       </h1>
 
       <p className="mt-4 max-w-lg text-sm leading-7 text-black/60 small:text-base">
-        هنوز محصولی به سبد خرید اضافه نکرده‌اید. محصولات فروشگاه را مشاهده کنید
-        و خرید خود را آغاز کنید.
+        {dictionary.cart.empty.description}
       </p>
 
       <LocalizedClientLink
         href="/store"
         className="mt-7 inline-flex h-12 items-center justify-center rounded-full bg-black px-8 text-sm font-medium text-white transition hover:bg-black/80"
       >
-        مشاهده محصولات
+        {dictionary.cart.empty.cta}
       </LocalizedClientLink>
     </section>
   )

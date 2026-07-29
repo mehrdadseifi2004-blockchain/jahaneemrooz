@@ -2,6 +2,7 @@ import React, { Suspense } from "react"
 import { notFound } from "next/navigation"
 import { HttpTypes } from "@medusajs/types"
 
+import { Dictionary } from "@i18n/get-dictionary"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import ImageGallery from "@modules/products/components/image-gallery"
 import ProductActions from "@modules/products/components/product-actions"
@@ -17,6 +18,7 @@ type ProductTemplateProps = {
   region: HttpTypes.StoreRegion
   countryCode: string
   images: HttpTypes.StoreProductImage[]
+  dictionary: Dictionary
 }
 
 const ProductTemplate: React.FC<ProductTemplateProps> = ({
@@ -24,36 +26,43 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   region,
   countryCode,
   images,
+  dictionary,
 }) => {
   if (!product?.id) {
     return notFound()
   }
 
   return (
-    <main className="min-h-screen bg-white pb-20" dir="rtl">
+    <main className="min-h-screen bg-white pb-20">
       <div className="content-container" data-testid="product-container">
         <div className="border-t border-black/10 pt-5 small:pt-6">
           <nav
-            aria-label="مسیر صفحه"
+            aria-label={dictionary.product.breadcrumb.ariaLabel}
             className="mb-6 flex flex-wrap items-center gap-2 text-sm text-black/60"
           >
             <LocalizedClientLink
               href="/"
               className="transition hover:text-black"
             >
-              خانه
+              {dictionary.product.breadcrumb.home}
             </LocalizedClientLink>
 
-            <span aria-hidden="true">←</span>
+            <span aria-hidden="true">
+              <span className="rtl:hidden">→</span>
+              <span className="hidden rtl:inline">←</span>
+            </span>
 
             <LocalizedClientLink
               href="/store"
               className="transition hover:text-black"
             >
-              فروشگاه
+              {dictionary.product.breadcrumb.store}
             </LocalizedClientLink>
 
-            <span aria-hidden="true">←</span>
+            <span aria-hidden="true">
+              <span className="rtl:hidden">→</span>
+              <span className="hidden rtl:inline">←</span>
+            </span>
 
             <span className="line-clamp-1 text-black">{product.title}</span>
           </nav>
@@ -94,7 +103,11 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
       >
         <div className="content-container">
           <Suspense fallback={<SkeletonRelatedProducts />}>
-            <RelatedProducts product={product} countryCode={countryCode} />
+            <RelatedProducts
+              product={product}
+              countryCode={countryCode}
+              dictionary={dictionary}
+            />
           </Suspense>
         </div>
       </section>

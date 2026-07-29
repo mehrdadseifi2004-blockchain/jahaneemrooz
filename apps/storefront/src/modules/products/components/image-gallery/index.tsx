@@ -1,5 +1,7 @@
 "use client"
 
+import { useI18n } from "@i18n/components/i18n-provider"
+
 import { HttpTypes } from "@medusajs/types"
 import Image from "next/image"
 import { useEffect, useState } from "react"
@@ -9,7 +11,10 @@ type ImageGalleryProps = {
   title?: string
 }
 
-const ImageGallery = ({ images, title = "محصول" }: ImageGalleryProps) => {
+const ImageGallery = ({ images, title }: ImageGalleryProps) => {
+  const { dictionary } = useI18n()
+  const gallery = dictionary.product.gallery
+  const resolvedTitle = title || gallery.fallbackTitle
   const [selectedImageId, setSelectedImageId] = useState<string | undefined>(
     images?.[0]?.id,
   )
@@ -21,7 +26,7 @@ const ImageGallery = ({ images, title = "محصول" }: ImageGalleryProps) => {
   if (!images?.length) {
     return (
       <div className="flex aspect-square w-full items-center justify-center rounded-[20px] bg-[#f0eeed] px-6 text-center text-sm text-black/40">
-        تصویری برای این محصول ثبت نشده است
+        {gallery.noImage}
       </div>
     )
   }
@@ -41,7 +46,10 @@ const ImageGallery = ({ images, title = "محصول" }: ImageGalleryProps) => {
               key={image.id}
               type="button"
               onClick={() => setSelectedImageId(image.id)}
-              aria-label={`نمایش تصویر ${index + 1}`}
+              aria-label={gallery.showImage.replace(
+                "{number}",
+                String(index + 1),
+              )}
               className={`relative aspect-square w-[90px] shrink-0 overflow-hidden rounded-[13px] bg-[#f0eeed] transition large:w-full large:rounded-[20px] ${
                 isSelected
                   ? "ring-2 ring-black"
@@ -51,7 +59,9 @@ const ImageGallery = ({ images, title = "محصول" }: ImageGalleryProps) => {
               {image.url && (
                 <Image
                   src={image.url}
-                  alt={`${title} - تصویر ${index + 1}`}
+                  alt={gallery.imageAlt
+                    .replace("{title}", resolvedTitle)
+                    .replace("{number}", String(index + 1))}
                   fill
                   sizes="152px"
                   className="object-contain p-2 transition-transform duration-500 hover:scale-110"
@@ -68,7 +78,9 @@ const ImageGallery = ({ images, title = "محصول" }: ImageGalleryProps) => {
           <Image
             key={selectedImage.id}
             src={selectedImage.url}
-            alt={title}
+            alt={gallery.imageAlt
+              .replace("{title}", resolvedTitle)
+              .replace("{number}", "1")}
             priority
             fill
             quality={90}

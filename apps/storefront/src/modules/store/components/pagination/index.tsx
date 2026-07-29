@@ -1,5 +1,6 @@
 "use client"
 
+import { useI18n } from "@i18n/components/i18n-provider"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 
 export function Pagination({
@@ -11,6 +12,7 @@ export function Pagination({
   totalPages: number
   "data-testid"?: string
 }) {
+  const { dictionary } = useI18n()
   const router = useRouter()
   const pathname = usePathname()
   const searchParams = useSearchParams()
@@ -39,6 +41,9 @@ export function Pagination({
         disabled={isCurrent}
         onClick={() => handlePageChange(pageNumber)}
         aria-current={isCurrent ? "page" : undefined}
+        aria-label={`${dictionary.store.pagination.pageOf
+          .replace("{page}", String(pageNumber))
+          .replace("{totalPages}", String(totalPages))}`}
         className={`flex h-10 min-w-10 items-center justify-center rounded-lg px-3 text-sm font-medium transition ${
           isCurrent
             ? "bg-black/5 text-black"
@@ -54,8 +59,9 @@ export function Pagination({
     <span
       key={key}
       className="flex h-10 min-w-8 items-center justify-center text-black/40"
+      aria-hidden="true"
     >
-      ...
+      …
     </span>
   )
 
@@ -89,9 +95,13 @@ export function Pagination({
     ]
   }
 
+  const mobilePageLabel = dictionary.store.pagination.pageOf
+    .replace("{page}", String(page))
+    .replace("{totalPages}", String(totalPages))
+
   return (
     <nav
-      aria-label="صفحه‌بندی محصولات"
+      aria-label={dictionary.store.pagination.ariaLabel}
       className="mt-10 flex w-full items-center justify-between border-t border-black/10 pt-5"
       data-testid={dataTestid}
     >
@@ -101,7 +111,7 @@ export function Pagination({
         onClick={() => handlePageChange(page - 1)}
         className="inline-flex h-10 items-center justify-center rounded-lg border border-black/10 px-4 text-sm font-medium text-black transition hover:bg-black hover:text-white disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-black"
       >
-        صفحه قبل
+        {dictionary.store.pagination.previous}
       </button>
 
       <div dir="ltr" className="hidden items-center gap-1 small:flex">
@@ -109,7 +119,7 @@ export function Pagination({
       </div>
 
       <span className="text-sm text-black/60 small:hidden">
-        صفحه {page} از {totalPages}
+        {mobilePageLabel}
       </span>
 
       <button
@@ -118,7 +128,7 @@ export function Pagination({
         onClick={() => handlePageChange(page + 1)}
         className="inline-flex h-10 items-center justify-center rounded-lg border border-black/10 px-4 text-sm font-medium text-black transition hover:bg-black hover:text-white disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-black"
       >
-        صفحه بعد
+        {dictionary.store.pagination.next}
       </button>
     </nav>
   )

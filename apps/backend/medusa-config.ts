@@ -1,6 +1,6 @@
-import { loadEnv, defineConfig } from "@medusajs/framework/utils"
+import { loadEnv, defineConfig } from "@medusajs/framework/utils";
 
-loadEnv(process.env.NODE_ENV || "development", process.cwd())
+loadEnv(process.env.NODE_ENV || "development", process.cwd());
 
 module.exports = defineConfig({
   projectConfig: {
@@ -11,41 +11,38 @@ module.exports = defineConfig({
 
     // For the first Railway deployment, server and worker run together.
     workerMode:
-      (process.env.MEDUSA_WORKER_MODE as
-        | "shared"
-        | "server"
-        | "worker") || "shared",
+      (process.env.MEDUSA_WORKER_MODE as "shared" | "server" | "worker") ||
+      "shared",
 
     http: {
-      storeCors:
-        process.env.STORE_CORS || "http://localhost:8000",
+      storeCors: process.env.STORE_CORS || "http://localhost:8000",
 
-      adminCors:
-        process.env.ADMIN_CORS || "http://localhost:9000",
+      adminCors: process.env.ADMIN_CORS || "http://localhost:9000",
 
       authCors:
-        process.env.AUTH_CORS ||
-        "http://localhost:8000,http://localhost:9000",
+        process.env.AUTH_CORS || "http://localhost:8000,http://localhost:9000",
 
-      jwtSecret:
-        process.env.JWT_SECRET ||
-        "development-jwt-secret",
+      jwtSecret: process.env.JWT_SECRET || "development-jwt-secret",
 
-      cookieSecret:
-        process.env.COOKIE_SECRET ||
-        "development-cookie-secret",
+      cookieSecret: process.env.COOKIE_SECRET || "development-cookie-secret",
     },
+  },
+
+  modules: [
+    {
+      resolve: "@medusajs/medusa/translation",
+    },
+  ],
+
+  featureFlags: {
+    translation: true,
   },
 
   admin: {
     disable: process.env.DISABLE_MEDUSA_ADMIN === "true",
 
-    backendUrl:
-      process.env.MEDUSA_BACKEND_URL ||
-      "http://localhost:9000",
+    backendUrl: process.env.MEDUSA_BACKEND_URL || "http://localhost:9000",
 
-    storefrontUrl:
-      process.env.MEDUSA_STOREFRONT_URL ||
-      "http://localhost:8000",
+    storefrontUrl: process.env.MEDUSA_STOREFRONT_URL || "http://localhost:8000",
   },
-})
+});

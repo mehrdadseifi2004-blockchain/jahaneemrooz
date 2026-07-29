@@ -1,3 +1,4 @@
+import { Dictionary } from "@i18n/get-dictionary"
 import { listProductsWithSort } from "@lib/data/products"
 import { getRegion } from "@lib/data/regions"
 import { OptionValueIds } from "@lib/util/product-option-filters"
@@ -15,6 +16,17 @@ type PaginatedProductsParams = {
   order?: string
 }
 
+type PaginatedProductsProps = {
+  sortBy?: SortOptions
+  page: number
+  collectionId?: string
+  categoryId?: string
+  productsIds?: string[]
+  countryCode: string
+  optionValueIds?: OptionValueIds
+  dictionary: Dictionary
+}
+
 export default async function PaginatedProducts({
   sortBy,
   page,
@@ -23,15 +35,8 @@ export default async function PaginatedProducts({
   productsIds,
   countryCode,
   optionValueIds,
-}: {
-  sortBy?: SortOptions
-  page: number
-  collectionId?: string
-  categoryId?: string
-  productsIds?: string[]
-  countryCode: string
-  optionValueIds?: OptionValueIds
-}) {
+  dictionary,
+}: PaginatedProductsProps) {
   const queryParams: PaginatedProductsParams = {
     limit: PRODUCT_LIMIT,
   }
@@ -72,12 +77,15 @@ export default async function PaginatedProducts({
   const firstProduct = count === 0 ? 0 : (page - 1) * PRODUCT_LIMIT + 1
   const lastProduct = Math.min(page * PRODUCT_LIMIT, count)
 
+  const resultsSummary = dictionary.store.results.summary
+    .replace("{first}", String(firstProduct))
+    .replace("{last}", String(lastProduct))
+    .replace("{count}", String(count))
+
   return (
     <>
       <div className="mb-5 flex items-center justify-between border-b border-black/10 pb-5">
-        <p className="text-sm text-black/60">
-          نمایش {firstProduct} تا {lastProduct} از {count} محصول
-        </p>
+        <p className="text-sm text-black/60">{resultsSummary}</p>
       </div>
 
       {products.length ? (
@@ -97,10 +105,12 @@ export default async function PaginatedProducts({
             🔍
           </span>
 
-          <h2 className="mt-5 text-xl font-bold text-black">محصولی پیدا نشد</h2>
+          <h2 className="mt-5 text-xl font-bold text-black">
+            {dictionary.store.results.notFoundTitle}
+          </h2>
 
           <p className="mt-2 max-w-md text-sm leading-7 text-black/60">
-            فیلترهای انتخاب‌شده را تغییر دهید یا همه فیلترها را پاک کنید.
+            {dictionary.store.results.notFoundDescription}
           </p>
         </div>
       )}

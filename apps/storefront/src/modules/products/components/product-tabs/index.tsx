@@ -1,7 +1,9 @@
 "use client"
 
-import { HttpTypes } from "@medusajs/types"
 import { useState } from "react"
+import { HttpTypes } from "@medusajs/types"
+
+import { useI18n } from "@i18n/components/i18n-provider"
 
 type ProductTabsProps = {
   product: HttpTypes.StoreProduct
@@ -10,28 +12,29 @@ type ProductTabsProps = {
 type TabId = "details" | "reviews" | "faq"
 
 const ProductTabs = ({ product }: ProductTabsProps) => {
+  const { dictionary } = useI18n()
   const [activeTab, setActiveTab] = useState<TabId>("details")
 
   const tabs: Array<{ id: TabId; label: string }> = [
     {
       id: "details",
-      label: "جزئیات محصول",
+      label: dictionary.product.tabs.details,
     },
     {
       id: "reviews",
-      label: "امتیاز و نظرات",
+      label: dictionary.product.tabs.reviews,
     },
     {
       id: "faq",
-      label: "سؤالات متداول",
+      label: dictionary.product.tabs.faq,
     },
   ]
 
   return (
-    <div className="w-full text-right" dir="rtl">
+    <div className="w-full text-start">
       <div
         role="tablist"
-        aria-label="اطلاعات محصول"
+        aria-label={dictionary.product.tabs.ariaLabel}
         className="flex items-center overflow-x-auto"
       >
         {tabs.map((tab) => {
@@ -81,45 +84,48 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
 }
 
 const ProductDetails = ({ product }: ProductTabsProps) => {
+  const { dictionary } = useI18n()
+  const t = dictionary.product.tabs
+
   const specifications = [
     {
-      label: "جنس محصول",
-      value: product.material || "ثبت نشده",
+      label: t.material,
+      value: product.material || t.notAvailable,
     },
     {
-      label: "کشور سازنده",
-      value: product.origin_country || "ثبت نشده",
+      label: t.originCountry,
+      value: product.origin_country || t.notAvailable,
     },
     {
-      label: "نوع محصول",
-      value: product.type?.value || "ثبت نشده",
+      label: t.productType,
+      value: product.type?.value || t.notAvailable,
     },
     {
-      label: "وزن",
-      value: product.weight ? `${product.weight} گرم` : "ثبت نشده",
+      label: t.weight,
+      value: product.weight
+        ? `${product.weight} ${t.weightUnit}`
+        : t.notAvailable,
     },
     {
-      label: "ابعاد",
+      label: t.dimensions,
       value:
         product.length && product.width && product.height
           ? `${product.length} × ${product.width} × ${product.height}`
-          : "ثبت نشده",
+          : t.notAvailable,
     },
     {
-      label: "کد محصول",
-      value: product.handle || "ثبت نشده",
+      label: t.productCode,
+      value: product.handle || t.notAvailable,
     },
   ]
 
   return (
     <div className="grid gap-8 large:grid-cols-[minmax(0,1fr)_380px]">
       <div>
-        <h2 className="text-2xl font-bold text-black">درباره این محصول</h2>
+        <h2 className="text-2xl font-bold text-black">{t.about}</h2>
 
         <p className="mt-4 whitespace-pre-line text-sm leading-8 text-black/60 small:text-base">
-          {product.description ||
-            product.subtitle ||
-            "توضیحات تکمیلی برای این محصول ثبت نشده است."}
+          {product.description || product.subtitle || t.noDescription}
         </p>
       </div>
 
@@ -135,7 +141,7 @@ const ProductDetails = ({ product }: ProductTabsProps) => {
           >
             <span className="text-black/50">{item.label}</span>
 
-            <span className="text-left font-medium text-black">
+            <span className="text-end font-medium text-black">
               {item.value}
             </span>
           </div>
@@ -145,38 +151,25 @@ const ProductDetails = ({ product }: ProductTabsProps) => {
   )
 }
 
-const reviews = [
-  {
-    id: 1,
-    name: "علی رضایی",
-    content:
-      "کیفیت محصول بسیار خوب بود و دقیقاً مطابق توضیحات صفحه محصول به دستم رسید.",
-  },
-  {
-    id: 2,
-    name: "امیرحسین محمدی",
-    content:
-      "ارسال سریع انجام شد و بسته‌بندی مناسبی داشت. از خرید خودم راضی هستم.",
-  },
-]
-
 const ProductReviews = () => {
+  const { dictionary } = useI18n()
+  const t = dictionary.product.tabs
+  const reviews = t.reviewItems
+
   return (
     <div>
       <div className="mb-8 flex flex-col gap-4 small:flex-row small:items-center small:justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-black">نظرات مشتریان</h2>
+          <h2 className="text-2xl font-bold text-black">{t.customerReviews}</h2>
 
-          <p className="mt-2 text-sm text-black/60">
-            نظرات نمایش‌داده‌شده فعلاً نمونه هستند.
-          </p>
+          <p className="mt-2 text-sm text-black/60">{t.sampleReviewsNotice}</p>
         </div>
 
         <button
           type="button"
           className="inline-flex h-12 items-center justify-center rounded-full bg-black px-6 text-sm font-medium text-white transition hover:bg-black/80"
         >
-          ثبت نظر
+          {t.writeReview}
         </button>
       </div>
 
@@ -189,7 +182,7 @@ const ProductReviews = () => {
             <div
               dir="ltr"
               className="flex gap-1 text-xl text-[#ffc633]"
-              aria-label="امتیاز ۵ از ۵"
+              aria-label={t.ratingFive}
             >
               <span>★</span>
               <span>★</span>
@@ -202,7 +195,8 @@ const ProductReviews = () => {
               <strong className="text-lg text-black">{review.name}</strong>
 
               <span
-                aria-label="خریدار تأییدشده"
+                aria-label={t.verifiedBuyer}
+                title={t.verifiedBuyer}
                 className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#01ab31] text-xs font-bold text-white"
               >
                 ✓
@@ -219,31 +213,16 @@ const ProductReviews = () => {
   )
 }
 
-const faqItems = [
-  {
-    question: "زمان آماده‌سازی سفارش چقدر است؟",
-    answer:
-      "زمان آماده‌سازی به نوع محصول بستگی دارد. محصولات دیجیتال معمولاً سریع‌تر تحویل می‌شوند و کالاهای فیزیکی پس از تأیید سفارش برای ارسال آماده خواهند شد.",
-  },
-  {
-    question: "آیا امکان بازگشت محصول وجود دارد؟",
-    answer:
-      "برای کالاهای فیزیکی، درخواست بازگشت مطابق شرایط فروشگاه بررسی می‌شود. محصولات دیجیتال تحویل‌شده معمولاً امکان بازگشت ندارند.",
-  },
-  {
-    question: "چگونه از وضعیت سفارش مطلع شوم؟",
-    answer:
-      "پس از ثبت سفارش می‌توانید وضعیت آن را از بخش سفارش‌های حساب کاربری خود مشاهده کنید.",
-  },
-]
-
 const ProductFaq = () => {
+  const { dictionary } = useI18n()
+  const t = dictionary.product.tabs
+
   return (
     <div className="mx-auto max-w-4xl">
-      <h2 className="mb-6 text-2xl font-bold text-black">سؤالات متداول</h2>
+      <h2 className="mb-6 text-2xl font-bold text-black">{t.faq}</h2>
 
       <div className="divide-y divide-black/10 rounded-[20px] border border-black/10 px-5 small:px-8">
-        {faqItems.map((item, index) => (
+        {t.faqItems.map((item, index) => (
           <details key={item.question} className="group" open={index === 0}>
             <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-semibold text-black">
               <span>{item.question}</span>

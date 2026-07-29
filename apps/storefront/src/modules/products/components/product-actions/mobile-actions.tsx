@@ -2,6 +2,7 @@ import { Dialog, Transition } from "@headlessui/react"
 import { Button, clx } from "@modules/common/components/ui"
 import React, { Fragment, useMemo } from "react"
 
+import { useI18n } from "@i18n/components/i18n-provider"
 import useToggleState from "@lib/hooks/use-toggle-state"
 import ChevronDown from "@modules/common/icons/chevron-down"
 import X from "@modules/common/icons/x"
@@ -34,6 +35,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
   show,
   optionsDisabled,
 }) => {
+  const { dictionary } = useI18n()
   const { state, open, close } = useToggleState()
 
   const price = getProductPrice({
@@ -98,24 +100,28 @@ const MobileActions: React.FC<MobileActionsProps> = ({
                 <div></div>
               )}
             </div>
-            <div className={clx("grid grid-cols-2 w-full gap-x-4", {
-              "!grid-cols-1": isSimple
-            })}>
-              {!isSimple && <Button
-                onClick={open}
-                variant="secondary"
-                className="w-full"
-                data-testid="mobile-actions-button"
-              >
-                <div className="flex items-center justify-between w-full">
-                  <span>
-                    {variant
-                      ? Object.values(options).join(" / ")
-                      : "Select Options"}
-                  </span>
-                  <ChevronDown />
-                </div>
-              </Button>}
+            <div
+              className={clx("grid grid-cols-2 w-full gap-x-4", {
+                "!grid-cols-1": isSimple,
+              })}
+            >
+              {!isSimple && (
+                <Button
+                  onClick={open}
+                  variant="secondary"
+                  className="w-full"
+                  data-testid="mobile-actions-button"
+                >
+                  <div className="flex items-center justify-between w-full">
+                    <span>
+                      {variant
+                        ? Object.values(options).join(" / ")
+                        : dictionary.product.actions.selectOptions}
+                    </span>
+                    <ChevronDown />
+                  </div>
+                </Button>
+              )}
               <Button
                 onClick={handleAddToCart}
                 disabled={!inStock || !variant}
@@ -124,10 +130,10 @@ const MobileActions: React.FC<MobileActionsProps> = ({
                 data-testid="mobile-cart-button"
               >
                 {!variant
-                  ? "Select variant"
+                  ? dictionary.product.actions.selectVariant
                   : !inStock
-                  ? "Out of stock"
-                  : "Add to cart"}
+                    ? dictionary.product.actions.unavailable
+                    : dictionary.product.actions.addToCart}
               </Button>
             </div>
           </div>
@@ -159,10 +165,10 @@ const MobileActions: React.FC<MobileActionsProps> = ({
                 leaveTo="opacity-0"
               >
                 <Dialog.Panel
-                  className="w-full h-full transform overflow-hidden text-left flex flex-col gap-y-3"
+                  className="w-full h-full transform overflow-hidden text-start flex flex-col gap-y-3"
                   data-testid="mobile-actions-modal"
                 >
-                  <div className="w-full flex justify-end pr-6">
+                  <div className="flex w-full justify-end pe-6">
                     <button
                       onClick={close}
                       className="bg-white w-12 h-12 rounded-full text-ui-fg-base flex justify-center items-center"

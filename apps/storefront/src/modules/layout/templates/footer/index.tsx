@@ -1,6 +1,11 @@
 import { listCategories } from "@lib/data/categories"
+import { Dictionary } from "@i18n/get-dictionary"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import Newsletter from "@modules/layout/components/newsletter"
+
+type FooterProps = {
+  dictionary: Dictionary
+}
 
 const socialLinks = [
   {
@@ -25,7 +30,7 @@ const socialLinks = [
   },
 ]
 
-export default async function Footer() {
+export default async function Footer({ dictionary }: FooterProps) {
   const productCategories = await listCategories()
 
   const rootCategories =
@@ -35,28 +40,25 @@ export default async function Footer() {
 
   return (
     <footer className="mt-10 text-black">
-      {/* Newsletter overlap */}
       <div className="relative">
         <div className="absolute inset-x-0 bottom-0 h-1/2 bg-[#f0f0f0]" />
+
         <Newsletter />
       </div>
 
-      {/* Footer content */}
       <div className="bg-[#f0f0f0] px-4 pb-5 pt-10 small:pt-[50px]">
         <div className="content-container">
           <nav className="grid gap-10 pb-10 medium:grid-cols-12 medium:gap-8">
-            {/* Brand */}
             <div className="medium:col-span-4">
               <LocalizedClientLink
                 href="/"
                 className="inline-block text-[28px] font-black tracking-[-0.04em] text-black small:text-[32px]"
               >
-                JAHAN.EMROOZ
+                {dictionary.common.brand}
               </LocalizedClientLink>
 
-              <p className="mt-5 max-w-[330px] text-sm leading-7 text-black/60">
-                فروشگاه آنلاین محصولات دیجیتال، تجهیزات گیمینگ، لوازم جانبی،
-                گیفت‌کارت، اکانت و نرم‌افزار با تجربه‌ای سریع و مطمئن.
+              <p className="mt-5 max-w-[350px] text-sm leading-7 text-black/60">
+                {dictionary.footer.description}
               </p>
 
               <div dir="ltr" className="mt-7 flex items-center gap-3">
@@ -73,10 +75,9 @@ export default async function Footer() {
               </div>
             </div>
 
-            {/* Categories */}
             <div className="medium:col-span-2">
-              <h3 className="mb-6 text-sm font-semibold uppercase tracking-[0.18em] text-black">
-                دسته‌بندی‌ها
+              <h3 className="mb-6 text-sm font-semibold uppercase tracking-[0.14em] text-black">
+                {dictionary.footer.categories}
               </h3>
 
               <ul className="space-y-4 text-sm text-black/60">
@@ -93,10 +94,9 @@ export default async function Footer() {
               </ul>
             </div>
 
-            {/* Store links */}
             <div className="medium:col-span-2">
-              <h3 className="mb-6 text-sm font-semibold uppercase tracking-[0.18em] text-black">
-                فروشگاه
+              <h3 className="mb-6 text-sm font-semibold uppercase tracking-[0.14em] text-black">
+                {dictionary.footer.store}
               </h3>
 
               <ul className="space-y-4 text-sm text-black/60">
@@ -105,7 +105,7 @@ export default async function Footer() {
                     href="/store"
                     className="transition hover:text-black"
                   >
-                    همه محصولات
+                    {dictionary.footer.allProducts}
                   </LocalizedClientLink>
                 </li>
 
@@ -114,7 +114,7 @@ export default async function Footer() {
                     href="/store"
                     className="transition hover:text-black"
                   >
-                    جدیدترین محصولات
+                    {dictionary.footer.newProducts}
                   </LocalizedClientLink>
                 </li>
 
@@ -123,7 +123,7 @@ export default async function Footer() {
                     href="/store"
                     className="transition hover:text-black"
                   >
-                    محصولات پرفروش
+                    {dictionary.footer.bestSelling}
                   </LocalizedClientLink>
                 </li>
 
@@ -132,16 +132,15 @@ export default async function Footer() {
                     href="/cart"
                     className="transition hover:text-black"
                   >
-                    سبد خرید
+                    {dictionary.footer.cart}
                   </LocalizedClientLink>
                 </li>
               </ul>
             </div>
 
-            {/* Account */}
             <div className="medium:col-span-2">
-              <h3 className="mb-6 text-sm font-semibold uppercase tracking-[0.18em] text-black">
-                حساب کاربری
+              <h3 className="mb-6 text-sm font-semibold uppercase tracking-[0.14em] text-black">
+                {dictionary.footer.account}
               </h3>
 
               <ul className="space-y-4 text-sm text-black/60">
@@ -150,7 +149,7 @@ export default async function Footer() {
                     href="/account"
                     className="transition hover:text-black"
                   >
-                    ورود یا ثبت‌نام
+                    {dictionary.footer.loginRegister}
                   </LocalizedClientLink>
                 </li>
 
@@ -159,7 +158,7 @@ export default async function Footer() {
                     href="/account/orders"
                     className="transition hover:text-black"
                   >
-                    سفارش‌های من
+                    {dictionary.footer.myOrders}
                   </LocalizedClientLink>
                 </li>
 
@@ -168,43 +167,42 @@ export default async function Footer() {
                     href="/account/profile"
                     className="transition hover:text-black"
                   >
-                    اطلاعات حساب
+                    {dictionary.footer.accountInformation}
                   </LocalizedClientLink>
                 </li>
               </ul>
             </div>
 
-            {/* Support */}
             <div className="medium:col-span-2">
-              <h3 className="mb-6 text-sm font-semibold uppercase tracking-[0.18em] text-black">
-                راهنما
+              <h3 className="mb-6 text-sm font-semibold uppercase tracking-[0.14em] text-black">
+                {dictionary.footer.help}
               </h3>
 
               <ul className="space-y-4 text-sm text-black/60">
-                <li>پشتیبانی خرید</li>
-                <li>تحویل محصولات دیجیتال</li>
-                <li>ارسال کالاهای فیزیکی</li>
-                <li>خرید امن و مطمئن</li>
+                <li>{dictionary.footer.purchaseSupport}</li>
+                <li>{dictionary.footer.digitalDelivery}</li>
+                <li>{dictionary.footer.physicalShipping}</li>
+                <li>{dictionary.footer.securePurchase}</li>
               </ul>
             </div>
           </nav>
 
           <div className="flex flex-col gap-5 border-t border-black/10 pt-6 text-sm text-black/60 small:flex-row small:items-center small:justify-between">
             <p>
-              © {new Date().getFullYear()} جهان امروز. تمامی حقوق محفوظ است.
+              © {new Date().getFullYear()} {dictionary.footer.copyright}
             </p>
 
             <div className="flex flex-wrap items-center gap-2">
               <span className="flex h-8 items-center justify-center rounded-md border border-[#d6dce5] bg-white px-3 text-xs font-bold text-black">
-                پرداخت امن
+                {dictionary.footer.securePayment}
               </span>
 
               <span className="flex h-8 items-center justify-center rounded-md border border-[#d6dce5] bg-white px-3 text-xs font-bold text-black">
-                SSL
+                {dictionary.footer.ssl}
               </span>
 
               <span className="flex h-8 items-center justify-center rounded-md border border-[#d6dce5] bg-white px-3 text-xs font-bold text-black">
-                24/7
+                {dictionary.footer.support247}
               </span>
             </div>
           </div>

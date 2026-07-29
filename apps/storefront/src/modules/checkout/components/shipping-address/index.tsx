@@ -1,3 +1,4 @@
+import { useI18n } from "@i18n/components/i18n-provider"
 import { HttpTypes } from "@medusajs/types"
 import { Container } from "@modules/common/components/ui"
 import Checkbox from "@modules/common/components/checkbox"
@@ -19,31 +20,25 @@ const ShippingAddress = ({
   checked: boolean
   onChange: () => void
 }) => {
+  const { dictionary } = useI18n()
+
   const [formData, setFormData] = useState<Record<string, string>>({
-    "shipping_address.first_name":
-      cart?.shipping_address?.first_name || "",
-    "shipping_address.last_name":
-      cart?.shipping_address?.last_name || "",
-    "shipping_address.address_1":
-      cart?.shipping_address?.address_1 || "",
-    "shipping_address.company":
-      cart?.shipping_address?.company || "",
-    "shipping_address.postal_code":
-      cart?.shipping_address?.postal_code || "",
-    "shipping_address.city":
-      cart?.shipping_address?.city || "",
+    "shipping_address.first_name": cart?.shipping_address?.first_name || "",
+    "shipping_address.last_name": cart?.shipping_address?.last_name || "",
+    "shipping_address.address_1": cart?.shipping_address?.address_1 || "",
+    "shipping_address.company": cart?.shipping_address?.company || "",
+    "shipping_address.postal_code": cart?.shipping_address?.postal_code || "",
+    "shipping_address.city": cart?.shipping_address?.city || "",
     "shipping_address.country_code":
       cart?.shipping_address?.country_code || "ir",
-    "shipping_address.province":
-      cart?.shipping_address?.province || "",
-    "shipping_address.phone":
-      cart?.shipping_address?.phone || "",
+    "shipping_address.province": cart?.shipping_address?.province || "",
+    "shipping_address.phone": cart?.shipping_address?.phone || "",
     email: cart?.email || "",
   })
 
   const countriesInRegion = useMemo(
     () => cart?.region?.countries?.map((country) => country.iso_2),
-    [cart?.region]
+    [cart?.region],
   )
 
   const addressesInRegion = useMemo(
@@ -51,14 +46,14 @@ const ShippingAddress = ({
       customer?.addresses.filter(
         (address) =>
           address.country_code &&
-          countriesInRegion?.includes(address.country_code)
+          countriesInRegion?.includes(address.country_code),
       ),
-    [customer?.addresses, countriesInRegion]
+    [customer?.addresses, countriesInRegion],
   )
 
   const setFormAddress = (
     address?: HttpTypes.StoreCartAddress,
-    email?: string
+    email?: string,
   ) => {
     if (address) {
       setFormData((previous) => ({
@@ -69,8 +64,7 @@ const ShippingAddress = ({
         "shipping_address.company": address.company || "",
         "shipping_address.postal_code": address.postal_code || "",
         "shipping_address.city": address.city || "",
-        "shipping_address.country_code":
-          address.country_code || "ir",
+        "shipping_address.country_code": address.country_code || "ir",
         "shipping_address.province": address.province || "",
         "shipping_address.phone": address.phone || "",
       }))
@@ -95,7 +89,7 @@ const ShippingAddress = ({
   }, [cart, customer?.email])
 
   const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => {
     setFormData((previous) => ({
       ...previous,
@@ -104,20 +98,23 @@ const ShippingAddress = ({
   }
 
   return (
-    <div dir="rtl">
+    <div>
       {customer && (addressesInRegion?.length || 0) > 0 && (
         <Container className="mb-7 flex flex-col gap-4 rounded-2xl border border-blue-100 bg-blue-50 p-5 shadow-none">
           <p className="text-sm font-semibold text-slate-800">
             {customer.first_name
-              ? `${customer.first_name} عزیز، می‌توانید یکی از آدرس‌های ذخیره‌شده را انتخاب کنید.`
-              : "یکی از آدرس‌های ذخیره‌شده را انتخاب کنید."}
+              ? dictionary.checkout.address.savedAddressGreeting.replace(
+                  "{name}",
+                  customer.first_name,
+                )
+              : dictionary.checkout.address.savedAddress}
           </p>
 
           <AddressSelect
             addresses={customer.addresses}
             addressInput={
               mapKeys(formData, (_, key) =>
-                key.replace("shipping_address.", "")
+                key.replace("shipping_address.", ""),
               ) as unknown as HttpTypes.StoreCartAddress
             }
             onSelect={setFormAddress}
@@ -127,7 +124,7 @@ const ShippingAddress = ({
 
       <div className="grid grid-cols-1 gap-4 small:grid-cols-2">
         <Input
-          label="نام"
+          label={dictionary.checkout.address.firstName}
           name="shipping_address.first_name"
           autoComplete="given-name"
           value={formData["shipping_address.first_name"]}
@@ -137,7 +134,7 @@ const ShippingAddress = ({
         />
 
         <Input
-          label="نام خانوادگی"
+          label={dictionary.checkout.address.lastName}
           name="shipping_address.last_name"
           autoComplete="family-name"
           value={formData["shipping_address.last_name"]}
@@ -148,7 +145,7 @@ const ShippingAddress = ({
 
         <div className="small:col-span-2">
           <Input
-            label="نشانی کامل"
+            label={dictionary.checkout.address.addressLine}
             name="shipping_address.address_1"
             autoComplete="address-line1"
             value={formData["shipping_address.address_1"]}
@@ -159,7 +156,7 @@ const ShippingAddress = ({
         </div>
 
         <Input
-          label="استان"
+          label={dictionary.checkout.address.province}
           name="shipping_address.province"
           autoComplete="address-level1"
           value={formData["shipping_address.province"]}
@@ -169,7 +166,7 @@ const ShippingAddress = ({
         />
 
         <Input
-          label="شهر"
+          label={dictionary.checkout.address.city}
           name="shipping_address.city"
           autoComplete="address-level2"
           value={formData["shipping_address.city"]}
@@ -179,7 +176,7 @@ const ShippingAddress = ({
         />
 
         <Input
-          label="کد پستی"
+          label={dictionary.checkout.address.postal}
           name="shipping_address.postal_code"
           autoComplete="postal-code"
           inputMode="numeric"
@@ -200,7 +197,7 @@ const ShippingAddress = ({
         />
 
         <Input
-          label="شماره موبایل"
+          label={dictionary.checkout.address.phone}
           name="shipping_address.phone"
           autoComplete="tel"
           inputMode="tel"
@@ -211,10 +208,10 @@ const ShippingAddress = ({
         />
 
         <Input
-          label="ایمیل"
+          label={dictionary.checkout.address.emailLabel}
           name="email"
           type="email"
-          title="یک ایمیل معتبر وارد کنید."
+          title={dictionary.checkout.address.emailValidation}
           autoComplete="email"
           value={formData.email}
           onChange={handleChange}
@@ -224,7 +221,7 @@ const ShippingAddress = ({
 
         <div className="small:col-span-2">
           <Input
-            label="نام شرکت یا سازمان (اختیاری)"
+            label={dictionary.checkout.address.company}
             name="shipping_address.company"
             value={formData["shipping_address.company"]}
             onChange={handleChange}
@@ -236,7 +233,7 @@ const ShippingAddress = ({
 
       <div className="mt-7 rounded-2xl border border-slate-200 bg-slate-50 p-4">
         <Checkbox
-          label="آدرس صورتحساب با آدرس دریافت سفارش یکسان است"
+          label={dictionary.checkout.address.sameBilling}
           name="same_as_billing"
           checked={checked}
           onChange={onChange}

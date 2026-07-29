@@ -20,7 +20,7 @@ export default function ProductPrice({
   }
 
   return (
-    <div dir="rtl" className="flex flex-wrap items-center gap-3">
+    <div dir="auto" className="flex flex-wrap items-center gap-3">
       <span
         className="text-2xl font-bold text-black small:text-[32px]"
         data-testid="product-price"

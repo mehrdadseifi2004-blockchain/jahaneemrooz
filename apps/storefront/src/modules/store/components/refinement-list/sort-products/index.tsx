@@ -1,5 +1,6 @@
 "use client"
 
+import { useI18n } from "@i18n/components/i18n-provider"
 import FilterRadioGroup from "@modules/common/components/filter-radio-group"
 
 export type SortOptions = "price_asc" | "price_desc" | "created_at"
@@ -10,34 +11,36 @@ type SortProductsProps = {
   "data-testid"?: string
 }
 
-const sortOptions = [
-  {
-    value: "created_at",
-    label: "جدیدترین محصولات",
-  },
-  {
-    value: "price_asc",
-    label: "قیمت: کم به زیاد",
-  },
-  {
-    value: "price_desc",
-    label: "قیمت: زیاد به کم",
-  },
-]
-
 const SortProducts = ({
   "data-testid": dataTestId,
   sortBy,
   setQueryParams,
 }: SortProductsProps) => {
+  const { dictionary } = useI18n()
+
+  const sortOptions = [
+    {
+      value: "created_at",
+      label: dictionary.store.filters.newest,
+    },
+    {
+      value: "price_asc",
+      label: dictionary.store.filters.priceLowToHigh,
+    },
+    {
+      value: "price_desc",
+      label: dictionary.store.filters.priceHighToLow,
+    },
+  ]
+
   const handleChange = (value: string) => {
     setQueryParams("sortBy", value as SortOptions)
   }
 
   return (
-    <div dir="rtl" className="text-right">
+    <div className="text-start">
       <FilterRadioGroup
-        title="مرتب‌سازی"
+        title={dictionary.store.filters.sortTitle}
         items={sortOptions}
         value={sortBy}
         handleChange={handleChange}

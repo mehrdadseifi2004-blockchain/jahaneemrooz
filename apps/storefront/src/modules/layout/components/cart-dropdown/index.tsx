@@ -1,5 +1,7 @@
 "use client"
 
+import { useI18n } from "@i18n/components/i18n-provider"
+
 import {
   Popover,
   PopoverButton,
@@ -22,6 +24,8 @@ const CartDropdown = ({
 }: {
   cart?: HttpTypes.StoreCart | null
 }) => {
+  const { dictionary, locale } = useI18n()
+
   const [activeTimer, setActiveTimer] = useState<
     ReturnType<typeof setTimeout> | undefined
   >(undefined)
@@ -77,7 +81,7 @@ const CartDropdown = ({
       className="relative z-50 h-full"
       onMouseEnter={openAndCancel}
       onMouseLeave={close}
-      dir="rtl"
+      dir={locale === "fa" ? "rtl" : "ltr"}
     >
       <Popover className="relative h-full">
         <PopoverButton className="h-full">
@@ -86,7 +90,8 @@ const CartDropdown = ({
             href="/cart"
             data-testid="nav-cart-link"
           >
-            سبد خرید ({totalItems.toLocaleString("fa-IR")})
+            {dictionary.cart.title} (
+            {totalItems.toLocaleString(locale === "fa" ? "fa-IR" : "en-US")})
           </LocalizedClientLink>
         </PopoverButton>
 
@@ -106,10 +111,11 @@ const CartDropdown = ({
             data-testid="nav-cart-dropdown"
           >
             <div className="flex items-center justify-between border-b border-black/10 px-5 py-4">
-              <h3 className="text-lg font-bold">سبد خرید</h3>
+              <h3 className="text-lg font-bold">{dictionary.cart.title}</h3>
 
               <span className="text-sm text-black/50">
-                {totalItems.toLocaleString("fa-IR")} کالا
+                {totalItems.toLocaleString(locale === "fa" ? "fa-IR" : "en-US")}{" "}
+                {dictionary.cart.dropdown.items}
               </span>
             </div>
 
@@ -174,7 +180,10 @@ const CartDropdown = ({
                               data-testid="cart-item-quantity"
                               data-value={item.quantity}
                             >
-                              تعداد: {item.quantity.toLocaleString("fa-IR")}
+                              {dictionary.cart.dropdown.quantity}:{" "}
+                              {item.quantity.toLocaleString(
+                                locale === "fa" ? "fa-IR" : "en-US",
+                              )}
                             </span>
 
                             <DeleteButton
@@ -182,7 +191,7 @@ const CartDropdown = ({
                               className="text-xs text-[#ff3333] transition hover:text-[#cc0000]"
                               data-testid="cart-item-remove-button"
                             >
-                              حذف
+                              {dictionary.cart.dropdown.remove}
                             </DeleteButton>
                           </div>
                         </div>
@@ -193,7 +202,7 @@ const CartDropdown = ({
                 <div className="flex flex-col gap-4 border-t border-black/10 p-5">
                   <div className="flex items-center justify-between gap-4">
                     <span className="font-semibold text-black">
-                      جمع محصولات
+                      {dictionary.cart.dropdown.subtotal}
                     </span>
 
                     <span
@@ -214,7 +223,7 @@ const CartDropdown = ({
                       size="large"
                       data-testid="go-to-cart-button"
                     >
-                      مشاهده سبد خرید
+                      {dictionary.cart.dropdown.viewCart}
                     </Button>
                   </LocalizedClientLink>
                 </div>
@@ -222,14 +231,16 @@ const CartDropdown = ({
             ) : (
               <div className="flex flex-col items-center justify-center gap-5 px-6 py-14 text-center">
                 <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#f0f0f0] text-lg font-bold text-black/50">
-                  ۰
+                  {(0).toLocaleString(locale === "fa" ? "fa-IR" : "en-US")}
                 </div>
 
                 <div>
-                  <p className="font-bold text-black">سبد خرید شما خالی است</p>
+                  <p className="font-bold text-black">
+                    {dictionary.cart.dropdown.emptyTitle}
+                  </p>
 
                   <p className="mt-2 text-sm leading-6 text-black/50">
-                    هنوز محصولی به سبد خرید اضافه نکرده‌اید.
+                    {dictionary.cart.dropdown.emptyDescription}
                   </p>
                 </div>
 
@@ -238,7 +249,7 @@ const CartDropdown = ({
                     onClick={close}
                     className="h-11 rounded-full bg-black px-7 text-sm font-medium text-white transition hover:bg-black/80"
                   >
-                    مشاهده محصولات
+                    {dictionary.cart.dropdown.browseProducts}
                   </Button>
                 </LocalizedClientLink>
               </div>

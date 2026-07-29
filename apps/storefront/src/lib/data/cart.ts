@@ -16,6 +16,12 @@ import {
 import { getRegion } from "./regions"
 import { getLocale } from "./locale-actions"
 
+async function getAppLocaleSegment() {
+  const locale = await getLocale()
+
+  return locale?.toLowerCase().startsWith("en") ? "en" : "fa"
+}
+
 /**
  * Retrieves a cart by its ID. If no ID is provided, it will use the cart ID from the cookies.
  * @param cartId - optional - The ID of the cart to retrieve.
@@ -70,7 +76,7 @@ export async function getOrSetCart(countryCode: string) {
     const cartResp = await sdk.store.cart.create(
       { region_id: region.id, locale: locale || undefined },
       {},
-      headers
+      headers,
     )
     cart = cartResp.cart
 
@@ -145,7 +151,7 @@ export async function addToCart({
         quantity,
       },
       {},
-      headers
+      headers,
     )
     .then(async () => {
       const cartCacheTag = await getCacheTag("carts")
@@ -239,7 +245,7 @@ export async function setShippingMethod({
 
 export async function initiatePaymentSession(
   cart: HttpTypes.StoreCart,
-  data: HttpTypes.StoreInitializePaymentSession
+  data: HttpTypes.StoreInitializePaymentSession,
 ) {
   const headers = {
     ...(await getAuthHeaders()),
@@ -303,7 +309,7 @@ export async function removeDiscount(code: string) {
 
 export async function removeGiftCard(
   codeToRemove: string,
-  giftCards: any[]
+  giftCards: any[],
   // giftCards: GiftCard[]
 ) {
   //   const cartId = getCartId()
@@ -323,7 +329,7 @@ export async function removeGiftCard(
 
 export async function submitPromotionForm(
   currentState: unknown,
-  formData: FormData
+  formData: FormData,
 ) {
   const code = formData.get("code") as string
   try {
@@ -381,9 +387,12 @@ export async function setAddresses(currentState: unknown, formData: FormData) {
     return e.message
   }
 
-  redirect(
-    `/${formData.get("shipping_address.country_code")}/checkout?step=delivery`
-  )
+  const appLocale = await getAppLocaleSegment()
+  const countryCode = String(
+    formData.get("shipping_address.country_code"),
+  ).toLowerCase()
+
+  redirect(`/${appLocale}/${countryCode}/checkout?step=delivery`)
 }
 
 /**
@@ -418,8 +427,11 @@ export async function placeOrder(cartId?: string) {
     const orderCacheTag = await getCacheTag("orders")
     revalidateTag(orderCacheTag)
 
+    const appLocale = await getAppLocaleSegment()
+
     removeCartId()
-    redirect(`/${countryCode}/order/${cartRes?.order.id}/confirmed`)
+
+    redirect(`/${appLocale}/${countryCode}/order/${cartRes.order.id}/confirmed`)
   }
 
   return cartRes.cart
@@ -431,15 +443,19 @@ export async function placeOrder(cartId?: string) {
  * @param countryCode
  */
 export async function updateRegion(countryCode: string, currentPath: string) {
+  const normalizedCountryCode = countryCode.toLowerCase()
   const cartId = await getCartId()
-  const region = await getRegion(countryCode)
+  const region = await getRegion(normalizedCountryCode)
 
   if (!region) {
-    throw new Error(`Region not found for country code: ${countryCode}`)
+    throw new Error(
+      `Region not found for country code: ${normalizedCountryCode}`,
+    )
   }
 
   if (cartId) {
     await updateCart({ region_id: region.id })
+
     const cartCacheTag = await getCacheTag("carts")
     revalidateTag(cartCacheTag)
   }
@@ -450,7 +466,31 @@ export async function updateRegion(countryCode: string, currentPath: string) {
   const productsCacheTag = await getCacheTag("products")
   revalidateTag(productsCacheTag)
 
-  redirect(`/${countryCode}${currentPath}`)
+  const segments = currentPath.split("?")[0].split("/").filter(Boolean)
+
+  const routeLocale =
+    segments[0] === "fa" || segments[0] === "en" ? segments[0] : null
+
+  const appLocale = routeLocale || (await getAppLocaleSegment())
+
+  let remainingSegments: string[]
+
+  if (routeLocale) {
+    // Current route: /fa/ir/store
+    remainingSegments = segments.slice(2)
+  } else if (segments[0] && segments[0].length === 2) {
+    // Legacy route: /ir/store
+    remainingSegments = segments.slice(1)
+  } else {
+    // Internal route: /store
+    remainingSegments = segments
+  }
+
+  const remainingPath = remainingSegments.length
+    ? `/${remainingSegments.join("/")}`
+    : ""
+
+  redirect(`/${appLocale}/${normalizedCountryCode}${remainingPath}`)
 }
 
 export async function listCartOptions() {

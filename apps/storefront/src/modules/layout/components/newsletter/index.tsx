@@ -2,7 +2,11 @@
 
 import { FormEvent, useState } from "react"
 
+import { useI18n } from "@i18n/components/i18n-provider"
+
 const Newsletter = () => {
+  const { dictionary } = useI18n()
+
   const [email, setEmail] = useState("")
   const [isSubmitted, setIsSubmitted] = useState(false)
 
@@ -19,7 +23,6 @@ const Newsletter = () => {
 
   return (
     <section
-      dir="rtl"
       aria-labelledby="newsletter-title"
       className="content-container relative z-10"
     >
@@ -29,29 +32,32 @@ const Newsletter = () => {
             id="newsletter-title"
             className="max-w-[560px] text-[30px] font-black leading-[1.15] tracking-[-0.03em] small:text-[40px] medium:text-[46px]"
           >
-            از جدیدترین محصولات و تخفیف‌ها باخبر شوید
+            {dictionary.newsletter.title}
           </h2>
         </div>
 
-        <div className="medium:mr-auto medium:w-full medium:max-w-[350px]">
+        <div className="medium:ms-auto medium:w-full medium:max-w-[390px]">
           {isSubmitted ? (
             <div
               role="status"
-              className="flex min-h-[112px] items-center justify-center rounded-[20px] bg-white px-6 text-center text-sm font-semibold leading-7 text-black"
+              className="flex min-h-[112px] flex-col items-center justify-center rounded-[20px] bg-white px-6 text-center text-sm font-semibold leading-7 text-black"
             >
-              ایمیل شما با موفقیت ثبت شد. پس از اتصال سرویس خبرنامه، جدیدترین
-              پیشنهادها برای شما ارسال می‌شود.
+              <strong>{dictionary.newsletter.success}</strong>
+
+              <span className="mt-1 font-normal text-black/60">
+                {dictionary.newsletter.successDescription}
+              </span>
             </div>
           ) : (
             <form onSubmit={handleSubmit} className="flex flex-col gap-3">
               <label htmlFor="newsletter-email" className="sr-only">
-                آدرس ایمیل
+                {dictionary.newsletter.emailLabel}
               </label>
 
               <div className="relative">
                 <span
                   aria-hidden="true"
-                  className="absolute right-5 top-1/2 -translate-y-1/2 text-black/40"
+                  className="absolute start-5 top-1/2 -translate-y-1/2 text-black/40"
                 >
                   <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
                     <path
@@ -61,6 +67,7 @@ const Newsletter = () => {
                       strokeLinecap="round"
                       strokeLinejoin="round"
                     />
+
                     <rect
                       x="3"
                       y="5"
@@ -81,8 +88,8 @@ const Newsletter = () => {
                   autoComplete="email"
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
-                  placeholder="ایمیل خود را وارد کنید"
-                  className="h-12 w-full rounded-full border-0 bg-white px-12 text-sm text-black outline-none placeholder:text-black/40 focus:ring-4 focus:ring-white/20"
+                  placeholder={dictionary.newsletter.emailPlaceholder}
+                  className="h-12 w-full rounded-full border-0 bg-white ps-12 pe-5 text-sm text-black outline-none placeholder:text-black/40 focus:ring-4 focus:ring-white/20"
                 />
               </div>
 
@@ -90,7 +97,7 @@ const Newsletter = () => {
                 type="submit"
                 className="h-12 rounded-full bg-white px-6 text-sm font-medium text-black transition hover:bg-white/85"
               >
-                عضویت در خبرنامه
+                {dictionary.newsletter.submit}
               </button>
             </form>
           )}

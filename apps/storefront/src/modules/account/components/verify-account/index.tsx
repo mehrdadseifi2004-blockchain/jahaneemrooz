@@ -2,24 +2,28 @@
 
 import { useEffect, useRef, useState } from "react"
 import { useSearchParams } from "next/navigation"
-import { Button } from "@modules/common/components/ui"
+
+import { useI18n } from "@i18n/components/i18n-provider"
 import { confirmEmailVerification } from "@lib/data/customer"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
+import { Button } from "@modules/common/components/ui"
 
 type VerificationState = "verifying" | "success" | "error"
 
 const VerifyAccount = () => {
+  const { dictionary } = useI18n()
   const searchParams = useSearchParams()
   const token = searchParams.get("token")
+
   const [state, setState] = useState<VerificationState>("verifying")
-  // Guard against the effect running twice in React Strict Mode, which would
-  // consume the single-use token before the customer sees the result.
+
   const confirmed = useRef(false)
 
   useEffect(() => {
     if (confirmed.current) {
       return
     }
+
     confirmed.current = true
 
     if (!token) {
@@ -27,31 +31,36 @@ const VerifyAccount = () => {
       return
     }
 
-    confirmEmailVerification(token).then(({ success }) =>
+    confirmEmailVerification(token).then(({ success }) => {
       setState(success ? "success" : "error")
-    )
+    })
   }, [token])
 
   return (
     <div
-      className="max-w-sm w-full flex flex-col items-center text-center gap-y-4"
+      className="flex w-full max-w-sm flex-col items-center gap-y-4 text-center"
       data-testid="verify-account-page"
     >
-      <h1 className="text-large-semi uppercase">Email verification</h1>
+      <h1 className="text-large-semi uppercase">
+        {dictionary.verifyAccount.title}
+      </h1>
 
       {state === "verifying" && (
         <p className="text-base-regular text-ui-fg-base">
-          Verifying your email...
+          {dictionary.verifyAccount.verifying}
         </p>
       )}
 
       {state === "success" && (
         <>
           <p className="text-base-regular text-ui-fg-base">
-            Your email is verified. You can now sign in to your account.
+            {dictionary.verifyAccount.success}
           </p>
+
           <LocalizedClientLink href="/account">
-            <Button variant="primary">Go to sign in</Button>
+            <Button variant="primary">
+              {dictionary.verifyAccount.goToSignIn}
+            </Button>
           </LocalizedClientLink>
         </>
       )}
@@ -59,11 +68,13 @@ const VerifyAccount = () => {
       {state === "error" && (
         <>
           <p className="text-base-regular text-ui-fg-base">
-            This verification link is invalid or has expired. Sign in to receive
-            a new verification email.
+            {dictionary.verifyAccount.error}
           </p>
+
           <LocalizedClientLink href="/account">
-            <Button variant="secondary">Go to sign in</Button>
+            <Button variant="secondary">
+              {dictionary.verifyAccount.goToSignIn}
+            </Button>
           </LocalizedClientLink>
         </>
       )}

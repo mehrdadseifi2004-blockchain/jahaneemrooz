@@ -1,5 +1,6 @@
 "use client"
 
+import { useI18n } from "@i18n/components/i18n-provider"
 import { setAddresses } from "@lib/data/cart"
 import useToggleState from "@lib/hooks/use-toggle-state"
 import compareAddresses from "@lib/util/compare-addresses"
@@ -21,6 +22,9 @@ const Addresses = ({
   cart: HttpTypes.StoreCart | null
   customer: HttpTypes.StoreCustomer | null
 }) => {
+  const { locale, dictionary } = useI18n()
+  const numberLocale = locale === "fa" ? "fa-IR" : "en-US"
+
   const searchParams = useSearchParams()
   const router = useRouter()
   const pathname = usePathname()
@@ -40,7 +44,7 @@ const Addresses = ({
   const [message, formAction] = useActionState(setAddresses, null)
 
   return (
-    <section dir="rtl">
+    <section>
       <div className="mb-6 flex items-start justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
@@ -51,16 +55,16 @@ const Addresses = ({
                   : "bg-emerald-50 text-emerald-600"
               }`}
             >
-              {isOpen ? "۱" : <CheckCircleSolid />}
+              {isOpen ? (1).toLocaleString(numberLocale) : <CheckCircleSolid />}
             </span>
 
             <h2 className="text-xl font-bold text-black small:text-2xl">
-              اطلاعات گیرنده و آدرس
+              {dictionary.checkout.address.title}
             </h2>
           </div>
 
-          <p className="mr-12 mt-2 text-sm leading-7 text-black/50">
-            اطلاعات تماس و نشانی دریافت سفارش را وارد کنید.
+          <p className="ms-12 mt-2 text-sm leading-7 text-black/50">
+            {dictionary.checkout.address.description}
           </p>
         </div>
 
@@ -71,7 +75,7 @@ const Addresses = ({
             className="shrink-0 text-sm font-semibold text-black transition hover:text-black/70"
             data-testid="edit-address-button"
           >
-            ویرایش اطلاعات
+            {dictionary.checkout.address.edit}
           </button>
         )}
       </div>
@@ -88,7 +92,7 @@ const Addresses = ({
           {!sameAsBilling && (
             <div className="mt-8 border-t border-black/10 pt-8">
               <h3 className="mb-6 text-lg font-bold text-black">
-                آدرس صورتحساب
+                {dictionary.checkout.address.billingTitle}
               </h3>
 
               <BillingAddress cart={cart} />
@@ -100,7 +104,7 @@ const Addresses = ({
               className="h-12 w-full rounded-full bg-black px-7 text-base font-bold text-white transition hover:bg-black/80 small:w-auto"
               data-testid="submit-address-button"
             >
-              ثبت اطلاعات و ادامه
+              {dictionary.checkout.address.submit}
             </SubmitButton>
 
             <ErrorMessage error={message} data-testid="address-error-message" />
@@ -110,7 +114,7 @@ const Addresses = ({
         <div>
           {cart?.shipping_address ? (
             <div className="grid grid-cols-1 gap-4 medium:grid-cols-3">
-              <SummaryBox title="گیرنده">
+              <SummaryBox title={dictionary.checkout.address.recipient}>
                 <p>
                   {cart.shipping_address.first_name}{" "}
                   {cart.shipping_address.last_name}
@@ -119,21 +123,33 @@ const Addresses = ({
                 <p className="mt-2">{cart.shipping_address.address_1}</p>
 
                 <p>
-                  {cart.shipping_address.city}، {cart.shipping_address.province}
+                  {cart.shipping_address.city}
+                  {locale === "fa" ? "، " : ", "}
+                  {cart.shipping_address.province}
                 </p>
 
-                <p>کد پستی: {cart.shipping_address.postal_code}</p>
+                <p>
+                  {dictionary.checkout.address.postalCode}{" "}
+                  {cart.shipping_address.postal_code}
+                </p>
               </SummaryBox>
 
-              <SummaryBox title="اطلاعات تماس">
-                <p>موبایل: {cart.shipping_address.phone || "ثبت نشده"}</p>
+              <SummaryBox title={dictionary.checkout.address.contact}>
+                <p>
+                  {dictionary.checkout.address.mobile}{" "}
+                  {cart.shipping_address.phone ||
+                    dictionary.checkout.address.notProvided}
+                </p>
 
-                <p className="mt-2">ایمیل: {cart.email || "ثبت نشده"}</p>
+                <p className="mt-2">
+                  {dictionary.checkout.address.email}{" "}
+                  {cart.email || dictionary.checkout.address.notProvided}
+                </p>
               </SummaryBox>
 
-              <SummaryBox title="آدرس صورتحساب">
+              <SummaryBox title="{dictionary.checkout.address.billingTitle}">
                 {sameAsBilling ? (
-                  <p>آدرس صورتحساب با آدرس دریافت سفارش یکسان است.</p>
+                  <p>{dictionary.checkout.address.sameBillingSummary}</p>
                 ) : (
                   <>
                     <p>
@@ -144,7 +160,8 @@ const Addresses = ({
                     <p className="mt-2">{cart.billing_address?.address_1}</p>
 
                     <p>
-                      {cart.billing_address?.city}،{" "}
+                      {cart.billing_address?.city}
+                      {locale === "fa" ? "، " : ", "}
                       {cart.billing_address?.province}
                     </p>
                   </>

@@ -1,0 +1,606 @@
+{
+  "common": {
+    "brand": "JAHAN.EMROOZ",
+    "home": "Home",
+    "store": "Shop",
+    "cart": "Cart",
+    "account": "Account",
+    "search": "Search",
+    "loading": "Loading...",
+    "language": "Language"
+  },
+  "navigation": {
+    "specialOffers": "Special Offers",
+    "newArrivals": "New Arrivals",
+    "categories": "Categories",
+    "searchPlaceholder": "Search for products...",
+    "announcement": "Get a special discount on your first purchase.",
+    "viewProducts": "View Products"
+  },
+  "cart": {
+    "metadata": {
+      "title": "Shopping Cart | Jahan Emrooz",
+      "description": "View and manage the products in your Jahan Emrooz shopping cart."
+    },
+    "breadcrumb": {
+      "ariaLabel": "Breadcrumb",
+      "home": "Home",
+      "cart": "Cart"
+    },
+    "title": "Your Cart",
+    "account": {
+      "title": "Already have an account?",
+      "description": "Sign in to view previous orders and complete your purchase faster.",
+      "login": "Sign In"
+    },
+    "itemCount": "You have {count} items in your cart.",
+    "empty": {
+      "title": "Your Cart Is Empty",
+      "description": "You haven't added any products to your cart yet. Browse the store and start shopping.",
+      "cta": "Browse Products"
+    },
+    "item": {
+      "quantityUnit": "pcs",
+      "selectedOption": "Selected option:",
+      "unitPrice": "Unit price:",
+      "decreaseQuantity": "Decrease quantity",
+      "increaseQuantity": "Increase quantity",
+      "updateError": "Could not update the product quantity."
+    },
+    "summary": {
+      "title": "Order Summary",
+      "subtotal": "Subtotal",
+      "discount": "Discount",
+      "shipping": "Shipping",
+      "shippingLater": "Calculated next",
+      "tax": "Tax",
+      "total": "Total",
+      "promotionLabel": "Promo code",
+      "promotionPlaceholder": "Enter promo code",
+      "promotionApply": "Apply",
+      "promotionApplying": "Applying...",
+      "promotionSuccess": "Promo code applied successfully.",
+      "promotionError": "This promo code is invalid or cannot be applied.",
+      "checkout": "Continue to Checkout",
+      "continueShopping": "Continue Shopping",
+      "secureNotice": "Your payment and personal information are processed securely."
+    },
+    "dropdown": {
+      "items": "items",
+      "quantity": "Quantity",
+      "remove": "Remove",
+      "subtotal": "Subtotal",
+      "viewCart": "View Cart",
+      "emptyTitle": "Your Cart Is Empty",
+      "emptyDescription": "You haven't added any products to your cart yet.",
+      "browseProducts": "Browse Products"
+    }
+  },
+  "language": {
+    "persian": "فارسی",
+    "english": "English"
+  },
+  "newsletter": {
+    "title": "Stay up to date with our latest products and offers",
+    "emailLabel": "Email address",
+    "emailPlaceholder": "Enter your email address",
+    "submit": "Subscribe to Newsletter",
+    "success": "Your email has been registered successfully.",
+    "successDescription": "Our latest offers will be sent to you once the newsletter service is connected."
+  },
+  "footer": {
+    "description": "An online store for digital products, gaming equipment, accessories, gift cards, accounts, and software with a fast and reliable shopping experience.",
+    "categories": "Categories",
+    "store": "Shop",
+    "account": "Account",
+    "help": "Help",
+    "allProducts": "All Products",
+    "newProducts": "New Arrivals",
+    "bestSelling": "Best Selling",
+    "cart": "Shopping Cart",
+    "loginRegister": "Login or Register",
+    "myOrders": "My Orders",
+    "accountInformation": "Account Information",
+    "purchaseSupport": "Purchase Support",
+    "digitalDelivery": "Digital Product Delivery",
+    "physicalShipping": "Physical Product Shipping",
+    "securePurchase": "Safe and Secure Shopping",
+    "copyright": "Jahan Emrooz. All rights reserved.",
+    "securePayment": "Secure Payment",
+    "ssl": "SSL",
+    "support247": "24/7 Support"
+  },
+  "home": {
+    "metadata": {
+      "title": "Jahan Emrooz | Digital Products Store",
+      "description": "Shop digital products, gaming equipment, accessories, gift cards, accounts, and software online."
+    },
+    "hero": {
+      "titleLine1": "FIND PRODUCTS",
+      "titleLine2": "THAT MATCH YOUR",
+      "titleLine3": "DIGITAL WORLD",
+      "description": "Explore a diverse collection of digital products, gaming equipment, accessories, storage devices, and software services.",
+      "cta": "Shop Now",
+      "productsCount": "100+",
+      "productsLabel": "Different Products",
+      "qualityCount": "50+",
+      "qualityLabel": "High-Quality Products",
+      "customersCount": "1,000+",
+      "customersLabel": "Happy Customers"
+    },
+    "brands": {
+      "ariaLabel": "Available brands"
+    },
+    "latestProducts": {
+      "title": "NEW ARRIVALS",
+      "viewAll": "View All"
+    },
+    "bestSelling": {
+      "title": "TOP SELLING",
+      "viewAll": "View All"
+    },
+    "categories": {
+      "title": "BROWSE BY CATEGORY",
+      "viewProducts": "View Products"
+    },
+    "reviews": {
+      "title": "OUR HAPPY CUSTOMERS",
+      "ratingLabel": "Rated 5 out of 5",
+      "verifiedBuyer": "Verified buyer",
+      "items": [
+        {
+          "id": 1,
+          "name": "Ali Rezaei",
+          "content": "I had a great shopping experience. The product was exactly as described, and the ordering process was quick and simple."
+        },
+        {
+          "id": 2,
+          "name": "Sara Mohammadi",
+          "content": "The wide product selection and detailed descriptions were very helpful. Packaging and order tracking were handled professionally."
+        },
+        {
+          "id": 3,
+          "name": "Amirhossein Karimi",
+          "content": "I purchased gaming equipment from Jahan Emrooz and was completely satisfied with both the product quality and customer support."
+        },
+        {
+          "id": 4,
+          "name": "Negar Ahmadi",
+          "content": "My digital product was delivered very quickly. The purchasing process was transparent and completely hassle-free."
+        }
+      ]
+    }
+  },
+  "store": {
+    "metadata": {
+      "title": "Store | Jahan Emrooz",
+      "description": "Browse and shop digital products, gaming equipment, accessories, and software from Jahan Emrooz."
+    },
+    "breadcrumb": {
+      "ariaLabel": "Breadcrumb",
+      "home": "Home",
+      "store": "Store"
+    },
+    "title": "All Products",
+    "description": "Digital products, gaming equipment, and accessories from Jahan Emrooz.",
+    "filters": {
+      "title": "Filters",
+      "mobileNotice": "Sorting and filters are available on desktop",
+      "sortTitle": "Sort by",
+      "newest": "Newest Products",
+      "priceLowToHigh": "Price: Low to High",
+      "priceHighToLow": "Price: High to Low",
+      "options": "Options",
+      "optionFallback": "Option",
+      "clear": "Clear Filters"
+    },
+    "results": {
+      "summary": "Showing {first} to {last} of {count} products",
+      "notFoundTitle": "No Products Found",
+      "notFoundDescription": "Change the selected filters or clear all filters and try again."
+    },
+    "pagination": {
+      "ariaLabel": "Product pagination",
+      "previous": "Previous",
+      "next": "Next",
+      "pageOf": "Page {page} of {totalPages}"
+    },
+    "productCard": {
+      "ratingLabel": "Product rating: 4.5 out of 5",
+      "contact": "Contact Us"
+    }
+  },
+  "product": {
+    "metadata": {
+      "brand": "Jahan Emrooz"
+    },
+    "breadcrumb": {
+      "ariaLabel": "Breadcrumb",
+      "home": "Home",
+      "store": "Store"
+    },
+    "info": {
+      "digital": "Digital Product",
+      "physical": "Physical Product",
+      "ratingLabel": "Product rating: 4.5 out of 5"
+    },
+    "actions": {
+      "inStock": "In Stock",
+      "outOfStock": "Currently Out of Stock",
+      "digitalDelivery": "Product information will be delivered digitally after purchase.",
+      "physicalDelivery": "The item will be prepared for shipping after your order is placed.",
+      "decreaseQuantity": "Decrease quantity",
+      "increaseQuantity": "Increase quantity",
+      "selectOption": "Select Product Options",
+      "selectVariant": "Select Variant",
+      "unavailable": "Out of Stock",
+      "addToCart": "Add to Cart",
+      "securePurchase": "Secure Purchase",
+      "support": "Support",
+      "fastDelivery": "Fast Delivery",
+      "selectOptions": "Select Options",
+      "selectLabel": "Select {title}"
+    },
+    "tabs": {
+      "ariaLabel": "Product information",
+      "details": "Product Details",
+      "reviews": "Ratings & Reviews",
+      "faq": "Frequently Asked Questions",
+      "about": "About This Product",
+      "noDescription": "No additional description has been provided for this product.",
+      "notAvailable": "Not available",
+      "material": "Material",
+      "originCountry": "Country of Origin",
+      "productType": "Product Type",
+      "weight": "Weight",
+      "weightUnit": "g",
+      "dimensions": "Dimensions",
+      "productCode": "Product Code",
+      "customerReviews": "Customer Reviews",
+      "sampleReviewsNotice": "The reviews shown are currently sample reviews.",
+      "writeReview": "Write a Review",
+      "ratingFive": "Rated 5 out of 5",
+      "verifiedBuyer": "Verified Buyer",
+      "reviewItems": [
+        {
+          "id": 1,
+          "name": "Ali Rezaei",
+          "content": "The product quality was excellent and it arrived exactly as described on the product page."
+        },
+        {
+          "id": 2,
+          "name": "Amirhossein Mohammadi",
+          "content": "Delivery was fast and the packaging was good. I am very satisfied with my purchase."
+        }
+      ],
+      "faqItems": [
+        {
+          "question": "How long does order preparation take?",
+          "answer": "Preparation time depends on the product type. Digital products are usually delivered faster, while physical items are prepared for shipping after the order is confirmed."
+        },
+        {
+          "question": "Can I return a product?",
+          "answer": "Return requests for physical products are reviewed according to the store policy. Delivered digital products are generally non-returnable."
+        },
+        {
+          "question": "How can I track my order?",
+          "answer": "After placing your order, you can check its status from the orders section of your account."
+        }
+      ]
+    },
+    "related": {
+      "title": "YOU MIGHT ALSO LIKE"
+    },
+    "gallery": {
+      "fallbackTitle": "Product",
+      "noImage": "No image has been added for this product.",
+      "showImage": "Show image {number}",
+      "imageAlt": "{title} - image {number}"
+    }
+  },
+  "category": {
+    "metadata": {
+      "brand": "Jahan Emrooz",
+      "fallbackDescription": "Browse and shop products from the {name} category at Jahan Emrooz."
+    }
+  },
+  "collection": {
+    "metadata": {
+      "brand": "Jahan Emrooz",
+      "description": "Browse products from the {name} collection at Jahan Emrooz."
+    }
+  },
+  "checkout": {
+    "metadata": {
+      "title": "Checkout | Jahan Emrooz",
+      "description": "Enter your details, choose a delivery method, and complete your payment."
+    },
+    "layout": {
+      "secureCheckout": "Secure Checkout",
+      "backToCart": "Back to Cart",
+      "copyright": "© {year} Jahan Emrooz. All rights reserved.",
+      "securePayment": "Secure Payment",
+      "privacy": "Privacy Protected",
+      "support": "Shopping Support"
+    },
+    "page": {
+      "breadcrumbLabel": "Breadcrumb",
+      "home": "Home",
+      "cart": "Cart",
+      "checkout": "Checkout",
+      "title": "Checkout",
+      "description": "Enter your delivery information, choose a shipping method, select a payment method, and place your order."
+    },
+    "address": {
+      "title": "Contact & Delivery Address",
+      "description": "Enter the contact details and address for receiving your order.",
+      "edit": "Edit Details",
+      "billingTitle": "Billing Address",
+      "submit": "Save & Continue",
+      "recipient": "Recipient",
+      "contact": "Contact Information",
+      "billing": "Billing Address",
+      "postalCode": "Postal code:",
+      "mobile": "Phone:",
+      "email": "Email:",
+      "notProvided": "Not provided",
+      "sameBillingSummary": "The billing address is the same as the delivery address.",
+      "savedAddressGreeting": "{name}, you can select one of your saved addresses.",
+      "savedAddress": "Select one of your saved addresses.",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "addressLine": "Street Address",
+      "province": "Province / State",
+      "city": "City",
+      "postal": "Postal Code",
+      "country": "Country",
+      "phone": "Phone Number",
+      "billingPhone": "Phone Number",
+      "emailLabel": "Email",
+      "emailValidation": "Enter a valid email address.",
+      "company": "Company or Organization (Optional)",
+      "billingCompany": "Company or Organization (Optional)",
+      "sameBilling": "Billing address is the same as the delivery address"
+    },
+    "shipping": {
+      "title": "Shipping Method",
+      "description": "Choose how you would like to receive your order.",
+      "edit": "Change Shipping Method",
+      "pickup": "Store Pickup",
+      "pickupDescription": "Pick up your order directly from the store.",
+      "free": "Free",
+      "deliveryDescription": "Deliver the order to your saved address",
+      "unknown": "Unavailable",
+      "selectLocation": "Select Pickup Location",
+      "submit": "Save Shipping & Continue",
+      "submitting": "Saving...",
+      "selected": "Selected Method",
+      "error": "Could not select the shipping method."
+    },
+    "summary": {
+      "title": "Order Summary",
+      "itemCount": "{count} items in your order",
+      "edit": "Edit",
+      "subtotal": "Subtotal",
+      "discount": "Discount",
+      "shipping": "Shipping",
+      "shippingNotSelected": "Not selected yet",
+      "tax": "Tax",
+      "total": "Total",
+      "secureNotice": "Your order and payment information are processed securely."
+    },
+    "payment": {
+      "title": "Payment Method",
+      "description": "Choose how you would like to pay for your order.",
+      "edit": "Change Payment Method",
+      "giftCardPayment": "Pay with Gift Card Credit",
+      "noMethod": "No payment method is available for this region.",
+      "noMethodHelp": "Enable a Payment Provider in Medusa settings first.",
+      "submitting": "Saving...",
+      "saveCard": "Save Card Details",
+      "saveAndReview": "Save Payment & Review Order",
+      "selected": "Selected Payment Method",
+      "giftCard": "Gift Card",
+      "gateway": "Payment Gateway",
+      "detailsLater": "Payment details will be completed in the next step.",
+      "initError": "Could not initialize the payment method."
+    },
+    "review": {
+      "title": "Review & Place Order",
+      "description": "Review your order details before placing your order.",
+      "ready": "Your order is ready to be placed",
+      "confirmation": "By placing your order, you confirm that the information provided is correct and that you accept the store's purchase, shipping, returns, and privacy policies.",
+      "incomplete": "Previous steps are not complete yet.",
+      "incompleteHelp": "Complete your address, shipping method, and payment method first."
+    },
+    "paymentButton": {
+      "selectMethod": "Select a payment method first",
+      "orderError": "Could not place the order.",
+      "paymentError": "The payment could not be completed.",
+      "payAndPlace": "Pay & Place Order",
+      "placeOrder": "Place Order"
+    }
+  },
+  "order": {
+    "metadata": {
+      "title": "Order Confirmed | Jahan Emrooz",
+      "description": "View the details of your confirmed Jahan Emrooz order."
+    },
+    "completed": {
+      "title": "Your Order Has Been Placed",
+      "description": "Thank you for your purchase. Your order has been received and is now being prepared.",
+      "products": "Order Items",
+      "continueShopping": "Continue Shopping",
+      "myOrders": "View My Orders"
+    },
+    "details": {
+      "emailNotice": "Order confirmation details will be sent to the following email:",
+      "orderNumber": "Order Number",
+      "orderDate": "Order Date",
+      "orderStatus": "Order Status",
+      "paymentStatus": "Payment Status",
+      "unknown": "Unknown"
+    },
+    "statuses": {
+      "not_fulfilled": "Processing",
+      "partially_fulfilled": "Partially Fulfilled",
+      "fulfilled": "Fulfilled",
+      "partially_shipped": "Partially Shipped",
+      "shipped": "Shipped",
+      "partially_delivered": "Partially Delivered",
+      "delivered": "Delivered",
+      "canceled": "Canceled",
+      "requires_action": "Action Required",
+      "not_paid": "Not Paid",
+      "awaiting": "Awaiting Payment",
+      "authorized": "Authorized",
+      "partially_authorized": "Partially Authorized",
+      "captured": "Paid",
+      "partially_captured": "Partially Paid",
+      "refunded": "Refunded",
+      "partially_refunded": "Partially Refunded"
+    },
+    "summary": {
+      "title": "Order Summary",
+      "subtotal": "Subtotal",
+      "discount": "Discount",
+      "giftCard": "Gift Card Credit",
+      "shipping": "Shipping",
+      "tax": "Tax",
+      "total": "Total"
+    },
+    "shipping": {
+      "title": "Shipping Information",
+      "address": "Delivery Address",
+      "postalCode": "Postal code:",
+      "country": "Country:",
+      "contact": "Contact Information",
+      "phone": "Phone:",
+      "email": "Email:",
+      "method": "Delivery Method",
+      "cost": "Cost:",
+      "notProvided": "Not provided"
+    },
+    "payment": {
+      "title": "Payment Information",
+      "notAvailable": "No payment information is available for this order.",
+      "method": "Payment Method",
+      "details": "Payment Details",
+      "manual": "Manual Payment",
+      "paidAt": "Paid on {date}",
+      "notProvided": "Not provided"
+    },
+    "help": {
+      "title": "Need Help With Your Order?",
+      "description": "Contact our support team for order tracking, shipping information, or return requests.",
+      "contact": "Contact Support",
+      "orders": "My Orders"
+    },
+    "item": {
+      "quantityUnit": "pcs"
+    }
+  },
+  "sideMenu": {
+    "menu": "Menu",
+    "closeMenu": "Close menu",
+    "brandDescription": "Online store for digital products",
+    "home": "Home",
+    "store": "Shop",
+    "giftCards": "Gift Cards",
+    "digitalProducts": "Digital Products",
+    "account": "Account",
+    "cart": "Shopping Cart"
+  },
+  "accountPages": {
+    "metadata": {
+      "overview": {
+        "title": "Account | Jahan Emrooz",
+        "description": "View an overview of your account activity and information."
+      },
+      "profile": {
+        "title": "Profile | Jahan Emrooz",
+        "description": "View and edit your profile information."
+      },
+      "addresses": {
+        "title": "Addresses | Jahan Emrooz",
+        "description": "View and manage your shipping addresses."
+      },
+      "orders": {
+        "title": "Orders | Jahan Emrooz",
+        "description": "View your previous orders and their current status."
+      },
+      "login": {
+        "title": "Sign In | Jahan Emrooz",
+        "description": "Sign in to your Jahan Emrooz account."
+      },
+      "verifyAccount": {
+        "title": "Verify Your Email | Jahan Emrooz",
+        "description": "Verify your email address to complete your registration."
+      }
+    },
+    "profile": {
+      "title": "Profile",
+      "description": "View and update your profile information, including your name, email, and phone number. You can also manage your billing address and password."
+    },
+    "addresses": {
+      "title": "Shipping Addresses",
+      "description": "View and update your shipping addresses. You can add as many addresses as needed and use them during checkout."
+    },
+    "orders": {
+      "title": "Orders",
+      "description": "View your previous orders and their status. When available, you can also request returns or exchanges."
+    },
+    "verifyAccount": {
+      "loading": "Verifying your email..."
+    }
+  },
+  "accountNavigation": {
+    "title": "Account",
+    "backToAccount": "Back to Account",
+    "hello": "Hello {name}",
+    "overview": "Overview",
+    "profile": "Profile",
+    "addresses": "Addresses",
+    "orders": "Orders",
+    "logout": "Log out"
+  },
+  "accountOverview": {
+    "hello": "Hello {name}",
+    "signedInAs": "Signed in as:",
+    "profile": "Profile",
+    "completed": "Completed",
+    "addresses": "Addresses",
+    "saved": "Saved",
+    "recentOrders": "Recent Orders",
+    "datePlaced": "Date Placed",
+    "orderNumber": "Order Number",
+    "totalAmount": "Total Amount",
+    "goToOrder": "Go to order #{number}",
+    "noRecentOrders": "No recent orders"
+  },
+  "verifyAccount": {
+    "title": "Email Verification",
+    "verifying": "Verifying your email...",
+    "success": "Your email has been verified. You can now sign in to your account.",
+    "error": "This verification link is invalid or has expired. Sign in to receive a new verification email.",
+    "goToSignIn": "Go to Sign In"
+  },
+  "addressForm": {
+    "newAddress": "New Address",
+    "addAddress": "Add Address",
+    "editAddress": "Edit Address",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "company": "Company",
+    "address": "Address",
+    "addressExtra": "Apartment, suite, etc.",
+    "postalCode": "Postal Code",
+    "city": "City",
+    "province": "Province / State",
+    "phone": "Phone",
+    "edit": "Edit",
+    "remove": "Remove",
+    "cancel": "Cancel",
+    "save": "Save"
+  }
+}

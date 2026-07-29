@@ -1,6 +1,7 @@
 "use client"
 
 import { Radio, RadioGroup } from "@headlessui/react"
+import { useI18n } from "@i18n/components/i18n-provider"
 import { setShippingMethod } from "@lib/data/cart"
 import { calculatePriceForShippingOption } from "@lib/data/fulfillment"
 import { convertToLocale } from "@lib/util/money"
@@ -31,7 +32,10 @@ type ShippingOptionWithLocation = HttpTypes.StoreCartShippingOption & {
   }
 }
 
-function formatAddress(address?: HttpTypes.StoreCartAddress) {
+function formatAddress(
+  address: HttpTypes.StoreCartAddress | undefined,
+  separator: string,
+) {
   if (!address) {
     return ""
   }
@@ -44,10 +48,14 @@ function formatAddress(address?: HttpTypes.StoreCartAddress) {
     address.postal_code,
   ]
     .filter(Boolean)
-    .join("، ")
+    .join(separator)
 }
 
 const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
+  const { locale, dictionary } = useI18n()
+  const numberLocale = locale === "fa" ? "fa-IR" : "en-US"
+  const addressSeparator = locale === "fa" ? "، " : ", "
+
   const [isLoading, setIsLoading] = useState(false)
   const [isLoadingPrices, setIsLoadingPrices] = useState(true)
   const [showPickupOptions, setShowPickupOptions] = useState(PICKUP_OPTION_OFF)
@@ -98,20 +106,17 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
     ).then((results) => {
       const pricesMap: Record<string, number> = {}
 
-      results
-        .filter(
-          (
-            result,
-          ): result is PromiseFulfilledResult<{
-            id?: string
-            amount?: number
-          }> => result.status === "fulfilled",
-        )
-        .forEach((result) => {
-          if (result.value?.id) {
-            pricesMap[result.value.id] = result.value.amount ?? 0
-          }
-        })
+      results.forEach((result) => {
+        if (result.status !== "fulfilled") {
+          return
+        }
+
+        const shippingOption = result.value
+
+        if (shippingOption?.id) {
+          pricesMap[shippingOption.id] = shippingOption.amount ?? 0
+        }
+      })
 
       setCalculatedPricesMap(pricesMap)
       setIsLoadingPrices(false)
@@ -155,7 +160,9 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
       .catch((err) => {
         setShippingMethodId(previousId)
         setError(
-          err instanceof Error ? err.message : "انتخاب روش ارسال انجام نشد.",
+          err instanceof Error
+            ? err.message
+            : dictionary.checkout.shipping.error,
         )
       })
       .finally(() => {
@@ -166,7 +173,7 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
   const selectedMethod = cart.shipping_methods?.at(-1)
 
   return (
-    <section dir="rtl">
+    <section>
       <div className="mb-6 flex items-start justify-between gap-4">
         <div>
           <div className="flex items-center gap-3">
@@ -181,7 +188,11 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
                 },
               )}
             >
-              {!isOpen && selectedMethod ? <CheckCircleSolid /> : "۲"}
+              {!isOpen && selectedMethod ? (
+                <CheckCircleSolid />
+              ) : (
+                (2).toLocaleString(numberLocale)
+              )}
             </span>
 
             <h2
@@ -190,12 +201,12 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
                 selectedMethod || isOpen ? "text-black" : "text-black/40",
               )}
             >
-              روش ارسال
+              {dictionary.checkout.shipping.title}
             </h2>
           </div>
 
-          <p className="mr-12 mt-2 text-sm leading-7 text-black/50">
-            شیوه مناسب برای دریافت سفارش را انتخاب کنید.
+          <p className="ms-12 mt-2 text-sm leading-7 text-black/50">
+            {dictionary.checkout.shipping.description}
           </p>
         </div>
 
@@ -206,7 +217,7 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
             className="shrink-0 text-sm font-semibold text-black hover:text-black/70"
             data-testid="edit-delivery-button"
           >
-            تغییر روش ارسال
+            {dictionary.checkout.shipping.edit}
           </button>
         )}
       </div>
@@ -243,16 +254,16 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
 
                     <div>
                       <p className="font-bold text-black">
-                        تحویل حضوری از فروشگاه
+                        {dictionary.checkout.shipping.pickup}
                       </p>
                       <p className="mt-1 text-xs text-black/50">
-                        سفارش خود را از محل فروشگاه دریافت کنید.
+                        {dictionary.checkout.shipping.pickupDescription}
                       </p>
                     </div>
                   </div>
 
                   <span className="text-sm font-semibold text-emerald-600">
-                    رایگان
+                    {dictionary.checkout.shipping.free}
                   </span>
                 </Radio>
               </RadioGroup>
@@ -298,7 +309,7 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
                           <p className="font-bold text-black">{option.name}</p>
 
                           <p className="mt-1 text-xs text-black/50">
-                            ارسال سفارش به نشانی ثبت‌شده
+                            {dictionary.checkout.shipping.deliveryDescription}
                           </p>
                         </div>
                       </div>
@@ -317,7 +328,7 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
                         ) : isLoadingPrices ? (
                           <Loader />
                         ) : (
-                          "نامشخص"
+                          dictionary.checkout.shipping.unknown
                         )}
                       </span>
                     </Radio>
@@ -329,7 +340,9 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
 
           {showPickupOptions === PICKUP_OPTION_ON && (
             <div className="mt-6">
-              <h3 className="mb-3 font-bold text-black">انتخاب شعبه</h3>
+              <h3 className="mb-3 font-bold text-black">
+                {dictionary.checkout.shipping.selectLocation}
+              </h3>
 
               <RadioGroup
                 value={shippingMethodId}
@@ -370,7 +383,7 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
                             </p>
 
                             <p className="mt-1 text-xs leading-6 text-black/50">
-                              {formatAddress(address)}
+                              {formatAddress(address, addressSeparator)}
                             </p>
                           </div>
                         </div>
@@ -401,13 +414,17 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
             className="mt-7 flex h-12 w-full items-center justify-center rounded-full bg-black px-7 text-base font-bold text-white transition hover:bg-black/80 disabled:cursor-not-allowed disabled:bg-black/20 small:w-auto"
             data-testid="submit-delivery-option-button"
           >
-            {isLoading ? "در حال ثبت..." : "ثبت روش ارسال و ادامه"}
+            {isLoading
+              ? dictionary.checkout.shipping.submitting
+              : dictionary.checkout.shipping.submit}
           </button>
         </>
       ) : (
         selectedMethod && (
           <div className="rounded-2xl border border-black/10 bg-[#f0f0f0] p-5">
-            <p className="text-xs text-black/40">روش انتخاب‌شده</p>
+            <p className="text-xs text-black/40">
+              {dictionary.checkout.shipping.selected}
+            </p>
 
             <div className="mt-2 flex items-center justify-between gap-4">
               <p className="font-bold text-black">{selectedMethod.name}</p>

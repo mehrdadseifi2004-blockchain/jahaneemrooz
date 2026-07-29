@@ -1,37 +1,18 @@
-const reviews = [
-  {
-    id: 1,
-    name: "علی رضایی",
-    content:
-      "تجربه خرید خیلی خوبی داشتم. محصول دقیقاً مطابق توضیحات بود و روند سفارش هم سریع و ساده انجام شد.",
-  },
-  {
-    id: 2,
-    name: "سارا محمدی",
-    content:
-      "تنوع محصولات و توضیحات دقیق هر کالا واقعاً کمک‌کننده بود. بسته‌بندی و پیگیری سفارش هم حرفه‌ای انجام شد.",
-  },
-  {
-    id: 3,
-    name: "امیرحسین کریمی",
-    content:
-      "برای خرید تجهیزات گیمینگ از جهان امروز استفاده کردم و از کیفیت محصول و پشتیبانی کاملاً راضی بودم.",
-  },
-  {
-    id: 4,
-    name: "نگار احمدی",
-    content:
-      "محصول دیجیتال را خیلی سریع دریافت کردم. فرآیند خرید شفاف بود و همه‌چیز بدون دردسر انجام شد.",
-  },
-]
+import { Dictionary } from "@i18n/get-dictionary"
 
-const CustomerReviews = () => {
+type CustomerReviewsProps = {
+  dictionary: Dictionary
+}
+
+const CustomerReviews = ({ dictionary }: CustomerReviewsProps) => {
+  const reviews = dictionary.home.reviews.items
+
   return (
     <section className="overflow-hidden bg-white py-[50px] small:py-20">
       <div className="content-container">
         <div className="mb-8 flex items-end justify-between gap-4 small:mb-10">
           <h2 className="max-w-3xl text-[32px] font-black leading-[1.1] tracking-[-0.03em] text-black small:text-5xl">
-            مشتریان راضی ما
+            {dictionary.home.reviews.title}
           </h2>
 
           <div
@@ -62,12 +43,12 @@ const CustomerReviews = () => {
             {reviews.map((review) => (
               <article
                 key={review.id}
-                className="flex min-h-[230px] w-[320px] shrink-0 flex-col items-start rounded-[20px] border border-black/10 bg-white p-6 text-right small:w-[400px] small:px-8 small:py-7"
+                className="flex min-h-[230px] w-[320px] shrink-0 flex-col items-start rounded-[20px] border border-black/10 bg-white p-6 text-start small:w-[400px] small:px-8 small:py-7"
               >
                 <div
                   dir="ltr"
                   className="mb-3 flex items-center gap-1 text-[22px] text-[#ffc633] small:mb-4"
-                  aria-label="امتیاز ۵ از ۵"
+                  aria-label={dictionary.home.reviews.ratingLabel}
                 >
                   <span>★</span>
                   <span>★</span>
@@ -83,8 +64,8 @@ const CustomerReviews = () => {
 
                   <span
                     className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#01ab31] text-xs font-bold text-white small:h-6 small:w-6"
-                    aria-label="خریدار تأییدشده"
-                    title="خریدار تأییدشده"
+                    aria-label={dictionary.home.reviews.verifiedBuyer}
+                    title={dictionary.home.reviews.verifiedBuyer}
                   >
                     ✓
                   </span>
