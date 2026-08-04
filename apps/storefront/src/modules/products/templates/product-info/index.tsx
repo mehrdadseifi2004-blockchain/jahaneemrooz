@@ -30,15 +30,15 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
         {category && (
           <LocalizedClientLink
             href={`/categories/${category.handle}`}
-            className="text-sm text-black/60 transition hover:text-black"
+            className="text-sm text-slate-400 transition hover:text-[#ff7a1a]"
           >
             {category.name}
           </LocalizedClientLink>
         )}
 
-        {category && <span className="text-black/30">/</span>}
+        {category && <span className="text-white/20">/</span>}
 
-        <span className="text-sm text-black/60">
+        <span className="rounded-full border border-[#ff5a00]/25 bg-[#ff5a00]/10 px-3 py-1 text-sm text-[#ff7a1a]">
           {isDigital
             ? dictionary.product.info.digital
             : dictionary.product.info.physical}
@@ -46,7 +46,7 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
       </div>
 
       <h1
-        className="text-3xl font-black leading-[1.2] tracking-[-0.03em] text-black small:text-[40px] small:leading-[1.15]"
+        className="text-3xl font-black leading-[1.2] tracking-[-0.03em] text-white small:text-[40px] small:leading-[1.15]"
         data-testid="product-title"
       >
         {product.title}
@@ -64,21 +64,21 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
           <span>★</span>
 
           <span className="relative inline-block">
-            <span className="text-black/10">★</span>
+            <span className="text-white/10">★</span>
             <span className="absolute inset-0 w-1/2 overflow-hidden text-[#ffc633]">
               ★
             </span>
           </span>
         </div>
 
-        <span className="text-sm text-black">
-          4.5<span className="text-black/60">/5</span>
+        <span className="text-sm text-slate-200">
+          4.5<span className="text-slate-500">/5</span>
         </span>
       </div>
 
       {(product.description || product.subtitle) && (
         <p
-          className="mt-5 whitespace-pre-line text-sm leading-8 text-black/60 small:text-base"
+          className="mt-5 whitespace-pre-line text-sm leading-8 text-slate-400 small:text-base"
           data-testid="product-description"
         >
           {product.description || product.subtitle}

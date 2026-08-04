@@ -25,7 +25,7 @@ const ImageGallery = ({ images, title }: ImageGalleryProps) => {
 
   if (!images?.length) {
     return (
-      <div className="flex aspect-square w-full items-center justify-center rounded-[20px] bg-[#f0eeed] px-6 text-center text-sm text-black/40">
+      <div className="flex aspect-square w-full items-center justify-center rounded-[24px] border border-white/10 bg-[#111923] px-6 text-center text-sm text-slate-500">
         {gallery.noImage}
       </div>
     )
@@ -37,7 +37,7 @@ const ImageGallery = ({ images, title }: ImageGalleryProps) => {
   return (
     <div className="flex flex-col-reverse gap-3.5 large:flex-row">
       {/* Thumbnails */}
-      <div className="flex gap-3 overflow-x-auto pb-1 large:w-[152px] large:shrink-0 large:flex-col large:overflow-visible">
+      <div className="flex gap-3 overflow-x-auto pb-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden large:w-[152px] large:shrink-0 large:flex-col large:overflow-visible">
         {images.map((image, index) => {
           const isSelected = image.id === selectedImage.id
 
@@ -50,10 +50,10 @@ const ImageGallery = ({ images, title }: ImageGalleryProps) => {
                 "{number}",
                 String(index + 1),
               )}
-              className={`relative aspect-square w-[90px] shrink-0 overflow-hidden rounded-[13px] bg-[#f0eeed] transition large:w-full large:rounded-[20px] ${
+              className={`relative aspect-square w-[90px] shrink-0 overflow-hidden rounded-[13px] border bg-white transition large:w-full large:rounded-[20px] ${
                 isSelected
-                  ? "ring-2 ring-black"
-                  : "ring-1 ring-transparent hover:ring-black/20"
+                  ? "border-[#ff5a00] ring-2 ring-[#ff5a00]/25"
+                  : "border-white/10 hover:border-[#ff5a00]/50"
               }`}
             >
               {image.url && (
@@ -73,7 +73,7 @@ const ImageGallery = ({ images, title }: ImageGalleryProps) => {
       </div>
 
       {/* Main image */}
-      <div className="relative aspect-square min-w-0 flex-1 overflow-hidden rounded-[20px] bg-[#f0eeed]">
+      <div className="relative aspect-square min-w-0 flex-1 overflow-hidden rounded-[28px] border border-white/10 bg-white shadow-[0_25px_70px_rgba(0,0,0,0.3)]">
         {selectedImage.url && (
           <Image
             key={selectedImage.id}

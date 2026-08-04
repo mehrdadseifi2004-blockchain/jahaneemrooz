@@ -33,16 +33,16 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   }
 
   return (
-    <main className="min-h-screen bg-white pb-20">
+    <main className="min-h-screen bg-[#070b10] pb-20 text-white">
       <div className="content-container" data-testid="product-container">
-        <div className="border-t border-black/10 pt-5 small:pt-6">
+        <div className="border-t border-white/10 pt-5 small:pt-6">
           <nav
             aria-label={dictionary.product.breadcrumb.ariaLabel}
-            className="mb-6 flex flex-wrap items-center gap-2 text-sm text-black/60"
+            className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500"
           >
             <LocalizedClientLink
               href="/"
-              className="transition hover:text-black"
+              className="transition hover:text-[#ff7a1a]"
             >
               {dictionary.product.breadcrumb.home}
             </LocalizedClientLink>
@@ -54,7 +54,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
             <LocalizedClientLink
               href="/store"
-              className="transition hover:text-black"
+              className="transition hover:text-[#ff7a1a]"
             >
               {dictionary.product.breadcrumb.store}
             </LocalizedClientLink>
@@ -64,7 +64,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
               <span className="hidden rtl:inline">←</span>
             </span>
 
-            <span className="line-clamp-1 text-black">{product.title}</span>
+            <span className="line-clamp-1 text-white">{product.title}</span>
           </nav>
 
           <section className="grid items-start gap-8 medium:grid-cols-2 medium:gap-10">
@@ -75,7 +75,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
             <div className="min-w-0">
               <ProductInfo product={product} />
 
-              <div className="mt-5 border-t border-black/10 pt-5">
+              <div className="mt-5 border-t border-white/10 pt-5">
                 <Suspense
                   fallback={
                     <ProductActions
@@ -98,7 +98,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
       </div>
 
       <section
-        className="mt-4 border-t border-black/10 bg-white pt-[50px] small:mt-8 small:pt-20"
+        className="mt-4 border-t border-white/10 bg-[#070b10] pt-[50px] small:mt-8 small:pt-20"
         data-testid="related-products-container"
       >
         <div className="content-container">
