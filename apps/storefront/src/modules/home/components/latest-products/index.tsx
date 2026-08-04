@@ -29,9 +29,9 @@ export default async function LatestProducts({
   }
 
   return (
-    <section className="bg-white py-[50px] small:py-[72px]">
+    <section className="border-t border-white/5 bg-[#070b10] py-[50px] small:py-[72px]">
       <div className="content-container text-center">
-        <h2 className="mb-8 text-[32px] font-black leading-tight tracking-[-0.03em] text-black small:mb-14 small:text-5xl">
+        <h2 className="mb-8 text-[32px] font-black leading-tight tracking-[-0.03em] text-white small:mb-14 small:text-5xl">
           {dictionary.home.latestProducts.title}
         </h2>
 
@@ -46,7 +46,7 @@ export default async function LatestProducts({
         <div className="mt-9 flex justify-center">
           <LocalizedClientLink
             href="/store"
-            className="inline-flex h-[52px] w-full items-center justify-center rounded-full border border-black/10 px-12 text-sm font-medium text-black transition hover:bg-black hover:text-white small:w-[218px] small:text-base"
+            className="inline-flex h-[52px] w-full items-center justify-center rounded-full border border-[#ff5a00]/50 bg-[#ff5a00]/10 px-12 text-sm font-bold text-[#ff7a1a] transition hover:-translate-y-0.5 hover:bg-[#ff5a00] hover:text-white small:w-[218px] small:text-base"
           >
             {dictionary.home.latestProducts.viewAll}
           </LocalizedClientLink>

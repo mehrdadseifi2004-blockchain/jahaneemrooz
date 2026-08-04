@@ -2,28 +2,72 @@ import { Dictionary } from "@i18n/get-dictionary"
 import { listCategories } from "@lib/data/categories"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 
-const categoryCards = [
+const categoryLayouts = [
   {
-    className:
-      "medium:col-span-2 bg-[radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.95),transparent_30%),linear-gradient(135deg,#e8e8e8,#f7f7f7)]",
-    decoration: "🎧",
+    className: "medium:col-span-2",
+    glowPosition: "start-0 top-0",
   },
   {
-    className:
-      "medium:col-span-3 bg-[radial-gradient(circle_at_80%_20%,rgba(255,255,255,0.95),transparent_30%),linear-gradient(135deg,#ececec,#fafafa)]",
-    decoration: "🎮",
+    className: "medium:col-span-3",
+    glowPosition: "end-0 top-0",
   },
   {
-    className:
-      "medium:col-span-3 bg-[radial-gradient(circle_at_20%_80%,rgba(255,255,255,0.95),transparent_30%),linear-gradient(135deg,#ededed,#fafafa)]",
-    decoration: "💳",
+    className: "medium:col-span-3",
+    glowPosition: "start-0 bottom-0",
   },
   {
-    className:
-      "medium:col-span-2 bg-[radial-gradient(circle_at_80%_80%,rgba(255,255,255,0.95),transparent_30%),linear-gradient(135deg,#e7e7e7,#f7f7f7)]",
-    decoration: "💾",
+    className: "medium:col-span-2",
+    glowPosition: "end-0 bottom-0",
   },
 ]
+
+const getCategoryDecoration = (name: string, handle?: string) => {
+  const value = `${name} ${handle ?? ""}`.toLowerCase()
+
+  if (
+    value.includes("فلش") ||
+    value.includes("ذخیره") ||
+    value.includes("storage") ||
+    value.includes("flash") ||
+    value.includes("hard")
+  ) {
+    return "💾"
+  }
+
+  if (
+    value.includes("بازی") ||
+    value.includes("گیم") ||
+    value.includes("game") ||
+    value.includes("gaming")
+  ) {
+    return "🎮"
+  }
+
+  if (
+    value.includes("گیفت") ||
+    value.includes("کارت") ||
+    value.includes("gift") ||
+    value.includes("card")
+  ) {
+    return "💳"
+  }
+
+  if (
+    value.includes("هدفون") ||
+    value.includes("هندزفری") ||
+    value.includes("headphone") ||
+    value.includes("headset") ||
+    value.includes("earphone")
+  ) {
+    return "🎧"
+  }
+
+  if (value.includes("لوازم جانبی") || value.includes("accessor")) {
+    return "🖱️"
+  }
+
+  return "💻"
+}
 
 type CategoryGridProps = {
   dictionary: Dictionary
@@ -41,51 +85,93 @@ export default async function CategoryGrid({ dictionary }: CategoryGridProps) {
   return (
     <section
       id="categories"
-      className="bg-white px-4 py-[50px] small:py-20 xl:px-0"
+      className="border-t border-white/5 bg-[#070b10] px-4 py-[50px] small:py-20 xl:px-0"
     >
-      <div className="content-container rounded-[40px] bg-[#f0f0f0] px-6 pb-6 pt-10 text-center small:p-10 medium:p-[70px]">
-        <h2 className="mb-8 text-[32px] font-black leading-[1.1] tracking-[-0.03em] text-black small:mb-14 small:text-5xl">
-          {dictionary.home.categories.title}
-        </h2>
+      <div className="content-container">
+        <div className="overflow-hidden rounded-[34px] border border-white/10 bg-[#0c1219] px-5 pb-5 pt-10 text-center shadow-[0_25px_80px_rgba(0,0,0,0.3)] small:p-10 medium:p-14">
+          <div className="mx-auto mb-8 max-w-2xl small:mb-14">
+            <span className="mb-4 inline-flex rounded-full border border-[#ff5a00]/30 bg-[#ff5a00]/10 px-4 py-2 text-xs font-bold text-[#ff7a1a]">
+              JAHAN.EMROOZ
+            </span>
 
-        <div className="grid grid-cols-1 gap-4 medium:grid-cols-5 medium:gap-5">
-          {visibleCategories.map((category, index) => {
-            const card = categoryCards[index]
+            <h2 className="text-[32px] font-black leading-[1.1] tracking-[-0.03em] text-white small:text-5xl">
+              {dictionary.home.categories.title}
+            </h2>
+          </div>
 
-            return (
-              <LocalizedClientLink
-                key={category.id}
-                href={`/categories/${category.handle}`}
-                className={`group relative min-h-[190px] overflow-hidden rounded-[20px] bg-cover bg-center bg-no-repeat text-start medium:min-h-[289px] ${card.className}`}
-              >
-                <div className="absolute inset-0 bg-gradient-to-l from-transparent via-transparent to-white/20 rtl:bg-gradient-to-r" />
+          <div className="grid grid-cols-1 gap-4 medium:grid-cols-5 medium:gap-5">
+            {visibleCategories.map((category, index) => {
+              const card = categoryLayouts[index]
+              const decoration = getCategoryDecoration(
+                category.name,
+                category.handle,
+              )
+              return (
+                <LocalizedClientLink
+                  key={category.id}
+                  href={`/categories/${category.handle}`}
+                  className={`group relative min-h-[210px] overflow-hidden rounded-[24px] border border-white/10 bg-[#111923] text-start shadow-[0_18px_45px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-1 hover:border-[#ff5a00]/60 hover:shadow-[0_25px_65px_rgba(255,90,0,0.12)] medium:min-h-[300px] ${card.className}`}
+                >
+                  <div
+                    aria-hidden="true"
+                    className={`absolute ${card.glowPosition} h-48 w-48 rounded-full bg-[#ff5a00]/15 blur-[75px] transition duration-500 group-hover:bg-[#ff5a00]/25`}
+                  />
 
-                <div className="absolute bottom-4 end-5 text-[82px] opacity-90 transition duration-500 group-hover:scale-110 small:text-[110px] medium:bottom-6 medium:end-8 medium:text-[140px]">
-                  {card.decoration}
-                </div>
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] [background-size:32px_32px]"
+                  />
 
-                <div className="relative z-10 flex h-full flex-col justify-between p-5 medium:p-8">
-                  <div>
-                    <h3 className="text-2xl font-bold text-black medium:text-4xl">
-                      {category.name}
-                    </h3>
-
-                    {category.description && (
-                      <p className="mt-3 max-w-sm text-sm leading-7 text-black/55">
-                        {category.description}
-                      </p>
-                    )}
+                  <div
+                    aria-hidden="true"
+                    className="absolute bottom-3 end-4 text-[88px] opacity-70 grayscale-[20%] drop-shadow-[0_15px_28px_rgba(0,0,0,0.45)] transition duration-500 group-hover:scale-110 group-hover:rotate-3 group-hover:opacity-100 small:text-[115px] medium:bottom-5 medium:end-7 medium:text-[145px]"
+                  >
+                    {decoration}
                   </div>
 
-                  <span className="self-start rounded-full bg-black px-5 py-2.5 text-sm font-medium text-white opacity-0 transition duration-300 group-hover:opacity-100">
-                    {dictionary.home.categories.viewProducts}
-                  </span>
-                </div>
-              </LocalizedClientLink>
-            )
-          })}
+                  <div className="relative z-10 flex h-full flex-col justify-between p-6 medium:p-8">
+                    <div className="max-w-[75%]">
+                      <h3 className="text-2xl font-black leading-tight text-white transition group-hover:text-[#ff7a1a] medium:text-4xl">
+                        {category.name}
+                      </h3>
+
+                      {category.description && (
+                        <p className="mt-3 line-clamp-3 max-w-sm text-sm leading-7 text-slate-400">
+                          {category.description}
+                        </p>
+                      )}
+                    </div>
+
+                    <span className="mt-8 inline-flex w-fit items-center gap-2 rounded-full border border-[#ff5a00]/40 bg-[#ff5a00]/10 px-5 py-2.5 text-sm font-bold text-[#ff7a1a] transition duration-300 group-hover:bg-[#ff5a00] group-hover:text-white">
+                      {dictionary.home.categories.viewProducts}
+
+                      <ArrowIcon />
+                    </span>
+                  </div>
+                </LocalizedClientLink>
+              )
+            })}
+          </div>
         </div>
       </div>
     </section>
   )
 }
+
+const ArrowIcon = () => (
+  <svg
+    width="17"
+    height="17"
+    viewBox="0 0 24 24"
+    fill="none"
+    aria-hidden="true"
+  >
+    <path
+      d="M5 12H19M13 6L19 12L13 18"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+)

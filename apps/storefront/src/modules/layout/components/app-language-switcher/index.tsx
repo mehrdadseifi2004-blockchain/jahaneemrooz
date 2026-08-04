@@ -53,7 +53,7 @@ const AppLanguageSwitcher = () => {
         disabled={isPending}
         aria-label={dictionary.common.language}
         aria-expanded={isOpen}
-        className="inline-flex h-10 min-w-14 items-center justify-center gap-1 rounded-full border border-black/10 bg-white px-3 text-xs font-semibold text-black transition hover:bg-black hover:text-white disabled:cursor-wait disabled:opacity-50"
+        className="inline-flex h-10 min-w-14 items-center justify-center gap-1 rounded-full border border-white/15 bg-[#111923] px-3 text-xs font-semibold text-white transition hover:border-[#ff5a00]/60 hover:bg-[#ff5a00] disabled:cursor-wait disabled:opacity-50"
       >
         <span>{localeConfig[locale].shortLabel}</span>
 
@@ -85,7 +85,7 @@ const AppLanguageSwitcher = () => {
           />
 
           <div
-            className="absolute end-0 top-[calc(100%+8px)] z-50 min-w-36 overflow-hidden rounded-2xl border border-black/10 bg-white p-1.5 text-start shadow-xl"
+            className="absolute end-0 top-[calc(100%+8px)] z-50 min-w-36 overflow-hidden rounded-2xl border border-white/10 bg-[#111923] p-1.5 text-start text-white shadow-2xl shadow-black/40"
             role="menu"
           >
             {supportedLocales.map((optionLocale) => {
@@ -100,8 +100,8 @@ const AppLanguageSwitcher = () => {
                   onClick={() => switchLocale(optionLocale)}
                   className={`flex w-full items-center justify-between gap-4 rounded-xl px-3 py-2.5 text-sm transition ${
                     isActive
-                      ? "bg-black text-white"
-                      : "text-black hover:bg-black/5"
+                      ? "bg-[#ff5a00] text-white"
+                      : "text-slate-200 hover:bg-white/10 hover:text-[#ff7a1a]"
                   }`}
                 >
                   <span>{option.label}</span>

@@ -22,7 +22,7 @@ export default async function ProductPreview({
   return (
     <LocalizedClientLink
       href={`/products/${product.handle}`}
-      className="group flex min-w-0 flex-col items-start"
+      className="group flex h-full min-w-0 flex-col items-start rounded-[24px] border border-white/10 bg-[#111923] p-3 shadow-[0_16px_45px_rgba(0,0,0,0.2)] transition duration-300 hover:-translate-y-1 hover:border-[#ff5a00]/60 hover:shadow-[0_22px_60px_rgba(255,90,0,0.12)] small:p-4"
       data-testid="product-wrapper"
     >
       <Thumbnail
@@ -30,47 +30,49 @@ export default async function ProductPreview({
         images={product.images}
         size="square"
         isFeatured={isFeatured}
-        className="mb-2.5 w-full rounded-[13px] border-0 bg-[#f0eeed] p-0 shadow-none small:mb-4 small:rounded-[20px]"
+        className="mb-3 w-full rounded-[18px] border border-white/5 bg-[#0c1219] p-0 shadow-none small:mb-4 small:rounded-[20px]"
       />
 
-      <h3
-        className="line-clamp-2 min-h-11 w-full text-start text-sm font-bold leading-6 text-black small:min-h-14 small:text-base medium:text-xl"
-        data-testid="product-title"
-      >
-        {product.title}
-      </h3>
+      <div className="flex w-full flex-1 flex-col px-1 pb-1">
+        <h3
+          className="line-clamp-2 min-h-11 w-full text-start text-sm font-bold leading-6 text-white transition group-hover:text-[#ff7a1a] small:min-h-14 small:text-base medium:text-lg"
+          data-testid="product-title"
+        >
+          {product.title}
+        </h3>
 
-      <ProductRating>
-        <div className="flex items-center gap-0.5 text-sm text-[#ffc633] small:text-lg">
-          <span>★</span>
-          <span>★</span>
-          <span>★</span>
-          <span>★</span>
+        <ProductRating>
+          <div className="flex items-center gap-0.5 text-sm text-[#ffb020] small:text-lg">
+            <span>★</span>
+            <span>★</span>
+            <span>★</span>
+            <span>★</span>
 
-          <span className="relative inline-block">
-            <span className="text-black/10">★</span>
+            <span className="relative inline-block">
+              <span className="text-white/10">★</span>
 
-            <span className="absolute inset-0 w-1/2 overflow-hidden text-[#ffc633]">
-              ★
+              <span className="absolute inset-0 w-1/2 overflow-hidden text-[#ffb020]">
+                ★
+              </span>
             </span>
+          </div>
+
+          <span className="text-xs text-slate-300 small:text-sm">
+            4.5
+            <span className="text-slate-500">/5</span>
           </span>
+        </ProductRating>
+
+        <div
+          dir="auto"
+          className="mt-auto flex min-h-10 w-full items-end pt-2 text-start"
+        >
+          {cheapestPrice ? (
+            <PreviewPrice price={cheapestPrice} />
+          ) : (
+            <ProductContactPrice />
+          )}
         </div>
-
-        <span className="text-xs text-black small:text-sm">
-          4.5
-          <span className="text-black/60">/5</span>
-        </span>
-      </ProductRating>
-
-      <div
-        dir="auto"
-        className="mt-1 flex min-h-8 w-full items-center text-start"
-      >
-        {cheapestPrice ? (
-          <PreviewPrice price={cheapestPrice} />
-        ) : (
-          <ProductContactPrice />
-        )}
       </div>
     </LocalizedClientLink>
   )

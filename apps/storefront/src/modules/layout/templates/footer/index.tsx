@@ -39,25 +39,25 @@ export default async function Footer({ dictionary }: FooterProps) {
       .slice(0, 5) ?? []
 
   return (
-    <footer className="mt-10 text-black">
+    <footer className="mt-0 bg-[#05080c] text-white">
       <div className="relative">
-        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-[#f0f0f0]" />
+        <div className="absolute inset-x-0 bottom-0 h-1/2 bg-[#05080c]" />
 
         <Newsletter />
       </div>
 
-      <div className="bg-[#f0f0f0] px-4 pb-5 pt-10 small:pt-[50px]">
+      <div className="border-t border-white/10 bg-[#05080c] px-4 pb-6 pt-12 small:pt-16">
         <div className="content-container">
           <nav className="grid gap-10 pb-10 medium:grid-cols-12 medium:gap-8">
             <div className="medium:col-span-4">
               <LocalizedClientLink
                 href="/"
-                className="inline-block text-[28px] font-black tracking-[-0.04em] text-black small:text-[32px]"
+                className="inline-block text-[28px] font-black tracking-[-0.04em] text-white transition hover:text-[#ff5a00] small:text-[32px]"
               >
                 {dictionary.common.brand}
               </LocalizedClientLink>
 
-              <p className="mt-5 max-w-[350px] text-sm leading-7 text-black/60">
+              <p className="mt-5 max-w-[350px] text-sm leading-7 text-slate-400">
                 {dictionary.footer.description}
               </p>
 
@@ -67,7 +67,7 @@ export default async function Footer({ dictionary }: FooterProps) {
                     key={social.label}
                     href={social.href}
                     aria-label={social.label}
-                    className="flex h-8 w-8 items-center justify-center rounded-full border border-black/20 bg-white text-[10px] font-bold text-black transition hover:border-black hover:bg-black hover:text-white"
+                    className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 bg-[#111923] text-[10px] font-bold text-slate-300 transition hover:border-[#ff5a00]/60 hover:bg-[#ff5a00] hover:text-white"
                   >
                     {social.text}
                   </a>
@@ -76,16 +76,16 @@ export default async function Footer({ dictionary }: FooterProps) {
             </div>
 
             <div className="medium:col-span-2">
-              <h3 className="mb-6 text-sm font-semibold uppercase tracking-[0.14em] text-black">
+              <h3 className="mb-6 text-sm font-bold uppercase tracking-[0.14em] text-white">
                 {dictionary.footer.categories}
               </h3>
 
-              <ul className="space-y-4 text-sm text-black/60">
+              <ul className="space-y-4 text-sm text-slate-400">
                 {rootCategories.map((category) => (
                   <li key={category.id}>
                     <LocalizedClientLink
                       href={`/categories/${category.handle}`}
-                      className="transition hover:text-black"
+                      className="transition hover:text-[#ff7a1a]"
                     >
                       {category.name}
                     </LocalizedClientLink>
@@ -95,15 +95,15 @@ export default async function Footer({ dictionary }: FooterProps) {
             </div>
 
             <div className="medium:col-span-2">
-              <h3 className="mb-6 text-sm font-semibold uppercase tracking-[0.14em] text-black">
+              <h3 className="mb-6 text-sm font-bold uppercase tracking-[0.14em] text-white">
                 {dictionary.footer.store}
               </h3>
 
-              <ul className="space-y-4 text-sm text-black/60">
+              <ul className="space-y-4 text-sm text-slate-400">
                 <li>
                   <LocalizedClientLink
                     href="/store"
-                    className="transition hover:text-black"
+                    className="transition hover:text-[#ff7a1a]"
                   >
                     {dictionary.footer.allProducts}
                   </LocalizedClientLink>
@@ -112,7 +112,7 @@ export default async function Footer({ dictionary }: FooterProps) {
                 <li>
                   <LocalizedClientLink
                     href="/store"
-                    className="transition hover:text-black"
+                    className="transition hover:text-[#ff7a1a]"
                   >
                     {dictionary.footer.newProducts}
                   </LocalizedClientLink>
@@ -121,7 +121,7 @@ export default async function Footer({ dictionary }: FooterProps) {
                 <li>
                   <LocalizedClientLink
                     href="/store"
-                    className="transition hover:text-black"
+                    className="transition hover:text-[#ff7a1a]"
                   >
                     {dictionary.footer.bestSelling}
                   </LocalizedClientLink>
@@ -130,7 +130,7 @@ export default async function Footer({ dictionary }: FooterProps) {
                 <li>
                   <LocalizedClientLink
                     href="/cart"
-                    className="transition hover:text-black"
+                    className="transition hover:text-[#ff7a1a]"
                   >
                     {dictionary.footer.cart}
                   </LocalizedClientLink>
@@ -139,15 +139,15 @@ export default async function Footer({ dictionary }: FooterProps) {
             </div>
 
             <div className="medium:col-span-2">
-              <h3 className="mb-6 text-sm font-semibold uppercase tracking-[0.14em] text-black">
+              <h3 className="mb-6 text-sm font-bold uppercase tracking-[0.14em] text-white">
                 {dictionary.footer.account}
               </h3>
 
-              <ul className="space-y-4 text-sm text-black/60">
+              <ul className="space-y-4 text-sm text-slate-400">
                 <li>
                   <LocalizedClientLink
                     href="/account"
-                    className="transition hover:text-black"
+                    className="transition hover:text-[#ff7a1a]"
                   >
                     {dictionary.footer.loginRegister}
                   </LocalizedClientLink>
@@ -156,7 +156,7 @@ export default async function Footer({ dictionary }: FooterProps) {
                 <li>
                   <LocalizedClientLink
                     href="/account/orders"
-                    className="transition hover:text-black"
+                    className="transition hover:text-[#ff7a1a]"
                   >
                     {dictionary.footer.myOrders}
                   </LocalizedClientLink>
@@ -165,7 +165,7 @@ export default async function Footer({ dictionary }: FooterProps) {
                 <li>
                   <LocalizedClientLink
                     href="/account/profile"
-                    className="transition hover:text-black"
+                    className="transition hover:text-[#ff7a1a]"
                   >
                     {dictionary.footer.accountInformation}
                   </LocalizedClientLink>
@@ -174,11 +174,11 @@ export default async function Footer({ dictionary }: FooterProps) {
             </div>
 
             <div className="medium:col-span-2">
-              <h3 className="mb-6 text-sm font-semibold uppercase tracking-[0.14em] text-black">
+              <h3 className="mb-6 text-sm font-bold uppercase tracking-[0.14em] text-white">
                 {dictionary.footer.help}
               </h3>
 
-              <ul className="space-y-4 text-sm text-black/60">
+              <ul className="space-y-4 text-sm text-slate-400">
                 <li>{dictionary.footer.purchaseSupport}</li>
                 <li>{dictionary.footer.digitalDelivery}</li>
                 <li>{dictionary.footer.physicalShipping}</li>
@@ -187,21 +187,21 @@ export default async function Footer({ dictionary }: FooterProps) {
             </div>
           </nav>
 
-          <div className="flex flex-col gap-5 border-t border-black/10 pt-6 text-sm text-black/60 small:flex-row small:items-center small:justify-between">
+          <div className="flex flex-col gap-5 border-t border-white/10 pt-6 text-sm text-slate-500 small:flex-row small:items-center small:justify-between">
             <p>
               © {new Date().getFullYear()} {dictionary.footer.copyright}
             </p>
 
             <div className="flex flex-wrap items-center gap-2">
-              <span className="flex h-8 items-center justify-center rounded-md border border-[#d6dce5] bg-white px-3 text-xs font-bold text-black">
+              <span className="flex h-8 items-center justify-center rounded-full border border-white/10 bg-[#111923] px-3 text-xs font-bold text-slate-300">
                 {dictionary.footer.securePayment}
               </span>
 
-              <span className="flex h-8 items-center justify-center rounded-md border border-[#d6dce5] bg-white px-3 text-xs font-bold text-black">
+              <span className="flex h-8 items-center justify-center rounded-full border border-white/10 bg-[#111923] px-3 text-xs font-bold text-slate-300">
                 {dictionary.footer.ssl}
               </span>
 
-              <span className="flex h-8 items-center justify-center rounded-md border border-[#d6dce5] bg-white px-3 text-xs font-bold text-black">
+              <span className="flex h-8 items-center justify-center rounded-full border border-white/10 bg-[#111923] px-3 text-xs font-bold text-slate-300">
                 {dictionary.footer.support247}
               </span>
             </div>

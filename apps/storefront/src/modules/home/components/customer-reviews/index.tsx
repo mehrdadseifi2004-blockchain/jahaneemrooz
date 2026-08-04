@@ -8,12 +8,18 @@ const CustomerReviews = ({ dictionary }: CustomerReviewsProps) => {
   const reviews = dictionary.home.reviews.items
 
   return (
-    <section className="overflow-hidden bg-white py-[50px] small:py-20">
+    <section className="overflow-hidden border-t border-white/5 bg-[#070b10] py-[50px] text-white small:py-20">
       <div className="content-container">
-        <div className="mb-8 flex items-end justify-between gap-4 small:mb-10">
-          <h2 className="max-w-3xl text-[32px] font-black leading-[1.1] tracking-[-0.03em] text-black small:text-5xl">
-            {dictionary.home.reviews.title}
-          </h2>
+        <div className="mb-8 flex items-end justify-between gap-4 small:mb-12">
+          <div>
+            <span className="mb-4 inline-flex rounded-full border border-[#ff5a00]/30 bg-[#ff5a00]/10 px-4 py-2 text-xs font-bold text-[#ff7a1a]">
+              JAHAN.EMROOZ
+            </span>
+
+            <h2 className="max-w-3xl text-[32px] font-black leading-[1.1] tracking-[-0.03em] text-white small:text-5xl">
+              {dictionary.home.reviews.title}
+            </h2>
+          </div>
 
           <div
             dir="ltr"
@@ -22,7 +28,7 @@ const CustomerReviews = ({ dictionary }: CustomerReviewsProps) => {
           >
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full text-2xl text-black transition hover:bg-black/5"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-[#111923] text-xl text-white transition hover:border-[#ff5a00]/50 hover:bg-[#ff5a00] hover:text-white"
               tabIndex={-1}
             >
               ←
@@ -30,7 +36,7 @@ const CustomerReviews = ({ dictionary }: CustomerReviewsProps) => {
 
             <button
               type="button"
-              className="inline-flex h-10 w-10 items-center justify-center rounded-full text-2xl text-black transition hover:bg-black/5"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-[#111923] text-xl text-white transition hover:border-[#ff5a00]/50 hover:bg-[#ff5a00] hover:text-white"
               tabIndex={-1}
             >
               →
@@ -38,16 +44,21 @@ const CustomerReviews = ({ dictionary }: CustomerReviewsProps) => {
           </div>
         </div>
 
-        <div className="-mx-4 overflow-x-auto px-4 pb-2">
+        <div className="-mx-4 overflow-x-auto px-4 pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
           <div className="flex min-w-max gap-4 small:gap-5">
             {reviews.map((review) => (
               <article
                 key={review.id}
-                className="flex min-h-[230px] w-[320px] shrink-0 flex-col items-start rounded-[20px] border border-black/10 bg-white p-6 text-start small:w-[400px] small:px-8 small:py-7"
+                className="group relative flex min-h-[250px] w-[320px] shrink-0 flex-col items-start overflow-hidden rounded-[24px] border border-white/10 bg-[#111923] p-6 text-start shadow-[0_18px_50px_rgba(0,0,0,0.2)] transition duration-300 hover:-translate-y-1 hover:border-[#ff5a00]/60 hover:shadow-[0_24px_65px_rgba(255,90,0,0.1)] small:w-[400px] small:px-8 small:py-7"
               >
                 <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute -end-16 -top-16 h-40 w-40 rounded-full bg-[#ff5a00]/10 blur-[55px] transition group-hover:bg-[#ff5a00]/20"
+                />
+
+                <div
                   dir="ltr"
-                  className="mb-3 flex items-center gap-1 text-[22px] text-[#ffc633] small:mb-4"
+                  className="relative mb-4 flex items-center gap-1 text-[22px] text-[#ffb020]"
                   aria-label={dictionary.home.reviews.ratingLabel}
                 >
                   <span>★</span>
@@ -57,21 +68,31 @@ const CustomerReviews = ({ dictionary }: CustomerReviewsProps) => {
                   <span>★</span>
                 </div>
 
-                <div className="mb-2 flex items-center gap-2 small:mb-3">
-                  <strong className="text-base text-black small:text-xl">
-                    {review.name}
-                  </strong>
+                <div className="relative mb-3 flex items-center gap-2">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full border border-[#ff5a00]/25 bg-[#ff5a00]/10 text-base font-black text-[#ff7a1a]">
+                    {review.name.slice(0, 1)}
+                  </div>
 
-                  <span
-                    className="inline-flex h-5 w-5 items-center justify-center rounded-full bg-[#01ab31] text-xs font-bold text-white small:h-6 small:w-6"
-                    aria-label={dictionary.home.reviews.verifiedBuyer}
-                    title={dictionary.home.reviews.verifiedBuyer}
-                  >
-                    ✓
-                  </span>
+                  <div>
+                    <strong className="text-base text-white small:text-lg">
+                      {review.name}
+                    </strong>
+
+                    <div className="mt-1 flex items-center gap-1.5 text-xs text-emerald-400">
+                      <span
+                        className="inline-flex h-4 w-4 items-center justify-center rounded-full bg-emerald-500 text-[10px] font-bold text-white"
+                        aria-label={dictionary.home.reviews.verifiedBuyer}
+                        title={dictionary.home.reviews.verifiedBuyer}
+                      >
+                        ✓
+                      </span>
+
+                      <span>{dictionary.home.reviews.verifiedBuyer}</span>
+                    </div>
+                  </div>
                 </div>
 
-                <p className="text-sm leading-7 text-black/60 small:text-base">
+                <p className="relative mt-2 text-sm leading-7 text-slate-400 small:text-base">
                   {review.content}
                 </p>
               </article>

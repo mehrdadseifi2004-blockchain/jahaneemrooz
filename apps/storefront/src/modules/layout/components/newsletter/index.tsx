@@ -26,25 +26,43 @@ const Newsletter = () => {
       aria-labelledby="newsletter-title"
       className="content-container relative z-10"
     >
-      <div className="grid gap-8 rounded-[20px] bg-black px-6 py-8 text-white small:rounded-[24px] small:px-10 small:py-9 medium:grid-cols-2 medium:items-center medium:px-16">
-        <div>
+      <div className="relative grid gap-8 overflow-hidden rounded-[28px] border border-[#ff5a00]/25 bg-[#111923] px-6 py-8 text-white shadow-[0_25px_80px_rgba(0,0,0,0.35)] small:px-10 small:py-10 medium:grid-cols-2 medium:items-center medium:px-16">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -start-20 -top-20 h-64 w-64 rounded-full bg-[#ff5a00]/15 blur-[90px]"
+        />
+
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -bottom-24 end-0 h-72 w-72 rounded-full bg-[#ff5a00]/10 blur-[100px]"
+        />
+
+        <div className="relative">
+          <span className="mb-4 inline-flex rounded-full border border-[#ff5a00]/30 bg-[#ff5a00]/10 px-4 py-2 text-xs font-bold text-[#ff7a1a]">
+            JAHAN.EMROOZ
+          </span>
+
           <h2
             id="newsletter-title"
-            className="max-w-[560px] text-[30px] font-black leading-[1.15] tracking-[-0.03em] small:text-[40px] medium:text-[46px]"
+            className="max-w-[560px] text-[30px] font-black leading-[1.15] tracking-[-0.03em] text-white small:text-[40px] medium:text-[46px]"
           >
             {dictionary.newsletter.title}
           </h2>
         </div>
 
-        <div className="medium:ms-auto medium:w-full medium:max-w-[390px]">
+        <div className="relative medium:ms-auto medium:w-full medium:max-w-[420px]">
           {isSubmitted ? (
             <div
               role="status"
-              className="flex min-h-[112px] flex-col items-center justify-center rounded-[20px] bg-white px-6 text-center text-sm font-semibold leading-7 text-black"
+              className="flex min-h-[132px] flex-col items-center justify-center rounded-[22px] border border-emerald-400/20 bg-emerald-400/10 px-6 text-center text-sm font-semibold leading-7 text-white"
             >
+              <div className="mb-3 flex h-11 w-11 items-center justify-center rounded-full bg-emerald-500 text-lg font-black text-white">
+                ✓
+              </div>
+
               <strong>{dictionary.newsletter.success}</strong>
 
-              <span className="mt-1 font-normal text-black/60">
+              <span className="mt-1 font-normal text-slate-400">
                 {dictionary.newsletter.successDescription}
               </span>
             </div>
@@ -57,7 +75,7 @@ const Newsletter = () => {
               <div className="relative">
                 <span
                   aria-hidden="true"
-                  className="absolute start-5 top-1/2 -translate-y-1/2 text-black/40"
+                  className="absolute start-5 top-1/2 -translate-y-1/2 text-slate-400"
                 >
                   <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
                     <path
@@ -89,13 +107,13 @@ const Newsletter = () => {
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
                   placeholder={dictionary.newsletter.emailPlaceholder}
-                  className="h-12 w-full rounded-full border-0 bg-white ps-12 pe-5 text-sm text-black outline-none placeholder:text-black/40 focus:ring-4 focus:ring-white/20"
+                  className="h-13 w-full rounded-full border border-white/10 bg-[#0c1219] ps-12 pe-5 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-[#ff5a00]/60 focus:ring-4 focus:ring-[#ff5a00]/10"
                 />
               </div>
 
               <button
                 type="submit"
-                className="h-12 rounded-full bg-white px-6 text-sm font-medium text-black transition hover:bg-white/85"
+                className="h-13 rounded-full bg-[#ff5a00] px-6 text-sm font-bold text-white shadow-[0_12px_35px_rgba(255,90,0,0.22)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#ff7a1a] hover:shadow-[0_16px_42px_rgba(255,90,0,0.3)]"
               >
                 {dictionary.newsletter.submit}
               </button>

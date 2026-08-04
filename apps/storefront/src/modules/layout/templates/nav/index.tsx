@@ -24,14 +24,14 @@ export default function Nav({
 }: NavProps) {
   return (
     <>
-      <div className="bg-black text-white">
+      <div className="border-b border-white/10 bg-[#05080c] text-white">
         <div className="content-container flex min-h-9 items-center justify-center px-4 text-center text-xs">
           <span>
             {dictionary.navigation.announcement}
 
             <LocalizedClientLink
               href="/store"
-              className="ms-1 font-semibold underline underline-offset-2"
+              className="ms-1 font-semibold text-[#ff5a00] underline decoration-[#ff5a00]/70 underline-offset-4 transition hover:text-[#ff7a1a]"
             >
               {dictionary.navigation.viewProducts}
             </LocalizedClientLink>
@@ -39,7 +39,7 @@ export default function Nav({
         </div>
       </div>
 
-      <header className="sticky top-0 z-50 border-b border-black/5 bg-white">
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#080d12] text-white shadow-[0_10px_35px_rgba(0,0,0,0.28)]">
         <div className="content-container">
           <div className="flex h-[78px] items-center justify-between gap-4">
             <div className="flex shrink-0 items-center gap-3">
@@ -55,37 +55,37 @@ export default function Nav({
 
               <LocalizedClientLink
                 href="/"
-                className="text-2xl font-black tracking-[-0.04em] text-black small:text-3xl"
+                className="text-2xl font-black tracking-[-0.04em] text-white transition hover:text-[#ff5a00] small:text-3xl"
               >
                 {dictionary.common.brand}
               </LocalizedClientLink>
             </div>
 
-            <nav className="hidden items-center gap-6 text-sm font-medium text-black medium:flex">
+            <nav className="hidden items-center gap-6 text-sm font-medium text-slate-200 medium:flex">
               <LocalizedClientLink
                 href="/store"
-                className="transition hover:text-black/60"
+                className="transition hover:text-[#ff5a00]"
               >
                 {dictionary.common.store}
               </LocalizedClientLink>
 
               <LocalizedClientLink
                 href="/store"
-                className="transition hover:text-black/60"
+                className="transition hover:text-[#ff5a00]"
               >
                 {dictionary.navigation.specialOffers}
               </LocalizedClientLink>
 
               <LocalizedClientLink
                 href="/store"
-                className="transition hover:text-black/60"
+                className="transition hover:text-[#ff5a00]"
               >
                 {dictionary.navigation.newArrivals}
               </LocalizedClientLink>
 
               <LocalizedClientLink
                 href="/#categories"
-                className="transition hover:text-black/60"
+                className="transition hover:text-[#ff5a00]"
               >
                 {dictionary.navigation.categories}
               </LocalizedClientLink>
@@ -96,7 +96,7 @@ export default function Nav({
                 <button
                   type="submit"
                   aria-label={dictionary.common.search}
-                  className="absolute start-5 top-1/2 -translate-y-1/2 text-black/45"
+                  className="absolute start-5 top-1/2 -translate-y-1/2 text-slate-400 transition hover:text-[#ff5a00]"
                 >
                   <SearchIcon />
                 </button>
@@ -105,7 +105,7 @@ export default function Nav({
                   type="search"
                   name="q"
                   placeholder={dictionary.navigation.searchPlaceholder}
-                  className="h-12 w-full rounded-full border-0 bg-[#f0f0f0] ps-12 pe-5 text-sm text-black outline-none placeholder:text-black/40 focus:ring-2 focus:ring-black/10"
+                  className="h-12 w-full rounded-full border border-white/10 bg-[#111923] ps-12 pe-5 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-[#ff5a00]/60 focus:ring-2 focus:ring-[#ff5a00]/20"
                 />
               </form>
             </div>
@@ -116,7 +116,7 @@ export default function Nav({
               <LocalizedClientLink
                 href="/store"
                 aria-label={dictionary.common.search}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full text-black transition hover:bg-black/5 medium:hidden"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full text-white transition hover:bg-white/10 hover:text-[#ff5a00] medium:hidden"
               >
                 <SearchIcon />
               </LocalizedClientLink>
@@ -126,7 +126,7 @@ export default function Nav({
                   <LocalizedClientLink
                     href="/cart"
                     aria-label={dictionary.common.cart}
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full text-black transition hover:bg-black/5"
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-full text-white transition hover:bg-white/10 hover:text-[#ff5a00]"
                   >
                     <CartIcon />
                   </LocalizedClientLink>
@@ -138,7 +138,7 @@ export default function Nav({
               <LocalizedClientLink
                 href="/account"
                 aria-label={dictionary.common.account}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full text-black transition hover:bg-black/5"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full text-white transition hover:bg-white/10 hover:text-[#ff5a00]"
               >
                 <AccountIcon />
               </LocalizedClientLink>
@@ -150,7 +150,7 @@ export default function Nav({
               <button
                 type="submit"
                 aria-label={dictionary.common.search}
-                className="absolute start-4 top-1/2 -translate-y-1/2 text-black/45"
+                className="absolute start-4 top-1/2 -translate-y-1/2 text-slate-400 transition hover:text-[#ff5a00]"
               >
                 <SearchIcon size={20} />
               </button>
@@ -159,7 +159,7 @@ export default function Nav({
                 type="search"
                 name="q"
                 placeholder={dictionary.navigation.searchPlaceholder}
-                className="h-11 w-full rounded-full border-0 bg-[#f0f0f0] ps-11 pe-4 text-sm text-black outline-none placeholder:text-black/40"
+                className="h-11 w-full rounded-full border border-white/10 bg-[#111923] ps-11 pe-4 text-sm text-white outline-none placeholder:text-slate-500 focus:border-[#ff5a00]/60 focus:ring-2 focus:ring-[#ff5a00]/20"
               />
             </form>
           </div>

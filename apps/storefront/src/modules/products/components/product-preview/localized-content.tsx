@@ -22,7 +22,7 @@ export const ProductContactPrice = () => {
   const { dictionary } = useI18n()
 
   return (
-    <span className="text-base font-bold text-black small:text-xl">
+    <span className="text-base font-bold text-[#ff5a00] small:text-xl">
       {dictionary.store.productCard.contact}
     </span>
   )
