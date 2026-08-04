@@ -25,19 +25,19 @@ export default async function CheckoutLayout({
   const year = String(new Date().getFullYear())
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col bg-white">
-      <header className="sticky top-0 z-50 border-b border-black/10 bg-white/95 backdrop-blur">
+    <div className="relative flex min-h-screen w-full flex-col bg-[#070b10] text-white">
+      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#070b10]/95 backdrop-blur">
         <nav className="content-container flex h-[76px] items-center justify-between gap-4 small:h-[88px]">
           <LocalizedClientLink
             href="/"
-            className="shrink-0 text-2xl font-black tracking-[-0.04em] text-black small:text-[32px]"
+            className="shrink-0 text-2xl font-black tracking-[-0.04em] text-white transition hover:text-[#ff5a00] small:text-[32px]"
             data-testid="store-link"
           >
             JAHAN.EMROOZ
           </LocalizedClientLink>
 
-          <div className="hidden items-center gap-2 text-sm text-black/60 medium:flex">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full bg-[#f0f0f0]">
+          <div className="hidden items-center gap-2 text-sm text-slate-400 medium:flex">
+            <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#ff5a00]/30 bg-[#ff5a00]/10 text-[#ff7a1a]">
               <svg
                 width="18"
                 height="18"
@@ -69,7 +69,7 @@ export default async function CheckoutLayout({
 
           <LocalizedClientLink
             href="/cart"
-            className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full border border-black/10 bg-white px-4 text-xs font-medium text-black transition hover:bg-black hover:text-white small:px-6 small:text-sm"
+            className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full border border-white/10 bg-[#111923] px-4 text-xs font-bold text-slate-300 transition hover:border-[#ff5a00]/50 hover:text-[#ff7a1a] small:px-6 small:text-sm"
             data-testid="back-to-cart-link"
           >
             <span>{dictionary.checkout.layout.backToCart}</span>
@@ -86,8 +86,8 @@ export default async function CheckoutLayout({
         {children}
       </div>
 
-      <footer className="border-t border-black/10 bg-[#f0f0f0] py-6">
-        <div className="content-container flex flex-col gap-3 text-sm text-black/50 small:flex-row small:items-center small:justify-between">
+      <footer className="border-t border-white/10 bg-[#05080c] py-6">
+        <div className="content-container flex flex-col gap-3 text-sm text-slate-500 small:flex-row small:items-center small:justify-between">
           <p>{dictionary.checkout.layout.copyright.replace("{year}", year)}</p>
 
           <div className="flex flex-wrap items-center gap-5">

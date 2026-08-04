@@ -184,7 +184,7 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
                   "bg-black text-white": isOpen,
                   "bg-emerald-50 text-emerald-600":
                     !isOpen && Boolean(selectedMethod),
-                  "bg-[#f0f0f0] text-black/35": !isOpen && !selectedMethod,
+                  "bg-[#0c1219] text-slate-600": !isOpen && !selectedMethod,
                 },
               )}
             >
@@ -198,14 +198,14 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
             <h2
               className={clx(
                 "text-xl font-bold small:text-2xl",
-                selectedMethod || isOpen ? "text-black" : "text-black/40",
+                selectedMethod || isOpen ? "text-white" : "text-slate-600",
               )}
             >
               {dictionary.checkout.shipping.title}
             </h2>
           </div>
 
-          <p className="ms-12 mt-2 text-sm leading-7 text-black/50">
+          <p className="ms-12 mt-2 text-sm leading-7 text-slate-500">
             {dictionary.checkout.shipping.description}
           </p>
         </div>
@@ -243,7 +243,7 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
                   className={clx(
                     "flex cursor-pointer items-center justify-between rounded-2xl border p-5 transition",
                     showPickupOptions === PICKUP_OPTION_ON
-                      ? "border-black bg-[#f0f0f0]"
+                      ? "border-[#ff5a00] bg-[#ff5a00]/10 shadow-[0_10px_30px_rgba(255,90,0,0.08)]"
                       : "border-black/10 hover:border-black/20",
                   )}
                 >
@@ -253,10 +253,10 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
                     />
 
                     <div>
-                      <p className="font-bold text-black">
+                      <p className="font-bold text-white">
                         {dictionary.checkout.shipping.pickup}
                       </p>
-                      <p className="mt-1 text-xs text-black/50">
+                      <p className="mt-1 text-xs text-slate-500">
                         {dictionary.checkout.shipping.pickupDescription}
                       </p>
                     </div>
@@ -295,26 +295,26 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
                       className={clx(
                         "flex items-center justify-between rounded-2xl border p-5 transition",
                         isDisabled
-                          ? "cursor-not-allowed border-black/10 bg-[#f0f0f0] opacity-50"
-                          : "cursor-pointer hover:border-black/20",
+                          ? "cursor-not-allowed border-white/5 bg-white/[0.02] opacity-40"
+                          : "cursor-pointer hover:border-[#ff5a00]/50",
                         option.id === shippingMethodId
-                          ? "border-black bg-[#f0f0f0]"
-                          : "border-black/10",
+                          ? "border-[#ff5a00] bg-[#ff5a00]/10 shadow-[0_10px_30px_rgba(255,90,0,0.08)]"
+                          : "border-white/10 bg-[#0c1219]",
                       )}
                     >
                       <div className="flex items-center gap-3">
                         <MedusaRadio checked={option.id === shippingMethodId} />
 
                         <div>
-                          <p className="font-bold text-black">{option.name}</p>
+                          <p className="font-bold text-white">{option.name}</p>
 
-                          <p className="mt-1 text-xs text-black/50">
+                          <p className="mt-1 text-xs text-slate-500">
                             {dictionary.checkout.shipping.deliveryDescription}
                           </p>
                         </div>
                       </div>
 
-                      <span className="text-sm font-bold text-black">
+                      <span className="text-sm font-bold text-[#ff7a1a]">
                         {option.price_type === "flat" ? (
                           convertToLocale({
                             amount: option.amount || 0,
@@ -340,7 +340,7 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
 
           {showPickupOptions === PICKUP_OPTION_ON && (
             <div className="mt-6">
-              <h3 className="mb-3 font-bold text-black">
+              <h3 className="mb-3 font-bold text-white">
                 {dictionary.checkout.shipping.selectLocation}
               </h3>
 
@@ -366,10 +366,10 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
                           "flex items-center justify-between rounded-2xl border p-5 transition",
                           option.insufficient_inventory
                             ? "cursor-not-allowed opacity-50"
-                            : "cursor-pointer hover:border-black/20",
+                            : "cursor-pointer hover:border-[#ff5a00]/50",
                           option.id === shippingMethodId
-                            ? "border-black bg-[#f0f0f0]"
-                            : "border-black/10",
+                            ? "border-[#ff5a00] bg-[#ff5a00]/10 shadow-[0_10px_30px_rgba(255,90,0,0.08)]"
+                            : "border-white/10 bg-[#0c1219]",
                         )}
                       >
                         <div className="flex items-start gap-3">
@@ -378,17 +378,17 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
                           />
 
                           <div>
-                            <p className="font-bold text-black">
+                            <p className="font-bold text-white">
                               {option.name}
                             </p>
 
-                            <p className="mt-1 text-xs leading-6 text-black/50">
+                            <p className="mt-1 text-xs leading-6 text-slate-500">
                               {formatAddress(address, addressSeparator)}
                             </p>
                           </div>
                         </div>
 
-                        <span className="text-sm font-semibold text-black">
+                        <span className="text-sm font-semibold text-[#ff7a1a]">
                           {convertToLocale({
                             amount: option.amount || 0,
                             currency_code: cart.currency_code,
@@ -411,7 +411,7 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
             type="button"
             onClick={handleSubmit}
             disabled={!cart.shipping_methods?.[0] || isLoading}
-            className="mt-7 flex h-12 w-full items-center justify-center rounded-full bg-black px-7 text-base font-bold text-white transition hover:bg-black/80 disabled:cursor-not-allowed disabled:bg-black/20 small:w-auto"
+            className="mt-7 flex h-12 w-full items-center justify-center rounded-full border-0 bg-[#ff5a00] px-7 text-base font-bold text-white shadow-[0_12px_35px_rgba(255,90,0,0.2)] transition hover:bg-[#ff7a1a] disabled:cursor-not-allowed disabled:bg-[#ff5a00]/30 small:w-auto"
             data-testid="submit-delivery-option-button"
           >
             {isLoading
@@ -421,15 +421,15 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
         </>
       ) : (
         selectedMethod && (
-          <div className="rounded-2xl border border-black/10 bg-[#f0f0f0] p-5">
-            <p className="text-xs text-black/40">
+          <div className="rounded-2xl border border-white/10 bg-[#0c1219] p-5">
+            <p className="text-xs text-slate-500">
               {dictionary.checkout.shipping.selected}
             </p>
 
             <div className="mt-2 flex items-center justify-between gap-4">
-              <p className="font-bold text-black">{selectedMethod.name}</p>
+              <p className="font-bold text-white">{selectedMethod.name}</p>
 
-              <p className="text-sm font-semibold text-black/70">
+              <p className="text-sm font-semibold text-[#ff7a1a]">
                 {convertToLocale({
                   amount: selectedMethod.amount || 0,
                   currency_code: cart.currency_code,

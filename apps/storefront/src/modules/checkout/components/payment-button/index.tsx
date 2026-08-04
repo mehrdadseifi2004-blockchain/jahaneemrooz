@@ -45,7 +45,10 @@ const PaymentButton = ({
   }
 
   return (
-    <Button disabled className="h-14 w-full rounded-full">
+    <Button
+      disabled
+      className="h-14 w-full rounded-full !border-0 !bg-[#ff5a00]/30 !text-white"
+    >
       {dictionary.checkout.paymentButton.selectMethod}
     </Button>
   )
@@ -153,7 +156,7 @@ const StripePaymentButton = ({
         onClick={handlePayment}
         size="large"
         isLoading={submitting}
-        className="h-14 w-full rounded-full bg-black text-base font-medium text-white transition hover:bg-black/80"
+        className="h-14 w-full rounded-full !border-0 !bg-[#ff5a00] text-base font-bold !text-white shadow-[0_14px_40px_rgba(255,90,0,0.22)] transition hover:!bg-[#ff7a1a] disabled:!bg-[#ff5a00]/30"
         data-testid={dataTestId}
       >
         {dictionary.checkout.paymentButton.payAndPlace}
@@ -203,7 +206,7 @@ const ManualPaymentButton = ({
         isLoading={submitting}
         onClick={handlePayment}
         size="large"
-        className="h-14 w-full rounded-full bg-black text-base font-medium text-white transition hover:bg-black/80"
+        className="h-14 w-full rounded-full !border-0 !bg-[#ff5a00] text-base font-bold !text-white shadow-[0_14px_40px_rgba(255,90,0,0.22)] transition hover:!bg-[#ff7a1a] disabled:!bg-[#ff5a00]/30"
         data-testid={dataTestId}
       >
         {dictionary.checkout.paymentButton.placeOrder}

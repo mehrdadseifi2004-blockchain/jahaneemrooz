@@ -18,14 +18,14 @@ export type NativeSelectProps = {
 const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
   (
     { placeholder = "Select...", defaultValue, className, children, ...props },
-    ref
+    ref,
   ) => {
     const innerRef = useRef<HTMLSelectElement>(null)
     const [isPlaceholder, setIsPlaceholder] = useState(false)
 
     useImperativeHandle<HTMLSelectElement | null, HTMLSelectElement | null>(
       ref,
-      () => innerRef.current
+      () => innerRef.current,
     )
 
     useEffect(() => {
@@ -42,31 +42,31 @@ const NativeSelect = forwardRef<HTMLSelectElement, NativeSelectProps>(
           onFocus={() => innerRef.current?.focus()}
           onBlur={() => innerRef.current?.blur()}
           className={clx(
-            "relative flex items-center text-base-regular border border-ui-border-base bg-ui-bg-subtle rounded-md hover:bg-ui-bg-field-hover",
+            "relative flex h-12 items-center rounded-xl border border-white/10 bg-[#0c1219] text-sm text-white transition hover:border-white/20 focus-within:border-[#ff5a00]/60 focus-within:ring-4 focus-within:ring-[#ff5a00]/10",
             className,
             {
-              "text-ui-fg-muted": isPlaceholder,
-            }
+              "text-slate-500": isPlaceholder,
+            },
           )}
         >
           <select
             ref={innerRef}
             defaultValue={defaultValue}
             {...props}
-            className="appearance-none flex-1 bg-transparent border-none px-4 py-2.5 transition-colors duration-150 outline-none "
+            className="h-full flex-1 appearance-none border-none bg-transparent px-4 py-2.5 text-white outline-none [&>option]:bg-[#0c1219] [&>option]:text-white"
           >
             <option disabled value="">
               {placeholder}
             </option>
             {children}
           </select>
-          <span className="absolute right-4 inset-y-0 flex items-center pointer-events-none ">
+          <span className="pointer-events-none absolute inset-y-0 end-4 flex items-center text-slate-500">
             <ChevronUpDown />
           </span>
         </div>
       </div>
     )
-  }
+  },
 )
 
 NativeSelect.displayName = "NativeSelect"

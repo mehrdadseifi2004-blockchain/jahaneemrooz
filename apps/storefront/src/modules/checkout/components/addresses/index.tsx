@@ -51,19 +51,19 @@ const Addresses = ({
             <span
               className={`flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold ${
                 isOpen
-                  ? "bg-black text-white"
-                  : "bg-emerald-50 text-emerald-600"
+                  ? "bg-[#ff5a00] text-white"
+                  : "bg-emerald-500/15 text-emerald-400"
               }`}
             >
               {isOpen ? (1).toLocaleString(numberLocale) : <CheckCircleSolid />}
             </span>
 
-            <h2 className="text-xl font-bold text-black small:text-2xl">
+            <h2 className="text-xl font-bold text-white small:text-2xl">
               {dictionary.checkout.address.title}
             </h2>
           </div>
 
-          <p className="ms-12 mt-2 text-sm leading-7 text-black/50">
+          <p className="ms-12 mt-2 text-sm leading-7 text-slate-500">
             {dictionary.checkout.address.description}
           </p>
         </div>
@@ -72,7 +72,7 @@ const Addresses = ({
           <button
             type="button"
             onClick={handleEdit}
-            className="shrink-0 text-sm font-semibold text-black transition hover:text-black/70"
+            className="shrink-0 text-sm font-bold text-[#ff7a1a] transition hover:text-[#ff5a00]"
             data-testid="edit-address-button"
           >
             {dictionary.checkout.address.edit}
@@ -90,8 +90,8 @@ const Addresses = ({
           />
 
           {!sameAsBilling && (
-            <div className="mt-8 border-t border-black/10 pt-8">
-              <h3 className="mb-6 text-lg font-bold text-black">
+            <div className="mt-8 border-t border-white/10 pt-8">
+              <h3 className="mb-6 text-lg font-bold text-white">
                 {dictionary.checkout.address.billingTitle}
               </h3>
 
@@ -99,9 +99,9 @@ const Addresses = ({
             </div>
           )}
 
-          <div className="mt-8 flex flex-col items-start gap-4 border-t border-black/10 pt-6">
+          <div className="mt-8 flex flex-col items-start gap-4 border-t border-white/10 pt-6">
             <SubmitButton
-              className="h-12 w-full rounded-full bg-black px-7 text-base font-bold text-white transition hover:bg-black/80 small:w-auto"
+              className="h-12 w-full rounded-full !border-0 !bg-[#ff5a00] px-7 text-base font-bold !text-white transition hover:!bg-[#ff7a1a] small:w-auto"
               data-testid="submit-address-button"
             >
               {dictionary.checkout.address.submit}
@@ -147,7 +147,7 @@ const Addresses = ({
                 </p>
               </SummaryBox>
 
-              <SummaryBox title="{dictionary.checkout.address.billingTitle}">
+              <SummaryBox title={dictionary.checkout.address.billingTitle}>
                 {sameAsBilling ? (
                   <p>{dictionary.checkout.address.sameBillingSummary}</p>
                 ) : (
@@ -187,10 +187,10 @@ const SummaryBox = ({
   children: React.ReactNode
 }) => {
   return (
-    <div className="rounded-2xl border border-black/10 bg-[#f0f0f0] p-5">
-      <p className="mb-3 text-sm font-bold text-black">{title}</p>
+    <div className="rounded-2xl border border-white/10 bg-[#0c1219] p-5">
+      <p className="mb-3 text-sm font-bold text-white">{title}</p>
 
-      <div className="text-sm leading-7 text-black/50">{children}</div>
+      <div className="text-sm leading-7 text-slate-400">{children}</div>
     </div>
   )
 }

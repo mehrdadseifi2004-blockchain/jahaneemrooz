@@ -29,42 +29,42 @@ const CheckoutSummary = ({ cart }: { cart: HttpTypes.StoreCart }) => {
   )
 
   return (
-    <div className="rounded-[20px] border border-black/10 bg-white p-5 small:p-6">
-      <div className="flex items-start justify-between gap-4 border-b border-black/10 pb-5">
+    <div className="rounded-[24px] border border-white/10 bg-[#111923] p-5 shadow-[0_22px_70px_rgba(0,0,0,0.28)] small:p-6">
+      <div className="flex items-start justify-between gap-4 border-b border-white/10 pb-5">
         <div>
-          <h2 className="text-xl font-bold text-black small:text-2xl">
+          <h2 className="text-xl font-bold text-white small:text-2xl">
             {dictionary.checkout.summary.title}
           </h2>
 
-          <p className="mt-2 text-sm text-black/50">{itemCountText}</p>
+          <p className="mt-2 text-sm text-slate-500">{itemCountText}</p>
         </div>
 
         <LocalizedClientLink
           href="/cart"
-          className="text-sm font-medium text-black/60 underline underline-offset-4 transition hover:text-black"
+          className="text-sm font-bold text-slate-400 underline underline-offset-4 transition hover:text-[#ff7a1a]"
         >
           {dictionary.checkout.summary.edit}
         </LocalizedClientLink>
       </div>
 
-      <div className="max-h-[330px] overflow-y-auto border-b border-black/10 py-3">
+      <div className="max-h-[330px] overflow-y-auto border-b border-white/10 py-3">
         <ItemsPreviewTemplate cart={cart} />
       </div>
 
       <div className="space-y-5 py-6">
         <div className="flex items-center justify-between gap-4">
-          <span className="text-black/60">
+          <span className="text-slate-400">
             {dictionary.checkout.summary.subtotal}
           </span>
 
-          <span className="font-bold text-black">
+          <span className="font-bold text-white">
             {formatPrice(cart.subtotal)}
           </span>
         </div>
 
         {(cart.discount_total || 0) > 0 && (
           <div className="flex items-center justify-between gap-4">
-            <span className="text-black/60">
+            <span className="text-slate-400">
               {dictionary.checkout.summary.discount}
             </span>
 
@@ -75,11 +75,11 @@ const CheckoutSummary = ({ cart }: { cart: HttpTypes.StoreCart }) => {
         )}
 
         <div className="flex items-center justify-between gap-4">
-          <span className="text-black/60">
+          <span className="text-slate-400">
             {dictionary.checkout.summary.shipping}
           </span>
 
-          <span className="text-end font-bold text-black">
+          <span className="text-end font-bold text-white">
             {cart.shipping_total
               ? formatPrice(cart.shipping_total)
               : dictionary.checkout.summary.shippingNotSelected}
@@ -87,34 +87,34 @@ const CheckoutSummary = ({ cart }: { cart: HttpTypes.StoreCart }) => {
         </div>
 
         <div className="flex items-center justify-between gap-4">
-          <span className="text-black/60">
+          <span className="text-slate-400">
             {dictionary.checkout.summary.tax}
           </span>
 
-          <span className="font-bold text-black">
+          <span className="font-bold text-white">
             {formatPrice(cart.tax_total)}
           </span>
         </div>
       </div>
 
-      <div className="flex items-center justify-between gap-4 border-t border-black/10 pt-6">
-        <span className="text-lg text-black">
+      <div className="flex items-center justify-between gap-4 border-t border-white/10 pt-6">
+        <span className="text-lg font-bold text-white">
           {dictionary.checkout.summary.total}
         </span>
 
         <span
-          className="text-xl font-bold text-black small:text-2xl"
+          className="text-xl font-bold text-white small:text-2xl"
           data-testid="checkout-summary-total"
         >
           {formatPrice(cart.total)}
         </span>
       </div>
 
-      <div className="mt-6 rounded-[16px] bg-[#f0f0f0] p-4">
+      <div className="mt-6 rounded-[16px] border border-emerald-500/20 bg-emerald-500/10 p-4">
         <div className="flex items-start gap-3">
           <span aria-hidden="true">🔒</span>
 
-          <p className="text-xs leading-6 text-black/50">
+          <p className="text-xs leading-6 text-emerald-300/80">
             {dictionary.checkout.summary.secureNotice}
           </p>
         </div>

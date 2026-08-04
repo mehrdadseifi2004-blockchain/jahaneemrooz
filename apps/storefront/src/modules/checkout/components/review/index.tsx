@@ -36,7 +36,9 @@ const Review = ({ cart }: { cart: HttpTypes.StoreCart }) => {
           <span
             className={clx(
               "flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold",
-              isOpen ? "bg-black text-white" : "bg-[#f0f0f0] text-black/35",
+              isOpen
+                ? "bg-[#ff5a00] text-white"
+                : "bg-[#0c1219] text-slate-600",
             )}
           >
             {(4).toLocaleString(numberLocale)}
@@ -45,26 +47,26 @@ const Review = ({ cart }: { cart: HttpTypes.StoreCart }) => {
           <h2
             className={clx(
               "text-xl font-bold small:text-2xl",
-              isOpen ? "text-black" : "text-black/40",
+              isOpen ? "text-white" : "text-slate-600",
             )}
           >
             {dictionary.checkout.review.title}
           </h2>
         </div>
 
-        <p className="ms-12 mt-2 text-sm leading-7 text-black/50">
+        <p className="ms-12 mt-2 text-sm leading-7 text-slate-500">
           {dictionary.checkout.review.description}
         </p>
       </div>
 
       {isOpen && previousStepsCompleted && (
         <div>
-          <div className="rounded-2xl border border-black/10 bg-[#f0f0f0] p-5">
-            <p className="font-bold text-black">
+          <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-5">
+            <p className="font-bold text-emerald-400">
               {dictionary.checkout.review.ready}
             </p>
 
-            <p className="mt-2 text-sm leading-7 text-black/60">
+            <p className="mt-2 text-sm leading-7 text-emerald-300/80">
               {dictionary.checkout.review.confirmation}
             </p>
           </div>
@@ -76,12 +78,12 @@ const Review = ({ cart }: { cart: HttpTypes.StoreCart }) => {
       )}
 
       {isOpen && !previousStepsCompleted && (
-        <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
-          <p className="font-bold text-amber-700">
+        <div className="rounded-2xl border border-amber-500/20 bg-amber-500/10 p-5">
+          <p className="font-bold text-amber-400">
             {dictionary.checkout.review.incomplete}
           </p>
 
-          <p className="mt-2 text-sm text-amber-600">
+          <p className="mt-2 text-sm text-amber-300/80">
             {dictionary.checkout.review.incompleteHelp}
           </p>
         </div>

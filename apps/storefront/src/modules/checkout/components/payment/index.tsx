@@ -123,7 +123,7 @@ const Payment = ({
                 {
                   "bg-black text-white": isOpen,
                   "bg-emerald-50 text-emerald-600": !isOpen && paymentReady,
-                  "bg-[#f0f0f0] text-black/35": !isOpen && !paymentReady,
+                  "bg-[#0c1219] text-slate-600": !isOpen && !paymentReady,
                 },
               )}
             >
@@ -144,7 +144,7 @@ const Payment = ({
             </h2>
           </div>
 
-          <p className="ms-12 mt-2 text-sm leading-7 text-black/50">
+          <p className="ms-12 mt-2 text-sm leading-7 text-slate-500">
             {dictionary.checkout.payment.description}
           </p>
         </div>
@@ -202,20 +202,20 @@ const Payment = ({
           )}
 
           {paidByGiftcard && (
-            <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5">
-              <p className="font-bold text-emerald-700">
+            <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-5">
+              <p className="font-bold text-emerald-400">
                 {dictionary.checkout.payment.giftCardPayment}
               </p>
             </div>
           )}
 
           {!availablePaymentMethods?.length && !paidByGiftcard && (
-            <div className="rounded-2xl border border-amber-200 bg-amber-50 p-5">
-              <p className="font-bold text-amber-700">
+            <div className="rounded-2xl border border-amber-500/20 bg-amber-500/10 p-5">
+              <p className="font-bold text-amber-400">
                 {dictionary.checkout.payment.noMethod}
               </p>
 
-              <p className="mt-2 text-sm leading-6 text-amber-600">
+              <p className="mt-2 text-sm leading-6 text-amber-300/80">
                 {dictionary.checkout.payment.noMethodHelp}
               </p>
             </div>
@@ -234,7 +234,7 @@ const Payment = ({
               (!selectedPaymentMethod && !paidByGiftcard) ||
               isLoading
             }
-            className="mt-7 flex h-12 w-full items-center justify-center rounded-full bg-black px-7 text-base font-bold text-white transition hover:bg-black/80 disabled:cursor-not-allowed disabled:bg-black/20 small:w-auto"
+            className="mt-7 flex h-12 w-full items-center justify-center rounded-full border-0 bg-[#ff5a00] px-7 text-base font-bold text-white shadow-[0_12px_35px_rgba(255,90,0,0.2)] transition hover:bg-[#ff7a1a] disabled:cursor-not-allowed disabled:bg-[#ff5a00]/30 small:w-auto"
             data-testid="submit-payment-button"
           >
             {isLoading
@@ -247,13 +247,13 @@ const Payment = ({
       ) : (
         paymentReady &&
         (activeSession || paidByGiftcard) && (
-          <div className="rounded-2xl border border-black/10 bg-[#f0f0f0] p-5">
-            <p className="text-xs text-black/40">
+          <div className="rounded-2xl border border-white/10 bg-[#0c1219] p-5">
+            <p className="text-xs text-slate-500">
               {dictionary.checkout.payment.selected}
             </p>
 
             <div className="mt-3 flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-white text-black/70">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#ff5a00]/25 bg-[#ff5a00]/10 text-[#ff7a1a]">
                 {activeSession &&
                 paymentInfoMap[activeSession.provider_id]?.icon ? (
                   paymentInfoMap[activeSession.provider_id].icon
@@ -263,7 +263,7 @@ const Payment = ({
               </span>
 
               <div>
-                <p className="font-bold text-black">
+                <p className="font-bold text-white">
                   {paidByGiftcard
                     ? dictionary.checkout.payment.giftCard
                     : paymentInfoMap[activeSession?.provider_id || ""]?.title ||
@@ -271,7 +271,7 @@ const Payment = ({
                       dictionary.checkout.payment.gateway}
                 </p>
 
-                <p className="mt-1 text-xs text-black/50">
+                <p className="mt-1 text-xs text-slate-500">
                   {isStripeLike(selectedPaymentMethod) && cardBrand
                     ? cardBrand
                     : dictionary.checkout.payment.detailsLater}

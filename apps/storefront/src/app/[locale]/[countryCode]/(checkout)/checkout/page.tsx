@@ -56,16 +56,16 @@ export default async function Checkout({
   }
 
   return (
-    <main className="min-h-screen bg-white pb-20">
+    <main className="min-h-screen bg-[#070b10] pb-20 text-white">
       <div className="content-container">
         <div className="pt-5 small:pt-6">
           <nav
             aria-label={dictionary.checkout.page.breadcrumbLabel}
-            className="mb-5 flex items-center gap-2 text-sm text-black/60"
+            className="mb-5 flex items-center gap-2 text-sm text-slate-500"
           >
             <LocalizedClientLink
               href="/"
-              className="transition hover:text-black"
+              className="transition hover:text-[#ff7a1a]"
             >
               {dictionary.checkout.page.home}
             </LocalizedClientLink>
@@ -77,7 +77,7 @@ export default async function Checkout({
 
             <LocalizedClientLink
               href="/cart"
-              className="transition hover:text-black"
+              className="transition hover:text-[#ff7a1a]"
             >
               {dictionary.checkout.page.cart}
             </LocalizedClientLink>
@@ -87,17 +87,17 @@ export default async function Checkout({
               <span className="hidden rtl:inline">←</span>
             </span>
 
-            <span className="text-black">
+            <span className="text-white">
               {dictionary.checkout.page.checkout}
             </span>
           </nav>
 
           <div className="mb-7 small:mb-9">
-            <h1 className="text-[32px] font-black leading-tight tracking-[-0.03em] text-black small:text-[40px]">
+            <h1 className="text-[32px] font-black leading-tight tracking-[-0.03em] text-white small:text-[40px]">
               {dictionary.checkout.page.title}
             </h1>
 
-            <p className="mt-3 max-w-2xl text-sm leading-7 text-black/60 small:text-base">
+            <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-400 small:text-base">
               {dictionary.checkout.page.description}
             </p>
           </div>
