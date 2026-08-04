@@ -31,16 +31,16 @@ const StoreTemplate = ({
   const sort = sortBy || "created_at"
 
   return (
-    <main className="min-h-screen bg-white pb-20">
+    <main className="min-h-screen bg-[#070b10] pb-20 text-white">
       <div className="content-container">
-        <div className="border-t border-black/10 pt-5 small:pt-6">
+        <div className="border-t border-white/10 pt-5 small:pt-6">
           <nav
             aria-label={dictionary.store.breadcrumb.ariaLabel}
-            className="mb-6 flex items-center gap-2 text-sm text-black/60"
+            className="mb-6 flex items-center gap-2 text-sm text-slate-500"
           >
             <LocalizedClientLink
               href="/"
-              className="transition hover:text-black"
+              className="transition hover:text-[#ff7a1a]"
             >
               {dictionary.store.breadcrumb.home}
             </LocalizedClientLink>
@@ -50,16 +50,16 @@ const StoreTemplate = ({
               <span className="hidden rtl:inline">←</span>
             </span>
 
-            <span className="text-black">
+            <span className="text-white">
               {dictionary.store.breadcrumb.store}
             </span>
           </nav>
 
           <div className="flex items-start gap-5">
             <aside className="hidden w-[295px] shrink-0 medium:block">
-              <div className="rounded-[20px] border border-black/10 bg-white px-6 py-5">
+              <div className="rounded-[24px] border border-white/10 bg-[#111923] px-6 py-5 shadow-[0_18px_50px_rgba(0,0,0,0.25)]">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-xl font-bold text-black">
+                  <h2 className="text-xl font-bold text-white">
                     {dictionary.store.filters.title}
                   </h2>
 
@@ -68,7 +68,7 @@ const StoreTemplate = ({
                     height="24"
                     viewBox="0 0 24 24"
                     fill="none"
-                    className="text-black/40"
+                    className="text-[#ff5a00]"
                     aria-hidden="true"
                   >
                     <path
@@ -80,7 +80,7 @@ const StoreTemplate = ({
                   </svg>
                 </div>
 
-                <div className="my-5 h-px bg-black/10" />
+                <div className="my-5 h-px bg-white/10" />
 
                 <RefinementList
                   sortBy={sort}
@@ -92,16 +92,16 @@ const StoreTemplate = ({
             <section className="min-w-0 flex-1">
               <div className="mb-6 flex flex-col gap-4 small:flex-row small:items-end small:justify-between">
                 <div>
-                  <h1 className="text-2xl font-bold text-black small:text-[32px]">
+                  <h1 className="text-2xl font-black text-white small:text-[32px]">
                     {dictionary.store.title}
                   </h1>
 
-                  <p className="mt-2 text-sm leading-6 text-black/60">
+                  <p className="mt-2 text-sm leading-6 text-slate-400">
                     {dictionary.store.description}
                   </p>
                 </div>
 
-                <div className="rounded-full bg-[#f0f0f0] px-4 py-2 text-sm text-black/60 medium:hidden">
+                <div className="rounded-full border border-[#ff5a00]/25 bg-[#ff5a00]/10 px-4 py-2 text-sm text-[#ff7a1a] medium:hidden">
                   {dictionary.store.filters.mobileNotice}
                 </div>
               </div>

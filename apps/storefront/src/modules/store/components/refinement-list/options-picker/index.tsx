@@ -59,7 +59,7 @@ const OptionsPicker = ({
   return (
     <div className="flex flex-col gap-y-4">
       <div className="flex items-center justify-between px-1">
-        <span className="txt-compact-small-plus text-ui-fg-subtle">
+        <span className="text-sm font-bold text-white">
           {dictionary.store.filters.options}
         </span>
       </div>
@@ -67,7 +67,7 @@ const OptionsPicker = ({
         type="multiple"
         value={openItems}
         onValueChange={(values) => setOpenItems(values as string[])}
-        className="flex flex-col gap-y-3 pe-6"
+        className="flex flex-col gap-y-3"
       >
         {options.map((option) => {
           const values =
@@ -103,21 +103,21 @@ const OptionsPicker = ({
             <Accordion.Item
               key={option.id}
               value={option.id}
-              className="overflow-hidden"
+              className="overflow-hidden rounded-xl border border-white/5 bg-white/[0.025] px-3"
             >
               <Accordion.Header>
-                <Accordion.Trigger className="flex w-full items-center justify-between py-3 text-start">
+                <Accordion.Trigger className="flex w-full items-center justify-between py-3 text-start text-white">
                   <div className="flex items-center gap-2">
-                    <span className="txt-compact-small-plus text-ui-fg-base">
+                    <span className="text-sm font-semibold text-slate-200">
                       {option.title || dictionary.store.filters.optionFallback}
                     </span>
-                    <span className="txt-compact-small-plus text-ui-fg-muted">
+                    <span className="text-xs text-[#ff7a1a]">
                       ({selectedCount})
                     </span>
                   </div>
                   <span
                     className={clsx(
-                      "flex h-7 w-7 items-center justify-center text-ui-fg-muted transition-transform duration-150",
+                      "flex h-7 w-7 items-center justify-center text-slate-500 transition-transform duration-150",
                       {
                         "rotate-180": isOpen,
                       },
@@ -137,11 +137,11 @@ const OptionsPicker = ({
                         key={value.id}
                         onClick={() => toggleValue(value.id)}
                         className={clsx(
-                          "border-ui-border-base border text-small-regular h-10 rounded-rounded px-3 flex items-center transition-colors duration-150",
+                          "flex h-10 items-center rounded-full border px-3 text-sm transition-colors duration-150",
                           {
-                            "border-ui-border-interactive text-ui-fg-base":
+                            "border-[#ff5a00] bg-[#ff5a00]/15 text-[#ff7a1a]":
                               isSelected,
-                            "text-ui-fg-muted hover:text-ui-fg-base":
+                            "border-white/10 text-slate-400 hover:border-white/25 hover:text-white":
                               !isSelected,
                           },
                         )}

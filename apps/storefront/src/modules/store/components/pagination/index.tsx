@@ -41,13 +41,13 @@ export function Pagination({
         disabled={isCurrent}
         onClick={() => handlePageChange(pageNumber)}
         aria-current={isCurrent ? "page" : undefined}
-        aria-label={`${dictionary.store.pagination.pageOf
+        aria-label={dictionary.store.pagination.pageOf
           .replace("{page}", String(pageNumber))
-          .replace("{totalPages}", String(totalPages))}`}
-        className={`flex h-10 min-w-10 items-center justify-center rounded-lg px-3 text-sm font-medium transition ${
+          .replace("{totalPages}", String(totalPages))}
+        className={`flex h-10 min-w-10 items-center justify-center rounded-xl border px-3 text-sm font-bold transition ${
           isCurrent
-            ? "bg-black/5 text-black"
-            : "text-black/50 hover:bg-black/5 hover:text-black"
+            ? "border-[#ff5a00] bg-[#ff5a00] text-white"
+            : "border-white/10 bg-[#111923] text-slate-400 hover:border-[#ff5a00]/50 hover:text-[#ff7a1a]"
         }`}
       >
         {pageNumber}
@@ -58,7 +58,7 @@ export function Pagination({
   const renderEllipsis = (key: string) => (
     <span
       key={key}
-      className="flex h-10 min-w-8 items-center justify-center text-black/40"
+      className="flex h-10 min-w-8 items-center justify-center text-slate-600"
       aria-hidden="true"
     >
       …
@@ -99,17 +99,20 @@ export function Pagination({
     .replace("{page}", String(page))
     .replace("{totalPages}", String(totalPages))
 
+  const navigationButtonClass =
+    "inline-flex h-10 items-center justify-center rounded-xl border border-white/10 bg-[#111923] px-4 text-sm font-bold text-slate-300 transition hover:border-[#ff5a00]/50 hover:bg-[#ff5a00] hover:text-white disabled:cursor-not-allowed disabled:opacity-35 disabled:hover:border-white/10 disabled:hover:bg-[#111923] disabled:hover:text-slate-300"
+
   return (
     <nav
       aria-label={dictionary.store.pagination.ariaLabel}
-      className="mt-10 flex w-full items-center justify-between border-t border-black/10 pt-5"
+      className="mt-10 flex w-full items-center justify-between border-t border-white/10 pt-5"
       data-testid={dataTestid}
     >
       <button
         type="button"
         disabled={page === 1}
         onClick={() => handlePageChange(page - 1)}
-        className="inline-flex h-10 items-center justify-center rounded-lg border border-black/10 px-4 text-sm font-medium text-black transition hover:bg-black hover:text-white disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-black"
+        className={navigationButtonClass}
       >
         {dictionary.store.pagination.previous}
       </button>
@@ -118,7 +121,7 @@ export function Pagination({
         {renderPageButtons()}
       </div>
 
-      <span className="text-sm text-black/60 small:hidden">
+      <span className="text-sm text-slate-400 small:hidden">
         {mobilePageLabel}
       </span>
 
@@ -126,7 +129,7 @@ export function Pagination({
         type="button"
         disabled={page === totalPages}
         onClick={() => handlePageChange(page + 1)}
-        className="inline-flex h-10 items-center justify-center rounded-lg border border-black/10 px-4 text-sm font-medium text-black transition hover:bg-black hover:text-white disabled:cursor-not-allowed disabled:opacity-40 disabled:hover:bg-transparent disabled:hover:text-black"
+        className={navigationButtonClass}
       >
         {dictionary.store.pagination.next}
       </button>

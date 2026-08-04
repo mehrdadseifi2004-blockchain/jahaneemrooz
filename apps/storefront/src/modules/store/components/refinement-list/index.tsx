@@ -84,7 +84,7 @@ const RefinementList = ({
 
       {!hideOptionsPicker && (
         <>
-          <div className="my-5 h-px bg-black/10" />
+          <div className="my-5 h-px bg-white/10" />
 
           <OptionsPicker
             selectedValueIds={selectedOptionValueIds}
@@ -96,7 +96,7 @@ const RefinementList = ({
       <button
         type="button"
         onClick={clearFilters}
-        className="mt-6 h-12 w-full rounded-full bg-black px-5 text-sm font-medium text-white transition hover:bg-black/80"
+        className="mt-6 h-12 w-full rounded-full border border-[#ff5a00]/50 bg-[#ff5a00]/10 px-5 text-sm font-bold text-[#ff7a1a] transition hover:bg-[#ff5a00] hover:text-white"
       >
         {dictionary.store.filters.clear}
       </button>
