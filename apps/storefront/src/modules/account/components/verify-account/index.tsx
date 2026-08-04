@@ -38,27 +38,27 @@ const VerifyAccount = () => {
 
   return (
     <div
-      className="flex w-full max-w-sm flex-col items-center gap-y-4 text-center"
+      className="mx-auto my-16 flex w-full max-w-[470px] flex-col items-center gap-y-5 rounded-[28px] border border-white/10 bg-[#111923] px-7 py-10 text-center text-white shadow-[0_24px_80px_rgba(0,0,0,0.35)]"
       data-testid="verify-account-page"
     >
-      <h1 className="text-large-semi uppercase">
+      <h1 className="text-3xl font-black tracking-[-0.03em] text-white">
         {dictionary.verifyAccount.title}
       </h1>
 
       {state === "verifying" && (
-        <p className="text-base-regular text-ui-fg-base">
+        <p className="text-sm leading-7 text-slate-400">
           {dictionary.verifyAccount.verifying}
         </p>
       )}
 
       {state === "success" && (
         <>
-          <p className="text-base-regular text-ui-fg-base">
+          <p className="text-sm leading-7 text-slate-400">
             {dictionary.verifyAccount.success}
           </p>
 
           <LocalizedClientLink href="/account">
-            <Button variant="primary">
+            <Button className="rounded-full !border-0 !bg-[#ff5a00] px-7 font-bold !text-white hover:!bg-[#ff7a1a]">
               {dictionary.verifyAccount.goToSignIn}
             </Button>
           </LocalizedClientLink>
@@ -67,12 +67,12 @@ const VerifyAccount = () => {
 
       {state === "error" && (
         <>
-          <p className="text-base-regular text-ui-fg-base">
+          <p className="text-sm leading-7 text-slate-400">
             {dictionary.verifyAccount.error}
           </p>
 
           <LocalizedClientLink href="/account">
-            <Button variant="secondary">
+            <Button className="rounded-full border border-white/10 bg-[#0c1219] px-7 font-bold text-slate-300 hover:border-[#ff5a00]/50 hover:text-[#ff7a1a]">
               {dictionary.verifyAccount.goToSignIn}
             </Button>
           </LocalizedClientLink>

@@ -48,12 +48,12 @@ export default async function Addresses({ params }: Props) {
 
   return (
     <div className="w-full" data-testid="addresses-page-wrapper">
-      <div className="mb-8 flex flex-col gap-y-4">
-        <h1 className="text-2xl-semi">
+      <div className="mb-8 flex flex-col gap-y-3 rounded-[20px] border border-white/10 bg-[#111923] p-5 small:p-6">
+        <h1 className="text-3xl font-black tracking-[-0.03em] text-white">
           {dictionary.accountPages.addresses.title}
         </h1>
 
-        <p className="text-base-regular">
+        <p className="text-sm leading-7 text-slate-400">
           {dictionary.accountPages.addresses.description}
         </p>
       </div>

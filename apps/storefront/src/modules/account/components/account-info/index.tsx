@@ -13,7 +13,7 @@ type AccountInfoProps = {
   errorMessage?: string
   clearState: () => void
   children?: React.ReactNode
-  'data-testid'?: string
+  "data-testid"?: string
 }
 
 const AccountInfo = ({
@@ -24,7 +24,7 @@ const AccountInfo = ({
   clearState,
   errorMessage = "An error occurred, please try again",
   children,
-  'data-testid': dataTestid
+  "data-testid": dataTestid,
 }: AccountInfoProps) => {
   const { state, close, toggle } = useToggleState()
 
@@ -42,13 +42,21 @@ const AccountInfo = ({
   }, [isSuccess, close])
 
   return (
-    <div className="text-small-regular" data-testid={dataTestid}>
-      <div className="flex items-end justify-between">
-        <div className="flex flex-col">
-          <span className="uppercase text-ui-fg-base">{label}</span>
-          <div className="flex items-center flex-1 basis-0 justify-end gap-x-4">
+    <div
+      className="rounded-[20px] border border-white/10 bg-[#111923] p-5 text-sm shadow-[0_14px_40px_rgba(0,0,0,0.16)] small:p-6"
+      data-testid={dataTestid}
+    >
+      <div className="flex items-start justify-between gap-5">
+        <div className="flex min-w-0 flex-col gap-2">
+          <span className="text-sm font-bold text-white">{label}</span>
+          <div className="flex min-w-0 flex-1 basis-0 items-center gap-x-4 text-slate-400">
             {typeof currentInfo === "string" ? (
-              <span className="font-semibold" data-testid="current-info">{currentInfo}</span>
+              <span
+                className="break-words font-semibold text-slate-300"
+                data-testid="current-info"
+              >
+                {currentInfo}
+              </span>
             ) : (
               currentInfo
             )}
@@ -57,7 +65,7 @@ const AccountInfo = ({
         <div>
           <Button
             variant="secondary"
-            className="w-[100px] min-h-[25px] py-1"
+            className="min-h-10 w-[100px] rounded-full border border-[#ff5a00]/40 bg-[#ff5a00]/10 py-1 font-bold text-[#ff7a1a] transition hover:bg-[#ff5a00] hover:text-white"
             onClick={handleToggle}
             type={state ? "reset" : "button"}
             data-testid="edit-button"
@@ -77,11 +85,14 @@ const AccountInfo = ({
             {
               "max-h-[1000px] opacity-100": isSuccess,
               "max-h-0 opacity-0": !isSuccess,
-            }
+            },
           )}
           data-testid="success-message"
         >
-          <Badge className="p-2 my-4" color="green">
+          <Badge
+            className="my-4 rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-3 text-emerald-400"
+            color="green"
+          >
             <span>{label} updated succesfully</span>
           </Badge>
         </Disclosure.Panel>
@@ -96,11 +107,14 @@ const AccountInfo = ({
             {
               "max-h-[1000px] opacity-100": isError,
               "max-h-0 opacity-0": !isError,
-            }
+            },
           )}
           data-testid="error-message"
         >
-          <Badge className="p-2 my-4" color="red">
+          <Badge
+            className="my-4 rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-3 text-emerald-400"
+            color="red"
+          >
             <span>{errorMessage}</span>
           </Badge>
         </Disclosure.Panel>
@@ -114,15 +128,15 @@ const AccountInfo = ({
             {
               "max-h-[1000px] opacity-100": state,
               "max-h-0 opacity-0": !state,
-            }
+            },
           )}
         >
-          <div className="flex flex-col gap-y-2 py-4">
+          <div className="mt-5 flex flex-col gap-y-3 border-t border-white/10 pt-5">
             <div>{children}</div>
-            <div className="flex items-center justify-end mt-2">
+            <div className="mt-3 flex items-center justify-end">
               <Button
                 isLoading={pending}
-                className="w-full small:max-w-[140px]"
+                className="h-11 w-full rounded-full !border-0 !bg-[#ff5a00] font-bold !text-white hover:!bg-[#ff7a1a] small:max-w-[170px]"
                 type="submit"
                 data-testid="save-button"
               >

@@ -17,27 +17,27 @@ const Register = ({ setCurrentView }: Props) => {
 
   return (
     <div
-      className="max-w-sm flex flex-col items-center"
+      className="flex w-full max-w-[520px] flex-col items-center rounded-[28px] border border-white/10 bg-[#111923] px-6 py-8 text-white shadow-[0_24px_80px_rgba(0,0,0,0.35)] small:px-9 small:py-10"
       data-testid="register-page"
     >
-      <h1 className="text-large-semi uppercase mb-6">
+      <h1 className="mb-4 text-center text-3xl font-black tracking-[-0.03em] text-white">
         Become a Medusa Store Member
       </h1>
-      <p className="text-center text-base-regular text-ui-fg-base mb-4">
+      <p className="mb-6 max-w-md text-center text-sm leading-7 text-slate-400">
         Create your Medusa Store Member profile, and get access to an enhanced
         shopping experience.
       </p>
       {message?.state === "verification_required" && (
         <div
-          className="w-full mb-4 text-center text-base-regular text-ui-fg-base bg-ui-bg-subtle border border-ui-border-base rounded-rounded p-4"
+          className="mb-5 w-full rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-center text-sm leading-7 text-emerald-300"
           data-testid="register-verification-message"
         >
           We sent a verification link to <strong>{message.email}</strong>.
           Please check your inbox to verify your email, then sign in.
         </div>
       )}
-      <form className="w-full flex flex-col" action={formAction}>
-        <div className="flex flex-col w-full gap-y-2">
+      <form className="flex w-full flex-col" action={formAction}>
+        <div className="flex w-full flex-col gap-y-3">
           <Input
             label="First name"
             name="first_name"
@@ -80,32 +80,35 @@ const Register = ({ setCurrentView }: Props) => {
           error={message?.state === "error" ? message.error : null}
           data-testid="register-error"
         />
-        <span className="text-center text-ui-fg-base text-small-regular mt-6">
+        <span className="mt-6 text-center text-sm leading-7 text-slate-400">
           By creating an account, you agree to Medusa Store&apos;s{" "}
           <LocalizedClientLink
             href="/content/privacy-policy"
-            className="underline"
+            className="font-bold text-[#ff7a1a] underline underline-offset-4 transition hover:text-[#ff5a00]"
           >
             Privacy Policy
           </LocalizedClientLink>{" "}
           and{" "}
           <LocalizedClientLink
             href="/content/terms-of-use"
-            className="underline"
+            className="font-bold text-[#ff7a1a] underline underline-offset-4 transition hover:text-[#ff5a00]"
           >
             Terms of Use
           </LocalizedClientLink>
           .
         </span>
-        <SubmitButton className="w-full mt-6" data-testid="register-button">
+        <SubmitButton
+          className="mt-6 h-12 w-full rounded-full !border-0 !bg-[#ff5a00] font-bold !text-white transition hover:!bg-[#ff7a1a]"
+          data-testid="register-button"
+        >
           Join
         </SubmitButton>
       </form>
-      <span className="text-center text-ui-fg-base text-small-regular mt-6">
+      <span className="mt-6 text-center text-sm leading-7 text-slate-400">
         Already a member?{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.SIGN_IN)}
-          className="underline"
+          className="font-bold text-[#ff7a1a] underline underline-offset-4 transition hover:text-[#ff5a00]"
         >
           Sign in
         </button>

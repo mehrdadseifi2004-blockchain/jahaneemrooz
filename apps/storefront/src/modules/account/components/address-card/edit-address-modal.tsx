@@ -67,29 +67,29 @@ const EditAddress: React.FC<EditAddressProps> = ({
     <>
       <div
         className={clx(
-          "border rounded-rounded p-5 min-h-[220px] h-full w-full flex flex-col justify-between transition-colors",
+          "flex min-h-[220px] h-full w-full flex-col justify-between rounded-[20px] border border-white/10 bg-[#111923] p-5 text-slate-300 transition hover:border-[#ff5a00]/40",
           {
-            "border-gray-900": isActive,
+            "border-[#ff5a00] shadow-[0_0_0_1px_rgba(255,90,0,0.25)]": isActive,
           },
         )}
         data-testid="address-container"
       >
         <div className="flex flex-col">
           <Heading
-            className="text-start text-base-semi"
+            className="text-start text-base font-bold text-white"
             data-testid="address-name"
           >
             {address.first_name} {address.last_name}
           </Heading>
           {address.company && (
             <Text
-              className="txt-compact-small text-ui-fg-base"
+              className="text-sm text-slate-400"
               data-testid="address-company"
             >
               {address.company}
             </Text>
           )}
-          <Text className="mt-2 flex flex-col text-start text-base-regular">
+          <Text className="mt-3 flex flex-col text-start text-sm leading-7 text-slate-400">
             <span data-testid="address-address">
               {address.address_1}
               {address.address_2 && (
@@ -112,7 +112,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
         </div>
         <div className="flex items-center gap-x-4">
           <button
-            className="text-small-regular text-ui-fg-base flex items-center gap-x-2"
+            className="flex items-center gap-x-2 text-sm font-bold text-[#ff7a1a] transition hover:text-[#ff5a00]"
             onClick={open}
             data-testid="address-edit-button"
           >
@@ -120,7 +120,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
             {dictionary.addressForm.edit}
           </button>
           <button
-            className="text-small-regular text-ui-fg-base flex items-center gap-x-2"
+            className="flex items-center gap-x-2 text-sm font-bold text-[#ff7a1a] transition hover:text-[#ff5a00]"
             onClick={removeAddress}
             data-testid="address-delete-button"
           >
@@ -222,18 +222,18 @@ const EditAddress: React.FC<EditAddressProps> = ({
               />
             </div>
             {formState.error && (
-              <div className="text-rose-500 text-small-regular py-2">
+              <div className="my-3 rounded-xl border border-rose-500/20 bg-rose-500/10 px-4 py-3 text-sm text-rose-400">
                 {formState.error}
               </div>
             )}
           </Modal.Body>
           <Modal.Footer>
-            <div className="flex gap-3 mt-6">
+            <div className="mt-6 flex w-full gap-3">
               <Button
                 type="reset"
                 variant="secondary"
                 onClick={close}
-                className="h-10"
+                className="h-11 rounded-full border border-white/10 bg-[#0c1219] px-6 text-slate-300 hover:border-[#ff5a00]/40 hover:text-[#ff7a1a]"
                 data-testid="cancel-button"
               >
                 {dictionary.addressForm.cancel}

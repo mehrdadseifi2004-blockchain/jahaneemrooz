@@ -49,11 +49,11 @@ const AddAddress = ({
   return (
     <>
       <button
-        className="border border-ui-border-base rounded-rounded p-5 min-h-[220px] h-full w-full flex flex-col justify-between"
+        className="flex min-h-[220px] h-full w-full flex-col justify-between rounded-[20px] border border-dashed border-[#ff5a00]/40 bg-[#ff5a00]/5 p-5 text-[#ff7a1a] transition hover:border-[#ff5a00] hover:bg-[#ff5a00]/10"
         onClick={open}
         data-testid="add-address-button"
       >
-        <span className="text-base-semi">
+        <span className="text-base font-bold">
           {dictionary.addressForm.newAddress}
         </span>
         <Plus />
@@ -141,7 +141,7 @@ const AddAddress = ({
             </div>
             {formState.error && (
               <div
-                className="text-rose-500 text-small-regular py-2"
+                className="my-3 rounded-xl border border-rose-500/20 bg-rose-500/10 px-4 py-3 text-sm text-rose-400"
                 data-testid="address-error"
               >
                 {formState.error}
@@ -149,12 +149,12 @@ const AddAddress = ({
             )}
           </Modal.Body>
           <Modal.Footer>
-            <div className="flex gap-3 mt-6">
+            <div className="mt-6 flex w-full gap-3">
               <Button
                 type="reset"
                 variant="secondary"
                 onClick={close}
-                className="h-10"
+                className="h-11 rounded-full border border-white/10 bg-[#0c1219] px-6 text-slate-300 hover:border-[#ff5a00]/40 hover:text-[#ff7a1a]"
                 data-testid="cancel-button"
               >
                 {dictionary.addressForm.cancel}

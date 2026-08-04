@@ -51,12 +51,12 @@ export default async function Profile({ params }: Props) {
 
   return (
     <div className="w-full" data-testid="profile-page-wrapper">
-      <div className="mb-8 flex flex-col gap-y-4">
-        <h1 className="text-2xl-semi">
+      <div className="mb-8 flex flex-col gap-y-3 rounded-[20px] border border-white/10 bg-[#111923] p-5 small:p-6">
+        <h1 className="text-3xl font-black tracking-[-0.03em] text-white">
           {dictionary.accountPages.profile.title}
         </h1>
 
-        <p className="text-base-regular">
+        <p className="text-sm leading-7 text-slate-400">
           {dictionary.accountPages.profile.description}
         </p>
       </div>
@@ -81,5 +81,5 @@ export default async function Profile({ params }: Props) {
 }
 
 const Divider = () => {
-  return <div className="h-px w-full bg-gray-200" />
+  return <div className="h-px w-full bg-white/10" />
 }

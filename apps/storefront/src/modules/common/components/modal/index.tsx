@@ -11,7 +11,7 @@ type ModalProps = {
   size?: "small" | "medium" | "large"
   search?: boolean
   children: React.ReactNode
-  'data-testid'?: string
+  "data-testid"?: string
 }
 
 const Modal = ({
@@ -20,7 +20,7 @@ const Modal = ({
   size = "medium",
   search = false,
   children,
-  'data-testid': dataTestId
+  "data-testid": dataTestId,
 }: ModalProps) => {
   return (
     <Transition appear show={isOpen} as={Fragment}>
@@ -34,17 +34,17 @@ const Modal = ({
           leaveFrom="opacity-100"
           leaveTo="opacity-0"
         >
-          <div className="fixed inset-0 bg-opacity-75 backdrop-blur-md  h-screen" />
+          <div className="fixed inset-0 h-screen bg-black/75 backdrop-blur-md" />
         </Transition.Child>
 
         <div className="fixed inset-0 overflow-y-hidden">
           <div
             className={clx(
-              "flex min-h-full h-full justify-center p-4 text-center",
+              "flex h-full min-h-full justify-center p-4 text-center",
               {
                 "items-center": !search,
                 "items-start": search,
-              }
+              },
             )}
           >
             <Transition.Child
@@ -59,14 +59,15 @@ const Modal = ({
               <Dialog.Panel
                 data-testid={dataTestId}
                 className={clx(
-                  "flex flex-col justify-start w-full transform p-5 text-left align-middle transition-all max-h-[75vh] h-fit",
+                  "flex h-fit max-h-[85vh] w-full transform flex-col justify-start overflow-y-auto rounded-[24px] p-5 text-start align-middle text-white transition-all small:p-7",
                   {
                     "max-w-md": size === "small",
                     "max-w-xl": size === "medium",
                     "max-w-3xl": size === "large",
                     "bg-transparent shadow-none": search,
-                    "bg-white shadow-xl border rounded-rounded": !search,
-                  }
+                    "border border-white/10 bg-[#111923] shadow-[0_30px_100px_rgba(0,0,0,0.65)]":
+                      !search,
+                  },
                 )}
               >
                 <ModalProvider close={close}>{children}</ModalProvider>
@@ -83,10 +84,14 @@ const Title: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { close } = useModal()
 
   return (
-    <Dialog.Title className="flex items-center justify-between">
-      <div className="text-large-semi">{children}</div>
+    <Dialog.Title className="flex items-center justify-between border-b border-white/10 pb-4">
+      <div className="text-xl font-black text-white">{children}</div>
       <div>
-        <button onClick={close} data-testid="close-modal-button">
+        <button
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-slate-400 transition hover:border-[#ff5a00]/40 hover:text-[#ff7a1a]"
+          onClick={close}
+          data-testid="close-modal-button"
+        >
           <X size={20} />
         </button>
       </div>
@@ -96,18 +101,22 @@ const Title: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 const Description: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <Dialog.Description className="flex text-small-regular text-ui-fg-base items-center justify-center pt-2 pb-4 h-full">
+    <Dialog.Description className="flex h-full items-center justify-center pb-4 pt-3 text-sm leading-7 text-slate-400">
       {children}
     </Dialog.Description>
   )
 }
 
 const Body: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return <div className="flex justify-center">{children}</div>
+  return <div className="flex w-full justify-center py-4">{children}</div>
 }
 
 const Footer: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  return <div className="flex items-center justify-end gap-x-4">{children}</div>
+  return (
+    <div className="flex items-center justify-end gap-x-4 border-t border-white/10 pt-4">
+      {children}
+    </div>
+  )
 }
 
 Modal.Title = Title

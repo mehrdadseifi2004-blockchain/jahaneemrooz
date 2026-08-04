@@ -14,16 +14,18 @@ const Login = ({ setCurrentView }: Props) => {
 
   return (
     <div
-      className="max-w-sm w-full flex flex-col items-center"
+      className="flex w-full max-w-[470px] flex-col items-center rounded-[28px] border border-white/10 bg-[#111923] px-6 py-8 text-white shadow-[0_24px_80px_rgba(0,0,0,0.35)] small:px-9 small:py-10"
       data-testid="login-page"
     >
-      <h1 className="text-large-semi uppercase mb-6">Welcome back</h1>
-      <p className="text-center text-base-regular text-ui-fg-base mb-8">
+      <h1 className="mb-4 text-center text-3xl font-black tracking-[-0.03em] text-white">
+        Welcome back
+      </h1>
+      <p className="mb-8 max-w-sm text-center text-sm leading-7 text-slate-400">
         Sign in to access an enhanced shopping experience.
       </p>
       {message?.state === "verification_required" && (
         <div
-          className="w-full mb-6 text-center text-base-regular text-ui-fg-base bg-ui-bg-subtle border border-ui-border-base rounded-rounded p-4"
+          className="mb-6 w-full rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-4 text-center text-sm leading-7 text-emerald-300"
           data-testid="login-verification-message"
         >
           We sent a verification link to <strong>{message.email}</strong>.
@@ -31,7 +33,7 @@ const Login = ({ setCurrentView }: Props) => {
         </div>
       )}
       <form className="w-full" action={formAction}>
-        <div className="flex flex-col w-full gap-y-2">
+        <div className="flex w-full flex-col gap-y-3">
           <Input
             label="Email"
             name="email"
@@ -54,15 +56,18 @@ const Login = ({ setCurrentView }: Props) => {
           error={message?.state === "error" ? message.error : null}
           data-testid="login-error-message"
         />
-        <SubmitButton data-testid="sign-in-button" className="w-full mt-6">
+        <SubmitButton
+          data-testid="sign-in-button"
+          className="mt-6 h-12 w-full rounded-full !border-0 !bg-[#ff5a00] font-bold !text-white transition hover:!bg-[#ff7a1a]"
+        >
           Sign in
         </SubmitButton>
       </form>
-      <span className="text-center text-ui-fg-base text-small-regular mt-6">
+      <span className="mt-6 text-center text-sm text-slate-400">
         Not a member?{" "}
         <button
           onClick={() => setCurrentView(LOGIN_VIEW.REGISTER)}
-          className="underline"
+          className="font-bold text-[#ff7a1a] underline underline-offset-4 transition hover:text-[#ff5a00]"
           data-testid="register-button"
         >
           Join us

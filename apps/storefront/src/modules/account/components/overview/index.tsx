@@ -28,12 +28,12 @@ const Overview = ({ customer, orders }: OverviewProps) => {
   return (
     <div data-testid="overview-page-wrapper">
       <div className="hidden small:block">
-        <div className="mb-4 flex items-center justify-between text-xl-semi">
+        <div className="mb-6 flex flex-col gap-3 rounded-[20px] border border-white/10 bg-[#111923] p-5 text-xl font-bold text-white medium:flex-row medium:items-center medium:justify-between">
           <span data-testid="welcome-message" data-value={customer?.first_name}>
             {greeting}
           </span>
 
-          <span className="text-small-regular text-ui-fg-base">
+          <span className="text-sm text-slate-400">
             {dictionary.accountOverview.signedInAs}{" "}
             <span
               className="font-semibold"
@@ -45,37 +45,37 @@ const Overview = ({ customer, orders }: OverviewProps) => {
           </span>
         </div>
 
-        <div className="flex flex-col border-t border-gray-200 py-8">
+        <div className="flex flex-col border-t border-white/10 py-8">
           <div className="col-span-1 row-span-2 flex h-full flex-1 flex-col gap-y-4">
-            <div className="mb-6 flex items-start gap-x-16">
-              <div className="flex flex-col gap-y-4">
-                <h3 className="text-large-semi">
+            <div className="mb-8 grid grid-cols-1 gap-4 small:grid-cols-2">
+              <div className="flex flex-col gap-y-4 rounded-[20px] border border-white/10 bg-[#111923] p-5">
+                <h3 className="text-lg font-bold text-white">
                   {dictionary.accountOverview.profile}
                 </h3>
 
                 <div className="flex items-end gap-x-2">
                   <span
-                    className="text-3xl-semi leading-none"
+                    className="text-4xl font-black leading-none text-[#ff5a00]"
                     data-testid="customer-profile-completion"
                     data-value={getProfileCompletion(customer)}
                   >
                     {getProfileCompletion(customer).toLocaleString(dateLocale)}%
                   </span>
 
-                  <span className="uppercase text-base-regular text-ui-fg-subtle">
+                  <span className="text-sm text-slate-500">
                     {dictionary.accountOverview.completed}
                   </span>
                 </div>
               </div>
 
-              <div className="flex flex-col gap-y-4">
-                <h3 className="text-large-semi">
+              <div className="flex flex-col gap-y-4 rounded-[20px] border border-white/10 bg-[#111923] p-5">
+                <h3 className="text-lg font-bold text-white">
                   {dictionary.accountOverview.addresses}
                 </h3>
 
                 <div className="flex items-end gap-x-2">
                   <span
-                    className="text-3xl-semi leading-none"
+                    className="text-4xl font-black leading-none text-[#ff5a00]"
                     data-testid="addresses-count"
                     data-value={customer?.addresses?.length || 0}
                   >
@@ -84,20 +84,20 @@ const Overview = ({ customer, orders }: OverviewProps) => {
                     )}
                   </span>
 
-                  <span className="uppercase text-base-regular text-ui-fg-subtle">
+                  <span className="text-sm text-slate-500">
                     {dictionary.accountOverview.saved}
                   </span>
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-col gap-y-4">
-              <h3 className="text-large-semi">
+            <div className="flex flex-col gap-y-4 rounded-[20px] border border-white/10 bg-[#111923] p-5">
+              <h3 className="text-lg font-bold text-white">
                 {dictionary.accountOverview.recentOrders}
               </h3>
 
               <ul
-                className="flex flex-col gap-y-4"
+                className="flex flex-col gap-y-4 rounded-[20px] border border-white/10 bg-[#111923] p-5"
                 data-testid="orders-wrapper"
               >
                 {orders?.length ? (
@@ -110,7 +110,7 @@ const Overview = ({ customer, orders }: OverviewProps) => {
                       <LocalizedClientLink
                         href={`/account/orders/details/${order.id}`}
                       >
-                        <Container className="flex items-center justify-between bg-gray-50 p-4">
+                        <Container className="flex items-center justify-between rounded-[16px] border border-white/10 bg-[#0c1219] p-4 text-slate-300 transition hover:border-[#ff5a00]/40 hover:bg-[#ff5a00]/5">
                           <div className="grid flex-1 grid-cols-3 grid-rows-2 gap-x-4 text-small-regular">
                             <span className="font-semibold">
                               {dictionary.accountOverview.datePlaced}
