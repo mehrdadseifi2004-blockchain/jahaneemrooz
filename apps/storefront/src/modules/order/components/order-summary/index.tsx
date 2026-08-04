@@ -20,28 +20,28 @@ const OrderSummary = ({ order }: OrderSummaryProps) => {
 
   return (
     <div>
-      <h2 className="text-xl font-bold text-black small:text-2xl">
+      <h2 className="text-xl font-bold text-white small:text-2xl">
         {dictionary.order.summary.title}
       </h2>
 
       <div className="mt-6 space-y-5">
         <div className="flex items-center justify-between gap-4">
-          <span className="text-black/60">
+          <span className="text-slate-400">
             {dictionary.order.summary.subtotal}
           </span>
 
-          <span className="font-bold text-black">
+          <span className="font-bold text-white">
             {getAmount(order.subtotal)}
           </span>
         </div>
 
         {order.discount_total > 0 && (
           <div className="flex items-center justify-between gap-4">
-            <span className="text-black/60">
+            <span className="text-slate-400">
               {dictionary.order.summary.discount}
             </span>
 
-            <span className="font-bold text-[#ff3333]">
+            <span className="font-bold text-rose-400">
               -{getAmount(order.discount_total)}
             </span>
           </div>
@@ -49,43 +49,43 @@ const OrderSummary = ({ order }: OrderSummaryProps) => {
 
         {order.gift_card_total > 0 && (
           <div className="flex items-center justify-between gap-4">
-            <span className="text-black/60">
+            <span className="text-slate-400">
               {dictionary.order.summary.giftCard}
             </span>
 
-            <span className="font-bold text-[#ff3333]">
+            <span className="font-bold text-rose-400">
               -{getAmount(order.gift_card_total)}
             </span>
           </div>
         )}
 
         <div className="flex items-center justify-between gap-4">
-          <span className="text-black/60">
+          <span className="text-slate-400">
             {dictionary.order.summary.shipping}
           </span>
 
-          <span className="font-bold text-black">
+          <span className="font-bold text-white">
             {getAmount(order.shipping_total)}
           </span>
         </div>
 
         <div className="flex items-center justify-between gap-4">
-          <span className="text-black/60">{dictionary.order.summary.tax}</span>
+          <span className="text-slate-400">{dictionary.order.summary.tax}</span>
 
-          <span className="font-bold text-black">
+          <span className="font-bold text-white">
             {getAmount(order.tax_total)}
           </span>
         </div>
 
-        <div className="h-px bg-black/10" />
+        <div className="h-px bg-white/10" />
 
         <div className="flex items-center justify-between gap-4">
-          <span className="text-lg text-black">
+          <span className="text-lg font-bold text-white">
             {dictionary.order.summary.total}
           </span>
 
           <span
-            className="text-xl font-black text-black small:text-2xl"
+            className="text-xl font-black text-[#ff5a00] small:text-2xl"
             data-testid="order-total"
           >
             {getAmount(order.total)}

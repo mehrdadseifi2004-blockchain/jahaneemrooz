@@ -15,7 +15,7 @@ const Items = ({ order }: ItemsProps) => {
     : null
 
   return (
-    <div className="divide-y divide-black/10" data-testid="products-table">
+    <div className="divide-y divide-white/10" data-testid="products-table">
       {sortedItems?.length
         ? sortedItems.map((item) => (
             <Item

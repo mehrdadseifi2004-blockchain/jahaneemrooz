@@ -31,34 +31,34 @@ const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
 
   return (
     <div>
-      <p className="text-sm leading-7 text-black/60 small:text-base">
+      <p className="text-sm leading-7 text-slate-400 small:text-base">
         {dictionary.order.details.emailNotice}
       </p>
 
       <p
-        className="mt-1 break-all font-semibold text-black"
+        className="mt-1 break-all font-semibold text-white"
         data-testid="order-email"
       >
         {order.email}
       </p>
 
       <div className="mt-6 grid gap-3 small:grid-cols-2">
-        <div className="rounded-[16px] bg-[#f0f0f0] p-4">
-          <p className="text-xs text-black/50">
+        <div className="rounded-[16px] border border-white/10 bg-[#0c1219] p-4">
+          <p className="text-xs text-slate-500">
             {dictionary.order.details.orderNumber}
           </p>
 
-          <p className="mt-2 font-bold text-black" data-testid="order-id">
+          <p className="mt-2 font-bold text-white" data-testid="order-id">
             #{order.display_id}
           </p>
         </div>
 
-        <div className="rounded-[16px] bg-[#f0f0f0] p-4">
-          <p className="text-xs text-black/50">
+        <div className="rounded-[16px] border border-white/10 bg-[#0c1219] p-4">
+          <p className="text-xs text-slate-500">
             {dictionary.order.details.orderDate}
           </p>
 
-          <p className="mt-2 font-bold text-black" data-testid="order-date">
+          <p className="mt-2 font-bold text-white" data-testid="order-date">
             {orderDate}
           </p>
         </div>
@@ -66,26 +66,26 @@ const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
 
       {showStatus && (
         <div className="mt-3 grid gap-3 small:grid-cols-2">
-          <div className="rounded-[16px] border border-black/10 p-4">
-            <p className="text-xs text-black/50">
+          <div className="rounded-[16px] border border-white/10 bg-[#0c1219] p-4">
+            <p className="text-xs text-slate-500">
               {dictionary.order.details.orderStatus}
             </p>
 
             <p
-              className="mt-2 font-semibold text-black"
+              className="mt-2 font-semibold text-[#ff7a1a]"
               data-testid="order-status"
             >
               {getStatusLabel(order.fulfillment_status)}
             </p>
           </div>
 
-          <div className="rounded-[16px] border border-black/10 p-4">
-            <p className="text-xs text-black/50">
+          <div className="rounded-[16px] border border-white/10 bg-[#0c1219] p-4">
+            <p className="text-xs text-slate-500">
               {dictionary.order.details.paymentStatus}
             </p>
 
             <p
-              className="mt-2 font-semibold text-black"
+              className="mt-2 font-semibold text-[#ff7a1a]"
               data-testid="order-payment-status"
             >
               {getStatusLabel(order.payment_status)}

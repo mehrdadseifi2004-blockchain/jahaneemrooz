@@ -17,11 +17,11 @@ const PaymentDetails = ({ order }: PaymentDetailsProps) => {
   if (!payment) {
     return (
       <div>
-        <h2 className="text-xl font-bold text-black small:text-2xl">
+        <h2 className="text-xl font-bold text-white small:text-2xl">
           {dictionary.order.payment.title}
         </h2>
 
-        <div className="mt-6 rounded-[16px] bg-[#f0f0f0] p-5 text-sm text-black/60">
+        <div className="mt-6 rounded-[16px] border border-white/10 bg-[#0c1219] p-5 text-sm text-slate-400">
           {dictionary.order.payment.notAvailable}
         </div>
       </div>
@@ -38,24 +38,24 @@ const PaymentDetails = ({ order }: PaymentDetailsProps) => {
 
   return (
     <div>
-      <h2 className="text-xl font-bold text-black small:text-2xl">
+      <h2 className="text-xl font-bold text-white small:text-2xl">
         {dictionary.order.payment.title}
       </h2>
 
       <div className="mt-6 grid gap-4 small:grid-cols-2">
-        <div className="rounded-[16px] bg-[#f0f0f0] p-5">
-          <p className="text-xs text-black/50">
+        <div className="rounded-[16px] border border-white/10 bg-[#0c1219] p-5">
+          <p className="text-xs text-slate-500">
             {dictionary.order.payment.method}
           </p>
 
           <div className="mt-3 flex items-center gap-3">
             {paymentInfo?.icon && (
-              <span className="flex h-9 w-9 items-center justify-center rounded-lg bg-white">
+              <span className="flex h-9 w-9 items-center justify-center rounded-lg border border-[#ff5a00]/25 bg-[#ff5a00]/10 text-[#ff7a1a]">
                 {paymentInfo.icon}
               </span>
             )}
 
-            <p className="font-bold text-black" data-testid="payment-method">
+            <p className="font-bold text-white" data-testid="payment-method">
               {paymentInfo?.title ||
                 payment.provider_id ||
                 dictionary.order.payment.manual}
@@ -63,13 +63,13 @@ const PaymentDetails = ({ order }: PaymentDetailsProps) => {
           </div>
         </div>
 
-        <div className="rounded-[16px] bg-[#f0f0f0] p-5">
-          <p className="text-xs text-black/50">
+        <div className="rounded-[16px] border border-white/10 bg-[#0c1219] p-5">
+          <p className="text-xs text-slate-500">
             {dictionary.order.payment.details}
           </p>
 
           <div
-            className="mt-3 text-sm leading-7 text-black"
+            className="mt-3 text-sm leading-7 text-slate-300"
             data-testid="payment-amount"
           >
             {isStripeLike(payment.provider_id) && payment.data?.card_last4 ? (
@@ -83,7 +83,7 @@ const PaymentDetails = ({ order }: PaymentDetailsProps) => {
                   })}
                 </p>
 
-                <p className="text-xs text-black/50">
+                <p className="text-xs text-slate-500">
                   {dictionary.order.payment.paidAt.replace(
                     "{date}",
                     paymentDate,
