@@ -32,16 +32,16 @@ const CartTemplate = ({
   )
 
   return (
-    <main className="min-h-screen bg-white pb-20">
+    <main className="min-h-screen bg-[#070b10] pb-20 text-white">
       <div className="content-container" data-testid="cart-container">
-        <div className="border-t border-black/10 pt-5 small:pt-6">
+        <div className="border-t border-white/10 pt-5 small:pt-6">
           <nav
             aria-label={dictionary.cart.breadcrumb.ariaLabel}
-            className="mb-5 flex items-center gap-2 text-sm text-black/60 small:mb-6"
+            className="mb-5 flex items-center gap-2 text-sm text-slate-500 small:mb-6"
           >
             <LocalizedClientLink
               href="/"
-              className="transition hover:text-black"
+              className="transition hover:text-[#ff7a1a]"
             >
               {dictionary.cart.breadcrumb.home}
             </LocalizedClientLink>
@@ -51,32 +51,32 @@ const CartTemplate = ({
               <span className="hidden rtl:inline">←</span>
             </span>
 
-            <span className="text-black">
+            <span className="text-white">
               {dictionary.cart.breadcrumb.cart}
             </span>
           </nav>
 
           {cart?.items?.length ? (
             <>
-              <h1 className="mb-5 text-[32px] font-black leading-tight tracking-[-0.03em] text-black small:mb-6 small:text-[40px]">
+              <h1 className="mb-5 text-[32px] font-black leading-tight tracking-[-0.03em] text-white small:mb-6 small:text-[40px]">
                 {dictionary.cart.title}
               </h1>
 
               {!customer && (
-                <div className="mb-5 flex flex-col gap-4 rounded-[20px] bg-[#f0f0f0] p-5 small:flex-row small:items-center small:justify-between">
+                <div className="mb-5 flex flex-col gap-4 rounded-[24px] border border-white/10 bg-[#111923] p-5 small:flex-row small:items-center small:justify-between">
                   <div>
-                    <p className="font-bold text-black">
+                    <p className="font-bold text-white">
                       {dictionary.cart.account.title}
                     </p>
 
-                    <p className="mt-1 text-sm leading-6 text-black/60">
+                    <p className="mt-1 text-sm leading-6 text-slate-400">
                       {dictionary.cart.account.description}
                     </p>
                   </div>
 
                   <LocalizedClientLink
                     href="/account"
-                    className="inline-flex h-11 shrink-0 items-center justify-center rounded-full bg-black px-6 text-sm font-medium text-white transition hover:bg-black/80"
+                    className="inline-flex h-11 shrink-0 items-center justify-center rounded-full border border-[#ff5a00]/50 bg-[#ff5a00]/10 px-6 text-sm font-bold text-[#ff7a1a] transition hover:bg-[#ff5a00] hover:text-white"
                   >
                     {dictionary.cart.account.login}
                   </LocalizedClientLink>
@@ -93,7 +93,7 @@ const CartTemplate = ({
                 </aside>
               </div>
 
-              <p className="mt-5 text-sm text-black/50">{itemCountText}</p>
+              <p className="mt-5 text-sm text-slate-500">{itemCountText}</p>
             </>
           ) : (
             <EmptyCartMessage />

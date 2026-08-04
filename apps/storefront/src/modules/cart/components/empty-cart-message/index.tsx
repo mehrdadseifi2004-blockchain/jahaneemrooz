@@ -11,13 +11,13 @@ const EmptyCartMessage = () => {
       className="flex min-h-[520px] flex-col items-center justify-center px-4 text-center"
       data-testid="empty-cart-message"
     >
-      <div className="flex h-24 w-24 items-center justify-center rounded-full bg-[#f0f0f0]">
+      <div className="flex h-24 w-24 items-center justify-center rounded-full border border-[#ff5a00]/30 bg-[#ff5a00]/10 shadow-[0_0_55px_rgba(255,90,0,0.12)]">
         <svg
           width="46"
           height="46"
           viewBox="0 0 24 24"
           fill="none"
-          className="text-black/40"
+          className="text-[#ff7a1a]"
           aria-hidden="true"
         >
           <path
@@ -34,17 +34,17 @@ const EmptyCartMessage = () => {
         </svg>
       </div>
 
-      <h1 className="mt-6 text-3xl font-black text-black small:text-4xl">
+      <h1 className="mt-6 text-3xl font-black text-white small:text-4xl">
         {dictionary.cart.empty.title}
       </h1>
 
-      <p className="mt-4 max-w-lg text-sm leading-7 text-black/60 small:text-base">
+      <p className="mt-4 max-w-lg text-sm leading-7 text-slate-400 small:text-base">
         {dictionary.cart.empty.description}
       </p>
 
       <LocalizedClientLink
         href="/store"
-        className="mt-7 inline-flex h-12 items-center justify-center rounded-full bg-black px-8 text-sm font-medium text-white transition hover:bg-black/80"
+        className="mt-7 inline-flex h-12 items-center justify-center rounded-full bg-[#ff5a00] px-8 text-sm font-bold text-white transition hover:bg-[#ff7a1a]"
       >
         {dictionary.cart.empty.cta}
       </LocalizedClientLink>

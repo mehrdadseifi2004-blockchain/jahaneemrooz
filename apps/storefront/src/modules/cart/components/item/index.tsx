@@ -72,16 +72,16 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
             thumbnail={item.thumbnail}
             images={item.variant?.product?.images}
             size="square"
-            className="rounded-xl bg-[#f0eeed]"
+            className="rounded-xl border border-white/10 bg-white"
           />
         </LocalizedClientLink>
 
         <div className="min-w-0 flex-1">
-          <p className="line-clamp-1 text-sm font-semibold text-black">
+          <p className="line-clamp-1 text-sm font-semibold text-white">
             {item.product_title}
           </p>
 
-          <div className="mt-1 flex items-center gap-1 text-xs text-black/50">
+          <div className="mt-1 flex items-center gap-1 text-xs text-slate-500">
             <span>
               {item.quantity.toLocaleString(numberLocale)}{" "}
               {dictionary.cart.item.quantityUnit}
@@ -96,7 +96,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
           </div>
         </div>
 
-        <div className="font-bold text-black">
+        <div className="font-bold text-[#ff5a00]">
           <LineItemPrice
             item={item}
             style="tight"
@@ -121,7 +121,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
             thumbnail={item.thumbnail}
             images={item.variant?.product?.images}
             size="square"
-            className="rounded-[13px] border-0 bg-[#f0eeed] shadow-none small:rounded-[20px]"
+            className="rounded-[13px] border border-white/10 bg-white shadow-none small:rounded-[20px]"
           />
         </LocalizedClientLink>
 
@@ -129,28 +129,33 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
           <div className="flex items-start justify-between gap-3">
             <LocalizedClientLink
               href={`/products/${item.product_handle}`}
-              className="line-clamp-2 text-base font-bold leading-6 text-black transition hover:text-black/60 small:text-xl"
+              className="line-clamp-2 text-base font-bold leading-6 text-white transition hover:text-[#ff7a1a] small:text-xl"
               data-testid="product-title"
             >
               {item.product_title}
             </LocalizedClientLink>
 
             <div data-testid="product-delete-button">
-              <DeleteButton id={item.id} className="shrink-0 text-[#ff3333]" />
+              <DeleteButton
+                id={item.id}
+                className="shrink-0 text-rose-400 transition hover:text-rose-300"
+              />
             </div>
           </div>
 
           {item.variant_title &&
             !item.variant_title.toLowerCase().includes("default") && (
-              <p className="mt-1 text-xs leading-6 text-black/60 small:text-sm">
+              <p className="mt-1 text-xs leading-6 text-slate-400 small:text-sm">
                 {dictionary.cart.item.selectedOption}{" "}
-                <span className="text-black">{item.variant_title}</span>
+                <span className="font-semibold text-slate-200">
+                  {item.variant_title}
+                </span>
               </p>
             )}
 
           <div className="mt-auto flex flex-col gap-4 pt-4 xsmall:flex-row xsmall:items-end xsmall:justify-between">
             <div>
-              <div className="text-xl font-bold text-black small:text-2xl">
+              <div className="text-xl font-bold text-[#ff5a00] small:text-2xl">
                 <LineItemPrice
                   item={item}
                   style="tight"
@@ -159,7 +164,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
               </div>
 
               {item.quantity > 1 && (
-                <div className="mt-1 flex items-center gap-1 text-xs text-black/50">
+                <div className="mt-1 flex items-center gap-1 text-xs text-slate-500">
                   <span>{dictionary.cart.item.unitPrice}</span>
 
                   <LineItemUnitPrice
@@ -174,19 +179,19 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
             <div className="flex items-center gap-2">
               {updating && <Spinner />}
 
-              <div className="flex h-10 items-center rounded-full bg-[#f0f0f0] px-2 small:h-11">
+              <div className="flex h-10 items-center rounded-full border border-white/10 bg-[#0c1219] px-2 small:h-11">
                 <button
                   type="button"
                   onClick={() => changeQuantity(item.quantity - 1)}
                   disabled={item.quantity <= 1 || updating}
                   aria-label={dictionary.cart.item.decreaseQuantity}
-                  className="flex h-8 w-8 items-center justify-center rounded-full text-xl text-black transition hover:bg-black/5 disabled:cursor-not-allowed disabled:opacity-30"
+                  className="flex h-8 w-8 items-center justify-center rounded-full text-xl text-white transition hover:bg-white/10 hover:text-[#ff7a1a] disabled:cursor-not-allowed disabled:opacity-30"
                 >
                   −
                 </button>
 
                 <span
-                  className="min-w-8 text-center text-sm font-medium text-black"
+                  className="min-w-8 text-center text-sm font-bold text-white"
                   data-testid="product-quantity"
                   aria-live="polite"
                 >
@@ -198,7 +203,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
                   onClick={() => changeQuantity(item.quantity + 1)}
                   disabled={item.quantity >= maxQuantity || updating}
                   aria-label={dictionary.cart.item.increaseQuantity}
-                  className="flex h-8 w-8 items-center justify-center rounded-full text-xl text-black transition hover:bg-black/5 disabled:cursor-not-allowed disabled:opacity-30"
+                  className="flex h-8 w-8 items-center justify-center rounded-full text-xl text-white transition hover:bg-white/10 hover:text-[#ff7a1a] disabled:cursor-not-allowed disabled:opacity-30"
                 >
                   +
                 </button>

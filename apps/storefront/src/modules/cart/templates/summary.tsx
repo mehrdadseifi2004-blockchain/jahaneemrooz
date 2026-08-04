@@ -74,25 +74,25 @@ const Summary = ({ cart }: SummaryProps) => {
   }
 
   return (
-    <div className="rounded-[20px] border border-black/10 bg-white p-5 small:px-6 small:py-6">
-      <h2 className="text-xl font-bold text-black small:text-2xl">
+    <div className="rounded-[24px] border border-white/10 bg-[#111923] p-5 shadow-[0_18px_55px_rgba(0,0,0,0.24)] small:px-6 small:py-6">
+      <h2 className="text-xl font-bold text-white small:text-2xl">
         {dictionary.cart.summary.title}
       </h2>
 
       <div className="mt-6 space-y-5">
         <div className="flex items-center justify-between gap-4">
-          <span className="text-black/60 small:text-xl">
+          <span className="text-slate-400 small:text-xl">
             {dictionary.cart.summary.subtotal}
           </span>
 
-          <span className="font-bold text-black small:text-xl">
+          <span className="font-bold text-white small:text-xl">
             {formatPrice(cart.subtotal)}
           </span>
         </div>
 
         {(cart.discount_total || 0) > 0 && (
           <div className="flex items-center justify-between gap-4">
-            <span className="text-black/60 small:text-xl">
+            <span className="text-slate-400 small:text-xl">
               {dictionary.cart.summary.discount}
             </span>
 
@@ -103,11 +103,11 @@ const Summary = ({ cart }: SummaryProps) => {
         )}
 
         <div className="flex items-center justify-between gap-4">
-          <span className="text-black/60 small:text-xl">
+          <span className="text-slate-400 small:text-xl">
             {dictionary.cart.summary.shipping}
           </span>
 
-          <span className="text-end font-bold text-black small:text-xl">
+          <span className="text-end font-bold text-white small:text-xl">
             {cart.shipping_total
               ? formatPrice(cart.shipping_total)
               : dictionary.cart.summary.shippingLater}
@@ -115,24 +115,24 @@ const Summary = ({ cart }: SummaryProps) => {
         </div>
 
         <div className="flex items-center justify-between gap-4">
-          <span className="text-black/60 small:text-xl">
+          <span className="text-slate-400 small:text-xl">
             {dictionary.cart.summary.tax}
           </span>
 
-          <span className="font-bold text-black small:text-xl">
+          <span className="font-bold text-white small:text-xl">
             {formatPrice(cart.tax_total)}
           </span>
         </div>
 
-        <div className="h-px bg-black/10" />
+        <div className="h-px bg-white/10" />
 
         <div className="flex items-center justify-between gap-4">
-          <span className="text-black small:text-xl">
+          <span className="font-bold text-white small:text-xl">
             {dictionary.cart.summary.total}
           </span>
 
           <span
-            className="text-xl font-bold text-black small:text-2xl"
+            className="text-xl font-bold text-white small:text-2xl"
             data-testid="cart-total"
           >
             {formatPrice(cart.total)}
@@ -149,7 +149,7 @@ const Summary = ({ cart }: SummaryProps) => {
           <div className="relative min-w-0 flex-1">
             <span
               aria-hidden="true"
-              className="absolute start-4 top-1/2 -translate-y-1/2 text-xl text-black/40"
+              className="absolute start-4 top-1/2 -translate-y-1/2 text-xl text-slate-500"
             >
               %
             </span>
@@ -161,14 +161,14 @@ const Summary = ({ cart }: SummaryProps) => {
               value={promotionCode}
               onChange={(event) => setPromotionCode(event.target.value)}
               placeholder={dictionary.cart.summary.promotionPlaceholder}
-              className="h-12 w-full rounded-full border-0 bg-[#f0f0f0] px-11 text-sm text-black outline-none placeholder:text-black/40 focus:ring-2 focus:ring-black/10"
+              className="h-12 w-full rounded-full border border-white/10 bg-[#0c1219] px-11 text-sm text-white outline-none transition placeholder:text-slate-600 focus:border-[#ff5a00]/60 focus:ring-4 focus:ring-[#ff5a00]/10"
             />
           </div>
 
           <button
             type="submit"
             disabled={!promotionCode.trim() || isApplying}
-            className="h-12 shrink-0 rounded-full bg-black px-6 text-sm font-medium text-white transition hover:bg-black/80 disabled:cursor-not-allowed disabled:opacity-50"
+            className="h-12 shrink-0 rounded-full border border-[#ff5a00]/50 bg-[#ff5a00]/10 px-6 text-sm font-bold text-[#ff7a1a] transition hover:bg-[#ff5a00] hover:text-white disabled:cursor-not-allowed disabled:opacity-40"
           >
             {isApplying
               ? dictionary.cart.summary.promotionApplying
@@ -192,7 +192,7 @@ const Summary = ({ cart }: SummaryProps) => {
       <LocalizedClientLink
         href={`/checkout?step=${step}`}
         data-testid="checkout-button"
-        className="group mt-6 flex h-14 w-full items-center justify-center gap-3 rounded-full bg-black px-5 text-sm font-medium text-white transition hover:bg-black/80 small:h-[60px] small:text-base"
+        className="group mt-6 flex h-14 w-full items-center justify-center gap-3 rounded-full bg-[#ff5a00] px-5 text-sm font-bold text-white shadow-[0_14px_40px_rgba(255,90,0,0.24)] transition hover:-translate-y-0.5 hover:bg-[#ff7a1a] small:h-[60px] small:text-base"
       >
         <span>{dictionary.cart.summary.checkout}</span>
 
@@ -207,12 +207,12 @@ const Summary = ({ cart }: SummaryProps) => {
 
       <LocalizedClientLink
         href="/store"
-        className="mt-3 flex h-12 w-full items-center justify-center rounded-full border border-black/10 text-sm font-medium text-black transition hover:bg-black hover:text-white"
+        className="mt-3 flex h-12 w-full items-center justify-center rounded-full border border-white/10 bg-[#0c1219] text-sm font-bold text-slate-300 transition hover:border-[#ff5a00]/50 hover:text-[#ff7a1a]"
       >
         {dictionary.cart.summary.continueShopping}
       </LocalizedClientLink>
 
-      <div className="mt-5 flex items-center justify-center gap-2 text-center text-xs leading-6 text-black/40">
+      <div className="mt-5 flex items-center justify-center gap-2 text-center text-xs leading-6 text-slate-500">
         <span aria-hidden="true">🔒</span>
 
         <span>{dictionary.cart.summary.secureNotice}</span>

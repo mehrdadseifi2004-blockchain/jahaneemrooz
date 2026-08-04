@@ -1,6 +1,5 @@
 import { convertToLocale } from "@lib/util/money"
 import { HttpTypes } from "@medusajs/types"
-import { clx } from "@modules/common/components/ui"
 
 type LineItemUnitPriceProps = {
   item: HttpTypes.StoreCartLineItem | HttpTypes.StoreOrderLineItem
@@ -14,44 +13,47 @@ const LineItemUnitPrice = ({
   currencyCode,
 }: LineItemUnitPriceProps) => {
   const total = item.total ?? 0
-  const original_total = item.original_total ?? 0
-  const hasReducedPrice = total < original_total
+  const originalTotal = item.original_total ?? 0
+  const quantity = Math.max(item.quantity, 1)
+  const hasReducedPrice = total < originalTotal
 
-  const percentage_diff = Math.round(
-    ((original_total - total) / original_total) * 100
-  )
+  const percentageDiff =
+    originalTotal > 0
+      ? Math.round(((originalTotal - total) / originalTotal) * 100)
+      : 0
 
   return (
-    <div className="flex flex-col text-ui-fg-muted justify-center h-full">
+    <div className="flex h-full flex-col justify-center">
       {hasReducedPrice && (
-        <>
-          <p>
-            {style === "default" && (
-              <span className="text-ui-fg-muted">Original: </span>
-            )}
-            <span
-              className="line-through"
-              data-testid="product-unit-original-price"
-            >
-              {convertToLocale({
-                amount: original_total / item.quantity,
-                currency_code: currencyCode,
-              })}
-            </span>
-          </p>
+        <div className="flex flex-wrap items-center gap-2">
           {style === "default" && (
-            <span className="text-ui-fg-interactive">-{percentage_diff}%</span>
+            <span className="text-xs text-slate-500">Original:</span>
           )}
-        </>
+
+          <span
+            className="text-xs text-slate-500 line-through"
+            data-testid="product-unit-original-price"
+          >
+            {convertToLocale({
+              amount: originalTotal / quantity,
+              currency_code: currencyCode,
+            })}
+          </span>
+
+          {style === "default" && (
+            <span className="text-xs font-bold text-rose-400">
+              -{percentageDiff}%
+            </span>
+          )}
+        </div>
       )}
+
       <span
-        className={clx("text-base-regular", {
-          "text-ui-fg-interactive": hasReducedPrice,
-        })}
+        className="text-sm font-semibold text-slate-400"
         data-testid="product-unit-price"
       >
         {convertToLocale({
-          amount: total / item.quantity,
+          amount: total / quantity,
           currency_code: currencyCode,
         })}
       </span>

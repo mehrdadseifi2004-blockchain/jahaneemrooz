@@ -13,7 +13,7 @@ const ItemsPreviewTemplate = ({ cart }: ItemsPreviewTemplateProps) => {
     : []
 
   return (
-    <div className="divide-y divide-black/10" data-testid="items-preview">
+    <div className="divide-y divide-white/10" data-testid="items-preview">
       {sortedItems.map((item) => (
         <Item
           key={item.id}
