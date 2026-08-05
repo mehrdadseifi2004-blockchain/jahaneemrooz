@@ -8,8 +8,32 @@ import {
 } from "@i18n/config"
 import { getDictionary } from "@i18n/get-dictionary"
 import { Metadata } from "next"
+import localFont from "next/font/local"
 import { notFound } from "next/navigation"
 import "styles/globals.css"
+
+const persianFont = localFont({
+  src: [
+    {
+      path: "../fonts/yekan-bakh-regular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/b-yekan-regular.ttf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../fonts/xm-yekan-bold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+  ],
+  display: "swap",
+  preload: true,
+  fallback: ["Tahoma", "Arial", "sans-serif"],
+})
 
 export const metadata: Metadata = {
   metadataBase: new URL(getBaseURL()),
@@ -38,6 +62,8 @@ export default async function RootLayout({
   const config = localeConfig[locale]
   const dictionary = await getDictionary(locale)
 
+  const bodyFontClassName = locale === "fa" ? persianFont.className : undefined
+
   return (
     <html
       lang={config.languageTag}
@@ -45,7 +71,7 @@ export default async function RootLayout({
       data-locale={locale}
       data-mode="light"
     >
-      <body>
+      <body className={bodyFontClassName}>
         <I18nProvider locale={locale} dictionary={dictionary}>
           <main className="relative">{children}</main>
         </I18nProvider>
