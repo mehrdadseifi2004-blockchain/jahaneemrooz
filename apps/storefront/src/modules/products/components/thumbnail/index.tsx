@@ -26,7 +26,7 @@ const Thumbnail: React.FC<ThumbnailProps> = ({
   return (
     <Container
       className={clx(
-        "relative w-full overflow-hidden p-4 bg-ui-bg-subtle shadow-elevation-card-rest rounded-large group-hover:shadow-elevation-card-hover transition-shadow ease-in-out duration-150",
+        "relative w-full overflow-hidden rounded-large border border-[#ff5a00]/20 bg-[#ff5a00] p-4 shadow-[0_10px_30px_rgba(255,90,0,0.15)] transition-all duration-300 group-hover:border-[#ff7a1a]/50 group-hover:shadow-[0_18px_45px_rgba(255,90,0,0.28)]",
         className,
         {
           "aspect-[3/2]": size !== "square",

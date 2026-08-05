@@ -1,10 +1,11 @@
 import { Suspense } from "react"
-
+import Image from "next/image"
 import { AppLocale } from "@i18n/config"
 import { Dictionary } from "@i18n/get-dictionary"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import AppLanguageSwitcher from "@modules/layout/components/app-language-switcher"
 import CartButton from "@modules/layout/components/cart-button"
+import NavItem from "@modules/layout/components/nav-item"
 import SideMenu from "@modules/layout/components/side-menu"
 
 type NavProps = {
@@ -24,7 +25,7 @@ export default function Nav({
 }: NavProps) {
   return (
     <>
-      <div className="border-b border-white/10 bg-[#05080c] text-white">
+      {/* <div className="border-b border-white/10 bg-[#05080c] text-white">
         <div className="content-container flex min-h-9 items-center justify-center px-4 text-center text-xs">
           <span>
             {dictionary.navigation.announcement}
@@ -37,11 +38,11 @@ export default function Nav({
             </LocalizedClientLink>
           </span>
         </div>
-      </div>
+      </div> */}
 
       <header className="sticky top-0 z-50 border-b border-white/10 bg-[#080d12] text-white shadow-[0_10px_35px_rgba(0,0,0,0.28)]">
         <div className="content-container">
-          <div className="flex h-[78px] items-center justify-between gap-4">
+          <div className="flex h-[84px] items-center justify-between gap-5">
             <div className="flex shrink-0 items-center gap-3">
               <div className="medium:hidden">
                 <SideMenu
@@ -55,43 +56,81 @@ export default function Nav({
 
               <LocalizedClientLink
                 href="/"
-                className="text-2xl font-black tracking-[-0.04em] text-white transition hover:text-[#ff5a00] small:text-3xl"
+                aria-label={dictionary.common.brand}
+                className="group flex shrink-0 items-center gap-3"
               >
-                {dictionary.common.brand}
+                <Image
+                  src="/assets/logo-icon-transparent.png"
+                  alt=""
+                  width={72}
+                  height={72}
+                  priority
+                  className="h-12 w-12 shrink-0 object-contain transition duration-300 group-hover:scale-105 small:h-[60px] small:w-[60px]"
+                />
+
+                <div className="hidden min-w-0 flex-col leading-none small:flex">
+                  {locale === "fa" ? (
+                    <>
+                      <span className="whitespace-nowrap text-[22px] font-bold tracking-tight">
+                        <span className="text-white">جهان </span>
+                        <span className="text-[#ff5a00]">امروز</span>
+                      </span>
+
+                      <span className="mt-1.5 whitespace-nowrap text-[10px] font-normal tracking-wide text-slate-500">
+                        فناوری
+                        <span className="mx-1.5 text-[#ff5a00]">|</span>
+                        زندگی
+                        <span className="mx-1.5 text-[#ff5a00]">|</span>
+                        آینده
+                      </span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="whitespace-nowrap text-[20px] font-black tracking-[-0.04em] text-white">
+                        JAHAN.
+                        <span className="text-[#ff5a00]">EMROOZ</span>
+                      </span>
+
+                      <span className="mt-1.5 whitespace-nowrap text-[9px] font-medium uppercase tracking-[0.16em] text-slate-500">
+                        Technology
+                        <span className="mx-1 text-[#ff5a00]">|</span>
+                        Life
+                        <span className="mx-1 text-[#ff5a00]">|</span>
+                        Future
+                      </span>
+                    </>
+                  )}
+                </div>
               </LocalizedClientLink>
             </div>
 
-            <nav className="hidden items-center gap-6 text-sm font-medium text-slate-200 medium:flex">
-              <LocalizedClientLink
+            <nav
+              aria-label={dictionary.common.store}
+              className="hidden items-center gap-7 medium:flex large:gap-9"
+            >
+              <NavItem
                 href="/store"
-                className="transition hover:text-[#ff5a00]"
-              >
-                {dictionary.common.store}
-              </LocalizedClientLink>
+                activePath="/store"
+                label={dictionary.common.store}
+              />
 
-              <LocalizedClientLink
+              <NavItem
                 href="/store"
-                className="transition hover:text-[#ff5a00]"
-              >
-                {dictionary.navigation.specialOffers}
-              </LocalizedClientLink>
+                label={dictionary.navigation.specialOffers}
+              />
 
-              <LocalizedClientLink
+              <NavItem
                 href="/store"
-                className="transition hover:text-[#ff5a00]"
-              >
-                {dictionary.navigation.newArrivals}
-              </LocalizedClientLink>
+                label={dictionary.navigation.newArrivals}
+              />
 
-              <LocalizedClientLink
+              <NavItem
                 href="/#categories"
-                className="transition hover:text-[#ff5a00]"
-              >
-                {dictionary.navigation.categories}
-              </LocalizedClientLink>
+                label={dictionary.navigation.categories}
+              />
             </nav>
 
-            <div className="hidden max-w-[460px] flex-1 medium:block">
+            <div className="hidden max-w-[540px] flex-1 medium:block large:max-w-[600px]">
               <form action="./store" className="relative">
                 <button
                   type="submit"
@@ -105,7 +144,7 @@ export default function Nav({
                   type="search"
                   name="q"
                   placeholder={dictionary.navigation.searchPlaceholder}
-                  className="h-12 w-full rounded-full border border-white/10 bg-[#111923] ps-12 pe-5 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-[#ff5a00]/60 focus:ring-2 focus:ring-[#ff5a00]/20"
+                  className="h-12 w-full rounded-full border border-white/10 bg-[#111923] ps-12 pe-5 text-sm text-white outline-none transition duration-300 placeholder:text-slate-500 hover:border-white/20 focus:border-[#ff5a00]/60 focus:shadow-[0_0_0_4px_rgba(255,90,0,0.08)] focus:ring-0"
                 />
               </form>
             </div>
