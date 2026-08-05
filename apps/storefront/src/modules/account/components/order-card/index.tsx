@@ -1,3 +1,4 @@
+import { useI18n } from "@i18n/components/i18n-provider"
 import { Button } from "@modules/common/components/ui"
 import { useMemo } from "react"
 
@@ -11,6 +12,10 @@ type OrderCardProps = {
 }
 
 const OrderCard = ({ order }: OrderCardProps) => {
+  const { locale, dictionary } = useI18n()
+  const content = dictionary.account.orderCard
+  const numberLocale = locale === "fa" ? "fa-IR" : "en-US"
+
   const numberOfLines = useMemo(() => {
     return (
       order.items?.reduce((acc, item) => {
@@ -41,9 +46,12 @@ const OrderCard = ({ order }: OrderCardProps) => {
             currency_code: order.currency_code,
           })}
         </span>
-        <span className="pl-2">{`${numberOfLines} ${
-          numberOfLines > 1 ? "items" : "item"
-        }`}</span>
+        <span className="ps-2">
+          {content.items.replace(
+            "{count}",
+            numberOfLines.toLocaleString(numberLocale),
+          )}
+        </span>
       </div>
       <div className="my-5 grid grid-cols-2 gap-4 small:grid-cols-4">
         {order.items?.slice(0, 3).map((i) => {
@@ -70,16 +78,18 @@ const OrderCard = ({ order }: OrderCardProps) => {
         {numberOfProducts > 4 && (
           <div className="w-full h-full flex flex-col items-center justify-center">
             <span className="text-sm text-slate-400">
-              + {numberOfLines - 4}
+              {content.more.replace(
+                "{count}",
+                Math.max(numberOfLines - 4, 0).toLocaleString(numberLocale),
+              )}
             </span>
-            <span className="text-sm text-slate-400">more</span>
           </div>
         )}
       </div>
       <div className="flex justify-end">
         <LocalizedClientLink href={`/account/orders/details/${order.id}`}>
           <Button data-testid="order-details-link" variant="secondary">
-            See details
+            {content.details}
           </Button>
         </LocalizedClientLink>
       </div>

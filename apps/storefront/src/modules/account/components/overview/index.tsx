@@ -4,7 +4,7 @@ import { useI18n } from "@i18n/components/i18n-provider"
 import { convertToLocale } from "@lib/util/money"
 import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
-import { Container, clx } from "@modules/common/components/ui"
+import { clx } from "@modules/common/components/ui"
 import ChevronDown from "@modules/common/icons/chevron-down"
 
 type OverviewProps = {
@@ -110,7 +110,7 @@ const Overview = ({ customer, orders }: OverviewProps) => {
                       <LocalizedClientLink
                         href={`/account/orders/details/${order.id}`}
                       >
-                        <Container className="flex items-center justify-between rounded-[16px] border border-white/10 bg-[#0c1219] p-4 text-slate-300 transition hover:border-[#ff5a00]/40 hover:bg-[#ff5a00]/5">
+                        <div className="flex items-center justify-between rounded-[16px] border border-white/10 bg-[#0c1219] p-4 text-slate-300 transition hover:border-[#ff5a00]/40 hover:bg-[#ff5a00]/5">
                           <div className="grid flex-1 grid-cols-3 grid-rows-2 gap-x-4 text-small-regular">
                             <span className="font-semibold">
                               {dictionary.accountOverview.datePlaced}
@@ -162,7 +162,7 @@ const Overview = ({ customer, orders }: OverviewProps) => {
                               String(order.display_id),
                             )}
                           </span>
-                        </Container>
+                        </div>
                       </LocalizedClientLink>
                     </li>
                   ))

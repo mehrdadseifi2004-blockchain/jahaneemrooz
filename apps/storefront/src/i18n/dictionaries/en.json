@@ -74,6 +74,12 @@
       "emptyTitle": "Your Cart Is Empty",
       "emptyDescription": "You haven't added any products to your cart yet.",
       "browseProducts": "Browse Products"
+    },
+    "originalPrice": "Original:",
+    "signInPrompt": {
+      "title": "Already Have an Account?",
+      "description": "Sign in for a faster and better shopping experience.",
+      "submit": "Sign In"
     }
   },
   "language": {
@@ -498,6 +504,10 @@
     },
     "item": {
       "quantityUnit": "pcs"
+    },
+    "page": {
+      "pageTitle": "Order Details",
+      "backToOrders": "Back to Orders"
     }
   },
   "sideMenu": {
@@ -602,5 +612,55 @@
     "remove": "Remove",
     "cancel": "Cancel",
     "save": "Save"
+  },
+  "account": {
+    "login": {
+      "title": "Welcome Back",
+      "description": "Sign in to your account for a faster and better shopping experience.",
+      "verificationPrefix": "We sent a verification link to",
+      "verificationSuffix": "Verify your email and then sign in.",
+      "email": "Email",
+      "emailTitle": "Enter a valid email address.",
+      "password": "Password",
+      "submit": "Sign In",
+      "notMember": "Not a member yet?",
+      "join": "Create an account"
+    },
+    "register": {
+      "title": "Create an Account",
+      "description": "Create your Jahan Emrooz account and manage your purchases more easily.",
+      "verificationPrefix": "We sent a verification link to",
+      "verificationSuffix": "Check your inbox and verify your account.",
+      "firstName": "First Name",
+      "lastName": "Last Name",
+      "email": "Email",
+      "phone": "Phone",
+      "password": "Password",
+      "agreementPrefix": "By creating an account, you agree to Jahan Emrooz's",
+      "privacyPolicy": "Privacy Policy",
+      "and": "and",
+      "termsOfUse": "Terms of Use",
+      "agreementSuffix": ".",
+      "submit": "Create Account",
+      "alreadyMember": "Already have an account?",
+      "signIn": "Sign In"
+    },
+    "info": {
+      "edit": "Edit",
+      "cancel": "Cancel",
+      "save": "Save Changes",
+      "updated": "{label} was updated successfully.",
+      "defaultError": "An error occurred. Please try again."
+    },
+    "orderCard": {
+      "items": "{count} items",
+      "more": "{count} more",
+      "details": "View Details"
+    },
+    "help": {
+      "title": "Have Questions?",
+      "description": "Find answers to frequently asked questions on our customer service page.",
+      "cta": "Customer Service"
+    }
   }
 }

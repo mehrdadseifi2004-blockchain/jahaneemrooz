@@ -1,3 +1,6 @@
+"use client"
+
+import { useI18n } from "@i18n/components/i18n-provider"
 import { getPercentageDiff } from "@lib/util/get-percentage-diff"
 import { convertToLocale } from "@lib/util/money"
 import { HttpTypes } from "@medusajs/types"
@@ -13,6 +16,8 @@ const LineItemPrice = ({
   style = "default",
   currencyCode,
 }: LineItemPriceProps) => {
+  const { dictionary } = useI18n()
+
   const originalPrice = item.original_total ?? 0
   const currentPrice = item.total ?? 0
   const hasReducedPrice = currentPrice < originalPrice
@@ -22,7 +27,9 @@ const LineItemPrice = ({
       {hasReducedPrice && (
         <div className="flex flex-wrap items-center justify-end gap-2">
           {style === "default" && (
-            <span className="text-xs text-slate-500">Original:</span>
+            <span className="text-xs text-slate-500">
+              {dictionary.cart.originalPrice}
+            </span>
           )}
 
           <span

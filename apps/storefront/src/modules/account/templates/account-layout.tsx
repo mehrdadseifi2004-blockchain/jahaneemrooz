@@ -1,4 +1,8 @@
+"use client"
+
 import React from "react"
+
+import { useI18n } from "@i18n/components/i18n-provider"
 
 import UnderlineLink from "@modules/common/components/interactive-link"
 
@@ -14,6 +18,9 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
   customer,
   children,
 }) => {
+  const { dictionary } = useI18n()
+  const content = dictionary.account.help
+
   return (
     <div
       className="flex-1 bg-[#070b10] text-white small:py-12"
@@ -27,16 +34,15 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
         <div className="flex flex-col items-end justify-between gap-8 border-t border-white/10 py-12 small:flex-row">
           <div>
             <h3 className="mb-4 !text-xl !font-bold !text-white">
-              Got questions?
+              {content.title}
             </h3>
             <span className="!text-sm !leading-7 !text-slate-400">
-              You can find frequently asked questions and answers on our
-              customer service page.
+              {content.description}
             </span>
           </div>
           <div>
             <UnderlineLink href="/customer-service">
-              Customer Service
+              {content.cta}
             </UnderlineLink>
           </div>
         </div>

@@ -1,3 +1,6 @@
+"use client"
+
+import { useI18n } from "@i18n/components/i18n-provider"
 import { convertToLocale } from "@lib/util/money"
 import { HttpTypes } from "@medusajs/types"
 
@@ -12,6 +15,8 @@ const LineItemUnitPrice = ({
   style = "default",
   currencyCode,
 }: LineItemUnitPriceProps) => {
+  const { dictionary } = useI18n()
+
   const total = item.total ?? 0
   const originalTotal = item.original_total ?? 0
   const quantity = Math.max(item.quantity, 1)
@@ -27,7 +32,9 @@ const LineItemUnitPrice = ({
       {hasReducedPrice && (
         <div className="flex flex-wrap items-center gap-2">
           {style === "default" && (
-            <span className="text-xs text-slate-500">Original:</span>
+            <span className="text-xs text-slate-500">
+              {dictionary.cart.originalPrice}
+            </span>
           )}
 
           <span

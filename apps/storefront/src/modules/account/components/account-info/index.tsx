@@ -1,4 +1,5 @@
 import { Disclosure } from "@headlessui/react"
+import { useI18n } from "@i18n/components/i18n-provider"
 import { Badge, Button, clx } from "@modules/common/components/ui"
 import { useEffect } from "react"
 
@@ -22,10 +23,13 @@ const AccountInfo = ({
   isSuccess,
   isError,
   clearState,
-  errorMessage = "An error occurred, please try again",
+  errorMessage,
   children,
   "data-testid": dataTestid,
 }: AccountInfoProps) => {
+  const { dictionary } = useI18n()
+  const content = dictionary.account.info
+
   const { state, close, toggle } = useToggleState()
 
   const { pending } = useFormStatus()
@@ -71,7 +75,7 @@ const AccountInfo = ({
             data-testid="edit-button"
             data-active={state}
           >
-            {state ? "Cancel" : "Edit"}
+            {state ? content.cancel : content.edit}
           </Button>
         </div>
       </div>
@@ -93,7 +97,7 @@ const AccountInfo = ({
             className="my-4 rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-3 text-emerald-400"
             color="green"
           >
-            <span>{label} updated succesfully</span>
+            <span>{content.updated.replace("{label}", label)}</span>
           </Badge>
         </Disclosure.Panel>
       </Disclosure>
@@ -115,7 +119,7 @@ const AccountInfo = ({
             className="my-4 rounded-xl border border-emerald-500/20 bg-emerald-500/10 p-3 text-emerald-400"
             color="red"
           >
-            <span>{errorMessage}</span>
+            <span>{errorMessage || content.defaultError}</span>
           </Badge>
         </Disclosure.Panel>
       </Disclosure>
@@ -140,7 +144,7 @@ const AccountInfo = ({
                 type="submit"
                 data-testid="save-button"
               >
-                Save changes
+                {content.save}
               </Button>
             </div>
           </div>
