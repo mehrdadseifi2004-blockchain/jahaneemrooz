@@ -30,12 +30,12 @@ export default async function BestSellingProducts({
   }
 
   return (
-    <section className="bg-[#070b10] pb-[50px] small:pb-20">
+    <section className="bg-[var(--theme-background)] pb-[50px] transition-colors duration-300 small:pb-20">
       <div className="content-container">
-        <div className="mb-[50px] h-px bg-white/10 small:mb-16" />
+        <div className="mb-[50px] h-px bg-[var(--theme-border)] small:mb-16" />
 
         <div className="text-center">
-          <h2 className="mb-8 text-[32px] font-black leading-tight tracking-[-0.03em] text-white small:mb-14 small:text-5xl">
+          <h2 className="mb-8 text-[32px] font-black leading-tight tracking-[-0.03em] text-[var(--theme-text)] small:mb-14 small:text-5xl">
             {dictionary.home.bestSelling.title}
           </h2>
 

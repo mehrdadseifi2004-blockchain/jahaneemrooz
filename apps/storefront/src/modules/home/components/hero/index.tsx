@@ -28,7 +28,7 @@ const Hero = ({ dictionary }: HeroProps) => {
   ]
 
   return (
-    <section className="relative overflow-hidden bg-[#070b10] text-white">
+    <section className="relative overflow-hidden bg-[var(--theme-background)] text-[var(--theme-text)] transition-colors duration-300">
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_25%_35%,rgba(255,90,0,0.18),transparent_35%),radial-gradient(circle_at_80%_15%,rgba(255,90,0,0.08),transparent_28%)]"
@@ -45,14 +45,14 @@ const Hero = ({ dictionary }: HeroProps) => {
       />
 
       <div className="content-container relative z-10">
-      <div className="grid min-h-[650px] grid-cols-1 items-center gap-10 py-14 medium:grid-cols-[0.42fr_0.58fr] medium:gap-14 medium:py-20">
+        <div className="grid min-h-[650px] grid-cols-1 items-center gap-10 py-14 medium:grid-cols-[0.42fr_0.58fr] medium:gap-14 medium:py-20">
           <div className="order-2 flex flex-col justify-center medium:order-1">
             <div className="mb-5 inline-flex w-fit items-center gap-2 rounded-full border border-[#ff5a00]/30 bg-[#ff5a00]/10 px-4 py-2 text-xs font-semibold text-[#ff7a1a]">
               <span className="h-2 w-2 rounded-full bg-[#ff5a00] shadow-[0_0_14px_rgba(255,90,0,0.9)]" />
               {hero.productsLabel}
             </div>
 
-            <h1 className="max-w-[650px] text-[42px] font-black leading-[1.1] tracking-[-0.03em] text-white small:text-[54px] medium:text-[64px]">
+            <h1 className="max-w-[650px] text-[42px] font-black leading-[1.1] tracking-[-0.03em] text-[var(--theme-text)] small:text-[54px] medium:text-[64px]">
               {hero.titleLine1}
 
               <span className="block">{hero.titleLine2}</span>
@@ -60,7 +60,7 @@ const Hero = ({ dictionary }: HeroProps) => {
               <span className="block text-[#ff5a00]">{hero.titleLine3}</span>
             </h1>
 
-            <p className="mt-6 max-w-[570px] text-sm leading-8 text-slate-400 small:text-base">
+            <p className="mt-6 max-w-[570px] text-sm leading-8 text-[var(--theme-text-muted)] small:text-base">
               {hero.description}
             </p>
 
@@ -77,23 +77,23 @@ const Hero = ({ dictionary }: HeroProps) => {
           </div>
 
           <div className="order-1 medium:order-2">
-  <div className="relative mx-auto w-full max-w-[920px] overflow-hidden medium:-ms-14">
-    <img
-      src="/images/hero-tech-products.png"
-      alt="محصولات دیجیتال جهان امروز"
-      className="block h-[390px] w-full scale-x-[1.18] object-cover object-center medium:h-[540px] medium:scale-x-[1.38]"
-    />
-  </div>
-</div>
- </div>
+            <div className="relative mx-auto w-full max-w-[920px] overflow-hidden medium:-ms-14">
+              <img
+                src="/images/hero-tech-products.png"
+                alt="محصولات دیجیتال جهان امروز"
+                className="block h-[390px] w-full scale-x-[1.18] object-cover object-center medium:h-[540px] medium:scale-x-[1.38]"
+              />
+            </div>
+          </div>
+        </div>
 
-        <div className="relative mb-14 grid grid-cols-1 overflow-hidden rounded-[28px] border border-white/10 bg-[#0c1219]/90 shadow-[0_20px_70px_rgba(0,0,0,0.28)] backdrop-blur medium:mb-20 medium:grid-cols-3">
+        <div className="relative mb-14 grid grid-cols-1 overflow-hidden rounded-[28px] border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] shadow-[0_20px_70px_var(--theme-shadow)] backdrop-blur medium:mb-20 medium:grid-cols-3">
           {statistics.map((statistic, index) => (
             <div
               key={statistic.label}
               className={`flex items-center gap-5 px-7 py-7 medium:px-9 ${
                 index < statistics.length - 1
-                  ? "border-b border-white/10 medium:border-b-0 medium:border-e"
+                  ? "border-b border-[var(--theme-border)] medium:border-b-0 medium:border-e"
                   : ""
               }`}
             >
@@ -102,11 +102,11 @@ const Hero = ({ dictionary }: HeroProps) => {
               </div>
 
               <div>
-                <p className="text-3xl font-black leading-none text-white medium:text-[38px]">
+                <p className="text-3xl font-black leading-none text-[var(--theme-text)] medium:text-[38px]">
                   {statistic.value}
                 </p>
 
-                <p className="mt-2 whitespace-nowrap text-sm text-slate-400">
+                <p className="mt-2 whitespace-nowrap text-sm text-[var(--theme-text-muted)]">
                   {statistic.label}
                 </p>
               </div>

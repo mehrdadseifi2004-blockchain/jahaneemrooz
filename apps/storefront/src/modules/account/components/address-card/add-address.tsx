@@ -154,7 +154,7 @@ const AddAddress = ({
                 type="reset"
                 variant="secondary"
                 onClick={close}
-                className="h-11 rounded-full border border-white/10 bg-[#0c1219] px-6 text-slate-300 hover:border-[#ff5a00]/40 hover:text-[#ff7a1a]"
+                className="h-11 rounded-full border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] px-6 text-[var(--theme-text-muted)] hover:border-[#ff5a00]/40 hover:text-[#ff7a1a]"
                 data-testid="cancel-button"
               >
                 {dictionary.addressForm.cancel}

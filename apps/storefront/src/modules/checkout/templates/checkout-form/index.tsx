@@ -25,20 +25,20 @@ export default async function CheckoutForm({
   }
 
   return (
-    <div className="overflow-hidden rounded-[24px] border border-white/10 bg-[#111923] shadow-[0_22px_70px_rgba(0,0,0,0.28)]">
+    <div className="overflow-hidden rounded-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface)] shadow-[0_22px_70px_var(--theme-shadow)] transition-colors duration-300">
       <div className="p-5 small:p-7">
         <Addresses cart={cart} customer={customer} />
       </div>
 
-      <div className="border-t border-white/10 p-5 small:p-7">
+      <div className="border-t border-[var(--theme-border)] p-5 small:p-7">
         <Shipping cart={cart} availableShippingMethods={shippingMethods} />
       </div>
 
-      <div className="border-t border-white/10 p-5 small:p-7">
+      <div className="border-t border-[var(--theme-border)] p-5 small:p-7">
         <Payment cart={cart} availablePaymentMethods={paymentMethods} />
       </div>
 
-      <div className="border-t border-white/10 p-5 small:p-7">
+      <div className="border-t border-[var(--theme-border)] p-5 small:p-7">
         <Review cart={cart} />
       </div>
     </div>

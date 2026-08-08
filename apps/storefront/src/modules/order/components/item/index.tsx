@@ -26,19 +26,19 @@ const Item = ({ item, currencyCode }: ItemProps) => {
         <Thumbnail
           thumbnail={item.thumbnail}
           size="square"
-          className="rounded-[16px] border border-white/10 bg-white shadow-none"
+          className="rounded-[16px] border border-[var(--theme-border)] bg-white shadow-none"
         />
       </div>
 
       <div className="min-w-0 flex-1">
         <h3
-          className="text-sm font-bold leading-6 text-white small:text-base"
+          className="text-sm font-bold leading-6 text-[var(--theme-text)] small:text-base"
           data-testid="product-name"
         >
           {item.product_title}
         </h3>
 
-        <div className="mt-1 text-xs text-slate-500">
+        <div className="mt-1 text-xs text-[var(--theme-text-subtle)]">
           <LineItemOptions
             variant={item.variant}
             data-testid="product-variant"
@@ -46,7 +46,7 @@ const Item = ({ item, currencyCode }: ItemProps) => {
         </div>
 
         <div className="mt-4 flex flex-wrap items-end justify-between gap-4">
-          <div className="flex items-center gap-1 text-xs text-slate-500">
+          <div className="flex items-center gap-1 text-xs text-[var(--theme-text-subtle)]">
             <span data-testid="product-quantity">
               {item.quantity.toLocaleString(numberLocale)}
             </span>

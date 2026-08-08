@@ -51,7 +51,7 @@ const ProductTabs = ({ product }: ProductTabsProps) => {
               className={`min-w-[150px] flex-1 whitespace-nowrap border-b px-5 py-5 text-sm transition small:px-6 small:py-6 small:text-base ${
                 isActive
                   ? "border-b-2 border-[#ff5a00] font-bold text-[#ff7a1a]"
-                  : "border-white/10 font-normal text-slate-500 hover:text-white"
+                  : "border-[var(--theme-border)] font-normal text-[var(--theme-text-subtle)] hover:text-[var(--theme-text)]"
               }`}
             >
               {tab.label}
@@ -122,26 +122,30 @@ const ProductDetails = ({ product }: ProductTabsProps) => {
   return (
     <div className="grid gap-8 large:grid-cols-[minmax(0,1fr)_380px]">
       <div>
-        <h2 className="text-2xl font-bold text-white">{t.about}</h2>
+        <h2 className="text-2xl font-bold text-[var(--theme-text)]">
+          {t.about}
+        </h2>
 
-        <p className="mt-4 whitespace-pre-line text-sm leading-8 text-slate-400 small:text-base">
+        <p className="mt-4 whitespace-pre-line text-sm leading-8 text-[var(--theme-text-muted)] small:text-base">
           {product.description || product.subtitle || t.noDescription}
         </p>
       </div>
 
-      <div className="overflow-hidden rounded-[24px] border border-white/10 bg-[#111923]">
+      <div className="overflow-hidden rounded-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface)] transition-colors duration-300">
         {specifications.map((item, index) => (
           <div
             key={item.label}
             className={`flex items-center justify-between gap-6 px-5 py-4 text-sm ${
               index !== specifications.length - 1
-                ? "border-b border-white/10"
+                ? "border-b border-[var(--theme-border)]"
                 : ""
             }`}
           >
-            <span className="text-slate-500">{item.label}</span>
+            <span className="text-[var(--theme-text-subtle)]">
+              {item.label}
+            </span>
 
-            <span className="text-end font-medium text-white">
+            <span className="text-end font-medium text-[var(--theme-text)]">
               {item.value}
             </span>
           </div>
@@ -160,9 +164,13 @@ const ProductReviews = () => {
     <div>
       <div className="mb-8 flex flex-col gap-4 small:flex-row small:items-center small:justify-between">
         <div>
-          <h2 className="text-2xl font-bold text-white">{t.customerReviews}</h2>
+          <h2 className="text-2xl font-bold text-[var(--theme-text)]">
+            {t.customerReviews}
+          </h2>
 
-          <p className="mt-2 text-sm text-slate-400">{t.sampleReviewsNotice}</p>
+          <p className="mt-2 text-sm text-[var(--theme-text-muted)]">
+            {t.sampleReviewsNotice}
+          </p>
         </div>
 
         <button
@@ -177,7 +185,7 @@ const ProductReviews = () => {
         {reviews.map((review) => (
           <article
             key={review.id}
-            className="rounded-[24px] border border-white/10 bg-[#111923] p-6 transition hover:border-[#ff5a00]/50 small:p-8"
+            className="rounded-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-6 transition hover:border-[#ff5a00]/50 small:p-8"
           >
             <div
               dir="ltr"
@@ -192,7 +200,9 @@ const ProductReviews = () => {
             </div>
 
             <div className="mt-4 flex items-center gap-2">
-              <strong className="text-lg text-white">{review.name}</strong>
+              <strong className="text-lg text-[var(--theme-text)]">
+                {review.name}
+              </strong>
 
               <span
                 aria-label={t.verifiedBuyer}
@@ -203,7 +213,7 @@ const ProductReviews = () => {
               </span>
             </div>
 
-            <p className="mt-3 text-sm leading-7 text-slate-400 small:text-base">
+            <p className="mt-3 text-sm leading-7 text-[var(--theme-text-muted)] small:text-base">
               {review.content}
             </p>
           </article>
@@ -219,18 +229,20 @@ const ProductFaq = () => {
 
   return (
     <div className="mx-auto max-w-4xl">
-      <h2 className="mb-6 text-2xl font-bold text-white">{t.faq}</h2>
+      <h2 className="mb-6 text-2xl font-bold text-[var(--theme-text)]">
+        {t.faq}
+      </h2>
 
-      <div className="divide-y divide-white/10 rounded-[24px] border border-white/10 bg-[#111923] px-5 small:px-8">
+      <div className="divide-y divide-[var(--theme-border)] rounded-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface)] px-5 transition-colors duration-300 small:px-8">
         {t.faqItems.map((item, index) => (
           <details key={item.question} className="group" open={index === 0}>
-            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-semibold text-white transition hover:text-[#ff7a1a]">
+            <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-5 font-semibold text-[var(--theme-text)] transition hover:text-[#ff7a1a]">
               <span>{item.question}</span>
 
               <span className="text-xl transition group-open:rotate-45">+</span>
             </summary>
 
-            <p className="pb-5 text-sm leading-7 text-slate-400 small:text-base">
+            <p className="pb-5 text-sm leading-7 text-[var(--theme-text-muted)] small:text-base">
               {item.answer}
             </p>
           </details>

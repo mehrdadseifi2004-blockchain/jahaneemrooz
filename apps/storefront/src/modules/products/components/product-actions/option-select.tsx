@@ -25,7 +25,7 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
 
   return (
     <div className="flex flex-col gap-y-3">
-      <span className="text-sm font-bold text-white">
+      <span className="text-sm font-bold text-[var(--theme-text)]">
         {dictionary.product.actions.selectLabel.replace("{title}", title)}
       </span>
 
@@ -43,7 +43,8 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
                 {
                   "border-[#ff5a00] bg-[#ff5a00]/15 text-[#ff7a1a] shadow-[0_8px_25px_rgba(255,90,0,0.12)]":
                     isSelected,
-                  "border-white/10 bg-[#111923] text-slate-300 hover:border-[#ff5a00]/50 hover:text-white":
+
+                  "border-[var(--theme-border)] bg-[var(--theme-surface)] text-[var(--theme-text-muted)] hover:border-[#ff5a00]/50 hover:text-[var(--theme-text)]":
                     !isSelected,
                 },
               )}

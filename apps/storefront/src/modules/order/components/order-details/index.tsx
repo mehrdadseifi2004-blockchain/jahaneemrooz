@@ -31,34 +31,40 @@ const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
 
   return (
     <div>
-      <p className="text-sm leading-7 text-slate-400 small:text-base">
+      <p className="text-sm leading-7 text-[var(--theme-text-muted)] small:text-base">
         {dictionary.order.details.emailNotice}
       </p>
 
       <p
-        className="mt-1 break-all font-semibold text-white"
+        className="mt-1 break-all font-semibold text-[var(--theme-text)]"
         data-testid="order-email"
       >
         {order.email}
       </p>
 
       <div className="mt-6 grid gap-3 small:grid-cols-2">
-        <div className="rounded-[16px] border border-white/10 bg-[#0c1219] p-4">
-          <p className="text-xs text-slate-500">
+        <div className="rounded-[16px] border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] p-4">
+          <p className="text-xs text-[var(--theme-text-subtle)]">
             {dictionary.order.details.orderNumber}
           </p>
 
-          <p className="mt-2 font-bold text-white" data-testid="order-id">
+          <p
+            className="mt-2 font-bold text-[var(--theme-text)]"
+            data-testid="order-id"
+          >
             #{order.display_id}
           </p>
         </div>
 
-        <div className="rounded-[16px] border border-white/10 bg-[#0c1219] p-4">
-          <p className="text-xs text-slate-500">
+        <div className="rounded-[16px] border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] p-4">
+          <p className="text-xs text-[var(--theme-text-subtle)]">
             {dictionary.order.details.orderDate}
           </p>
 
-          <p className="mt-2 font-bold text-white" data-testid="order-date">
+          <p
+            className="mt-2 font-bold text-[var(--theme-text)]"
+            data-testid="order-date"
+          >
             {orderDate}
           </p>
         </div>
@@ -66,8 +72,8 @@ const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
 
       {showStatus && (
         <div className="mt-3 grid gap-3 small:grid-cols-2">
-          <div className="rounded-[16px] border border-white/10 bg-[#0c1219] p-4">
-            <p className="text-xs text-slate-500">
+          <div className="rounded-[16px] border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] p-4">
+            <p className="text-xs text-[var(--theme-text-subtle)]">
               {dictionary.order.details.orderStatus}
             </p>
 
@@ -79,8 +85,8 @@ const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
             </p>
           </div>
 
-          <div className="rounded-[16px] border border-white/10 bg-[#0c1219] p-4">
-            <p className="text-xs text-slate-500">
+          <div className="rounded-[16px] border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] p-4">
+            <p className="text-xs text-[var(--theme-text-subtle)]">
               {dictionary.order.details.paymentStatus}
             </p>
 

@@ -8,7 +8,7 @@ const CustomerReviews = ({ dictionary }: CustomerReviewsProps) => {
   const reviews = dictionary.home.reviews.items
 
   return (
-    <section className="overflow-hidden border-t border-white/5 bg-[#070b10] py-[50px] text-white small:py-20">
+    <section className="overflow-hidden border-t border-[var(--theme-border)] bg-[var(--theme-background)] py-[50px] text-[var(--theme-text)] transition-colors duration-300 small:py-20">
       <div className="content-container">
         <div className="mb-8 flex items-end justify-between gap-4 small:mb-12">
           <div>
@@ -16,7 +16,7 @@ const CustomerReviews = ({ dictionary }: CustomerReviewsProps) => {
               JAHAN.EMROOZ
             </span>
 
-            <h2 className="max-w-3xl text-[32px] font-black leading-[1.1] tracking-[-0.03em] text-white small:text-5xl">
+            <h2 className="max-w-3xl text-[32px] font-black leading-[1.1] tracking-[-0.03em] text-[var(--theme-text)] small:text-5xl">
               {dictionary.home.reviews.title}
             </h2>
           </div>
@@ -28,7 +28,7 @@ const CustomerReviews = ({ dictionary }: CustomerReviewsProps) => {
           >
             <button
               type="button"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-[#111923] text-xl text-white transition hover:border-[#ff5a00]/50 hover:bg-[#ff5a00] hover:text-white"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--theme-border)] bg-[var(--theme-surface)] text-xl text-[var(--theme-text)] transition hover:border-[#ff5a00]/50 hover:bg-[#ff5a00] hover:text-white"
               tabIndex={-1}
             >
               ←
@@ -36,7 +36,7 @@ const CustomerReviews = ({ dictionary }: CustomerReviewsProps) => {
 
             <button
               type="button"
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-[#111923] text-xl text-white transition hover:border-[#ff5a00]/50 hover:bg-[#ff5a00] hover:text-white"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--theme-border)] bg-[var(--theme-surface)] text-xl text-[var(--theme-text)] transition hover:border-[#ff5a00]/50 hover:bg-[#ff5a00] hover:text-white"
               tabIndex={-1}
             >
               →
@@ -49,7 +49,7 @@ const CustomerReviews = ({ dictionary }: CustomerReviewsProps) => {
             {reviews.map((review) => (
               <article
                 key={review.id}
-                className="group relative flex min-h-[250px] w-[320px] shrink-0 flex-col items-start overflow-hidden rounded-[24px] border border-white/10 bg-[#111923] p-6 text-start shadow-[0_18px_50px_rgba(0,0,0,0.2)] transition duration-300 hover:-translate-y-1 hover:border-[#ff5a00]/60 hover:shadow-[0_24px_65px_rgba(255,90,0,0.1)] small:w-[400px] small:px-8 small:py-7"
+                className="group relative flex min-h-[250px] w-[320px] shrink-0 flex-col items-start overflow-hidden rounded-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-6 text-start shadow-[0_18px_50px_var(--theme-shadow)] transition duration-300 hover:-translate-y-1 hover:border-[#ff5a00]/60 hover:shadow-[0_24px_65px_rgba(255,90,0,0.1)] small:w-[400px] small:px-8 small:py-7"
               >
                 <div
                   aria-hidden="true"
@@ -74,7 +74,7 @@ const CustomerReviews = ({ dictionary }: CustomerReviewsProps) => {
                   </div>
 
                   <div>
-                    <strong className="text-base text-white small:text-lg">
+                    <strong className="text-base text-[var(--theme-text)] small:text-lg">
                       {review.name}
                     </strong>
 
@@ -92,7 +92,7 @@ const CustomerReviews = ({ dictionary }: CustomerReviewsProps) => {
                   </div>
                 </div>
 
-                <p className="relative mt-2 text-sm leading-7 text-slate-400 small:text-base">
+                <p className="relative mt-2 text-sm leading-7 text-[var(--theme-text-muted)] small:text-base">
                   {review.content}
                 </p>
               </article>

@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation"
+import Image from "next/image"
 
 import { AppLocale, isAppLocale } from "@i18n/config"
 import { getDictionary } from "@i18n/get-dictionary"
@@ -25,18 +26,60 @@ export default async function CheckoutLayout({
   const year = String(new Date().getFullYear())
 
   return (
-    <div className="relative flex min-h-screen w-full flex-col bg-[#070b10] text-white">
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#070b10]/95 backdrop-blur">
+    <div className="relative flex min-h-screen w-full flex-col bg-[var(--theme-background)] text-[var(--theme-text)]">
+      <header className="sticky top-0 z-50 border-b border-[var(--theme-border)] bg-[var(--theme-header)]/95 backdrop-blur">
         <nav className="content-container flex h-[76px] items-center justify-between gap-4 small:h-[88px]">
           <LocalizedClientLink
             href="/"
-            className="shrink-0 text-2xl font-black tracking-[-0.04em] text-white transition hover:text-[#ff5a00] small:text-[32px]"
+            aria-label="JAHAN.EMROOZ"
             data-testid="store-link"
+            className="group flex shrink-0 items-center gap-2"
           >
-            JAHAN.EMROOZ
+            <Image
+              src="/assets/logo-icon-transparent.png"
+              alt=""
+              width={56}
+              height={56}
+              priority
+              className="h-10 w-10 shrink-0 object-contain transition duration-300 group-hover:scale-105 small:h-12 small:w-12"
+            />
+
+            <div className="flex min-w-0 flex-col leading-none">
+              {requestedLocale === "fa" ? (
+                <>
+                  <span className="whitespace-nowrap text-[17px] font-bold tracking-tight">
+                    <span className="text-[var(--theme-text)]">جهان </span>
+                    <span className="text-[var(--theme-accent)]">امروز</span>
+                  </span>
+
+                  <span className="mt-1 whitespace-nowrap text-[8px] font-normal tracking-wide text-[var(--theme-text-subtle)]">
+                    فناوری
+                    <span className="mx-1 text-[var(--theme-accent)]">|</span>
+                    زندگی
+                    <span className="mx-1 text-[var(--theme-accent)]">|</span>
+                    آینده
+                  </span>
+                </>
+              ) : (
+                <>
+                  <span className="whitespace-nowrap text-[16px] font-black tracking-[-0.04em] text-[var(--theme-text)]">
+                    JAHAN.
+                    <span className="text-[var(--theme-accent)]">EMROOZ</span>
+                  </span>
+
+                  <span className="mt-1 whitespace-nowrap text-[7px] font-medium uppercase tracking-[0.14em] text-[var(--theme-text-subtle)]">
+                    Technology
+                    <span className="mx-1 text-[var(--theme-accent)]">|</span>
+                    Life
+                    <span className="mx-1 text-[var(--theme-accent)]">|</span>
+                    Future
+                  </span>
+                </>
+              )}
+            </div>
           </LocalizedClientLink>
 
-          <div className="hidden items-center gap-2 text-sm text-slate-400 medium:flex">
+          <div className="hidden items-center gap-2 text-sm text-[var(--theme-text-muted)] medium:flex">
             <span className="flex h-9 w-9 items-center justify-center rounded-full border border-[#ff5a00]/30 bg-[#ff5a00]/10 text-[#ff7a1a]">
               <svg
                 width="18"
@@ -69,7 +112,7 @@ export default async function CheckoutLayout({
 
           <LocalizedClientLink
             href="/cart"
-            className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full border border-white/10 bg-[#111923] px-4 text-xs font-bold text-slate-300 transition hover:border-[#ff5a00]/50 hover:text-[#ff7a1a] small:px-6 small:text-sm"
+            className="inline-flex h-11 shrink-0 items-center justify-center gap-2 rounded-full border border-[var(--theme-border)] bg-[var(--theme-surface)] px-4 text-xs font-bold text-[var(--theme-text-muted)] transition hover:border-[#ff5a00]/50 hover:text-[#ff7a1a] small:px-6 small:text-sm"
             data-testid="back-to-cart-link"
           >
             <span>{dictionary.checkout.layout.backToCart}</span>
@@ -86,15 +129,13 @@ export default async function CheckoutLayout({
         {children}
       </div>
 
-      <footer className="border-t border-white/10 bg-[#05080c] py-6">
-        <div className="content-container flex flex-col gap-3 text-sm text-slate-500 small:flex-row small:items-center small:justify-between">
+      <footer className="border-t border-[var(--theme-border)] bg-[var(--theme-header)] py-6 transition-colors duration-300">
+        <div className="content-container flex flex-col gap-3 text-sm text-[var(--theme-text-subtle)] small:flex-row small:items-center small:justify-between">
           <p>{dictionary.checkout.layout.copyright.replace("{year}", year)}</p>
 
           <div className="flex flex-wrap items-center gap-5">
             <span>{dictionary.checkout.layout.securePayment}</span>
-
             <span>{dictionary.checkout.layout.privacy}</span>
-
             <span>{dictionary.checkout.layout.support}</span>
           </div>
         </div>

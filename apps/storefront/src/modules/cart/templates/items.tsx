@@ -18,8 +18,8 @@ const ItemsTemplate = ({ cart }: ItemsTemplateProps) => {
     : null
 
   return (
-    <div className="rounded-[24px] border border-white/10 bg-[#111923] px-4 py-3 shadow-[0_18px_55px_rgba(0,0,0,0.22)] small:px-6 small:py-5">
-      <div className="divide-y divide-white/10">
+    <div className="rounded-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface)] px-4 py-3 shadow-[0_18px_55px_var(--theme-shadow)] transition-colors duration-300 small:px-6 small:py-5">
+      <div className="divide-y divide-[var(--theme-border)]">
         {sortedItems
           ? sortedItems.map((item) => (
               <Item

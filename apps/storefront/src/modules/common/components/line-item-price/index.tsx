@@ -27,13 +27,13 @@ const LineItemPrice = ({
       {hasReducedPrice && (
         <div className="flex flex-wrap items-center justify-end gap-2">
           {style === "default" && (
-            <span className="text-xs text-slate-500">
+            <span className="text-xs text-[var(--theme-text-subtle)]">
               {dictionary.cart.originalPrice}
             </span>
           )}
 
           <span
-            className="text-xs text-slate-500 line-through"
+            className="text-xs text-[var(--theme-text-subtle)] line-through"
             data-testid="product-original-price"
           >
             {convertToLocale({

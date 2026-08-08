@@ -57,7 +57,7 @@ export default async function RelatedProducts({
 
   return (
     <div>
-      <h2 className="mb-8 text-center text-[32px] font-black leading-tight tracking-[-0.03em] text-white small:mb-14 small:text-5xl">
+      <h2 className="mb-8 text-center text-[32px] font-black leading-tight tracking-[-0.03em] text-[var(--theme-text)] small:mb-14 small:text-5xl">
         {dictionary.product.related.title}
       </h2>
 

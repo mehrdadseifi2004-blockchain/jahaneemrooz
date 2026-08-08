@@ -56,12 +56,12 @@ export default async function Checkout({
   }
 
   return (
-    <main className="min-h-screen bg-[#070b10] pb-20 text-white">
+    <main className="min-h-screen bg-[var(--theme-background)] pb-20 text-[var(--theme-text)] transition-colors duration-300">
       <div className="content-container">
         <div className="pt-5 small:pt-6">
           <nav
             aria-label={dictionary.checkout.page.breadcrumbLabel}
-            className="mb-5 flex items-center gap-2 text-sm text-slate-500"
+            className="mb-5 flex items-center gap-2 text-sm text-[var(--theme-text-subtle)]"
           >
             <LocalizedClientLink
               href="/"
@@ -87,17 +87,17 @@ export default async function Checkout({
               <span className="hidden rtl:inline">←</span>
             </span>
 
-            <span className="text-white">
+            <span className="text-[var(--theme-text)]">
               {dictionary.checkout.page.checkout}
             </span>
           </nav>
 
           <div className="mb-7 small:mb-9">
-            <h1 className="text-[32px] font-black leading-tight tracking-[-0.03em] text-white small:text-[40px]">
+            <h1 className="text-[32px] font-black leading-tight tracking-[-0.03em] text-[var(--theme-text)] small:text-[40px]">
               {dictionary.checkout.page.title}
             </h1>
 
-            <p className="mt-3 max-w-2xl text-sm leading-7 text-slate-400 small:text-base">
+            <p className="mt-3 max-w-2xl text-sm leading-7 text-[var(--theme-text-muted)] small:text-base">
               {dictionary.checkout.page.description}
             </p>
           </div>

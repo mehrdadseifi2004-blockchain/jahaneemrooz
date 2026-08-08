@@ -167,7 +167,7 @@ export default function ProductActions({
           </div>
         )}
 
-        <div className="border-b border-white/10 pb-5">
+        <div className="border-b border-[var(--theme-border)] pb-5">
           <ProductPrice product={product} variant={selectedVariant} />
         </div>
 
@@ -196,7 +196,7 @@ export default function ProductActions({
             </p>
 
             {inStock && (
-              <p className="mt-1 text-xs text-slate-400">
+              <p className="mt-1 text-xs text-[var(--theme-text-muted)]">
                 {isDigital
                   ? dictionary.product.actions.digitalDelivery
                   : dictionary.product.actions.physicalDelivery}
@@ -206,19 +206,19 @@ export default function ProductActions({
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="flex h-14 shrink-0 items-center rounded-full border border-white/10 bg-[#111923] px-2">
+          <div className="flex h-14 shrink-0 items-center rounded-full border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] px-2">
             <button
               type="button"
               onClick={() => setQuantity((current) => Math.max(1, current - 1))}
               disabled={quantity <= 1 || isAdding}
               aria-label={dictionary.product.actions.decreaseQuantity}
-              className="flex h-10 w-10 items-center justify-center rounded-full text-xl text-white transition hover:bg-white/10 hover:text-[#ff7a1a] disabled:opacity-30"
+              className="flex h-10 w-10 items-center justify-center rounded-full text-xl text-[var(--theme-text)] transition hover:bg-[var(--theme-accent)]/10 hover:text-[var(--theme-accent-hover)] disabled:opacity-30"
             >
               −
             </button>
 
             <span
-              className="min-w-8 text-center text-base font-bold text-white"
+              className="min-w-8 text-center text-base font-bold text-[var(--theme-text)]"
               aria-live="polite"
             >
               {quantity}
@@ -231,7 +231,7 @@ export default function ProductActions({
               }
               disabled={isAdding}
               aria-label={dictionary.product.actions.increaseQuantity}
-              className="flex h-10 w-10 items-center justify-center rounded-full text-xl text-white transition hover:bg-white/10 hover:text-[#ff7a1a] disabled:opacity-30"
+              className="flex h-10 w-10 items-center justify-center rounded-full text-xl text-[var(--theme-text)] transition hover:bg-[var(--theme-accent)]/10 hover:text-[var(--theme-accent-hover)] disabled:opacity-30"
             >
               +
             </button>
@@ -247,7 +247,7 @@ export default function ProductActions({
               !isValidVariant
             }
             variant="primary"
-            className="h-14 min-w-0 flex-1 rounded-full !border-0 !bg-[#ff5a00] px-5 text-sm font-bold !text-white shadow-[0_14px_38px_rgba(255,90,0,0.22)] transition hover:!bg-[#ff7a1a] disabled:!bg-[#ff5a00]/40 small:text-base"
+            className="h-14 min-w-0 flex-1 rounded-full !border-0 !bg-[#ff5a00] px-5 text-sm font-bold !text-[var(--theme-text)] shadow-[0_14px_38px_rgba(255,90,0,0.22)] transition hover:!bg-[#ff7a1a] disabled:!bg-[#ff5a00]/40 small:text-base"
             isLoading={isAdding}
             data-testid="add-product-button"
           >
@@ -260,20 +260,20 @@ export default function ProductActions({
         </div>
 
         <div className="grid grid-cols-3 gap-2 text-center">
-          <div className="rounded-xl border border-white/10 bg-[#111923] p-3">
-            <p className="text-xs font-semibold text-slate-300">
+          <div className="rounded-xl border border-[var(--theme-border)] bg-[var(--theme-surface)] p-3">
+            <p className="text-xs font-semibold text-[var(--theme-text-muted)]">
               {dictionary.product.actions.securePurchase}
             </p>
           </div>
 
-          <div className="rounded-xl border border-white/10 bg-[#111923] p-3">
-            <p className="text-xs font-semibold text-slate-300">
+          <div className="rounded-xl border border-[var(--theme-border)] bg-[var(--theme-surface)] p-3">
+            <p className="text-xs font-semibold text-[var(--theme-text-muted)]">
               {dictionary.product.actions.support}
             </p>
           </div>
 
-          <div className="rounded-xl border border-white/10 bg-[#111923] p-3">
-            <p className="text-xs font-semibold text-slate-300">
+          <div className="rounded-xl border border-[var(--theme-border)] bg-[var(--theme-surface)] p-3">
+            <p className="text-xs font-semibold text-[var(--theme-text-muted)]">
               {dictionary.product.actions.fastDelivery}
             </p>
           </div>

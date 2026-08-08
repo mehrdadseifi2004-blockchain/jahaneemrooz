@@ -23,20 +23,20 @@ const AccountLayout: React.FC<AccountLayoutProps> = ({
 
   return (
     <div
-      className="flex-1 bg-[#070b10] text-white small:py-12"
+      className="flex-1 bg-[var(--theme-background)] text-[var(--theme-text)] small:py-12"
       data-testid="account-page"
     >
-      <div className="content-container mx-auto flex h-full max-w-6xl flex-1 flex-col bg-[#070b10]">
+      <div className="content-container mx-auto flex h-full max-w-6xl flex-1 flex-col bg-[var(--theme-background)]">
         <div className="grid grid-cols-1 gap-8 py-12 small:grid-cols-[240px_minmax(0,1fr)]">
           <div>{customer && <AccountNav customer={customer} />}</div>
           <div className="flex-1">{children}</div>
         </div>
-        <div className="flex flex-col items-end justify-between gap-8 border-t border-white/10 py-12 small:flex-row">
+        <div className="flex flex-col items-end justify-between gap-8 border-t border-[var(--theme-border)] py-12 small:flex-row">
           <div>
-            <h3 className="mb-4 !text-xl !font-bold !text-white">
+            <h3 className="mb-4 !text-xl !font-bold !text-[var(--theme-text)]">
               {content.title}
             </h3>
-            <span className="!text-sm !leading-7 !text-slate-400">
+            <span className="!text-sm !leading-7 !text-[var(--theme-text-muted)]">
               {content.description}
             </span>
           </div>

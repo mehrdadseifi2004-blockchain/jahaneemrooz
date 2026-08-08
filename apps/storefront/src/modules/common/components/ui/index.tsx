@@ -27,7 +27,7 @@ export const Text = forwardRef<HTMLParagraphElement, TextProps>(
         {children}
       </Component>
     )
-  }
+  },
 )
 Text.displayName = "Text"
 
@@ -46,14 +46,14 @@ export const Heading = forwardRef<HTMLHeadingElement, HeadingProps>(
           Component === "h1" && "text-3xl",
           Component === "h2" && "text-2xl",
           Component === "h3" && "text-xl",
-          className
+          className,
         )}
         {...props}
       >
         {children}
       </Component>
     )
-  }
+  },
 )
 Heading.displayName = "Heading"
 
@@ -75,7 +75,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       children,
       ...props
     },
-    ref
+    ref,
   ) => {
     return (
       <button
@@ -83,21 +83,21 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         disabled={disabled || isLoading}
         className={clsx(
           "inline-flex gap-2 items-center justify-center rounded-md font-medium transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50",
-          variant === "primary" && "bg-black text-white hover:bg-gray-800",
+          variant === "primary" && "bg-[#ff5a00] text-white hover:bg-[#ff7a1a]",
           variant === "secondary" &&
-            "bg-white text-black border border-gray-200 hover:bg-gray-50",
+            "border border-[var(--theme-border)] bg-[var(--theme-surface)] text-[var(--theme-text)] hover:bg-[var(--theme-surface-muted)]",
           variant === "transparent" && "bg-transparent hover:bg-gray-100",
           size === "small" && "h-8 px-3 text-sm",
           size === "medium" && "h-10 px-4",
           size === "large" && "h-12 px-6 text-lg",
-          className
+          className,
         )}
         {...props}
       >
         {isLoading ? "Loading..." : children}
       </button>
     )
-  }
+  },
 )
 Button.displayName = "Button"
 
@@ -109,13 +109,16 @@ export const Container = forwardRef<HTMLDivElement, ContainerProps>(
     return (
       <div
         ref={ref}
-        className={clsx("bg-white rounded-lg p-4", className)}
+        className={clsx(
+          "rounded-lg bg-[var(--theme-surface)] p-4 text-[var(--theme-text)]",
+          className,
+        )}
         {...props}
       >
         {children}
       </div>
     )
-  }
+  },
 )
 Container.displayName = "Container"
 
@@ -137,14 +140,14 @@ export const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
           color === "orange" && "bg-orange-100 text-orange-700",
           color === "grey" && "bg-gray-100 text-gray-700",
           color === "purple" && "bg-purple-100 text-purple-700",
-          className
+          className,
         )}
         {...props}
       >
         {children}
       </span>
     )
-  }
+  },
 )
 Badge.displayName = "Badge"
 
@@ -158,14 +161,14 @@ export const IconBadge = forwardRef<HTMLSpanElement, IconBadgeProps>(
         ref={ref}
         className={clsx(
           "inline-flex items-center justify-center rounded-full bg-gray-100 p-1",
-          className
+          className,
         )}
         {...props}
       >
         {children}
       </span>
     )
-  }
+  },
 )
 IconBadge.displayName = "IconBadge"
 
@@ -179,14 +182,14 @@ export const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         ref={ref}
         className={clsx(
           "inline-flex items-center justify-center rounded-md p-2 hover:bg-gray-100 transition-colors focus-visible:outline-none focus-visible:ring-2",
-          className
+          className,
         )}
         {...props}
       >
         {children}
       </button>
     )
-  }
+  },
 )
 IconButton.displayName = "IconButton"
 
@@ -204,7 +207,7 @@ export const Label = forwardRef<HTMLLabelElement, LabelProps>(
         {children}
       </label>
     )
-  }
+  },
 )
 Label.displayName = "Label"
 
@@ -221,14 +224,14 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
         <input
           ref={ref}
           className={clsx(
-            "flex h-10 w-full rounded-md border border-gray-200 bg-white px-3 py-2 text-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-900 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
-            className
+            "flex h-10 w-full rounded-md border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] px-3 py-2 text-sm text-[var(--theme-text)] placeholder:text-[var(--theme-text-subtle)] focus:outline-none focus:ring-2 focus:ring-[#ff5a00]/40 disabled:cursor-not-allowed disabled:opacity-50",
+            className,
           )}
           {...props}
         />
       </div>
     )
-  }
+  },
 )
 Input.displayName = "Input"
 
@@ -246,7 +249,7 @@ const TableRoot = forwardRef<HTMLTableElement, TableProps>(
         {children}
       </table>
     )
-  }
+  },
 )
 TableRoot.displayName = "Table"
 
@@ -263,7 +266,7 @@ const TableHeader = forwardRef<HTMLTableSectionElement, TableHeaderProps>(
         {children}
       </thead>
     )
-  }
+  },
 )
 TableHeader.displayName = "TableHeader"
 
@@ -280,7 +283,7 @@ const TableBody = forwardRef<HTMLTableSectionElement, TableBodyProps>(
         {children}
       </tbody>
     )
-  }
+  },
 )
 TableBody.displayName = "TableBody"
 
@@ -293,14 +296,14 @@ const TableRow = forwardRef<HTMLTableRowElement, TableRowProps>(
         ref={ref}
         className={clsx(
           "border-b transition-colors hover:bg-gray-50",
-          className
+          className,
         )}
         {...props}
       >
         {children}
       </tr>
     )
-  }
+  },
 )
 TableRow.displayName = "TableRow"
 
@@ -313,14 +316,14 @@ const TableHead = forwardRef<HTMLTableCellElement, TableHeadProps>(
         ref={ref}
         className={clsx(
           "h-12 px-4 text-left align-middle font-medium text-gray-500 [&:has([role=checkbox])]:pr-0",
-          className
+          className,
         )}
         {...props}
       >
         {children}
       </th>
     )
-  }
+  },
 )
 TableHead.displayName = "TableHead"
 
@@ -333,14 +336,14 @@ const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(
         ref={ref}
         className={clsx(
           "p-4 align-middle [&:has([role=checkbox])]:pr-0",
-          className
+          className,
         )}
         {...props}
       >
         {children}
       </td>
     )
-  }
+  },
 )
 TableCell.displayName = "TableCell"
 
@@ -367,7 +370,7 @@ const RadioGroupRoot = forwardRef<HTMLDivElement, RadioGroupProps>(
         {children}
       </div>
     )
-  }
+  },
 )
 RadioGroupRoot.displayName = "RadioGroup"
 
@@ -385,14 +388,14 @@ const RadioGroupItem = forwardRef<HTMLInputElement, RadioGroupItemProps>(
           id={id}
           className={clsx(
             "h-4 w-4 border-gray-300 text-gray-900 focus:ring-gray-900",
-            className
+            className,
           )}
           {...props}
         />
         {label && <Label htmlFor={id}>{label}</Label>}
       </div>
     )
-  }
+  },
 )
 RadioGroupItem.displayName = "RadioGroupItem"
 
@@ -415,13 +418,13 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
           id={id}
           className={clsx(
             "h-4 w-4 rounded border-gray-300 text-gray-900 focus:ring-gray-900",
-            className
+            className,
           )}
           {...props}
         />
         {label && <Label htmlFor={id}>{label}</Label>}
       </div>
     )
-  }
+  },
 )
 Checkbox.displayName = "Checkbox"

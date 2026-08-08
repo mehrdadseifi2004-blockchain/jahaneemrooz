@@ -10,7 +10,7 @@ export default async function PreviewPrice({ price }: { price: VariantPrice }) {
     <div className="flex flex-col gap-1">
       {price.price_type === "sale" && (
         <span
-          className="text-xs text-slate-500 line-through"
+          className="text-xs text-[var(--theme-text-subtle)] line-through"
           data-testid="original-price"
         >
           {price.original_price}

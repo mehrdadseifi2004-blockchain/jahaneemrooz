@@ -72,16 +72,16 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
             thumbnail={item.thumbnail}
             images={item.variant?.product?.images}
             size="square"
-            className="rounded-xl border border-white/10 bg-white"
+            className="rounded-xl border border-[var(--theme-border)] bg-white"
           />
         </LocalizedClientLink>
 
         <div className="min-w-0 flex-1">
-          <p className="line-clamp-1 text-sm font-semibold text-white">
+          <p className="line-clamp-1 text-sm font-semibold text-[var(--theme-text)]">
             {item.product_title}
           </p>
 
-          <div className="mt-1 flex items-center gap-1 text-xs text-slate-500">
+          <div className="mt-1 flex items-center gap-1 text-xs text-[var(--theme-text-subtle)]">
             <span>
               {item.quantity.toLocaleString(numberLocale)}{" "}
               {dictionary.cart.item.quantityUnit}
@@ -121,7 +121,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
             thumbnail={item.thumbnail}
             images={item.variant?.product?.images}
             size="square"
-            className="rounded-[13px] border border-white/10 bg-white shadow-none small:rounded-[20px]"
+            className="rounded-[13px] border border-[var(--theme-border)] bg-white shadow-none small:rounded-[20px]"
           />
         </LocalizedClientLink>
 
@@ -129,7 +129,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
           <div className="flex items-start justify-between gap-3">
             <LocalizedClientLink
               href={`/products/${item.product_handle}`}
-              className="line-clamp-2 text-base font-bold leading-6 text-white transition hover:text-[#ff7a1a] small:text-xl"
+              className="line-clamp-2 text-base font-bold leading-6 text-[var(--theme-text)] transition hover:text-[#ff7a1a] small:text-xl"
               data-testid="product-title"
             >
               {item.product_title}
@@ -145,9 +145,9 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
 
           {item.variant_title &&
             !item.variant_title.toLowerCase().includes("default") && (
-              <p className="mt-1 text-xs leading-6 text-slate-400 small:text-sm">
+              <p className="mt-1 text-xs leading-6 text-[var(--theme-text-muted)] small:text-sm">
                 {dictionary.cart.item.selectedOption}{" "}
-                <span className="font-semibold text-slate-200">
+                <span className="font-semibold text-[var(--theme-text)]">
                   {item.variant_title}
                 </span>
               </p>
@@ -164,7 +164,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
               </div>
 
               {item.quantity > 1 && (
-                <div className="mt-1 flex items-center gap-1 text-xs text-slate-500">
+                <div className="mt-1 flex items-center gap-1 text-xs text-[var(--theme-text-subtle)]">
                   <span>{dictionary.cart.item.unitPrice}</span>
 
                   <LineItemUnitPrice
@@ -179,19 +179,19 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
             <div className="flex items-center gap-2">
               {updating && <Spinner />}
 
-              <div className="flex h-10 items-center rounded-full border border-white/10 bg-[#0c1219] px-2 small:h-11">
+              <div className="flex h-10 items-center rounded-full border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] px-2 small:h-11">
                 <button
                   type="button"
                   onClick={() => changeQuantity(item.quantity - 1)}
                   disabled={item.quantity <= 1 || updating}
                   aria-label={dictionary.cart.item.decreaseQuantity}
-                  className="flex h-8 w-8 items-center justify-center rounded-full text-xl text-white transition hover:bg-white/10 hover:text-[#ff7a1a] disabled:cursor-not-allowed disabled:opacity-30"
+                  className="flex h-8 w-8 items-center justify-center rounded-full text-xl text-[var(--theme-text)] transition hover:bg-[#ff5a00]/10 hover:text-[#ff7a1a] disabled:cursor-not-allowed disabled:opacity-30"
                 >
                   −
                 </button>
 
                 <span
-                  className="min-w-8 text-center text-sm font-bold text-white"
+                  className="min-w-8 text-center text-sm font-bold text-[var(--theme-text)]"
                   data-testid="product-quantity"
                   aria-live="polite"
                 >
@@ -203,7 +203,7 @@ const Item = ({ item, type = "full", currencyCode }: ItemProps) => {
                   onClick={() => changeQuantity(item.quantity + 1)}
                   disabled={item.quantity >= maxQuantity || updating}
                   aria-label={dictionary.cart.item.increaseQuantity}
-                  className="flex h-8 w-8 items-center justify-center rounded-full text-xl text-white transition hover:bg-white/10 hover:text-[#ff7a1a] disabled:cursor-not-allowed disabled:opacity-30"
+                  className="flex h-8 w-8 items-center justify-center rounded-full text-xl text-[var(--theme-text)] transition hover:bg-[#ff5a00]/10 hover:text-[#ff7a1a] disabled:cursor-not-allowed disabled:opacity-30"
                 >
                   +
                 </button>

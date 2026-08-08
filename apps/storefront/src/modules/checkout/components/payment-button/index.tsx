@@ -47,7 +47,7 @@ const PaymentButton = ({
   return (
     <Button
       disabled
-      className="h-14 w-full rounded-full !border-0 !bg-[#ff5a00]/30 !text-white"
+      className="h-14 w-full rounded-full !border-0 !bg-[var(--theme-accent)]/30 !text-[var(--theme-text)] transition"
     >
       {dictionary.checkout.paymentButton.selectMethod}
     </Button>
@@ -156,7 +156,7 @@ const StripePaymentButton = ({
         onClick={handlePayment}
         size="large"
         isLoading={submitting}
-        className="h-14 w-full rounded-full !border-0 !bg-[#ff5a00] text-base font-bold !text-white shadow-[0_14px_40px_rgba(255,90,0,0.22)] transition hover:!bg-[#ff7a1a] disabled:!bg-[#ff5a00]/30"
+        className="h-14 w-full rounded-full !border-0 !bg-[var(--theme-accent)] text-base font-bold !text-[var(--theme-text)] shadow-[0_14px_40px_rgba(255,90,0,0.22)] transition hover:!bg-[var(--theme-accent-hover)] disabled:!bg-[var(--theme-accent)]/30 disabled:opacity-60"
         data-testid={dataTestId}
       >
         {dictionary.checkout.paymentButton.payAndPlace}
@@ -206,7 +206,7 @@ const ManualPaymentButton = ({
         isLoading={submitting}
         onClick={handlePayment}
         size="large"
-        className="h-14 w-full rounded-full !border-0 !bg-[#ff5a00] text-base font-bold !text-white shadow-[0_14px_40px_rgba(255,90,0,0.22)] transition hover:!bg-[#ff7a1a] disabled:!bg-[#ff5a00]/30"
+        className="h-14 w-full rounded-full !border-0 !bg-[var(--theme-accent)] text-base font-bold !text-[var(--theme-text)] shadow-[0_14px_40px_rgba(255,90,0,0.22)] transition hover:!bg-[var(--theme-accent-hover)] disabled:!bg-[var(--theme-accent)]/30 disabled:opacity-60"
         data-testid={dataTestId}
       >
         {dictionary.checkout.paymentButton.placeOrder}

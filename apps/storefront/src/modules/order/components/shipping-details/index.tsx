@@ -27,20 +27,20 @@ const ShippingDetails = ({ order }: ShippingDetailsProps) => {
 
   return (
     <div>
-      <h2 className="text-xl font-bold text-white small:text-2xl">
+      <h2 className="text-xl font-bold text-[var(--theme-text)] small:text-2xl">
         {dictionary.order.shipping.title}
       </h2>
 
       <div className="mt-6 grid gap-4 medium:grid-cols-3">
         <div
-          className="rounded-[16px] border border-white/10 bg-[#0c1219] p-5"
+          className="rounded-[16px] border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] p-5"
           data-testid="shipping-address-summary"
         >
-          <p className="text-sm font-bold text-white">
+          <p className="text-sm font-bold text-[var(--theme-text)]">
             {dictionary.order.shipping.address}
           </p>
 
-          <div className="mt-3 text-sm leading-7 text-slate-400">
+          <div className="mt-3 text-sm leading-7 text-[var(--theme-text-muted)]">
             <p>
               {address?.first_name} {address?.last_name}
             </p>
@@ -68,14 +68,14 @@ const ShippingDetails = ({ order }: ShippingDetailsProps) => {
         </div>
 
         <div
-          className="rounded-[16px] border border-white/10 bg-[#0c1219] p-5"
+          className="rounded-[16px] border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] p-5"
           data-testid="shipping-contact-summary"
         >
-          <p className="text-sm font-bold text-white">
+          <p className="text-sm font-bold text-[var(--theme-text)]">
             {dictionary.order.shipping.contact}
           </p>
 
-          <div className="mt-3 text-sm leading-7 text-slate-400">
+          <div className="mt-3 text-sm leading-7 text-[var(--theme-text-muted)]">
             <p>
               {dictionary.order.shipping.phone} {address?.phone || notProvided}
             </p>
@@ -87,14 +87,14 @@ const ShippingDetails = ({ order }: ShippingDetailsProps) => {
         </div>
 
         <div
-          className="rounded-[16px] border border-white/10 bg-[#0c1219] p-5"
+          className="rounded-[16px] border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] p-5"
           data-testid="shipping-method-summary"
         >
-          <p className="text-sm font-bold text-white">
+          <p className="text-sm font-bold text-[var(--theme-text)]">
             {dictionary.order.shipping.method}
           </p>
 
-          <div className="mt-3 text-sm leading-7 text-slate-400">
+          <div className="mt-3 text-sm leading-7 text-[var(--theme-text-muted)]">
             <p>{shippingMethod?.name || notProvided}</p>
 
             <p>

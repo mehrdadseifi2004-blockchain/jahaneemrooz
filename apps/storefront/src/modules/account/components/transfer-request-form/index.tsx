@@ -23,13 +23,16 @@ export default function TransferRequestForm() {
   }, [state.success, state.order])
 
   return (
-    <div className="flex w-full flex-col gap-y-4 rounded-[24px] border border-white/10 bg-[#111923] p-5 small:p-6">
+    <div className="flex w-full flex-col gap-y-4 rounded-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-5 small:p-6">
       <div className="grid w-full items-center gap-x-8 gap-y-5 small:grid-cols-2">
         <div className="flex flex-col gap-y-1">
-          <Heading level="h3" className="!text-base !font-bold !text-white">
+          <Heading
+            level="h3"
+            className="!text-base !font-bold !text-[var(--theme-text)]"
+          >
             Order transfers
           </Heading>
-          <p className="text-sm leading-7 text-slate-400">
+          <p className="text-sm leading-7 text-[var(--theme-text-muted)]">
             Can&apos;t find the order you are looking for?
             <br /> Connect an order to your account.
           </p>
@@ -40,14 +43,14 @@ export default function TransferRequestForm() {
         >
           <div className="flex w-full flex-col gap-y-3">
             <Input
-              className="h-12 w-full rounded-xl border border-white/10 bg-[#0c1219] px-4 text-white outline-none placeholder:text-slate-600 focus:border-[#ff5a00]/60 focus:ring-4 focus:ring-[#ff5a00]/10"
+              className="h-12 w-full rounded-xl border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] px-4 text-[var(--theme-text)] outline-none placeholder:text-[var(--theme-text-subtle)] focus:border-[#ff5a00]/60 focus:ring-4 focus:ring-[#ff5a00]/10"
               name="order_id"
               placeholder="Order ID"
             />
             <SubmitButton
               variant="secondary"
               size="small"
-              className="h-11 w-fit self-end whitespace-nowrap rounded-full border border-[#ff5a00]/40 bg-[#ff5a00]/10 px-6 font-bold text-[#ff7a1a] hover:bg-[#ff5a00] hover:text-white"
+              className="h-11 w-fit self-end whitespace-nowrap rounded-full border border-[#ff5a00]/40 bg-[#ff5a00]/10 px-6 font-bold text-[#ff7a1a] hover:bg-[#ff5a00] hover:text-[var(--theme-text)]"
             >
               Request transfer
             </SubmitButton>

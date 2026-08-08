@@ -181,10 +181,11 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
               className={clx(
                 "flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold",
                 {
-                  "bg-black text-white": isOpen,
-                  "bg-emerald-50 text-emerald-600":
+                  "bg-[var(--theme-accent)] text-[var(--theme-text)]": isOpen,
+                  "bg-emerald-500/15 text-emerald-500":
                     !isOpen && Boolean(selectedMethod),
-                  "bg-[#0c1219] text-slate-600": !isOpen && !selectedMethod,
+                  "bg-[var(--theme-surface-muted)] text-[var(--theme-text-subtle)]":
+                    !isOpen && !selectedMethod,
                 },
               )}
             >
@@ -198,14 +199,16 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
             <h2
               className={clx(
                 "text-xl font-bold small:text-2xl",
-                selectedMethod || isOpen ? "text-white" : "text-slate-600",
+                selectedMethod || isOpen
+                  ? "text-[var(--theme-text)]"
+                  : "text-[var(--theme-text-subtle)]",
               )}
             >
               {dictionary.checkout.shipping.title}
             </h2>
           </div>
 
-          <p className="ms-12 mt-2 text-sm leading-7 text-slate-500">
+          <p className="ms-12 mt-2 text-sm leading-7 text-[var(--theme-text-muted)]">
             {dictionary.checkout.shipping.description}
           </p>
         </div>
@@ -214,7 +217,7 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
           <button
             type="button"
             onClick={handleEdit}
-            className="shrink-0 text-sm font-semibold text-black hover:text-black/70"
+            className="shrink-0 text-sm font-semibold text-[var(--theme-accent)] hover:text-[var(--theme-accent-hover)]"
             data-testid="edit-delivery-button"
           >
             {dictionary.checkout.shipping.edit}
@@ -243,8 +246,8 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
                   className={clx(
                     "flex cursor-pointer items-center justify-between rounded-2xl border p-5 transition",
                     showPickupOptions === PICKUP_OPTION_ON
-                      ? "border-[#ff5a00] bg-[#ff5a00]/10 shadow-[0_10px_30px_rgba(255,90,0,0.08)]"
-                      : "border-black/10 hover:border-black/20",
+                      ? "border-[var(--theme-accent)] bg-[color:rgba(255,90,0,0.1)] shadow-[0_10px_30px_rgba(255,90,0,0.08)]"
+                      : "border-[var(--theme-border)] hover:border-[#ff5a00]/40",
                   )}
                 >
                   <div className="flex items-center gap-3">
@@ -253,10 +256,10 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
                     />
 
                     <div>
-                      <p className="font-bold text-white">
+                      <p className="font-bold text-[var(--theme-text)]">
                         {dictionary.checkout.shipping.pickup}
                       </p>
-                      <p className="mt-1 text-xs text-slate-500">
+                      <p className="mt-1 text-xs text-[var(--theme-text-muted)]">
                         {dictionary.checkout.shipping.pickupDescription}
                       </p>
                     </div>
@@ -295,20 +298,21 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
                       className={clx(
                         "flex items-center justify-between rounded-2xl border p-5 transition",
                         isDisabled
-                          ? "cursor-not-allowed border-white/5 bg-white/[0.02] opacity-40"
+                          ? "cursor-not-allowed border-[var(--theme-border)] bg-[var(--theme-surface-muted)] opacity-40"
                           : "cursor-pointer hover:border-[#ff5a00]/50",
                         option.id === shippingMethodId
-                          ? "border-[#ff5a00] bg-[#ff5a00]/10 shadow-[0_10px_30px_rgba(255,90,0,0.08)]"
-                          : "border-white/10 bg-[#0c1219]",
+                          ? "border-[var(--theme-accent)] bg-[color:rgba(255,90,0,0.1)] shadow-[0_10px_30px_rgba(255,90,0,0.08)]"
+                          : "border-[var(--theme-border)] bg-[var(--theme-surface-muted)]",
                       )}
                     >
                       <div className="flex items-center gap-3">
                         <MedusaRadio checked={option.id === shippingMethodId} />
 
                         <div>
-                          <p className="font-bold text-white">{option.name}</p>
-
-                          <p className="mt-1 text-xs text-slate-500">
+                          <p className="font-bold text-[var(--theme-text)]">
+                            {option.name}
+                          </p>
+                          <p className="mt-1 text-xs text-[var(--theme-text-muted)]">
                             {dictionary.checkout.shipping.deliveryDescription}
                           </p>
                         </div>
@@ -340,7 +344,7 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
 
           {showPickupOptions === PICKUP_OPTION_ON && (
             <div className="mt-6">
-              <h3 className="mb-3 font-bold text-white">
+              <h3 className="mb-3 font-bold text-[var(--theme-text)]">
                 {dictionary.checkout.shipping.selectLocation}
               </h3>
 
@@ -368,8 +372,8 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
                             ? "cursor-not-allowed opacity-50"
                             : "cursor-pointer hover:border-[#ff5a00]/50",
                           option.id === shippingMethodId
-                            ? "border-[#ff5a00] bg-[#ff5a00]/10 shadow-[0_10px_30px_rgba(255,90,0,0.08)]"
-                            : "border-white/10 bg-[#0c1219]",
+                            ? "border-[var(--theme-accent)] bg-[color:rgba(255,90,0,0.1)] shadow-[0_10px_30px_rgba(255,90,0,0.08)]"
+                            : "border-[var(--theme-border)] bg-[var(--theme-surface-muted)]",
                         )}
                       >
                         <div className="flex items-start gap-3">
@@ -378,11 +382,11 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
                           />
 
                           <div>
-                            <p className="font-bold text-white">
+                            <p className="font-bold text-[var(--theme-text)]">
                               {option.name}
                             </p>
 
-                            <p className="mt-1 text-xs leading-6 text-slate-500">
+                            <p className="mt-1 text-xs leading-6 text-[var(--theme-text-muted)]">
                               {formatAddress(address, addressSeparator)}
                             </p>
                           </div>
@@ -411,7 +415,7 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
             type="button"
             onClick={handleSubmit}
             disabled={!cart.shipping_methods?.[0] || isLoading}
-            className="mt-7 flex h-12 w-full items-center justify-center rounded-full border-0 bg-[#ff5a00] px-7 text-base font-bold text-white shadow-[0_12px_35px_rgba(255,90,0,0.2)] transition hover:bg-[#ff7a1a] disabled:cursor-not-allowed disabled:bg-[#ff5a00]/30 small:w-auto"
+            className="mt-7 flex h-12 w-full items-center justify-center rounded-full border-0 bg-[var(--theme-accent)] px-7 text-base font-bold text-[var(--theme-text)] shadow-[0_12px_35px_rgba(255,90,0,0.2)] transition hover:bg-[var(--theme-accent-hover)] disabled:cursor-not-allowed disabled:bg-[var(--theme-accent)]/30 small:w-auto"
             data-testid="submit-delivery-option-button"
           >
             {isLoading
@@ -421,13 +425,15 @@ const Shipping = ({ cart, availableShippingMethods }: ShippingProps) => {
         </>
       ) : (
         selectedMethod && (
-          <div className="rounded-2xl border border-white/10 bg-[#0c1219] p-5">
-            <p className="text-xs text-slate-500">
+          <div className="rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] p-5">
+            <p className="text-xs text-[var(--theme-text-muted)]">
               {dictionary.checkout.shipping.selected}
             </p>
 
             <div className="mt-2 flex items-center justify-between gap-4">
-              <p className="font-bold text-white">{selectedMethod.name}</p>
+              <p className="font-bold text-[var(--theme-text)]">
+                {selectedMethod.name}
+              </p>
 
               <p className="text-sm font-semibold text-[#ff7a1a]">
                 {convertToLocale({

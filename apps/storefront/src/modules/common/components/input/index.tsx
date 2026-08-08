@@ -39,7 +39,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="flex flex-col w-full">
         {topLabel && (
-          <Label className="mb-2 !text-sm !font-bold !text-white">
+          <Label className="mb-2 !text-sm !font-bold !text-[var(--theme-text)]">
             {topLabel}
           </Label>
         )}
@@ -49,14 +49,14 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             name={name}
             placeholder=" "
             required={required}
-            className="mt-0 block h-12 w-full appearance-none rounded-xl border border-white/10 bg-[#0c1219] px-4 pb-1 pt-4 text-white caret-[#ff5a00] outline-none transition hover:border-white/20 focus:border-[#ff5a00]/60 focus:ring-4 focus:ring-[#ff5a00]/10"
+            className="mt-0 block h-12 w-full appearance-none rounded-xl border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] px-4 pb-1 pt-4 text-[var(--theme-text)] caret-[#ff5a00] outline-none transition hover:border-[#ff5a00]/35 focus:border-[#ff5a00]/60 focus:ring-4 focus:ring-[#ff5a00]/10"
             {...props}
             ref={inputRef}
           />
           <label
             htmlFor={name}
             onClick={() => inputRef.current?.focus()}
-            className="absolute top-3 -z-1 mx-3 flex origin-0 items-center justify-center px-1 text-slate-500 transition-all duration-300"
+            className="absolute top-3 -z-1 mx-3 flex origin-0 items-center justify-center px-1 text-[var(--theme-text-subtle)] transition-all duration-300"
           >
             {label}
             {required && <span className="text-rose-500">*</span>}
@@ -65,7 +65,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
             <button
               type="button"
               onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-0 top-3 px-4 text-slate-500 outline-none transition duration-150 hover:text-white focus:outline-none"
+              className="absolute right-0 top-3 px-4 text-[var(--theme-text-subtle)] outline-none transition duration-150 hover:text-[var(--theme-text)] focus:outline-none"
             >
               {showPassword ? <Eye /> : <EyeOff />}
             </button>

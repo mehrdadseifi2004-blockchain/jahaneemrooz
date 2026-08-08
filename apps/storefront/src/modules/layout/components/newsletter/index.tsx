@@ -26,7 +26,7 @@ const Newsletter = () => {
       aria-labelledby="newsletter-title"
       className="content-container relative z-10"
     >
-      <div className="relative grid gap-8 overflow-hidden rounded-[28px] border border-[#ff5a00]/25 bg-[#111923] px-6 py-8 text-white shadow-[0_25px_80px_rgba(0,0,0,0.35)] small:px-10 small:py-10 medium:grid-cols-2 medium:items-center medium:px-16">
+      <div className="relative grid gap-8 overflow-hidden rounded-[28px] border border-[#ff5a00]/25 bg-[var(--theme-surface)] px-6 py-8 text-[var(--theme-text)] shadow-[0_25px_80px_var(--theme-shadow)] small:px-10 small:py-10 medium:grid-cols-2 medium:items-center medium:px-16">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -start-20 -top-20 h-64 w-64 rounded-full bg-[#ff5a00]/15 blur-[90px]"
@@ -44,7 +44,7 @@ const Newsletter = () => {
 
           <h2
             id="newsletter-title"
-            className="max-w-[560px] text-[30px] font-black leading-[1.15] tracking-[-0.03em] text-white small:text-[40px] medium:text-[46px]"
+            className="max-w-[560px] text-[30px] font-black leading-[1.15] tracking-[-0.03em] text-[var(--theme-text)] small:text-[40px] medium:text-[46px]"
           >
             {dictionary.newsletter.title}
           </h2>
@@ -62,7 +62,7 @@ const Newsletter = () => {
 
               <strong>{dictionary.newsletter.success}</strong>
 
-              <span className="mt-1 font-normal text-slate-400">
+              <span className="mt-1 font-normal text-[var(--theme-text-muted)]">
                 {dictionary.newsletter.successDescription}
               </span>
             </div>
@@ -75,7 +75,7 @@ const Newsletter = () => {
               <div className="relative">
                 <span
                   aria-hidden="true"
-                  className="absolute start-5 top-1/2 -translate-y-1/2 text-slate-400"
+                  className="absolute start-5 top-1/2 -translate-y-1/2 text-[var(--theme-text-subtle)]"
                 >
                   <svg width="21" height="21" viewBox="0 0 24 24" fill="none">
                     <path
@@ -107,7 +107,7 @@ const Newsletter = () => {
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
                   placeholder={dictionary.newsletter.emailPlaceholder}
-                  className="h-13 w-full rounded-full border border-white/10 bg-[#0c1219] ps-12 pe-5 text-sm text-white outline-none transition placeholder:text-slate-500 focus:border-[#ff5a00]/60 focus:ring-4 focus:ring-[#ff5a00]/10"
+                  className="h-13 w-full rounded-full border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] ps-12 pe-5 text-sm text-[var(--theme-text)] outline-none transition placeholder:text-[var(--theme-text-subtle)] focus:border-[#ff5a00]/60 focus:ring-4 focus:ring-[#ff5a00]/10"
                 />
               </div>
 

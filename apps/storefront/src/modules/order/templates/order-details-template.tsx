@@ -23,14 +23,14 @@ const OrderDetailsTemplate: React.FC<OrderDetailsTemplateProps> = ({
   const content = dictionary.order.page
 
   return (
-    <div className="flex flex-col justify-center gap-y-5 text-white">
-      <div className="flex flex-col gap-4 rounded-[20px] border border-white/10 bg-[#111923] p-5 small:flex-row small:items-center small:justify-between">
-        <h1 className="text-3xl font-black tracking-[-0.03em] text-white">
+    <div className="flex flex-col justify-center gap-y-5 text-[var(--theme-text)]">
+      <div className="flex flex-col gap-4 rounded-[20px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-5 small:flex-row small:items-center small:justify-between">
+        <h1 className="text-3xl font-black tracking-[-0.03em] text-[var(--theme-text)]">
           {content.pageTitle}
         </h1>
         <LocalizedClientLink
           href="/account/orders"
-          className="flex items-center gap-2 text-sm font-bold text-slate-400 transition hover:text-[#ff7a1a]"
+          className="flex items-center gap-2 text-sm font-bold text-[var(--theme-text-muted)] transition hover:text-[#ff7a1a]"
           data-testid="back-to-overview-button"
         >
           <XMark /> {content.backToOrders}
@@ -40,19 +40,19 @@ const OrderDetailsTemplate: React.FC<OrderDetailsTemplateProps> = ({
         className="flex h-full w-full flex-col gap-5"
         data-testid="order-details-container"
       >
-        <section className="rounded-[24px] border border-white/10 bg-[#111923] p-5 small:p-7">
+        <section className="rounded-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-5 small:p-7">
           <OrderDetails order={order} showStatus />
         </section>
-        <section className="rounded-[24px] border border-white/10 bg-[#111923] p-5 small:p-7">
+        <section className="rounded-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-5 small:p-7">
           <Items order={order} />
         </section>
-        <section className="rounded-[24px] border border-white/10 bg-[#111923] p-5 small:p-7">
+        <section className="rounded-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-5 small:p-7">
           <ShippingDetails order={order} />
         </section>
-        <section className="rounded-[24px] border border-white/10 bg-[#111923] p-5 small:p-7">
+        <section className="rounded-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-5 small:p-7">
           <PaymentDetails order={order} />
         </section>
-        <section className="rounded-[24px] border border-white/10 bg-[#111923] p-5 small:p-7">
+        <section className="rounded-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-5 small:p-7">
           <OrderSummary order={order} />
         </section>
         <Help />

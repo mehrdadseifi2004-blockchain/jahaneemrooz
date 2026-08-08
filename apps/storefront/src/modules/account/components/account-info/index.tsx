@@ -47,16 +47,18 @@ const AccountInfo = ({
 
   return (
     <div
-      className="rounded-[20px] border border-white/10 bg-[#111923] p-5 text-sm shadow-[0_14px_40px_rgba(0,0,0,0.16)] small:p-6"
+      className="rounded-[20px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-5 text-sm shadow-[0_14px_40px_rgba(0,0,0,0.16)] small:p-6"
       data-testid={dataTestid}
     >
       <div className="flex items-start justify-between gap-5">
         <div className="flex min-w-0 flex-col gap-2">
-          <span className="text-sm font-bold text-white">{label}</span>
-          <div className="flex min-w-0 flex-1 basis-0 items-center gap-x-4 text-slate-400">
+          <span className="text-sm font-bold text-[var(--theme-text)]">
+            {label}
+          </span>
+          <div className="flex min-w-0 flex-1 basis-0 items-center gap-x-4 text-[var(--theme-text-muted)]">
             {typeof currentInfo === "string" ? (
               <span
-                className="break-words font-semibold text-slate-300"
+                className="break-words font-semibold text-[var(--theme-text-muted)]"
                 data-testid="current-info"
               >
                 {currentInfo}
@@ -69,7 +71,7 @@ const AccountInfo = ({
         <div>
           <Button
             variant="secondary"
-            className="min-h-10 w-[100px] rounded-full border border-[#ff5a00]/40 bg-[#ff5a00]/10 py-1 font-bold text-[#ff7a1a] transition hover:bg-[#ff5a00] hover:text-white"
+            className="min-h-10 w-[100px] rounded-full border border-[#ff5a00]/40 bg-[#ff5a00]/10 py-1 font-bold text-[#ff7a1a] transition hover:bg-[#ff5a00] hover:text-[var(--theme-text)]"
             onClick={handleToggle}
             type={state ? "reset" : "button"}
             data-testid="edit-button"
@@ -135,12 +137,12 @@ const AccountInfo = ({
             },
           )}
         >
-          <div className="mt-5 flex flex-col gap-y-3 border-t border-white/10 pt-5">
+          <div className="mt-5 flex flex-col gap-y-3 border-t border-[var(--theme-border)] pt-5">
             <div>{children}</div>
             <div className="mt-3 flex items-center justify-end">
               <Button
                 isLoading={pending}
-                className="h-11 w-full rounded-full !border-0 !bg-[#ff5a00] font-bold !text-white hover:!bg-[#ff7a1a] small:max-w-[170px]"
+                className="h-11 w-full rounded-full !border-0 !bg-[#ff5a00] font-bold !text-[var(--theme-text)] hover:!bg-[#ff7a1a] small:max-w-[170px]"
                 type="submit"
                 data-testid="save-button"
               >

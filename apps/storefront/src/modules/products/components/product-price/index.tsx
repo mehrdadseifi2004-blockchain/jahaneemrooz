@@ -34,7 +34,7 @@ export default function ProductPrice({
       {selectedPrice.price_type === "sale" && (
         <>
           <span
-            className="text-xl font-bold text-slate-500 line-through small:text-2xl"
+            className="text-xl font-bold text-[var(--theme-text-subtle)] line-through small:text-2xl"
             data-testid="original-product-price"
             data-value={selectedPrice.original_price_number}
           >

@@ -119,11 +119,12 @@ const Payment = ({
           <div className="flex items-center gap-3">
             <span
               className={clx(
-                "flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold",
+                "flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold transition-colors duration-300",
                 {
-                  "bg-black text-white": isOpen,
-                  "bg-emerald-50 text-emerald-600": !isOpen && paymentReady,
-                  "bg-[#0c1219] text-slate-600": !isOpen && !paymentReady,
+                  "bg-[var(--theme-accent)] text-[var(--theme-text)]": isOpen,
+                  "bg-emerald-500/15 text-emerald-500": !isOpen && paymentReady,
+                  "bg-[var(--theme-surface-muted)] text-[var(--theme-text-subtle)]":
+                    !isOpen && !paymentReady,
                 },
               )}
             >
@@ -136,15 +137,17 @@ const Payment = ({
 
             <h2
               className={clx(
-                "text-xl font-bold small:text-2xl",
-                isOpen || paymentReady ? "text-black" : "text-black/40",
+                "text-xl font-bold transition-colors duration-300 small:text-2xl",
+                isOpen || paymentReady
+                  ? "text-[var(--theme-text)]"
+                  : "text-[var(--theme-text-subtle)]",
               )}
             >
               {dictionary.checkout.payment.title}
             </h2>
           </div>
 
-          <p className="ms-12 mt-2 text-sm leading-7 text-slate-500">
+          <p className="ms-12 mt-2 text-sm leading-7 text-[var(--theme-text-subtle)]">
             {dictionary.checkout.payment.description}
           </p>
         </div>
@@ -153,7 +156,7 @@ const Payment = ({
           <button
             type="button"
             onClick={handleEdit}
-            className="text-sm font-semibold text-black hover:text-black/70"
+            className="text-sm font-semibold text-[#ff7a1a] transition hover:text-[#ff5a00]"
             data-testid="edit-payment-button"
           >
             {dictionary.checkout.payment.edit}
@@ -173,10 +176,10 @@ const Payment = ({
                   <div
                     key={method.id}
                     className={clx(
-                      "overflow-hidden rounded-2xl border p-1 transition",
+                      "overflow-hidden rounded-2xl border p-1 transition-colors duration-300",
                       selectedPaymentMethod === method.id
-                        ? "border-black bg-[#f0f0f0]"
-                        : "border-black/10",
+                        ? "border-[var(--theme-accent)] bg-[var(--theme-accent)]/5"
+                        : "border-[var(--theme-border)] bg-[var(--theme-surface-muted)]",
                     )}
                   >
                     {isStripeLike(method.id) ? (
@@ -203,7 +206,7 @@ const Payment = ({
 
           {paidByGiftcard && (
             <div className="rounded-2xl border border-emerald-500/20 bg-emerald-500/10 p-5">
-              <p className="font-bold text-emerald-400">
+              <p className="font-bold text-emerald-500">
                 {dictionary.checkout.payment.giftCardPayment}
               </p>
             </div>
@@ -211,11 +214,11 @@ const Payment = ({
 
           {!availablePaymentMethods?.length && !paidByGiftcard && (
             <div className="rounded-2xl border border-amber-500/20 bg-amber-500/10 p-5">
-              <p className="font-bold text-amber-400">
+              <p className="font-bold text-amber-500">
                 {dictionary.checkout.payment.noMethod}
               </p>
 
-              <p className="mt-2 text-sm leading-6 text-amber-300/80">
+              <p className="mt-2 text-sm leading-6 text-amber-600 dark:text-amber-300/80">
                 {dictionary.checkout.payment.noMethodHelp}
               </p>
             </div>
@@ -234,7 +237,7 @@ const Payment = ({
               (!selectedPaymentMethod && !paidByGiftcard) ||
               isLoading
             }
-            className="mt-7 flex h-12 w-full items-center justify-center rounded-full border-0 bg-[#ff5a00] px-7 text-base font-bold text-white shadow-[0_12px_35px_rgba(255,90,0,0.2)] transition hover:bg-[#ff7a1a] disabled:cursor-not-allowed disabled:bg-[#ff5a00]/30 small:w-auto"
+            className="mt-7 flex h-12 w-full items-center justify-center rounded-full border-0 bg-[var(--theme-accent)] px-7 text-base font-bold text-[var(--theme-text)] shadow-[0_12px_35px_rgba(255,90,0,0.2)] transition hover:bg-[var(--theme-accent-hover)] disabled:cursor-not-allowed disabled:bg-[var(--theme-accent)]/30 small:w-auto"
             data-testid="submit-payment-button"
           >
             {isLoading
@@ -247,13 +250,13 @@ const Payment = ({
       ) : (
         paymentReady &&
         (activeSession || paidByGiftcard) && (
-          <div className="rounded-2xl border border-white/10 bg-[#0c1219] p-5">
-            <p className="text-xs text-slate-500">
+          <div className="rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] p-5 transition-colors duration-300">
+            <p className="text-xs text-[var(--theme-text-subtle)]">
               {dictionary.checkout.payment.selected}
             </p>
 
             <div className="mt-3 flex items-center gap-3">
-              <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-[#ff5a00]/25 bg-[#ff5a00]/10 text-[#ff7a1a]">
+              <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--theme-accent)]/25 bg-[var(--theme-accent)]/10 text-[var(--theme-accent-hover)]">
                 {activeSession &&
                 paymentInfoMap[activeSession.provider_id]?.icon ? (
                   paymentInfoMap[activeSession.provider_id].icon
@@ -263,7 +266,7 @@ const Payment = ({
               </span>
 
               <div>
-                <p className="font-bold text-white">
+                <p className="font-bold text-[var(--theme-text)]">
                   {paidByGiftcard
                     ? dictionary.checkout.payment.giftCard
                     : paymentInfoMap[activeSession?.provider_id || ""]?.title ||
@@ -271,7 +274,7 @@ const Payment = ({
                       dictionary.checkout.payment.gateway}
                 </p>
 
-                <p className="mt-1 text-xs text-slate-500">
+                <p className="mt-1 text-xs text-[var(--theme-text-subtle)]">
                   {isStripeLike(selectedPaymentMethod) && cardBrand
                     ? cardBrand
                     : dictionary.checkout.payment.detailsLater}

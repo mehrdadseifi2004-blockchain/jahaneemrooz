@@ -21,11 +21,13 @@ const OrderOverview = ({ orders }: { orders: HttpTypes.StoreOrder[] }) => {
 
   return (
     <div
-      className="flex min-h-[320px] w-full flex-col items-center justify-center gap-y-4 rounded-[24px] border border-white/10 bg-[#111923] px-6 text-center"
+      className="flex min-h-[320px] w-full flex-col items-center justify-center gap-y-4 rounded-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface)] px-6 text-center"
       data-testid="no-orders-container"
     >
-      <h2 className="text-2xl font-black text-white">Nothing to see here</h2>
-      <p className="max-w-lg text-sm leading-7 text-slate-400">
+      <h2 className="text-2xl font-black text-[var(--theme-text)]">
+        Nothing to see here
+      </h2>
+      <p className="max-w-lg text-sm leading-7 text-[var(--theme-text-muted)]">
         You don&apos;t have any orders yet, let us change that {":)"}
       </p>
       <div className="mt-4">

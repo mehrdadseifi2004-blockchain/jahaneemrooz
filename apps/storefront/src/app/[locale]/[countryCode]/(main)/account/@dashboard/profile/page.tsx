@@ -51,12 +51,12 @@ export default async function Profile({ params }: Props) {
 
   return (
     <div className="w-full" data-testid="profile-page-wrapper">
-      <div className="mb-8 flex flex-col gap-y-3 rounded-[20px] border border-white/10 bg-[#111923] p-5 small:p-6">
-        <h1 className="text-3xl font-black tracking-[-0.03em] text-white">
+      <div className="mb-8 flex flex-col gap-y-3 rounded-[20px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-5 small:p-6">
+        <h1 className="text-3xl font-black tracking-[-0.03em] text-[var(--theme-text)]">
           {dictionary.accountPages.profile.title}
         </h1>
 
-        <p className="text-sm leading-7 text-slate-400">
+        <p className="text-sm leading-7 text-[var(--theme-text-muted)]">
           {dictionary.accountPages.profile.description}
         </p>
       </div>

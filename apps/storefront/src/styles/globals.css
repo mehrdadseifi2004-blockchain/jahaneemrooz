@@ -1,6 +1,55 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@layer base {
+  :root,
+  :root.dark {
+    --theme-background: #070b10;
+    --theme-header: #080d12;
+    --theme-surface: #111923;
+    --theme-surface-muted: #0c1219;
+    --theme-text: #ffffff;
+    --theme-text-muted: #94a3b8;
+    --theme-text-subtle: #64748b;
+    --theme-border: rgba(255, 255, 255, 0.1);
+    --theme-shadow: rgba(0, 0, 0, 0.28);
+    --theme-accent: #ff5a00;
+    --theme-accent-hover: #ff7a1a;
+  }
+
+  :root.light {
+    --theme-background: #f8fafc;
+    --theme-header: #ffffff;
+    --theme-surface: #ffffff;
+    --theme-surface-muted: #f1f5f9;
+    --theme-text: #0f172a;
+    --theme-text-muted: #334155;
+    --theme-text-subtle: #64748b;
+    --theme-border: rgba(15, 23, 42, 0.12);
+    --theme-shadow: rgba(15, 23, 42, 0.08);
+    --theme-accent: #ff5a00;
+    --theme-accent-hover: #e94f00;
+  }
+
+  html {
+    background: var(--theme-background);
+    color: var(--theme-text);
+  }
+
+  body {
+    min-height: 100vh;
+    background: var(--theme-background);
+    color: var(--theme-text);
+    transition:
+      background-color 250ms ease,
+      color 250ms ease;
+  }
+
+  ::selection {
+    background: rgba(255, 90, 0, 0.3);
+    color: var(--theme-text);
+  }
+}
 
 @layer utilities {
   /* Chrome, Safari and Opera */
@@ -35,9 +84,9 @@
   select:-webkit-autofill,
   select:-webkit-autofill:hover,
   select:-webkit-autofill:focus {
-    border: 1px solid #212121;
-    -webkit-text-fill-color: #212121;
-    -webkit-box-shadow: 0 0 0px 1000px #fff inset;
+    border: 1px solid var(--theme-border);
+    -webkit-text-fill-color: var(--theme-text);
+    -webkit-box-shadow: 0 0 0 1000px var(--theme-surface-muted) inset;
     transition: background-color 5000s ease-in-out 0s;
   }
 

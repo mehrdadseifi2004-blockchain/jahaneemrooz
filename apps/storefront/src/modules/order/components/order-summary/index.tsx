@@ -20,24 +20,24 @@ const OrderSummary = ({ order }: OrderSummaryProps) => {
 
   return (
     <div>
-      <h2 className="text-xl font-bold text-white small:text-2xl">
+      <h2 className="text-xl font-bold text-[var(--theme-text)] small:text-2xl">
         {dictionary.order.summary.title}
       </h2>
 
       <div className="mt-6 space-y-5">
         <div className="flex items-center justify-between gap-4">
-          <span className="text-slate-400">
+          <span className="text-[var(--theme-text-muted)]">
             {dictionary.order.summary.subtotal}
           </span>
 
-          <span className="font-bold text-white">
+          <span className="font-bold text-[var(--theme-text)]">
             {getAmount(order.subtotal)}
           </span>
         </div>
 
         {order.discount_total > 0 && (
           <div className="flex items-center justify-between gap-4">
-            <span className="text-slate-400">
+            <span className="text-[var(--theme-text-muted)]">
               {dictionary.order.summary.discount}
             </span>
 
@@ -49,7 +49,7 @@ const OrderSummary = ({ order }: OrderSummaryProps) => {
 
         {order.gift_card_total > 0 && (
           <div className="flex items-center justify-between gap-4">
-            <span className="text-slate-400">
+            <span className="text-[var(--theme-text-muted)]">
               {dictionary.order.summary.giftCard}
             </span>
 
@@ -60,19 +60,21 @@ const OrderSummary = ({ order }: OrderSummaryProps) => {
         )}
 
         <div className="flex items-center justify-between gap-4">
-          <span className="text-slate-400">
+          <span className="text-[var(--theme-text-muted)]">
             {dictionary.order.summary.shipping}
           </span>
 
-          <span className="font-bold text-white">
+          <span className="font-bold text-[var(--theme-text)]">
             {getAmount(order.shipping_total)}
           </span>
         </div>
 
         <div className="flex items-center justify-between gap-4">
-          <span className="text-slate-400">{dictionary.order.summary.tax}</span>
+          <span className="text-[var(--theme-text-muted)]">
+            {dictionary.order.summary.tax}
+          </span>
 
-          <span className="font-bold text-white">
+          <span className="font-bold text-[var(--theme-text)]">
             {getAmount(order.tax_total)}
           </span>
         </div>
@@ -80,7 +82,7 @@ const OrderSummary = ({ order }: OrderSummaryProps) => {
         <div className="h-px bg-white/10" />
 
         <div className="flex items-center justify-between gap-4">
-          <span className="text-lg font-bold text-white">
+          <span className="text-lg font-bold text-[var(--theme-text)]">
             {dictionary.order.summary.total}
           </span>
 

@@ -1,6 +1,6 @@
 const SkeletonProductPreview = () => {
   return (
-    <div className="animate-pulse rounded-[24px] border border-white/10 bg-[#111923] p-3 small:p-4">
+    <div className="animate-pulse rounded-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-3 small:p-4">
       <div className="aspect-square w-full rounded-[18px] bg-white/[0.06]" />
 
       <div className="mt-4 h-5 w-4/5 rounded-full bg-white/[0.06]" />

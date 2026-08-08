@@ -89,7 +89,7 @@ const SideMenu = ({
 
               {open && (
                 <div
-                  className="fixed inset-0 z-[50] bg-slate-950/45 backdrop-blur-sm"
+                  className="fixed inset-0 z-[50] bg-[var(--theme-surface)]/45 backdrop-blur-sm"
                   onClick={close}
                   data-testid="side-menu-backdrop"
                 />
@@ -119,7 +119,7 @@ const SideMenu = ({
                 >
                   <div
                     data-testid="nav-menu-popup"
-                    className="flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-white/10 bg-slate-950 p-6 text-white shadow-2xl"
+                    className="flex h-full flex-col justify-between overflow-hidden rounded-3xl border border-[var(--theme-border)] bg-[var(--theme-surface)] p-6 text-white shadow-2xl"
                   >
                     <div>
                       <div className="mb-8 flex items-center justify-between">
@@ -128,7 +128,7 @@ const SideMenu = ({
                             {dictionary.common.brand}
                           </p>
 
-                          <p className="mt-1 text-xs text-slate-400">
+                          <p className="mt-1 text-xs text-[var(--theme-text-muted)]">
                             {dictionary.sideMenu.brandDescription}
                           </p>
                         </div>
@@ -138,7 +138,7 @@ const SideMenu = ({
                           data-testid="close-menu-button"
                           onClick={close}
                           aria-label={dictionary.sideMenu.closeMenu}
-                          className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 transition hover:bg-white/10"
+                          className="flex h-10 w-10 items-center justify-center rounded-xl border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] transition hover:bg-[var(--theme-accent)]/10"
                         >
                           <XMark />
                         </button>
@@ -149,14 +149,14 @@ const SideMenu = ({
                           <li key={key}>
                             <LocalizedClientLink
                               href={href}
-                              className="flex items-center justify-between rounded-xl px-4 py-3 text-lg font-medium text-slate-200 transition hover:bg-white/10 hover:text-white"
+                              className="flex items-center justify-between rounded-xl px-4 py-3 text-lg font-medium text-[var(--theme-text)] transition hover:bg-[var(--theme-accent)]/10 hover:text-[var(--theme-text)]"
                               onClick={close}
                               data-testid={`${key}-link`}
                             >
                               <span>{name}</span>
 
                               <span
-                                className="text-slate-500"
+                                className="text-[var(--theme-text-subtle)]"
                                 aria-hidden="true"
                               >
                                 {isRtl ? "←" : "→"}
@@ -167,7 +167,7 @@ const SideMenu = ({
                       </ul>
                     </div>
 
-                    <div className="space-y-5 border-t border-white/10 pt-6">
+                    <div className="space-y-5 border-t border-[var(--theme-border)] pt-6">
                       {!!locales?.length && (
                         <div
                           className="flex justify-between"
@@ -209,7 +209,7 @@ const SideMenu = ({
                         />
                       </div>
 
-                      <Text className="text-xs text-slate-500">
+                      <Text className="text-xs text-[var(--theme-text-subtle)]">
                         © {new Date().getFullYear()}{" "}
                         {dictionary.footer.copyright}
                       </Text>

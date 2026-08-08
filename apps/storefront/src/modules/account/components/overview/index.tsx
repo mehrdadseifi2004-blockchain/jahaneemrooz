@@ -28,12 +28,12 @@ const Overview = ({ customer, orders }: OverviewProps) => {
   return (
     <div data-testid="overview-page-wrapper">
       <div className="hidden small:block">
-        <div className="mb-6 flex flex-col gap-3 rounded-[20px] border border-white/10 bg-[#111923] p-5 text-xl font-bold text-white medium:flex-row medium:items-center medium:justify-between">
+        <div className="mb-6 flex flex-col gap-3 rounded-[20px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-5 text-xl font-bold text-[var(--theme-text)] medium:flex-row medium:items-center medium:justify-between">
           <span data-testid="welcome-message" data-value={customer?.first_name}>
             {greeting}
           </span>
 
-          <span className="text-sm text-slate-400">
+          <span className="text-sm text-[var(--theme-text-muted)]">
             {dictionary.accountOverview.signedInAs}{" "}
             <span
               className="font-semibold"
@@ -45,11 +45,11 @@ const Overview = ({ customer, orders }: OverviewProps) => {
           </span>
         </div>
 
-        <div className="flex flex-col border-t border-white/10 py-8">
+        <div className="flex flex-col border-t border-[var(--theme-border)] py-8">
           <div className="col-span-1 row-span-2 flex h-full flex-1 flex-col gap-y-4">
             <div className="mb-8 grid grid-cols-1 gap-4 small:grid-cols-2">
-              <div className="flex flex-col gap-y-4 rounded-[20px] border border-white/10 bg-[#111923] p-5">
-                <h3 className="text-lg font-bold text-white">
+              <div className="flex flex-col gap-y-4 rounded-[20px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-5">
+                <h3 className="text-lg font-bold text-[var(--theme-text)]">
                   {dictionary.accountOverview.profile}
                 </h3>
 
@@ -62,14 +62,14 @@ const Overview = ({ customer, orders }: OverviewProps) => {
                     {getProfileCompletion(customer).toLocaleString(dateLocale)}%
                   </span>
 
-                  <span className="text-sm text-slate-500">
+                  <span className="text-sm text-[var(--theme-text-subtle)]">
                     {dictionary.accountOverview.completed}
                   </span>
                 </div>
               </div>
 
-              <div className="flex flex-col gap-y-4 rounded-[20px] border border-white/10 bg-[#111923] p-5">
-                <h3 className="text-lg font-bold text-white">
+              <div className="flex flex-col gap-y-4 rounded-[20px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-5">
+                <h3 className="text-lg font-bold text-[var(--theme-text)]">
                   {dictionary.accountOverview.addresses}
                 </h3>
 
@@ -84,20 +84,20 @@ const Overview = ({ customer, orders }: OverviewProps) => {
                     )}
                   </span>
 
-                  <span className="text-sm text-slate-500">
+                  <span className="text-sm text-[var(--theme-text-subtle)]">
                     {dictionary.accountOverview.saved}
                   </span>
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-col gap-y-4 rounded-[20px] border border-white/10 bg-[#111923] p-5">
-              <h3 className="text-lg font-bold text-white">
+            <div className="flex flex-col gap-y-4 rounded-[20px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-5">
+              <h3 className="text-lg font-bold text-[var(--theme-text)]">
                 {dictionary.accountOverview.recentOrders}
               </h3>
 
               <ul
-                className="flex flex-col gap-y-4 rounded-[20px] border border-white/10 bg-[#111923] p-5"
+                className="flex flex-col gap-y-4 rounded-[20px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-5"
                 data-testid="orders-wrapper"
               >
                 {orders?.length ? (
@@ -110,7 +110,7 @@ const Overview = ({ customer, orders }: OverviewProps) => {
                       <LocalizedClientLink
                         href={`/account/orders/details/${order.id}`}
                       >
-                        <div className="flex items-center justify-between rounded-[16px] border border-white/10 bg-[#0c1219] p-4 text-slate-300 transition hover:border-[#ff5a00]/40 hover:bg-[#ff5a00]/5">
+                        <div className="flex items-center justify-between rounded-[16px] border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] p-4 text-[var(--theme-text-muted)] transition hover:border-[#ff5a00]/40 hover:bg-[#ff5a00]/5">
                           <div className="grid flex-1 grid-cols-3 grid-rows-2 gap-x-4 text-small-regular">
                             <span className="font-semibold">
                               {dictionary.accountOverview.datePlaced}

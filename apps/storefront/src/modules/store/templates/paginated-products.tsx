@@ -84,8 +84,10 @@ export default async function PaginatedProducts({
 
   return (
     <>
-      <div className="mb-5 flex items-center justify-between border-b border-white/10 pb-5">
-        <p className="text-sm text-slate-400">{resultsSummary}</p>
+      <div className="mb-5 flex items-center justify-between border-b border-[var(--theme-border)] pb-5">
+        <p className="text-sm text-[var(--theme-text-muted)]">
+          {resultsSummary}
+        </p>
       </div>
 
       {products.length ? (
@@ -100,7 +102,7 @@ export default async function PaginatedProducts({
           ))}
         </ul>
       ) : (
-        <div className="flex min-h-[360px] flex-col items-center justify-center rounded-[24px] border border-white/10 bg-[#111923] px-6 text-center shadow-[0_18px_50px_rgba(0,0,0,0.2)]">
+        <div className="flex min-h-[360px] flex-col items-center justify-center rounded-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface)] px-6 text-center shadow-[0_18px_50px_rgba(0,0,0,0.2)]">
           <span className="text-5xl" aria-hidden="true">
             🔍
           </span>
@@ -109,7 +111,7 @@ export default async function PaginatedProducts({
             {dictionary.store.results.notFoundTitle}
           </h2>
 
-          <p className="mt-2 max-w-md text-sm leading-7 text-slate-400">
+          <p className="mt-2 max-w-md text-sm leading-7 text-[var(--theme-text-muted)]">
             {dictionary.store.results.notFoundDescription}
           </p>
         </div>

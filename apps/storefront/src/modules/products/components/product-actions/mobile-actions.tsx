@@ -72,7 +72,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
           leaveTo="opacity-0"
         >
           <div
-            className="flex h-full w-full flex-col items-center justify-center gap-y-3 border-t border-white/10 bg-[#0c1219] p-4 text-white shadow-[0_-15px_45px_rgba(0,0,0,0.4)]"
+            className="flex h-full w-full flex-col items-center justify-center gap-y-3 border-t border-[var(--theme-border)] bg-[var(--theme-header)] p-4 text-[var(--theme-text)] shadow-[0_-15px_45px_rgba(0,0,0,0.4)]"
             data-testid="mobile-actions"
           >
             <div className="flex items-center gap-x-2">
@@ -108,7 +108,7 @@ const MobileActions: React.FC<MobileActionsProps> = ({
                 <Button
                   onClick={open}
                   variant="secondary"
-                  className="w-full rounded-full border border-white/10 bg-[#111923] text-white"
+                  className="w-full rounded-full border border-[var(--theme-border)] bg-[var(--theme-surface)] text-[var(--theme-text)]"
                   data-testid="mobile-actions-button"
                 >
                   <div className="flex items-center justify-between w-full">
@@ -170,13 +170,13 @@ const MobileActions: React.FC<MobileActionsProps> = ({
                   <div className="flex w-full justify-end pe-6">
                     <button
                       onClick={close}
-                      className="flex h-12 w-12 items-center justify-center rounded-full border border-white/10 bg-[#111923] text-white"
+                      className="flex h-12 w-12 items-center justify-center rounded-full border border-[var(--theme-border)] bg-[var(--theme-surface)] text-[var(--theme-text)]"
                       data-testid="close-modal-button"
                     >
                       <X />
                     </button>
                   </div>
-                  <div className="border-t border-white/10 bg-[#0c1219] px-6 py-12 text-white">
+                  <div className="border-t border-[var(--theme-border)] bg-[var(--theme-header)] px-6 py-12 text-[var(--theme-text)]">
                     {(product.variants?.length ?? 0) > 1 && (
                       <div className="flex flex-col gap-y-6">
                         {(product.options || []).map((option) => {

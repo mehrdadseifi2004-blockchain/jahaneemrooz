@@ -85,16 +85,16 @@ export default async function CategoryGrid({ dictionary }: CategoryGridProps) {
   return (
     <section
       id="categories"
-      className="border-t border-white/5 bg-[#070b10] px-4 py-[50px] small:py-20 xl:px-0"
+      className="border-t border-[var(--theme-border)] bg-[var(--theme-background)] px-4 py-[50px] transition-colors duration-300 small:py-20 xl:px-0"
     >
       <div className="content-container">
-        <div className="overflow-hidden rounded-[34px] border border-white/10 bg-[#0c1219] px-5 pb-5 pt-10 text-center shadow-[0_25px_80px_rgba(0,0,0,0.3)] small:p-10 medium:p-14">
+        <div className="overflow-hidden rounded-[34px] border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] px-5 pb-5 pt-10 text-center shadow-[0_25px_80px_var(--theme-shadow)] small:p-10 medium:p-14">
           <div className="mx-auto mb-8 max-w-2xl small:mb-14">
             <span className="mb-4 inline-flex rounded-full border border-[#ff5a00]/30 bg-[#ff5a00]/10 px-4 py-2 text-xs font-bold text-[#ff7a1a]">
               JAHAN.EMROOZ
             </span>
 
-            <h2 className="text-[32px] font-black leading-[1.1] tracking-[-0.03em] text-white small:text-5xl">
+            <h2 className="text-[32px] font-black leading-[1.1] tracking-[-0.03em] text-[var(--theme-text)] small:text-5xl">
               {dictionary.home.categories.title}
             </h2>
           </div>
@@ -110,7 +110,7 @@ export default async function CategoryGrid({ dictionary }: CategoryGridProps) {
                 <LocalizedClientLink
                   key={category.id}
                   href={`/categories/${category.handle}`}
-                  className={`group relative min-h-[210px] overflow-hidden rounded-[24px] border border-white/10 bg-[#111923] text-start shadow-[0_18px_45px_rgba(0,0,0,0.22)] transition duration-300 hover:-translate-y-1 hover:border-[#ff5a00]/60 hover:shadow-[0_25px_65px_rgba(255,90,0,0.12)] medium:min-h-[300px] ${card.className}`}
+                  className={`group relative min-h-[210px] overflow-hidden rounded-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface)] text-start shadow-[0_18px_45px_var(--theme-shadow)] transition duration-300 hover:-translate-y-1 hover:border-[#ff5a00]/60 hover:shadow-[0_25px_65px_rgba(255,90,0,0.12)] medium:min-h-[300px] ${card.className}`}
                 >
                   <div
                     aria-hidden="true"
@@ -131,12 +131,12 @@ export default async function CategoryGrid({ dictionary }: CategoryGridProps) {
 
                   <div className="relative z-10 flex h-full flex-col justify-between p-6 medium:p-8">
                     <div className="max-w-[75%]">
-                      <h3 className="text-2xl font-black leading-tight text-white transition group-hover:text-[#ff7a1a] medium:text-4xl">
+                      <h3 className="text-2xl font-black leading-tight text-[var(--theme-text)] transition group-hover:text-[#ff7a1a] medium:text-4xl">
                         {category.name}
                       </h3>
 
                       {category.description && (
-                        <p className="mt-3 line-clamp-3 max-w-sm text-sm leading-7 text-slate-400">
+                        <p className="mt-3 line-clamp-3 max-w-sm text-sm leading-7 text-[var(--theme-text-muted)]">
                           {category.description}
                         </p>
                       )}

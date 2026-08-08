@@ -33,18 +33,18 @@ export default function CollectionTemplate({
   const sort = sortBy || "created_at"
 
   return (
-    <main className="min-h-screen bg-white pb-20">
+    <main className="min-h-screen bg-[var(--theme-background)] pb-20 text-[var(--theme-text)] transition-colors duration-300">
       <div className="content-container">
         <div className="flex flex-col gap-8 border-t border-black/10 py-6 medium:flex-row medium:items-start">
           <aside className="w-full shrink-0 medium:w-[295px]">
-            <div className="rounded-[20px] border border-black/10 bg-white px-6 py-5">
+            <div className="rounded-[20px] border border-[var(--theme-border)] bg-[var(--theme-surface)] px-6 py-5">
               <RefinementList sortBy={sort} hideOptionsPicker />
             </div>
           </aside>
 
           <section className="min-w-0 w-full flex-1">
             <div className="mb-8">
-              <h1 className="text-3xl font-black leading-tight text-black small:text-4xl">
+              <h1 className="text-3xl font-black leading-tight text-[var(--theme-text)] small:text-4xl">
                 {collection.title}
               </h1>
             </div>

@@ -50,7 +50,7 @@ const AccountNav = ({ customer }: AccountNavProps) => {
         {!isAccountRoot ? (
           <LocalizedClientLink
             href="/account"
-            className="flex items-center gap-x-2 rounded-xl border border-white/10 bg-[#111923] px-4 py-3 text-sm font-bold text-slate-300 transition hover:border-[#ff5a00]/40 hover:text-[#ff7a1a]"
+            className="flex items-center gap-x-2 rounded-xl border border-[var(--theme-border)] bg-[var(--theme-surface)] px-4 py-3 text-sm font-bold text-[var(--theme-text-muted)] transition hover:border-[#ff5a00]/40 hover:text-[#ff7a1a]"
             data-testid="account-main-link"
           >
             <ChevronDown
@@ -61,16 +61,16 @@ const AccountNav = ({ customer }: AccountNavProps) => {
           </LocalizedClientLink>
         ) : (
           <>
-            <div className="mb-4 rounded-2xl border border-white/10 bg-[#111923] px-6 py-5 text-xl font-bold text-white">
+            <div className="mb-4 rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-surface)] px-6 py-5 text-xl font-bold text-[var(--theme-text)]">
               {greeting}
             </div>
 
-            <div className="text-sm text-slate-300">
+            <div className="text-sm text-[var(--theme-text-muted)]">
               <ul>
                 <li>
                   <LocalizedClientLink
                     href="/account/profile"
-                    className="flex items-center justify-between border-b border-white/10 px-6 py-4 transition hover:bg-[#ff5a00]/10 hover:text-[#ff7a1a]"
+                    className="flex items-center justify-between border-b border-[var(--theme-border)] px-6 py-4 transition hover:bg-[#ff5a00]/10 hover:text-[#ff7a1a]"
                     data-testid="profile-link"
                   >
                     <div className="flex items-center gap-x-2">
@@ -86,7 +86,7 @@ const AccountNav = ({ customer }: AccountNavProps) => {
                 <li>
                   <LocalizedClientLink
                     href="/account/addresses"
-                    className="flex items-center justify-between border-b border-white/10 px-6 py-4 transition hover:bg-[#ff5a00]/10 hover:text-[#ff7a1a]"
+                    className="flex items-center justify-between border-b border-[var(--theme-border)] px-6 py-4 transition hover:bg-[#ff5a00]/10 hover:text-[#ff7a1a]"
                     data-testid="addresses-link"
                   >
                     <div className="flex items-center gap-x-2">
@@ -102,7 +102,7 @@ const AccountNav = ({ customer }: AccountNavProps) => {
                 <li>
                   <LocalizedClientLink
                     href="/account/orders"
-                    className="flex items-center justify-between border-b border-white/10 px-6 py-4 transition hover:bg-[#ff5a00]/10 hover:text-[#ff7a1a]"
+                    className="flex items-center justify-between border-b border-[var(--theme-border)] px-6 py-4 transition hover:bg-[#ff5a00]/10 hover:text-[#ff7a1a]"
                     data-testid="orders-link"
                   >
                     <div className="flex items-center gap-x-2">
@@ -118,7 +118,7 @@ const AccountNav = ({ customer }: AccountNavProps) => {
                 <li>
                   <button
                     type="button"
-                    className="flex w-full items-center justify-between border-b border-white/10 px-6 py-4 text-rose-400 transition hover:bg-rose-500/10 hover:text-rose-300"
+                    className="flex w-full items-center justify-between border-b border-[var(--theme-border)] px-6 py-4 text-rose-400 transition hover:bg-rose-500/10 hover:text-rose-300"
                     onClick={handleLogout}
                     data-testid="logout-button"
                   >
@@ -139,13 +139,13 @@ const AccountNav = ({ customer }: AccountNavProps) => {
 
       <div className="hidden small:block" data-testid="account-nav">
         <div>
-          <div className="mb-4 border-b border-white/10 pb-4">
-            <h3 className="text-lg font-black text-white">
+          <div className="mb-4 border-b border-[var(--theme-border)] pb-4">
+            <h3 className="text-lg font-black text-[var(--theme-text)]">
               {dictionary.accountNavigation.title}
             </h3>
           </div>
 
-          <div className="text-sm text-slate-300">
+          <div className="text-sm text-[var(--theme-text-muted)]">
             <ul className="mb-0 flex w-full flex-col gap-y-2">
               <li>
                 <AccountNavLink
@@ -195,7 +195,7 @@ const AccountNav = ({ customer }: AccountNavProps) => {
                 </AccountNavLink>
               </li>
 
-              <li className="mt-3 border-t border-white/10 pt-4 text-rose-400">
+              <li className="mt-3 border-t border-[var(--theme-border)] pt-4 text-rose-400">
                 <button
                   type="button"
                   onClick={handleLogout}
@@ -252,7 +252,7 @@ const AccountNavLink = ({
     <LocalizedClientLink
       href={href}
       className={clx(
-        "block w-full rounded-xl px-4 py-3 text-slate-400 transition hover:bg-white/5 hover:text-white",
+        "block w-full rounded-xl px-4 py-3 text-[var(--theme-text-muted)] transition hover:bg-white/5 hover:text-[var(--theme-text)]",
         {
           "bg-[#ff5a00]/10 font-bold text-[#ff7a1a]": active,
         },

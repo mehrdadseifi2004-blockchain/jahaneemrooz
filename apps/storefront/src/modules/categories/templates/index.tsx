@@ -70,11 +70,11 @@ export default function CategoryTemplate({
           </aside>
 
           <section className="min-w-0 w-full flex-1">
-            <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-black/60">
+            <nav className="mb-6 flex flex-wrap items-center gap-2 text-sm text-[var(--theme-text-muted)]">
               {orderedParents.map((parent) => (
                 <span key={parent.id} className="contents">
                   <LocalizedClientLink
-                    className="transition hover:text-black"
+                    className="transition hover:text-[var(--theme-text)]"
                     href={`/categories/${parent.handle}`}
                     data-testid="sort-by-link"
                   >
@@ -89,19 +89,21 @@ export default function CategoryTemplate({
                 </span>
               ))}
 
-              <span className="font-medium text-black">{category.name}</span>
+              <span className="font-medium text-[var(--theme-text)]">
+                {category.name}
+              </span>
             </nav>
 
             <div className="mb-8">
               <h1
-                className="text-3xl font-black leading-tight text-black small:text-4xl"
+                className="text-3xl font-black leading-tight text-[var(--theme-text)] small:text-4xl"
                 data-testid="category-page-title"
               >
                 {category.name}
               </h1>
 
               {category.description && (
-                <p className="mt-3 max-w-3xl text-sm leading-7 text-black/60 small:text-base">
+                <p className="mt-3 max-w-3xl text-sm leading-7 text-[var(--theme-text-muted)] small:text-base">
                   {category.description}
                 </p>
               )}

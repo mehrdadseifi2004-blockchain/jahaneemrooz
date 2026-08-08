@@ -17,11 +17,11 @@ const PaymentDetails = ({ order }: PaymentDetailsProps) => {
   if (!payment) {
     return (
       <div>
-        <h2 className="text-xl font-bold text-white small:text-2xl">
+        <h2 className="text-xl font-bold text-[var(--theme-text)] small:text-2xl">
           {dictionary.order.payment.title}
         </h2>
 
-        <div className="mt-6 rounded-[16px] border border-white/10 bg-[#0c1219] p-5 text-sm text-slate-400">
+        <div className="mt-6 rounded-[16px] border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] p-5 text-sm text-[var(--theme-text-muted)]">
           {dictionary.order.payment.notAvailable}
         </div>
       </div>
@@ -38,13 +38,13 @@ const PaymentDetails = ({ order }: PaymentDetailsProps) => {
 
   return (
     <div>
-      <h2 className="text-xl font-bold text-white small:text-2xl">
+      <h2 className="text-xl font-bold text-[var(--theme-text)] small:text-2xl">
         {dictionary.order.payment.title}
       </h2>
 
       <div className="mt-6 grid gap-4 small:grid-cols-2">
-        <div className="rounded-[16px] border border-white/10 bg-[#0c1219] p-5">
-          <p className="text-xs text-slate-500">
+        <div className="rounded-[16px] border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] p-5">
+          <p className="text-xs text-[var(--theme-text-subtle)]">
             {dictionary.order.payment.method}
           </p>
 
@@ -55,7 +55,10 @@ const PaymentDetails = ({ order }: PaymentDetailsProps) => {
               </span>
             )}
 
-            <p className="font-bold text-white" data-testid="payment-method">
+            <p
+              className="font-bold text-[var(--theme-text)]"
+              data-testid="payment-method"
+            >
               {paymentInfo?.title ||
                 payment.provider_id ||
                 dictionary.order.payment.manual}
@@ -63,13 +66,13 @@ const PaymentDetails = ({ order }: PaymentDetailsProps) => {
           </div>
         </div>
 
-        <div className="rounded-[16px] border border-white/10 bg-[#0c1219] p-5">
-          <p className="text-xs text-slate-500">
+        <div className="rounded-[16px] border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] p-5">
+          <p className="text-xs text-[var(--theme-text-subtle)]">
             {dictionary.order.payment.details}
           </p>
 
           <div
-            className="mt-3 text-sm leading-7 text-slate-300"
+            className="mt-3 text-sm leading-7 text-[var(--theme-text-muted)]"
             data-testid="payment-amount"
           >
             {isStripeLike(payment.provider_id) && payment.data?.card_last4 ? (
@@ -83,7 +86,7 @@ const PaymentDetails = ({ order }: PaymentDetailsProps) => {
                   })}
                 </p>
 
-                <p className="text-xs text-slate-500">
+                <p className="text-xs text-[var(--theme-text-subtle)]">
                   {dictionary.order.payment.paidAt.replace(
                     "{date}",
                     paymentDate,

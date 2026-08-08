@@ -7,9 +7,12 @@ import {
   supportedLocales,
 } from "@i18n/config"
 import { getDictionary } from "@i18n/get-dictionary"
+import { ThemeProvider } from "@modules/theme/components/theme-provider"
 import { Metadata } from "next"
 import localFont from "next/font/local"
 import { notFound } from "next/navigation"
+import Script from "next/script"
+
 import "styles/globals.css"
 
 const persianFont = localFont({
@@ -75,6 +78,43 @@ export function generateStaticParams() {
   }))
 }
 
+const themeScript = `
+(() => {
+  try {
+    const storedTheme = localStorage.getItem("jahan-emrooz-theme");
+
+    const systemTheme =
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+
+    const theme =
+      storedTheme === "light" || storedTheme === "dark"
+        ? storedTheme
+        : systemTheme;
+
+    const root = document.documentElement;
+
+    root.classList.remove("light", "dark");
+    root.classList.add(theme);
+    root.dataset.theme = theme;
+    root.style.colorScheme = theme;
+  } catch {
+    const theme =
+      window.matchMedia("(prefers-color-scheme: dark)").matches
+        ? "dark"
+        : "light";
+
+    const root = document.documentElement;
+
+    root.classList.remove("light", "dark");
+    root.classList.add(theme);
+    root.dataset.theme = theme;
+    root.style.colorScheme = theme;
+  }
+})();
+`
+
 export default async function RootLayout({
   children,
   params,
@@ -99,12 +139,22 @@ export default async function RootLayout({
       lang={config.languageTag}
       dir={config.direction}
       data-locale={locale}
-      data-mode="light"
+      data-theme="dark"
+      className="dark"
+      suppressHydrationWarning
     >
       <body className={bodyFontClassName}>
-        <I18nProvider locale={locale} dictionary={dictionary}>
-          <main className="relative">{children}</main>
-        </I18nProvider>
+        <Script
+          id="theme-script"
+          strategy="beforeInteractive"
+          dangerouslySetInnerHTML={{ __html: themeScript }}
+        />
+
+        <ThemeProvider>
+          <I18nProvider locale={locale} dictionary={dictionary}>
+            <main className="relative">{children}</main>
+          </I18nProvider>
+        </ThemeProvider>
       </body>
     </html>
   )

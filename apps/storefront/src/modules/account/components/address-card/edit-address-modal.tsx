@@ -67,7 +67,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
     <>
       <div
         className={clx(
-          "flex min-h-[220px] h-full w-full flex-col justify-between rounded-[20px] border border-white/10 bg-[#111923] p-5 text-slate-300 transition hover:border-[#ff5a00]/40",
+          "flex min-h-[220px] h-full w-full flex-col justify-between rounded-[20px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-5 text-[var(--theme-text-muted)] transition hover:border-[#ff5a00]/40",
           {
             "border-[#ff5a00] shadow-[0_0_0_1px_rgba(255,90,0,0.25)]": isActive,
           },
@@ -76,20 +76,20 @@ const EditAddress: React.FC<EditAddressProps> = ({
       >
         <div className="flex flex-col">
           <Heading
-            className="text-start text-base font-bold text-white"
+            className="text-start text-base font-bold text-[var(--theme-text)]"
             data-testid="address-name"
           >
             {address.first_name} {address.last_name}
           </Heading>
           {address.company && (
             <Text
-              className="text-sm text-slate-400"
+              className="text-sm text-[var(--theme-text-muted)]"
               data-testid="address-company"
             >
               {address.company}
             </Text>
           )}
-          <Text className="mt-3 flex flex-col text-start text-sm leading-7 text-slate-400">
+          <Text className="mt-3 flex flex-col text-start text-sm leading-7 text-[var(--theme-text-muted)]">
             <span data-testid="address-address">
               {address.address_1}
               {address.address_2 && (
@@ -233,7 +233,7 @@ const EditAddress: React.FC<EditAddressProps> = ({
                 type="reset"
                 variant="secondary"
                 onClick={close}
-                className="h-11 rounded-full border border-white/10 bg-[#0c1219] px-6 text-slate-300 hover:border-[#ff5a00]/40 hover:text-[#ff7a1a]"
+                className="h-11 rounded-full border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] px-6 text-[var(--theme-text-muted)] hover:border-[#ff5a00]/40 hover:text-[#ff7a1a]"
                 data-testid="cancel-button"
               >
                 {dictionary.addressForm.cancel}

@@ -33,12 +33,12 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
   }
 
   return (
-    <main className="min-h-screen bg-[#070b10] pb-20 text-white">
+    <main className="min-h-screen bg-[var(--theme-background)] pb-20 text-[var(--theme-text)] transition-colors duration-300">
       <div className="content-container" data-testid="product-container">
-        <div className="border-t border-white/10 pt-5 small:pt-6">
+        <div className="border-t border-[var(--theme-border)] pt-5 small:pt-6">
           <nav
             aria-label={dictionary.product.breadcrumb.ariaLabel}
-            className="mb-6 flex flex-wrap items-center gap-2 text-sm text-slate-500"
+            className="mb-6 flex flex-wrap items-center gap-2 text-sm text-[var(--theme-text-subtle)]"
           >
             <LocalizedClientLink
               href="/"
@@ -64,7 +64,9 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
               <span className="hidden rtl:inline">←</span>
             </span>
 
-            <span className="line-clamp-1 text-white">{product.title}</span>
+            <span className="line-clamp-1 text-[var(--theme-text)]">
+              {product.title}
+            </span>
           </nav>
 
           <section className="grid items-start gap-8 medium:grid-cols-2 medium:gap-10">
@@ -75,7 +77,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
             <div className="min-w-0">
               <ProductInfo product={product} />
 
-              <div className="mt-5 border-t border-white/10 pt-5">
+              <div className="mt-5 border-t border-[var(--theme-border)] pt-5">
                 <Suspense
                   fallback={
                     <ProductActions
@@ -98,7 +100,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
       </div>
 
       <section
-        className="mt-4 border-t border-white/10 bg-[#070b10] pt-[50px] small:mt-8 small:pt-20"
+        className="mt-4 border-t border-[var(--theme-border)] bg-[var(--theme-background)] pt-[50px] small:mt-8 small:pt-20 transition-colors duration-300"
         data-testid="related-products-container"
       >
         <div className="content-container">

@@ -32,12 +32,12 @@ const CartTemplate = ({
   )
 
   return (
-    <main className="min-h-screen bg-[#070b10] pb-20 text-white">
+    <main className="min-h-screen bg-[var(--theme-background)] pb-20 text-[var(--theme-text)] transition-colors duration-300">
       <div className="content-container" data-testid="cart-container">
-        <div className="border-t border-white/10 pt-5 small:pt-6">
+        <div className="border-t border-[var(--theme-border)] pt-5 small:pt-6">
           <nav
             aria-label={dictionary.cart.breadcrumb.ariaLabel}
-            className="mb-5 flex items-center gap-2 text-sm text-slate-500 small:mb-6"
+            className="mb-5 flex items-center gap-2 text-sm text-[var(--theme-text-subtle)] small:mb-6"
           >
             <LocalizedClientLink
               href="/"
@@ -51,25 +51,25 @@ const CartTemplate = ({
               <span className="hidden rtl:inline">←</span>
             </span>
 
-            <span className="text-white">
+            <span className="text-[var(--theme-text)]">
               {dictionary.cart.breadcrumb.cart}
             </span>
           </nav>
 
           {cart?.items?.length ? (
             <>
-              <h1 className="mb-5 text-[32px] font-black leading-tight tracking-[-0.03em] text-white small:mb-6 small:text-[40px]">
+              <h1 className="mb-5 text-[32px] font-black leading-tight tracking-[-0.03em] text-[var(--theme-text)] small:mb-6 small:text-[40px]">
                 {dictionary.cart.title}
               </h1>
 
               {!customer && (
-                <div className="mb-5 flex flex-col gap-4 rounded-[24px] border border-white/10 bg-[#111923] p-5 small:flex-row small:items-center small:justify-between">
+                <div className="mb-5 flex flex-col gap-4 rounded-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-5 transition-colors duration-300 small:flex-row small:items-center small:justify-between">
                   <div>
-                    <p className="font-bold text-white">
+                    <p className="font-bold text-[var(--theme-text)]">
                       {dictionary.cart.account.title}
                     </p>
 
-                    <p className="mt-1 text-sm leading-6 text-slate-400">
+                    <p className="mt-1 text-sm leading-6 text-[var(--theme-text-muted)]">
                       {dictionary.cart.account.description}
                     </p>
                   </div>
@@ -93,7 +93,9 @@ const CartTemplate = ({
                 </aside>
               </div>
 
-              <p className="mt-5 text-sm text-slate-500">{itemCountText}</p>
+              <p className="mt-5 text-sm text-[var(--theme-text-subtle)]">
+                {itemCountText}
+              </p>
             </>
           ) : (
             <EmptyCartMessage />

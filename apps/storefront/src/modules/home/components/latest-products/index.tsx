@@ -29,9 +29,9 @@ export default async function LatestProducts({
   }
 
   return (
-    <section className="border-t border-white/5 bg-[#070b10] py-[50px] small:py-[72px]">
+    <section className="border-t border-[var(--theme-border)] bg-[var(--theme-background)] py-[50px] transition-colors duration-300 small:py-[72px]">
       <div className="content-container text-center">
-        <h2 className="mb-8 text-[32px] font-black leading-tight tracking-[-0.03em] text-white small:mb-14 small:text-5xl">
+        <h2 className="mb-8 text-[32px] font-black leading-tight tracking-[-0.03em] text-[var(--theme-text)] small:mb-14 small:text-5xl">
           {dictionary.home.latestProducts.title}
         </h2>
 

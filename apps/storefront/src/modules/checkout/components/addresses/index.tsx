@@ -51,19 +51,19 @@ const Addresses = ({
             <span
               className={`flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold ${
                 isOpen
-                  ? "bg-[#ff5a00] text-white"
+                  ? "bg-[var(--theme-accent)] text-[var(--theme-text)]"
                   : "bg-emerald-500/15 text-emerald-400"
               }`}
             >
               {isOpen ? (1).toLocaleString(numberLocale) : <CheckCircleSolid />}
             </span>
 
-            <h2 className="text-xl font-bold text-white small:text-2xl">
+            <h2 className="text-xl font-bold text-[var(--theme-text)] small:text-2xl">
               {dictionary.checkout.address.title}
             </h2>
           </div>
 
-          <p className="ms-12 mt-2 text-sm leading-7 text-slate-500">
+          <p className="ms-12 mt-2 text-sm leading-7 text-[var(--theme-text-subtle)]">
             {dictionary.checkout.address.description}
           </p>
         </div>
@@ -90,8 +90,8 @@ const Addresses = ({
           />
 
           {!sameAsBilling && (
-            <div className="mt-8 border-t border-white/10 pt-8">
-              <h3 className="mb-6 text-lg font-bold text-white">
+            <div className="mt-8 border-t border-[var(--theme-border)] pt-8">
+              <h3 className="mb-6 text-lg font-bold text-[var(--theme-text)]">
                 {dictionary.checkout.address.billingTitle}
               </h3>
 
@@ -99,9 +99,9 @@ const Addresses = ({
             </div>
           )}
 
-          <div className="mt-8 flex flex-col items-start gap-4 border-t border-white/10 pt-6">
+          <div className="mt-8 flex flex-col items-start gap-4 border-t border-[var(--theme-border)] pt-6">
             <SubmitButton
-              className="h-12 w-full rounded-full !border-0 !bg-[#ff5a00] px-7 text-base font-bold !text-white transition hover:!bg-[#ff7a1a] small:w-auto"
+              className="h-12 w-full rounded-full !border-0 !bg-[var(--theme-accent)] px-7 text-base font-bold !text-[var(--theme-text)] transition hover:!bg-[var(--theme-accent-hover)] small:w-auto"
               data-testid="submit-address-button"
             >
               {dictionary.checkout.address.submit}
@@ -187,10 +187,12 @@ const SummaryBox = ({
   children: React.ReactNode
 }) => {
   return (
-    <div className="rounded-2xl border border-white/10 bg-[#0c1219] p-5">
-      <p className="mb-3 text-sm font-bold text-white">{title}</p>
+    <div className="rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] p-5 transition-colors duration-300">
+      <p className="mb-3 text-sm font-bold text-[var(--theme-text)]">{title}</p>
 
-      <div className="text-sm leading-7 text-slate-400">{children}</div>
+      <div className="text-sm leading-7 text-[var(--theme-text-subtle)]">
+        {children}
+      </div>
     </div>
   )
 }

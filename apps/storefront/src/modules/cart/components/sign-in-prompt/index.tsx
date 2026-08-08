@@ -8,11 +8,13 @@ const SignInPrompt = () => {
   const content = dictionary.cart.signInPrompt
 
   return (
-    <div className="flex flex-col gap-4 rounded-[20px] border border-white/10 bg-[#111923] p-5 text-white small:flex-row small:items-center small:justify-between">
+    <div className="flex flex-col gap-4 rounded-[20px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-5 text-[var(--theme-text)] transition-colors duration-300 small:flex-row small:items-center small:justify-between">
       <div>
-        <h2 className="text-lg font-bold text-white">{content.title}</h2>
+        <h2 className="text-lg font-bold text-[var(--theme-text)]">
+          {content.title}
+        </h2>
 
-        <p className="mt-2 text-sm leading-7 text-slate-400">
+        <p className="mt-2 text-sm leading-7 text-[var(--theme-text-muted)]">
           {content.description}
         </p>
       </div>

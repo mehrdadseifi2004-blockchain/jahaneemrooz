@@ -100,7 +100,7 @@ const ShippingAddress = ({
   return (
     <div>
       {customer && (addressesInRegion?.length || 0) > 0 && (
-        <Container className="mb-7 flex flex-col gap-4 rounded-2xl border border-[#ff5a00]/20 bg-[#ff5a00]/10 p-5 shadow-none">
+        <Container className="mb-7 flex flex-col gap-4 rounded-2xl border border-[var(--theme-accent)]/20 bg-[var(--theme-accent)]/10 p-5 shadow-none">
           <p className="text-sm font-semibold text-[#ff7a1a]">
             {customer.first_name
               ? dictionary.checkout.address.savedAddressGreeting.replace(
@@ -231,7 +231,7 @@ const ShippingAddress = ({
         </div>
       </div>
 
-      <div className="mt-7 rounded-2xl border border-white/10 bg-[#0c1219] p-4">
+      <div className="mt-7 rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] p-4 transition-colors duration-300">
         <Checkbox
           label={dictionary.checkout.address.sameBilling}
           name="same_as_billing"

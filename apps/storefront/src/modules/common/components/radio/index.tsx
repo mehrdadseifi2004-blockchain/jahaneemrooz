@@ -18,7 +18,7 @@ const Radio = ({
         className={`flex h-[18px] w-[18px] items-center justify-center rounded-full border transition ${
           checked
             ? "border-[#ff5a00] bg-[#ff5a00]/15"
-            : "border-white/20 bg-[#0c1219] group-hover:border-[#ff5a00]/60"
+            : "border-[var(--theme-border)] bg-[var(--theme-surface-muted)] group-hover:border-[#ff5a00]/60"
         }`}
       >
         {checked && <span className="h-2 w-2 rounded-full bg-[#ff5a00]" />}

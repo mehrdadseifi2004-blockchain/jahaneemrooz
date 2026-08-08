@@ -32,13 +32,13 @@ const LineItemUnitPrice = ({
       {hasReducedPrice && (
         <div className="flex flex-wrap items-center gap-2">
           {style === "default" && (
-            <span className="text-xs text-slate-500">
+            <span className="text-xs text-[var(--theme-text-subtle)]">
               {dictionary.cart.originalPrice}
             </span>
           )}
 
           <span
-            className="text-xs text-slate-500 line-through"
+            className="text-xs text-[var(--theme-text-subtle)] line-through"
             data-testid="product-unit-original-price"
           >
             {convertToLocale({
@@ -56,7 +56,7 @@ const LineItemUnitPrice = ({
       )}
 
       <span
-        className="text-sm font-semibold text-slate-400"
+        className="text-sm font-semibold text-[var(--theme-text-muted)]"
         data-testid="product-unit-price"
       >
         {convertToLocale({

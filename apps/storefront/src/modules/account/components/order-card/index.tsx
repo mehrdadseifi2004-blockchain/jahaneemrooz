@@ -30,13 +30,13 @@ const OrderCard = ({ order }: OrderCardProps) => {
 
   return (
     <div
-      className="flex flex-col rounded-[24px] border border-white/10 bg-[#111923] p-5 text-white shadow-[0_18px_55px_rgba(0,0,0,0.18)]"
+      className="flex flex-col rounded-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface)] p-5 text-[var(--theme-text)] shadow-[0_18px_55px_rgba(0,0,0,0.18)]"
       data-testid="order-card"
     >
       <div className="mb-2 text-xl font-black text-[#ff7a1a]">
         #<span data-testid="order-display-id">{order.display_id}</span>
       </div>
-      <div className="flex flex-wrap items-center gap-2 text-sm text-slate-400">
+      <div className="flex flex-wrap items-center gap-2 text-sm text-[var(--theme-text-muted)]">
         <span className="pr-2" data-testid="order-created-at">
           {new Date(order.created_at).toDateString()}
         </span>
@@ -62,9 +62,9 @@ const OrderCard = ({ order }: OrderCardProps) => {
               data-testid="order-item"
             >
               <Thumbnail thumbnail={i.thumbnail} images={[]} size="full" />
-              <div className="flex items-center text-sm text-slate-400">
+              <div className="flex items-center text-sm text-[var(--theme-text-muted)]">
                 <span
-                  className="line-clamp-2 font-semibold text-white"
+                  className="line-clamp-2 font-semibold text-[var(--theme-text)]"
                   data-testid="item-title"
                 >
                   {i.title}
@@ -77,7 +77,7 @@ const OrderCard = ({ order }: OrderCardProps) => {
         })}
         {numberOfProducts > 4 && (
           <div className="w-full h-full flex flex-col items-center justify-center">
-            <span className="text-sm text-slate-400">
+            <span className="text-sm text-[var(--theme-text-muted)]">
               {content.more.replace(
                 "{count}",
                 Math.max(numberOfLines - 4, 0).toLocaleString(numberLocale),

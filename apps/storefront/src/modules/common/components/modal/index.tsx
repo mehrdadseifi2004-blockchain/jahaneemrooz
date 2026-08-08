@@ -59,13 +59,13 @@ const Modal = ({
               <Dialog.Panel
                 data-testid={dataTestId}
                 className={clx(
-                  "flex h-fit max-h-[85vh] w-full transform flex-col justify-start overflow-y-auto rounded-[24px] p-5 text-start align-middle text-white transition-all small:p-7",
+                  "flex h-fit max-h-[85vh] w-full transform flex-col justify-start overflow-y-auto rounded-[24px] p-5 text-start align-middle text-[var(--theme-text)] transition-all small:p-7",
                   {
                     "max-w-md": size === "small",
                     "max-w-xl": size === "medium",
                     "max-w-3xl": size === "large",
                     "bg-transparent shadow-none": search,
-                    "border border-white/10 bg-[#111923] shadow-[0_30px_100px_rgba(0,0,0,0.65)]":
+                    "border border-[var(--theme-border)] bg-[var(--theme-surface)] shadow-[0_30px_100px_var(--theme-shadow)]":
                       !search,
                   },
                 )}
@@ -84,11 +84,13 @@ const Title: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const { close } = useModal()
 
   return (
-    <Dialog.Title className="flex items-center justify-between border-b border-white/10 pb-4">
-      <div className="text-xl font-black text-white">{children}</div>
+    <Dialog.Title className="flex items-center justify-between border-b border-[var(--theme-border)] pb-4">
+      <div className="text-xl font-black text-[var(--theme-text)]">
+        {children}
+      </div>
       <div>
         <button
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10 text-slate-400 transition hover:border-[#ff5a00]/40 hover:text-[#ff7a1a]"
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-[var(--theme-border)] text-[var(--theme-text-muted)] transition hover:border-[#ff5a00]/40 hover:text-[#ff7a1a]"
           onClick={close}
           data-testid="close-modal-button"
         >
@@ -101,7 +103,7 @@ const Title: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 const Description: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <Dialog.Description className="flex h-full items-center justify-center pb-4 pt-3 text-sm leading-7 text-slate-400">
+    <Dialog.Description className="flex h-full items-center justify-center pb-4 pt-3 text-sm leading-7 text-[var(--theme-text-muted)]">
       {children}
     </Dialog.Description>
   )
@@ -113,7 +115,7 @@ const Body: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
 const Footer: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   return (
-    <div className="flex items-center justify-end gap-x-4 border-t border-white/10 pt-4">
+    <div className="flex items-center justify-end gap-x-4 border-t border-[var(--theme-border)] pt-4">
       {children}
     </div>
   )

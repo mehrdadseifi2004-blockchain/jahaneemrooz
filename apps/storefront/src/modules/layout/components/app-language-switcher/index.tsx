@@ -1,10 +1,11 @@
 "use client"
 
-import { updateLocale } from "@lib/data/locale-actions"
-import { AppLocale, localeConfig, supportedLocales } from "@i18n/config"
-import { useI18n } from "@i18n/components/i18n-provider"
-import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { useState, useTransition } from "react"
+import { usePathname, useRouter, useSearchParams } from "next/navigation"
+
+import { useI18n } from "@i18n/components/i18n-provider"
+import { AppLocale, localeConfig, supportedLocales } from "@i18n/config"
+import { updateLocale } from "@lib/data/locale-actions"
 
 const AppLanguageSwitcher = () => {
   const { locale, dictionary } = useI18n()
@@ -53,7 +54,7 @@ const AppLanguageSwitcher = () => {
         disabled={isPending}
         aria-label={dictionary.common.language}
         aria-expanded={isOpen}
-        className="inline-flex h-10 min-w-14 items-center justify-center gap-1 rounded-full border border-white/15 bg-[#111923] px-3 text-xs font-semibold text-white transition hover:border-[#ff5a00]/60 hover:bg-[#ff5a00] disabled:cursor-wait disabled:opacity-50"
+        className="inline-flex h-10 min-w-14 items-center justify-center gap-1 rounded-full border border-[var(--theme-border)] bg-[var(--theme-surface)] px-3 text-xs font-semibold text-[var(--theme-text)] transition duration-300 hover:border-[#ff5a00]/60 hover:bg-[#ff5a00]/10 hover:text-[#ff5a00] disabled:cursor-wait disabled:opacity-50"
       >
         <span>{localeConfig[locale].shortLabel}</span>
 
@@ -63,7 +64,9 @@ const AppLanguageSwitcher = () => {
           viewBox="0 0 24 24"
           fill="none"
           aria-hidden="true"
-          className={`transition-transform ${isOpen ? "rotate-180" : ""}`}
+          className={`transition-transform duration-300 ${
+            isOpen ? "rotate-180" : ""
+          }`}
         >
           <path
             d="M6 9L12 15L18 9"
@@ -85,7 +88,7 @@ const AppLanguageSwitcher = () => {
           />
 
           <div
-            className="absolute end-0 top-[calc(100%+8px)] z-50 min-w-36 overflow-hidden rounded-2xl border border-white/10 bg-[#111923] p-1.5 text-start text-white shadow-2xl shadow-black/40"
+            className="absolute end-0 top-[calc(100%+8px)] z-50 min-w-36 overflow-hidden rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-surface)] p-1.5 text-start text-[var(--theme-text)] shadow-[0_18px_55px_var(--theme-shadow)]"
             role="menu"
           >
             {supportedLocales.map((optionLocale) => {
@@ -101,10 +104,11 @@ const AppLanguageSwitcher = () => {
                   className={`flex w-full items-center justify-between gap-4 rounded-xl px-3 py-2.5 text-sm transition ${
                     isActive
                       ? "bg-[#ff5a00] text-white"
-                      : "text-slate-200 hover:bg-white/10 hover:text-[#ff7a1a]"
+                      : "text-[var(--theme-text-muted)] hover:bg-[#ff5a00]/10 hover:text-[#ff5a00]"
                   }`}
                 >
                   <span>{option.label}</span>
+
                   <span className="text-xs opacity-60">
                     {option.shortLabel}
                   </span>

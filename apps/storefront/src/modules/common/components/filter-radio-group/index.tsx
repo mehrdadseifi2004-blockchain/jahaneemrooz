@@ -20,7 +20,9 @@ const FilterRadioGroup = ({
 }: FilterRadioGroupProps) => {
   return (
     <div className="flex flex-col gap-y-3">
-      <Text className="!text-sm !font-bold !text-white">{title}</Text>
+      <Text className="!text-sm !font-bold !text-[var(--theme-text)]">
+        {title}
+      </Text>
 
       <RadioGroup className="flex flex-col gap-2" data-testid={dataTestId}>
         {items.map((item) => {
@@ -43,7 +45,7 @@ const FilterRadioGroup = ({
                   {
                     "border-[#ff5a00]/60 bg-[#ff5a00]/10 !text-[#ff7a1a]":
                       isSelected,
-                    "border-white/5 bg-white/[0.025] !text-slate-400 hover:border-white/15 hover:!text-white":
+                    "border-[var(--theme-border)] bg-[var(--theme-surface-muted)] !text-[var(--theme-text-muted)] hover:border-[#ff5a00]/35 hover:!text-[var(--theme-text)]":
                       !isSelected,
                   },
                 )}

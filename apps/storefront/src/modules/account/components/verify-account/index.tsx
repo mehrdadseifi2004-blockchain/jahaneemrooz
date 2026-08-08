@@ -38,27 +38,27 @@ const VerifyAccount = () => {
 
   return (
     <div
-      className="mx-auto my-16 flex w-full max-w-[470px] flex-col items-center gap-y-5 rounded-[28px] border border-white/10 bg-[#111923] px-7 py-10 text-center text-white shadow-[0_24px_80px_rgba(0,0,0,0.35)]"
+      className="mx-auto my-16 flex w-full max-w-[470px] flex-col items-center gap-y-5 rounded-[28px] border border-[var(--theme-border)] bg-[var(--theme-surface)] px-7 py-10 text-center text-[var(--theme-text)] shadow-[0_24px_80px_rgba(0,0,0,0.35)]"
       data-testid="verify-account-page"
     >
-      <h1 className="text-3xl font-black tracking-[-0.03em] text-white">
+      <h1 className="text-3xl font-black tracking-[-0.03em] text-[var(--theme-text)]">
         {dictionary.verifyAccount.title}
       </h1>
 
       {state === "verifying" && (
-        <p className="text-sm leading-7 text-slate-400">
+        <p className="text-sm leading-7 text-[var(--theme-text-muted)]">
           {dictionary.verifyAccount.verifying}
         </p>
       )}
 
       {state === "success" && (
         <>
-          <p className="text-sm leading-7 text-slate-400">
+          <p className="text-sm leading-7 text-[var(--theme-text-muted)]">
             {dictionary.verifyAccount.success}
           </p>
 
           <LocalizedClientLink href="/account">
-            <Button className="rounded-full !border-0 !bg-[#ff5a00] px-7 font-bold !text-white hover:!bg-[#ff7a1a]">
+            <Button className="rounded-full !border-0 !bg-[#ff5a00] px-7 font-bold !text-[var(--theme-text)] hover:!bg-[#ff7a1a]">
               {dictionary.verifyAccount.goToSignIn}
             </Button>
           </LocalizedClientLink>
@@ -67,12 +67,12 @@ const VerifyAccount = () => {
 
       {state === "error" && (
         <>
-          <p className="text-sm leading-7 text-slate-400">
+          <p className="text-sm leading-7 text-[var(--theme-text-muted)]">
             {dictionary.verifyAccount.error}
           </p>
 
           <LocalizedClientLink href="/account">
-            <Button className="rounded-full border border-white/10 bg-[#0c1219] px-7 font-bold text-slate-300 hover:border-[#ff5a00]/50 hover:text-[#ff7a1a]">
+            <Button className="rounded-full border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] px-7 font-bold text-[var(--theme-text-muted)] hover:border-[#ff5a00]/50 hover:text-[#ff7a1a]">
               {dictionary.verifyAccount.goToSignIn}
             </Button>
           </LocalizedClientLink>

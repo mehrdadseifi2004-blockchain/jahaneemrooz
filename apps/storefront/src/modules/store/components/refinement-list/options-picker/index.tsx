@@ -103,12 +103,12 @@ const OptionsPicker = ({
             <Accordion.Item
               key={option.id}
               value={option.id}
-              className="overflow-hidden rounded-xl border border-white/5 bg-white/[0.025] px-3"
+              className="overflow-hidden rounded-xl border border-[var(--theme-border)] bg-white/[0.025] px-3"
             >
               <Accordion.Header>
                 <Accordion.Trigger className="flex w-full items-center justify-between py-3 text-start text-white">
                   <div className="flex items-center gap-2">
-                    <span className="text-sm font-semibold text-slate-200">
+                    <span className="text-sm font-semibold text-[var(--theme-text)]">
                       {option.title || dictionary.store.filters.optionFallback}
                     </span>
                     <span className="text-xs text-[#ff7a1a]">
@@ -117,7 +117,7 @@ const OptionsPicker = ({
                   </div>
                   <span
                     className={clsx(
-                      "flex h-7 w-7 items-center justify-center text-slate-500 transition-transform duration-150",
+                      "flex h-7 w-7 items-center justify-center text-[var(--theme-text-subtle)] transition-transform duration-150",
                       {
                         "rotate-180": isOpen,
                       },
@@ -141,7 +141,7 @@ const OptionsPicker = ({
                           {
                             "border-[#ff5a00] bg-[#ff5a00]/15 text-[#ff7a1a]":
                               isSelected,
-                            "border-white/10 text-slate-400 hover:border-white/25 hover:text-white":
+                            "border-[var(--theme-border)] text-[var(--theme-text-muted)] hover:border-white/25 hover:text-white":
                               !isSelected,
                           },
                         )}

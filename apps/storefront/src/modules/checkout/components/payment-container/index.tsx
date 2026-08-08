@@ -34,9 +34,9 @@ const PaymentContainer: React.FC<PaymentContainerProps> = ({
       value={paymentProviderId}
       disabled={disabled}
       className={clx(
-        "mb-3 flex cursor-pointer flex-col gap-y-3 rounded-2xl border border-white/10 bg-[#0c1219] px-5 py-5 text-sm text-white transition hover:border-[#ff5a00]/50",
+        "mb-3 flex cursor-pointer flex-col gap-y-3 rounded-2xl border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] px-5 py-5 text-sm text-[var(--theme-text)] transition hover:border-[#ff5a00]/50",
         {
-          "border-[#ff5a00] bg-[#ff5a00]/10":
+          "border-[var(--theme-accent)] bg-[color:rgba(255,90,0,0.1)]":
             selectedPaymentOptionId === paymentProviderId,
         },
       )}
@@ -44,7 +44,7 @@ const PaymentContainer: React.FC<PaymentContainerProps> = ({
       <div className="flex items-center justify-between ">
         <div className="flex items-center gap-x-4">
           <Radio checked={selectedPaymentOptionId === paymentProviderId} />
-          <Text className="!text-sm !font-bold !text-white">
+          <Text className="!text-sm !font-bold !text-[var(--theme-text)]">
             {paymentInfoMap[paymentProviderId]?.title || paymentProviderId}
           </Text>
           {isManual(paymentProviderId) && isDevelopment && (
@@ -92,7 +92,7 @@ export const StripeCardContainer = ({
         },
       },
       classes: {
-        base: "mt-3 block h-12 w-full appearance-none rounded-xl border border-white/10 bg-[#070b10] px-4 pb-1 pt-3 text-white outline-none transition focus:border-[#ff5a00]/60 focus:ring-4 focus:ring-[#ff5a00]/10",
+        base: "mt-3 block h-12 w-full appearance-none rounded-xl border border-[var(--theme-border)] bg-[var(--theme-background)] px-4 pb-1 pt-3 text-[var(--theme-text)] outline-none transition focus:border-[#ff5a00]/60 focus:ring-4 focus:ring-[#ff5a00]/10",
       },
     }
   }, [])
@@ -107,7 +107,7 @@ export const StripeCardContainer = ({
       {selectedPaymentOptionId === paymentProviderId &&
         (stripeReady ? (
           <div className="my-4 transition-all duration-150 ease-in-out">
-            <Text className="mb-2 !text-sm !font-bold !text-white">
+           <Text className="mb-2 !text-sm !font-bold !text-[var(--theme-text)]">
               Enter your card details:
             </Text>
             <CardElement

@@ -31,12 +31,12 @@ const StoreTemplate = ({
   const sort = sortBy || "created_at"
 
   return (
-    <main className="min-h-screen bg-[#070b10] pb-20 text-white">
+    <main className="min-h-screen bg-[var(--theme-background)] pb-20 text-white">
       <div className="content-container">
-        <div className="border-t border-white/10 pt-5 small:pt-6">
+        <div className="border-t border-[var(--theme-border)] pt-5 small:pt-6">
           <nav
             aria-label={dictionary.store.breadcrumb.ariaLabel}
-            className="mb-6 flex items-center gap-2 text-sm text-slate-500"
+            className="mb-6 flex items-center gap-2 text-sm text-[var(--theme-text-subtle)]"
           >
             <LocalizedClientLink
               href="/"
@@ -57,7 +57,7 @@ const StoreTemplate = ({
 
           <div className="flex items-start gap-5">
             <aside className="hidden w-[295px] shrink-0 medium:block">
-              <div className="rounded-[24px] border border-white/10 bg-[#111923] px-6 py-5 shadow-[0_18px_50px_rgba(0,0,0,0.25)]">
+              <div className="rounded-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface)] px-6 py-5 shadow-[0_18px_50px_rgba(0,0,0,0.25)]">
                 <div className="flex items-center justify-between">
                   <h2 className="text-xl font-bold text-white">
                     {dictionary.store.filters.title}
@@ -96,7 +96,7 @@ const StoreTemplate = ({
                     {dictionary.store.title}
                   </h1>
 
-                  <p className="mt-2 text-sm leading-6 text-slate-400">
+                  <p className="mt-2 text-sm leading-6 text-[var(--theme-text-muted)]">
                     {dictionary.store.description}
                   </p>
                 </div>

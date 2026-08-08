@@ -38,7 +38,7 @@ const AddressSelect = ({
     <Listbox onChange={handleSelect} value={selectedAddress?.id}>
       <div className="relative">
         <Listbox.Button
-          className="relative flex h-12 w-full cursor-default items-center justify-between rounded-xl border border-white/10 bg-[#0c1219] px-4 text-start text-sm text-white outline-none transition focus:border-[#ff5a00]/60 focus:ring-4 focus:ring-[#ff5a00]/10"
+          className="relative flex h-12 w-full cursor-default items-center justify-between rounded-xl border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] px-4 text-start text-sm text-[var(--theme-text)] outline-none transition focus:border-[var(--theme-accent)]/60 focus:ring-4 focus:ring-[var(--theme-accent)]/10"
           data-testid="shipping-address-select"
         >
           {({ open }) => (
@@ -63,7 +63,7 @@ const AddressSelect = ({
           leaveTo="opacity-0"
         >
           <Listbox.Options
-            className="absolute z-20 mt-2 max-h-60 w-full overflow-auto rounded-xl border border-white/10 bg-[#0c1219] py-2 text-sm text-white shadow-[0_20px_60px_rgba(0,0,0,0.5)] outline-none"
+           className="absolute z-20 mt-2 max-h-60 w-full overflow-auto rounded-xl border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] py-2 text-sm text-[var(--theme-text)] shadow-[0_20px_60px_rgba(0,0,0,0.5)] outline-none"
             data-testid="shipping-address-options"
           >
             {addresses.map((address) => {
@@ -71,7 +71,7 @@ const AddressSelect = ({
                 <Listbox.Option
                   key={address.id}
                   value={address.id}
-                  className="relative cursor-pointer select-none px-4 py-4 transition hover:bg-[#ff5a00]/10"
+                  className="relative cursor-pointer select-none px-4 py-4 transition hover:bg-[var(--theme-accent)]/10"
                   data-testid="shipping-address-option"
                 >
                   <div className="flex gap-x-4 items-start">
@@ -84,11 +84,11 @@ const AddressSelect = ({
                         {address.first_name} {address.last_name}
                       </span>
                       {address.company && (
-                        <span className="text-xs text-slate-400">
+                        <span className="text-xs text-[var(--theme-text-muted)]">
                           {address.company}
                         </span>
                       )}
-                      <div className="mt-2 flex flex-col text-start text-sm text-slate-400">
+                      <div className="mt-2 flex flex-col text-start text-sm text-[var(--theme-text-muted)]">
                         <span>
                           {address.address_1}
                           {address.address_2 && (

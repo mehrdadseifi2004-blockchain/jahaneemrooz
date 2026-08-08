@@ -7,6 +7,7 @@ import AppLanguageSwitcher from "@modules/layout/components/app-language-switche
 import CartButton from "@modules/layout/components/cart-button"
 import NavItem from "@modules/layout/components/nav-item"
 import SideMenu from "@modules/layout/components/side-menu"
+import ThemeToggle from "@modules/theme/components/theme-toggle"
 
 type NavProps = {
   locale: AppLocale
@@ -25,22 +26,7 @@ export default function Nav({
 }: NavProps) {
   return (
     <>
-      {/* <div className="border-b border-white/10 bg-[#05080c] text-white">
-        <div className="content-container flex min-h-9 items-center justify-center px-4 text-center text-xs">
-          <span>
-            {dictionary.navigation.announcement}
-
-            <LocalizedClientLink
-              href="/store"
-              className="ms-1 font-semibold text-[#ff5a00] underline decoration-[#ff5a00]/70 underline-offset-4 transition hover:text-[#ff7a1a]"
-            >
-              {dictionary.navigation.viewProducts}
-            </LocalizedClientLink>
-          </span>
-        </div>
-      </div> */}
-
-      <header className="sticky top-0 z-50 border-b border-white/10 bg-[#080d12] text-white shadow-[0_10px_35px_rgba(0,0,0,0.28)]">
+      <header className="sticky top-0 z-50 border-b border-[var(--theme-border)] bg-[var(--theme-header)] text-[var(--theme-text)] shadow-[0_10px_35px_var(--theme-shadow)] transition-colors duration-300">
         <div className="content-container">
           <div className="flex h-[84px] items-center justify-between gap-5">
             <div className="flex shrink-0 items-center gap-3">
@@ -72,11 +58,11 @@ export default function Nav({
                   {locale === "fa" ? (
                     <>
                       <span className="whitespace-nowrap text-[22px] font-bold tracking-tight">
-                        <span className="text-white">جهان </span>
+                        <span className="text-[var(--theme-text)]">جهان </span>
                         <span className="text-[#ff5a00]">امروز</span>
                       </span>
 
-                      <span className="mt-1.5 whitespace-nowrap text-[10px] font-normal tracking-wide text-slate-500">
+                      <span className="mt-1.5 whitespace-nowrap text-[10px] font-normal tracking-wide text-[var(--theme-text-subtle)]">
                         فناوری
                         <span className="mx-1.5 text-[#ff5a00]">|</span>
                         زندگی
@@ -86,12 +72,12 @@ export default function Nav({
                     </>
                   ) : (
                     <>
-                      <span className="whitespace-nowrap text-[20px] font-black tracking-[-0.04em] text-white">
+                      <span className="whitespace-nowrap text-[20px] font-black tracking-[-0.04em] text-[var(--theme-text)]">
                         JAHAN.
                         <span className="text-[#ff5a00]">EMROOZ</span>
                       </span>
 
-                      <span className="mt-1.5 whitespace-nowrap text-[9px] font-medium uppercase tracking-[0.16em] text-slate-500">
+                      <span className="mt-1.5 whitespace-nowrap text-[9px] font-medium uppercase tracking-[0.16em] text-[var(--theme-text-subtle)]">
                         Technology
                         <span className="mx-1 text-[#ff5a00]">|</span>
                         Life
@@ -135,7 +121,7 @@ export default function Nav({
                 <button
                   type="submit"
                   aria-label={dictionary.common.search}
-                  className="absolute start-5 top-1/2 -translate-y-1/2 text-slate-400 transition hover:text-[#ff5a00]"
+                  className="absolute start-5 top-1/2 -translate-y-1/2 text-[var(--theme-text-subtle)] transition hover:text-[#ff5a00]"
                 >
                   <SearchIcon />
                 </button>
@@ -144,18 +130,19 @@ export default function Nav({
                   type="search"
                   name="q"
                   placeholder={dictionary.navigation.searchPlaceholder}
-                  className="h-12 w-full rounded-full border border-white/10 bg-[#111923] ps-12 pe-5 text-sm text-white outline-none transition duration-300 placeholder:text-slate-500 hover:border-white/20 focus:border-[#ff5a00]/60 focus:shadow-[0_0_0_4px_rgba(255,90,0,0.08)] focus:ring-0"
+                  className="h-12 w-full rounded-full border border-[var(--theme-border)] bg-[var(--theme-surface)] ps-12 pe-5 text-sm text-[var(--theme-text)] outline-none transition placeholder:text-[var(--theme-text-subtle)] focus:border-[#ff5a00]/60 focus:ring-2 focus:ring-[#ff5a00]/20"
                 />
               </form>
             </div>
 
             <div className="flex shrink-0 items-center gap-2">
+              <ThemeToggle locale={locale} />
               <AppLanguageSwitcher />
 
               <LocalizedClientLink
                 href="/store"
                 aria-label={dictionary.common.search}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full text-white transition hover:bg-white/10 hover:text-[#ff5a00] medium:hidden"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full text-[var(--theme-text)] transition hover:bg-[#ff5a00]/10 hover:text-[#ff5a00] medium:hidden"
               >
                 <SearchIcon />
               </LocalizedClientLink>
@@ -165,7 +152,7 @@ export default function Nav({
                   <LocalizedClientLink
                     href="/cart"
                     aria-label={dictionary.common.cart}
-                    className="inline-flex h-10 w-10 items-center justify-center rounded-full text-white transition hover:bg-white/10 hover:text-[#ff5a00]"
+                    className="inline-flex h-10 w-10 items-center justify-center rounded-full text-[var(--theme-text)] transition hover:bg-[#ff5a00]/10 hover:text-[#ff5a00]"
                   >
                     <CartIcon />
                   </LocalizedClientLink>
@@ -177,7 +164,7 @@ export default function Nav({
               <LocalizedClientLink
                 href="/account"
                 aria-label={dictionary.common.account}
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full text-white transition hover:bg-white/10 hover:text-[#ff5a00]"
+                className="inline-flex h-10 w-10 items-center justify-center rounded-full text-[var(--theme-text)] transition hover:bg-[#ff5a00]/10 hover:text-[#ff5a00]"
               >
                 <AccountIcon />
               </LocalizedClientLink>
@@ -189,7 +176,7 @@ export default function Nav({
               <button
                 type="submit"
                 aria-label={dictionary.common.search}
-                className="absolute start-4 top-1/2 -translate-y-1/2 text-slate-400 transition hover:text-[#ff5a00]"
+                className="absolute start-4 top-1/2 -translate-y-1/2 text-[var(--theme-text-subtle)] transition hover:text-[#ff5a00]"
               >
                 <SearchIcon size={20} />
               </button>
@@ -198,7 +185,7 @@ export default function Nav({
                 type="search"
                 name="q"
                 placeholder={dictionary.navigation.searchPlaceholder}
-                className="h-11 w-full rounded-full border border-white/10 bg-[#111923] ps-11 pe-4 text-sm text-white outline-none placeholder:text-slate-500 focus:border-[#ff5a00]/60 focus:ring-2 focus:ring-[#ff5a00]/20"
+                className="h-11 w-full rounded-full border border-[var(--theme-border)] bg-[var(--theme-surface)] ps-11 pe-4 text-sm text-[var(--theme-text)] outline-none placeholder:text-[var(--theme-text-subtle)] focus:border-[#ff5a00]/60 focus:ring-2 focus:ring-[#ff5a00]/20"
               />
             </form>
           </div>

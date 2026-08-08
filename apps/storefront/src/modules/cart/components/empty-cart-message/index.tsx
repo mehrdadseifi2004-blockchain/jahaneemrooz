@@ -34,11 +34,11 @@ const EmptyCartMessage = () => {
         </svg>
       </div>
 
-      <h1 className="mt-6 text-3xl font-black text-white small:text-4xl">
+      <h1 className="mt-6 text-3xl font-black text-[var(--theme-text)] small:text-4xl">
         {dictionary.cart.empty.title}
       </h1>
 
-      <p className="mt-4 max-w-lg text-sm leading-7 text-slate-400 small:text-base">
+      <p className="mt-4 max-w-lg text-sm leading-7 text-[var(--theme-text-muted)] small:text-base">
         {dictionary.cart.empty.description}
       </p>
 

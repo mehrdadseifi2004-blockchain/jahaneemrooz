@@ -37,8 +37,8 @@ const Review = ({ cart }: { cart: HttpTypes.StoreCart }) => {
             className={clx(
               "flex h-9 w-9 items-center justify-center rounded-full text-sm font-bold",
               isOpen
-                ? "bg-[#ff5a00] text-white"
-                : "bg-[#0c1219] text-slate-600",
+                ? "bg-[var(--theme-accent)] text-[var(--theme-text)]"
+                : "bg-[var(--theme-surface-muted)] text-[var(--theme-text-subtle)]",
             )}
           >
             {(4).toLocaleString(numberLocale)}
@@ -47,14 +47,16 @@ const Review = ({ cart }: { cart: HttpTypes.StoreCart }) => {
           <h2
             className={clx(
               "text-xl font-bold small:text-2xl",
-              isOpen ? "text-white" : "text-slate-600",
+              isOpen
+                ? "text-[var(--theme-text)]"
+                : "text-[var(--theme-text-subtle)]",
             )}
           >
             {dictionary.checkout.review.title}
           </h2>
         </div>
 
-        <p className="ms-12 mt-2 text-sm leading-7 text-slate-500">
+        <p className="ms-12 mt-2 text-sm leading-7 text-[var(--theme-text-muted)]">
           {dictionary.checkout.review.description}
         </p>
       </div>

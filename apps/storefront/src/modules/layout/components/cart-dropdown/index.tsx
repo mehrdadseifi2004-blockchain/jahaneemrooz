@@ -86,7 +86,7 @@ const CartDropdown = ({
       <Popover className="relative h-full">
         <PopoverButton className="h-full">
           <LocalizedClientLink
-            className="text-white transition hover:text-[#ff5a00]"
+            className="text-[var(--theme-text)] transition hover:text-[#ff5a00]"
             href="/cart"
             data-testid="nav-cart-link"
           >
@@ -107,13 +107,13 @@ const CartDropdown = ({
         >
           <PopoverPanel
             static
-            className="absolute end-0 top-[calc(100%+1px)] hidden w-[min(420px,calc(100vw-2rem))] overflow-hidden rounded-b-[24px] border border-white/10 bg-[#0c1219] text-white shadow-[0_25px_80px_rgba(0,0,0,0.55)] small:block"
+            className="absolute end-0 top-[calc(100%+1px)] hidden w-[min(420px,calc(100vw-2rem))] overflow-hidden rounded-b-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] text-[var(--theme-text)] shadow-[0_25px_80px_var(--theme-shadow)] transition-colors duration-300 small:block"
             data-testid="nav-cart-dropdown"
           >
-            <div className="flex items-center justify-between border-b border-white/10 px-5 py-4">
+            <div className="flex items-center justify-between border-b border-[var(--theme-border)] px-5 py-4">
               <h3 className="text-lg font-bold">{dictionary.cart.title}</h3>
 
-              <span className="text-sm text-slate-500">
+              <span className="text-sm text-[var(--theme-text-subtle)]">
                 {totalItems.toLocaleString(locale === "fa" ? "fa-IR" : "en-US")}{" "}
                 {dictionary.cart.dropdown.items}
               </span>
@@ -121,7 +121,7 @@ const CartDropdown = ({
 
             {cartState?.items?.length ? (
               <>
-                <div className="grid max-h-[402px] grid-cols-1 divide-y divide-white/10 overflow-y-auto px-5 no-scrollbar">
+                <div className="grid max-h-[402px] grid-cols-1 divide-y divide-[var(--theme-border)] overflow-y-auto px-5 no-scrollbar">
                   {[...cartState.items]
                     .sort((a, b) =>
                       (a.created_at ?? "") > (b.created_at ?? "") ? -1 : 1,
@@ -140,14 +140,14 @@ const CartDropdown = ({
                             thumbnail={item.thumbnail}
                             images={item.variant?.product?.images}
                             size="square"
-                            className="rounded-[16px] border border-white/10 bg-white shadow-none"
+                            className="rounded-[16px] border border-[var(--theme-border)] bg-white shadow-none"
                           />
                         </LocalizedClientLink>
 
                         <div className="flex min-w-0 flex-col">
                           <div className="flex items-start justify-between gap-3">
                             <div className="min-w-0">
-                              <h3 className="line-clamp-2 text-sm font-bold leading-6 text-white transition hover:text-[#ff7a1a]">
+                              <h3 className="line-clamp-2 text-sm font-bold leading-6 text-[var(--theme-text)] transition hover:text-[#ff7a1a]">
                                 <LocalizedClientLink
                                   href={`/products/${item.product_handle}`}
                                   data-testid="product-link"
@@ -156,7 +156,7 @@ const CartDropdown = ({
                                 </LocalizedClientLink>
                               </h3>
 
-                              <div className="mt-1 text-xs leading-5 text-slate-500">
+                              <div className="mt-1 text-xs leading-5 text-[var(--theme-text-subtle)]">
                                 <LineItemOptions
                                   variant={item.variant}
                                   data-testid="cart-item-variant"
@@ -176,7 +176,7 @@ const CartDropdown = ({
 
                           <div className="mt-4 flex items-center justify-between gap-4">
                             <span
-                              className="text-xs text-slate-500"
+                              className="text-xs text-[var(--theme-text-subtle)]"
                               data-testid="cart-item-quantity"
                               data-value={item.quantity}
                             >
@@ -199,9 +199,9 @@ const CartDropdown = ({
                     ))}
                 </div>
 
-                <div className="flex flex-col gap-4 border-t border-white/10 bg-[#111923] p-5">
+                <div className="flex flex-col gap-4 border-t border-[var(--theme-border)] bg-[var(--theme-surface)] p-5">
                   <div className="flex items-center justify-between gap-4">
-                    <span className="font-semibold text-slate-300">
+                    <span className="font-semibold text-[var(--theme-text-muted)]">
                       {dictionary.cart.dropdown.subtotal}
                     </span>
 
@@ -235,11 +235,11 @@ const CartDropdown = ({
                 </div>
 
                 <div>
-                  <p className="font-bold text-white">
+                  <p className="font-bold text-[var(--theme-text)]">
                     {dictionary.cart.dropdown.emptyTitle}
                   </p>
 
-                  <p className="mt-2 text-sm leading-6 text-slate-500">
+                  <p className="mt-2 text-sm leading-6 text-[var(--theme-text-subtle)]">
                     {dictionary.cart.dropdown.emptyDescription}
                   </p>
                 </div>
