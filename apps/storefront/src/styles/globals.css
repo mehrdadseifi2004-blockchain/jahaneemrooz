@@ -159,3 +159,8 @@
     @apply text-[32px] leading-[44px] font-semibold;
   }
 }
+
+#newsletter-email{
+  height: 3rem;
+}
+

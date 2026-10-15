@@ -113,7 +113,7 @@ const Newsletter = () => {
 
               <button
                 type="submit"
-                className="h-13 rounded-full bg-[#ff5a00] px-6 text-sm font-bold text-white shadow-[0_12px_35px_rgba(255,90,0,0.22)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#ff7a1a] hover:shadow-[0_16px_42px_rgba(255,90,0,0.3)]"
+                className="h-12 rounded-full bg-[#ff5a00] px-6 text-sm font-bold text-white shadow-[0_12px_35px_rgba(255,90,0,0.22)] transition duration-300 hover:-translate-y-0.5 hover:bg-[#ff7a1a] hover:shadow-[0_16px_42px_rgba(255,90,0,0.3)]"
               >
                 {dictionary.newsletter.submit}
               </button>

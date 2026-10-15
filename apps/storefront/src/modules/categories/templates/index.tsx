@@ -53,14 +53,14 @@ export default function CategoryTemplate({
   const orderedParents = [...parents].reverse()
 
   return (
-    <main className="min-h-screen bg-white pb-20">
+    <main className="min-h-screen bg-[var(--theme-background)] pb-20 transition-colors duration-300">
       <div className="content-container">
         <div
-          className="flex flex-col gap-8 border-t border-black/10 py-6 medium:flex-row medium:items-start"
+          className="flex flex-col gap-8 border-t border-[var(--theme-border)] py-6 medium:flex-row medium:items-start"
           data-testid="category-container"
         >
           <aside className="w-full shrink-0 medium:w-[295px]">
-            <div className="rounded-[20px] border border-black/10 bg-white px-6 py-5">
+            <div className="rounded-[20px] border border-[var(--theme-border)] bg-[var(--theme-surface)] px-6 py-5">
               <RefinementList
                 sortBy={sort}
                 data-testid="sort-by-container"

@@ -18,13 +18,38 @@ export default async function LatestProducts({
   } = await listProducts({
     regionId: region.id,
     queryParams: {
-      limit: 4,
+      limit: 100,
       order: "-created_at",
       fields: "*variants.calculated_price,*categories",
     },
   })
 
-  if (!products?.length) {
+  const categoryHandles = ["joy-sticks", "keyboards", "mouses-(wire)"]
+
+  const categoryProducts = categoryHandles
+    .map((handle) =>
+      products.find((product) =>
+        product.categories?.some((category) => category.handle === handle)
+      )
+    )
+    .filter(
+      (product): product is HttpTypes.StoreProduct => Boolean(product)
+    )
+
+  const selectedIds = new Set(categoryProducts.map((product) => product.id))
+
+  const additionalProducts = products.filter(
+    (product) => !selectedIds.has(product.id)
+  )
+
+  const displayProducts = [...categoryProducts, ...additionalProducts]
+    .slice(0, 4)
+    .sort(
+      (a, b) =>
+        new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
+    )
+
+  if (!displayProducts.length) {
     return null
   }
 
@@ -36,7 +61,7 @@ export default async function LatestProducts({
         </h2>
 
         <ul className="grid grid-cols-2 gap-x-4 gap-y-8 text-start small:gap-x-5 medium:grid-cols-4">
-          {products.map((product) => (
+          {displayProducts.map((product) => (
             <li key={product.id} className="min-w-0">
               <ProductPreview product={product} region={region} isFeatured />
             </li>

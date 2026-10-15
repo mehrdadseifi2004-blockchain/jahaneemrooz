@@ -1,3 +1,4 @@
+import Image from "next/image"
 import { Dictionary } from "@i18n/get-dictionary"
 import { listCategories } from "@lib/data/categories"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
@@ -21,60 +22,15 @@ const categoryLayouts = [
   },
 ]
 
-const getCategoryDecoration = (name: string, handle?: string) => {
-  const value = `${name} ${handle ?? ""}`.toLowerCase()
-
-  if (
-    value.includes("فلش") ||
-    value.includes("ذخیره") ||
-    value.includes("storage") ||
-    value.includes("flash") ||
-    value.includes("hard")
-  ) {
-    return "💾"
-  }
-
-  if (
-    value.includes("بازی") ||
-    value.includes("گیم") ||
-    value.includes("game") ||
-    value.includes("gaming")
-  ) {
-    return "🎮"
-  }
-
-  if (
-    value.includes("گیفت") ||
-    value.includes("کارت") ||
-    value.includes("gift") ||
-    value.includes("card")
-  ) {
-    return "💳"
-  }
-
-  if (
-    value.includes("هدفون") ||
-    value.includes("هندزفری") ||
-    value.includes("headphone") ||
-    value.includes("headset") ||
-    value.includes("earphone")
-  ) {
-    return "🎧"
-  }
-
-  if (value.includes("لوازم جانبی") || value.includes("accessor")) {
-    return "🖱️"
-  }
-
-  return "💻"
-}
-
 type CategoryGridProps = {
   dictionary: Dictionary
 }
 
 export default async function CategoryGrid({ dictionary }: CategoryGridProps) {
-  const categories = await listCategories()
+  const categories = await listCategories({
+    fields:
+      "*category_children, *products, *products.images, *parent_category, *parent_category.parent_category",
+  })
 
   if (!categories?.length) {
     return null
@@ -102,10 +58,7 @@ export default async function CategoryGrid({ dictionary }: CategoryGridProps) {
           <div className="grid grid-cols-1 gap-4 medium:grid-cols-5 medium:gap-5">
             {visibleCategories.map((category, index) => {
               const card = categoryLayouts[index]
-              const decoration = getCategoryDecoration(
-                category.name,
-                category.handle,
-              )
+              const categoryImage = category.products?.[0]?.images?.[0]?.url
               return (
                 <LocalizedClientLink
                   key={category.id}
@@ -122,12 +75,21 @@ export default async function CategoryGrid({ dictionary }: CategoryGridProps) {
                     className="absolute inset-0 opacity-30 [background-image:linear-gradient(rgba(255,255,255,0.035)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.035)_1px,transparent_1px)] [background-size:32px_32px]"
                   />
 
-                  <div
-                    aria-hidden="true"
-                    className="absolute bottom-3 end-4 text-[88px] opacity-70 grayscale-[20%] drop-shadow-[0_15px_28px_rgba(0,0,0,0.45)] transition duration-500 group-hover:scale-110 group-hover:rotate-3 group-hover:opacity-100 small:text-[115px] medium:bottom-5 medium:end-7 medium:text-[145px]"
-                  >
-                    {decoration}
-                  </div>
+                  {categoryImage && (
+                    <>
+                      <Image
+                        src={categoryImage}
+                        alt={category.name}
+                        fill
+                        sizes="(min-width: 768px) 40vw, 100vw"
+                        className="object-cover opacity-70 transition duration-500 group-hover:scale-105 group-hover:opacity-90"
+                      />
+                      <div
+                        aria-hidden="true"
+                        className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10"
+                      />
+                    </>
+                  )}
 
                   <div className="relative z-10 flex h-full flex-col justify-between p-6 medium:p-8">
                     <div className="max-w-[75%]">
