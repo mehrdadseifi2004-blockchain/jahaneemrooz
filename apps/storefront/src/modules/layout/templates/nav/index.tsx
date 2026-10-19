@@ -28,8 +28,8 @@ export default function Nav({
     <>
       <header className="sticky top-0 z-50 border-b border-[var(--theme-border)] bg-[var(--theme-header)] text-[var(--theme-text)] shadow-[0_10px_35px_var(--theme-shadow)] transition-colors duration-300">
         <div className="content-container">
-          <div className="flex h-[84px] items-center justify-between gap-5">
-            <div className="flex shrink-0 items-center gap-3">
+          <div className="flex h-[84px] items-center justify-between gap-1 small:gap-5">
+            <div className="flex shrink-0 items-center gap-1 small:gap-3">
               <div className="medium:hidden">
                 <SideMenu
                   regions={regions}
@@ -135,7 +135,7 @@ export default function Nav({
               </form>
             </div>
 
-            <div className="flex shrink-0 items-center gap-2">
+            <div className="flex shrink-0 items-center gap-0.5 small:gap-2">
               <ThemeToggle locale={locale} />
               <AppLanguageSwitcher />
 

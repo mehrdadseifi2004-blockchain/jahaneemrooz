@@ -86,12 +86,28 @@ const CartDropdown = ({
       <Popover className="relative h-full">
         <PopoverButton className="h-full">
           <LocalizedClientLink
-            className="text-[var(--theme-text)] transition hover:text-[#ff5a00]"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-full text-[var(--theme-text)] transition hover:bg-[#ff5a00]/10 hover:text-[#ff5a00] small:h-auto small:w-auto small:rounded-none small:bg-transparent"
             href="/cart"
             data-testid="nav-cart-link"
           >
-            {dictionary.cart.title} (
-            {totalItems.toLocaleString(locale === "fa" ? "fa-IR" : "en-US")})
+            <svg
+              className="h-5 w-5 small:hidden"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="1.8"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M3 3h2l2.2 11.2a2 2 0 0 0 2 1.6h7.9a2 2 0 0 0 1.9-1.4L21 8H6" />
+              <circle cx="10" cy="20" r="1" />
+              <circle cx="18" cy="20" r="1" />
+            </svg>
+            <span className="hidden small:inline">
+              {dictionary.cart.title} (
+              {totalItems.toLocaleString(locale === "fa" ? "fa-IR" : "en-US")})
+            </span>
           </LocalizedClientLink>
         </PopoverButton>
 
@@ -107,7 +123,7 @@ const CartDropdown = ({
         >
           <PopoverPanel
             static
-            className="absolute end-0 top-[calc(100%+1px)] hidden w-[min(420px,calc(100vw-2rem))] overflow-hidden rounded-b-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] text-[var(--theme-text)] shadow-[0_25px_80px_var(--theme-shadow)] transition-colors duration-300 small:block"
+            className="fixed inset-x-4 top-36 hidden w-auto small:absolute small:inset-x-auto small:end-0 small:top-[calc(100%+1px)] small:w-[min(420px,calc(100vw-2rem))] overflow-hidden rounded-b-[24px] border border-[var(--theme-border)] bg-[var(--theme-surface-muted)] text-[var(--theme-text)] shadow-[0_25px_80px_var(--theme-shadow)] transition-colors duration-300 small:block"
             data-testid="nav-cart-dropdown"
           >
             <div className="flex items-center justify-between border-b border-[var(--theme-border)] px-5 py-4">
