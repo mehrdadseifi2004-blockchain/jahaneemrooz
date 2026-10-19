@@ -192,6 +192,18 @@ export default async function Footer({ dictionary }: FooterProps) {
               © {new Date().getFullYear()} {dictionary.footer.copyright}
             </p>
 
+            <p className="text-xs text-[var(--theme-text-muted)]">
+              Design &amp; Development by:{" "}
+              <a
+                href="https://mehrdadseif.ir/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-semibold transition-colors hover:text-[#ff5a00]"
+              >
+                MehrdadSeif.ir
+              </a>
+            </p>
+
             <div className="flex flex-wrap items-center gap-2">
               <span className="flex h-8 items-center justify-center rounded-full border border-[var(--theme-border)] bg-[var(--theme-surface)] px-3 text-xs font-bold text-[var(--theme-text-muted)]">
                 {dictionary.footer.securePayment}
